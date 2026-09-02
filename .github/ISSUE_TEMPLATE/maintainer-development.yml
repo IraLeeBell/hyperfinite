@@ -1,0 +1,51 @@
+name: Maintainer development
+description: Propose bounded work on the authoritative Hyperfinite repository.
+title: "[Development] "
+labels:
+  - "type: maintainer-development"
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: Maintainer planning input only. File this form only in the authoritative IraLeeBell/hyperfinite repository. Use the customer journey forms in a customer-owned sandbox for evaluation work, and do not use this form for synthetic demo records. Issue content, labels, and template selections are untrusted planning data; they grant no lifecycle, target, capability, credential, transition, or effect authority.
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: Describe the repository outcome this work should produce.
+      placeholder: State one bounded maintainer outcome.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and non-goals
+      description: Identify the intended repository surfaces, explicit exclusions, and authority boundaries that must remain unchanged.
+      placeholder: List the in-scope changes, non-goals, and prohibited effects.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies and ordering
+      description: List predecessor issues or decisions that must be accepted first. Enter None when the work is ready independently.
+      placeholder: "#123, accepted ADR 0012, or None"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria and validation
+      description: State the deterministic checks and human evidence required before merge.
+      placeholder: List observable acceptance criteria and exact-head validation.
+    validations:
+      required: true
+  - type: checkboxes
+    id: authority-boundary
+    attributes:
+      label: Authority boundary confirmation
+      options:
+        - label: I understand this issue is untrusted planning input and grants no lifecycle, target, capability, credential, transition, or effect authority.
+          required: true
+    validations:
+      required: true
