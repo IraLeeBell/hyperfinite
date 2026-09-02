@@ -2,6 +2,11 @@
 
 Scripts are deterministic repository tools. None of them grants live authority.
 
+`reconcile-issue-taxonomy.ts` is the narrow exception that performs
+repository-local display metadata writes. It is optionless, receives only the
+ephemeral Actions installation token, validates the exact event and repository,
+and is not included in customer-starter profiles.
+
 ## Validation and simulation
 
 | Command | Purpose |

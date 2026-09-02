@@ -50,6 +50,10 @@ export const PINNED_WORKFLOW_ACTIONS = [
   }
 ] as const;
 
+export const REVIEWED_NON_AGENTIC_WORKFLOW_FILES = [
+  "reconcile-issue-taxonomy.yml"
+] as const;
+
 function sha256(value: string): string {
   const canonical = value.endsWith("\n") ? value.slice(0, -1) : value;
   return createHash("sha256").update(canonical).digest("hex");

@@ -64,11 +64,13 @@
     "excludedPaths": [
         "config/v1alpha1/demo-portfolio",
         "config/v1alpha1/demo-projects",
+        "config/v1alpha1/issue-taxonomy.json",
         "schemas/v1alpha1/behavioral-eval-fixture.schema.json",
         "schemas/v1alpha1/behavioral-eval-record.schema.json",
         "schemas/v1alpha1/demo-external-call-assertions.schema.json",
         "schemas/v1alpha1/demo-portfolio-hardening-plan.schema.json",
         "schemas/v1alpha1/demo-projects",
+        "schemas/v1alpha1/issue-taxonomy.schema.json",
         "tests/fixtures/project-ux/live"
     ],
     "resolvedClosureDigest": "sha256:ef78753d345ef17d1cbfb3fa133d41c3396da27dd14c48ef4581ce22d9c9225f"

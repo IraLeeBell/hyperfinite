@@ -17,6 +17,7 @@ Major groups include:
 - Marketing and Business Operations artifact contracts;
 - packaging, installation, migration, release, audit, metrics, budgets,
   administrator handoff/apply/readback, and durable grant-store contracts.
+- the upstream-only, repository-bound issue-taxonomy reconciliation contract.
 
 Per-demo artifact schemas live under `v1alpha1/demo-projects/`. Domain Pack
 artifact schemas live under `v1alpha1/domain-packs/`.

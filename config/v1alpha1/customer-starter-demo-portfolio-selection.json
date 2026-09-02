@@ -66,6 +66,7 @@
         ".github/workflows/agentic-execution.md",
         ".github/workflows/agentic-framing.md",
         ".github/workflows/agentic-review.md",
+        ".github/workflows/reconcile-issue-taxonomy.yml",
         "config/v1alpha1/demo-projects/adaptive-delivery/project-binding.json"
     ],
     "resolvedClosureDigest": "sha256:14dc9d1eca439789abb72e62f88b80c97e55ebe9a48469247cc65a847d5a4756"

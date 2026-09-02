@@ -15,7 +15,8 @@ import {
 import {
   isExactExecutionAuthorizationSealScript,
   isExactReviewHeadScript,
-  isExactReviewWorkspaceScript
+  isExactReviewWorkspaceScript,
+  REVIEWED_NON_AGENTIC_WORKFLOW_FILES
 } from "../src/runtime-workflow-validation.js";
 import { assertDocument } from "../src/validation.js";
 import {
@@ -1211,12 +1212,16 @@ for (const binding of runtimeBindings) {
   const agenticSources = new Set(
     workflowEntries.filter((entry) => entry.endsWith(".md"))
   );
+  const reviewedNonAgenticWorkflows = new Set<string>(
+    REVIEWED_NON_AGENTIC_WORKFLOW_FILES
+  );
   for (const entry of workflowEntries) {
     if (entry.endsWith(".md") && !boundWorkflows.has(entry)) {
       errors.push(`unbound Agentic Workflow source .github/workflows/${entry}`);
     }
     if (
       (entry.endsWith(".yml") || entry.endsWith(".yaml")) &&
+      !reviewedNonAgenticWorkflows.has(entry) &&
       (!entry.endsWith(".lock.yml") ||
         !agenticSources.has(entry.replace(/\.lock\.yml$/u, ".md")))
     ) {

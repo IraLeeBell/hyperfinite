@@ -19,6 +19,14 @@ Humans retain:
 - final merge and rollback authority;
 - outbound licensing, publication, deployment, and production authorization.
 
+A narrowly scoped repository-maintenance workflow may apply deterministic,
+display-only issue metadata after its exact workflow and mapping are reviewed and
+merged. The merge is the authorization for the initial reconciliation. Future
+issue-open events may invoke only the merged, repository-bound rules; issue text
+cannot select a repository, issue number, label definition, credential, or other
+effect. Such automation cannot approve, merge, close issues, or mutate on a pull
+request event.
+
 The framework will not approve or merge its own changes. It verifies the reviewer by immutable identity, current permissions/team eligibility, approval state, and exact current head SHA. The task requester and automation identity do not count where policy requires an independent reviewer.
 
 ## Decision drivers
@@ -40,6 +48,8 @@ The framework will not approve or merge its own changes. It verifies the reviewe
 - Bot approval with branch protection as the only backstop: rejected because a bot can become its own gate.
 - Agent-issued merge after a human comment: rejected because the decisive effect remains automated.
 - PAT-backed administrator fallback: rejected because it bypasses scoped App authority and obscures accountability.
+- Pull-request-triggered metadata mutation: rejected because unmerged code must
+  not produce the effect it proposes.
 
 ## Security and operational impact
 

@@ -6,6 +6,16 @@ The local adapter foundation is **current**. It defines strict contracts, verifi
 
 It does not install a GitHub App, hold a private key, mint a live token, create or migrate a Project, run a daemon, invoke a model, or mutate a production system. Those actions require a separately reviewed deployment and explicit human administration.
 
+The authoritative repository separately contains an upstream-only issue-taxonomy
+reconciler. It is not a model route or Control Kernel effect: reviewed
+configuration fixes the one repository numeric/full-name identity, three label
+definitions, historical issue numbers, title prefixes, and execution bounds.
+The workflow runs only from the exact default-branch revision after a merge or
+from `issues.opened`, fresh-reads every issue before mutation, removes only
+conflicting taxonomy labels, preserves unrelated labels, and requires exact
+readback. Unknown titles, wrong repository/event/ref identities, malformed API
+responses, drift, pagination overflow, and partial readback fail closed.
+
 ## Versioned contracts
 
 The adapter adds closed JSON Schemas for:
