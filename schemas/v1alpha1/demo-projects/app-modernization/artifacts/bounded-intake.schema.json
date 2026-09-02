@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/bounded-intake.schema.json",
+  "title": "App Modernization bounded intake",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationBoundedIntake" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "submissionDigest",
+        "projectProfileDigest",
+        "repositoryHintDigest",
+        "desiredOutcome",
+        "constraints",
+        "depthProfile",
+        "consentEvidenceDigest",
+        "state",
+        "authorityGranted"
+      ],
+      "properties": {
+        "submissionDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "projectProfileDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "repositoryHintDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "desiredOutcome": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "constraints": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+        },
+        "depthProfile": { "enum": ["D1", "D2"] },
+        "consentEvidenceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "state": { "const": "ACTIVATION_PENDING" },
+        "authorityGranted": { "const": false }
+      }
+    }
+  }
+}

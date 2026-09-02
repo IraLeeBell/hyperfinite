@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "1.0.0",
+  "summary": "Encode namespace and cache key lengths before concatenation and update the fictional local dependency metadata.",
+  "changes": [
+    {
+      "slot": "dependency-manifest",
+      "content": "{\"name\":\"mist-lru\",\"version\":\"0.4.1\"}\n"
+    },
+    {
+      "slot": "dependency-lock",
+      "content": "{\"name\":\"mist-lru\",\"version\":\"0.4.1\",\"lockfileVersion\":3,\"packages\":{\"\":{\"name\":\"mist-lru\",\"version\":\"0.4.1\"}}}\n"
+    },
+    {
+      "slot": "cache-key-source",
+      "content": "export const cacheKey = (namespace: string, key: string): string => `${namespace.length}:${namespace}${key.length}:${key}`;\n"
+    },
+    {
+      "slot": "cache-key-regression",
+      "content": "assert.notEqual(cacheKey(\"a:b\", \"c\"), cacheKey(\"a\", \"b:c\"));\n"
+    }
+  ]
+}

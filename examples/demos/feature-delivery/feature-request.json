@@ -1,0 +1,21 @@
+{
+  "synthetic": true,
+  "demoProjectId": "feature-delivery",
+  "desiredOutcome": "Add a deterministic synthetic export option.",
+  "repositoryHint": "attacker-controlled/example",
+  "repositoryHintIsAuthority": false,
+  "constraints": [
+    "Preserve existing API behavior.",
+    "Deliver only through a draft pull request.",
+    "Require exact-head verification and independent human merge."
+  ],
+  "acceptanceCriterionIds": [
+    "FD-AC-001",
+    "FD-AC-002",
+    "FD-AC-003",
+    "FD-AC-004",
+    "FD-AC-005"
+  ],
+  "depthProfile": "D2",
+  "consent": true
+}

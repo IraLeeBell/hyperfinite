@@ -1,0 +1,287 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubProjectBinding",
+  "schemaVersion": "1.0.0",
+  "projectSchemaDigest": "sha256:30f83cfb909298ec8bbeb408cd2e27f415b8a8599ec357a3b8f5fbf0df20c402",
+  "owner": {
+    "type": "organization",
+    "login": "OWNER",
+    "nodeId": "O_synthetic_owner"
+  },
+  "installation": {
+    "id": 2401,
+    "accountNodeId": "O_synthetic_owner"
+  },
+  "project": {
+    "number": 101,
+    "nodeId": "PVT_synthetic_app_modernization",
+    "title": "App Modernization"
+  },
+  "fields": [
+    {
+      "key": "stage",
+      "nodeId": "PVTF_synthetic_app_stage",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "key": "captured",
+          "nodeId": "PVTO_app_stage_captured",
+          "name": "Captured"
+        },
+        {
+          "key": "activation-pending",
+          "nodeId": "PVTO_app_stage_activation",
+          "name": "Activation pending"
+        },
+        {
+          "key": "framing",
+          "nodeId": "PVTO_app_stage_framing",
+          "name": "Framing"
+        },
+        {
+          "key": "planned",
+          "nodeId": "PVTO_app_stage_planned",
+          "name": "Planned"
+        },
+        {
+          "key": "executing",
+          "nodeId": "PVTO_app_stage_executing",
+          "name": "Executing"
+        },
+        {
+          "key": "verifying",
+          "nodeId": "PVTO_app_stage_verifying",
+          "name": "Verifying"
+        },
+        {
+          "key": "human-review",
+          "nodeId": "PVTO_app_stage_human",
+          "name": "Human review"
+        },
+        {
+          "key": "completed",
+          "nodeId": "PVTO_app_stage_completed",
+          "name": "Completed"
+        },
+        {
+          "key": "paused",
+          "nodeId": "PVTO_app_stage_paused",
+          "name": "Paused"
+        },
+        {
+          "key": "blocked",
+          "nodeId": "PVTO_app_stage_blocked",
+          "name": "Blocked"
+        },
+        {
+          "key": "cancelled",
+          "nodeId": "PVTO_app_stage_cancelled",
+          "name": "Cancelled"
+        }
+      ]
+    },
+    {
+      "key": "journey-stage",
+      "nodeId": "PVTF_synthetic_app_journey",
+      "name": "Journey Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "key": "intake",
+          "nodeId": "PVTO_app_journey_intake",
+          "name": "Intake"
+        },
+        {
+          "key": "repository-discovery",
+          "nodeId": "PVTO_app_journey_repository",
+          "name": "Repository discovery"
+        },
+        {
+          "key": "current-state-inventory",
+          "nodeId": "PVTO_app_journey_inventory",
+          "name": "Current-state inventory"
+        },
+        {
+          "key": "modernization-assessment",
+          "nodeId": "PVTO_app_journey_assessment",
+          "name": "Modernization assessment"
+        },
+        {
+          "key": "target-architecture",
+          "nodeId": "PVTO_app_journey_architecture",
+          "name": "Target architecture"
+        },
+        {
+          "key": "migration-plan",
+          "nodeId": "PVTO_app_journey_plan",
+          "name": "Migration plan"
+        },
+        {
+          "key": "implementation",
+          "nodeId": "PVTO_app_journey_implementation",
+          "name": "Implementation"
+        },
+        {
+          "key": "verification",
+          "nodeId": "PVTO_app_journey_verification",
+          "name": "Verification"
+        },
+        {
+          "key": "human-review",
+          "nodeId": "PVTO_app_journey_review",
+          "name": "Human review"
+        },
+        {
+          "key": "completed",
+          "nodeId": "PVTO_app_journey_completed",
+          "name": "Completed"
+        },
+        {
+          "key": "activation-pending",
+          "nodeId": "PVTO_app_journey_activation",
+          "name": "Activation Pending"
+        },
+        {
+          "key": "paused",
+          "nodeId": "PVTO_app_journey_paused",
+          "name": "Paused"
+        },
+        {
+          "key": "blocked",
+          "nodeId": "PVTO_app_journey_blocked",
+          "name": "Blocked"
+        },
+        {
+          "key": "cancelled",
+          "nodeId": "PVTO_app_journey_cancelled",
+          "name": "Cancelled"
+        }
+      ]
+    },
+    {
+      "key": "demo-project-profile",
+      "nodeId": "PVTF_synthetic_app_profile",
+      "name": "Demo Project Profile",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "key": "depth-profile",
+      "nodeId": "PVTF_synthetic_app_depth",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "key": "d0",
+          "nodeId": "PVTO_app_d0",
+          "name": "D0"
+        },
+        {
+          "key": "d1",
+          "nodeId": "PVTO_app_d1",
+          "name": "D1"
+        },
+        {
+          "key": "d2",
+          "nodeId": "PVTO_app_d2",
+          "name": "D2"
+        },
+        {
+          "key": "d3",
+          "nodeId": "PVTO_app_d3",
+          "name": "D3"
+        }
+      ]
+    },
+    {
+      "key": "gate-status",
+      "nodeId": "PVTF_synthetic_app_gate",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "key": "pending",
+          "nodeId": "PVTO_app_pending",
+          "name": "Pending"
+        },
+        {
+          "key": "satisfied",
+          "nodeId": "PVTO_app_satisfied",
+          "name": "Satisfied"
+        },
+        {
+          "key": "blocked",
+          "nodeId": "PVTO_app_gate_blocked",
+          "name": "Blocked"
+        }
+      ]
+    },
+    {
+      "key": "contract-revision",
+      "nodeId": "PVTF_synthetic_app_revision",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "options": []
+    },
+    {
+      "key": "last-receipt",
+      "nodeId": "PVTF_synthetic_app_receipt",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "key": "attention",
+      "nodeId": "PVTF_synthetic_app_attention",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "key": "none",
+          "nodeId": "PVTO_app_none",
+          "name": "None"
+        },
+        {
+          "key": "human-action",
+          "nodeId": "PVTO_app_human",
+          "name": "Human action"
+        },
+        {
+          "key": "reconciliation",
+          "nodeId": "PVTO_app_reconciliation",
+          "name": "Reconciliation"
+        }
+      ]
+    },
+    {
+      "key": "target-repository",
+      "nodeId": "PVTF_synthetic_app_repository",
+      "name": "Target Repository",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "key": "run-attempt",
+      "nodeId": "PVTF_synthetic_app_attempt",
+      "name": "Run / Attempt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "key": "current-draft-pr",
+      "nodeId": "PVTF_synthetic_app_pr",
+      "name": "Current Draft PR",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "key": "current-stage-agent",
+      "nodeId": "PVTF_synthetic_app_agent",
+      "name": "Current Stage Agent",
+      "dataType": "TEXT",
+      "options": []
+    }
+  ],
+  "validatedAt": "2026-08-29T18:00:00.000Z"
+}

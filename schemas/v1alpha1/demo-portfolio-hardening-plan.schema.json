@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-portfolio-hardening-plan.schema.json",
+  "title": "Demo Portfolio Hardening Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "generatedAt",
+    "mode",
+    "demos",
+    "testFiles",
+    "demoAnchors",
+    "scenarios",
+    "faultBoundaries",
+    "requiredInvariants",
+    "readiness"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "DemoPortfolioHardeningPlan"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "generatedAt": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+      "maxLength": 24
+    },
+    "mode": {
+      "const": "hermetic"
+    },
+    "demos": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "const": "app-modernization"
+        },
+        {
+          "const": "feature-delivery"
+        },
+        {
+          "const": "security-dependency-remediation"
+        },
+        {
+          "const": "adaptive-delivery"
+        }
+      ],
+      "items": false,
+      "minItems": 4,
+      "maxItems": 4
+    },
+    "testFiles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^dist/tests/[a-z0-9-]+\\.test\\.js$",
+        "maxLength": 96
+      }
+    },
+    "demoAnchors": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "app-modernization",
+        "feature-delivery",
+        "security-dependency-remediation",
+        "adaptive-delivery"
+      ],
+      "properties": {
+        "app-modernization": {
+          "$ref": "#/$defs/testNames"
+        },
+        "feature-delivery": {
+          "$ref": "#/$defs/testNames"
+        },
+        "security-dependency-remediation": {
+          "$ref": "#/$defs/testNames"
+        },
+        "adaptive-delivery": {
+          "$ref": "#/$defs/testNames"
+        }
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 96,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "outcome",
+          "beforePaidInference",
+          "beforeMutation",
+          "tests"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "outcome": {
+            "enum": [
+              "accepted",
+              "refused",
+              "blocked",
+              "reconciled",
+              "human-gated"
+            ]
+          },
+          "beforePaidInference": {
+            "type": "boolean"
+          },
+          "beforeMutation": {
+            "type": "boolean"
+          },
+          "tests": {
+            "$ref": "#/$defs/testNames"
+          }
+        }
+      }
+    },
+    "faultBoundaries": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "beforePaidInference",
+          "beforeMutation",
+          "ambiguousOutcome",
+          "tests"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "beforePaidInference": {
+            "type": "boolean"
+          },
+          "beforeMutation": {
+            "type": "boolean"
+          },
+          "ambiguousOutcome": {
+            "const": "exact-readback-or-blocked"
+          },
+          "tests": {
+            "$ref": "#/$defs/testNames"
+          }
+        }
+      }
+    },
+    "requiredInvariants": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 32,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repositoryClassification",
+        "sandboxLiveClassification",
+        "productionClassification",
+        "projectsProvisioned",
+        "liveModeEnabled",
+        "requiredCanaryStage"
+      ],
+      "properties": {
+        "repositoryClassification": {
+          "const": "repository-hermetic-demo-ready"
+        },
+        "sandboxLiveClassification": {
+          "const": "blocked-pending-human-administration-and-canary"
+        },
+        "productionClassification": {
+          "const": "customer-approval-required"
+        },
+        "projectsProvisioned": {
+          "const": false
+        },
+        "liveModeEnabled": {
+          "const": false
+        },
+        "requiredCanaryStage": {
+          "const": "human-review"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+      "minLength": 3,
+      "maxLength": 80
+    },
+    "testNames": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 8,
+        "maxLength": 160
+      }
+    }
+  }
+}

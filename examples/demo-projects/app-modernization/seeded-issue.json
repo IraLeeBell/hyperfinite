@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "demoProjectId": "app-modernization",
+  "issue": {
+    "number": 1001,
+    "nodeId": "I_synthetic_app_modernization_1001",
+    "title": "Inventory a synthetic monolith for a bounded modernization plan"
+  },
+  "formSubmission": {
+    "desiredOutcome": "Produce a reviewable current-state inventory and migration plan for the synthetic application.",
+    "repositoryHint": "example/app-modernization-sandbox",
+    "constraints": "Keep the proposal repository-only; do not deploy or change infrastructure.",
+    "acceptanceEvidence": "Human review confirms the inventory, target architecture, and verification evidence.",
+    "depthProfile": "D2",
+    "consent": true
+  },
+  "projection": {
+    "Stage": "Activation pending",
+    "Journey Stage": "Intake",
+    "Demo Project Profile": "app-modernization@1.0.0",
+    "Depth Profile": "D2",
+    "Gate Status": "Pending",
+    "Contract Revision": 1,
+    "Last Receipt": "none",
+    "Attention": "Human action",
+    "Target Repository": "example/app-modernization-sandbox",
+    "Run / Attempt": "not-started",
+    "Current Draft PR": "none",
+    "Current Stage Agent": "none",
+    "Stage Interaction": "deterministic",
+    "Agent Selection Status": "not-applicable"
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoJourneyDefinition",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "initialStageId": "intake",
+    "terminalStageId": "completed",
+    "stages": [
+      {
+        "stageId": "intake",
+        "displayName": "Intake",
+        "ordinal": 1,
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "deterministic"
+      },
+      {
+        "stageId": "context-inventory",
+        "displayName": "Context inventory - autonomous",
+        "ordinal": 2,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "discovery-studio",
+        "displayName": "Discovery studio - choose agent",
+        "ordinal": 3,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "guided-synthesis",
+        "displayName": "Guided synthesis - autonomous",
+        "ordinal": 4,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "implementation-plan",
+        "displayName": "Implementation plan - deterministic gate",
+        "ordinal": 5,
+        "coreState": "PLANNED",
+        "executionKind": "planning"
+      },
+      {
+        "stageId": "implementation-studio",
+        "displayName": "Implementation studio - choose agent",
+        "ordinal": 6,
+        "coreState": "EXECUTING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "test-and-verification",
+        "displayName": "Test and verification - autonomous",
+        "ordinal": 7,
+        "coreState": "VERIFYING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "human-review",
+        "displayName": "Human review",
+        "ordinal": 8,
+        "coreState": "HUMAN_REVIEW",
+        "executionKind": "human"
+      },
+      {
+        "stageId": "completed",
+        "displayName": "Completed",
+        "ordinal": 9,
+        "coreState": "COMPLETED",
+        "executionKind": "terminal"
+      }
+    ],
+    "controlStages": [
+      {
+        "stageId": "activation-pending",
+        "displayName": "Activation Pending",
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "paused",
+        "displayName": "Paused",
+        "coreState": "PAUSED",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "blocked",
+        "displayName": "Blocked",
+        "coreState": "BLOCKED",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "cancelled",
+        "displayName": "Cancelled",
+        "coreState": "CANCELLED",
+        "executionKind": "kernel"
+      }
+    ]
+  },
+  "contentDigest": "sha256:894bd983fb5e714459399a81d30384722a10e76e00d1aa198aae441d1297167c"
+}

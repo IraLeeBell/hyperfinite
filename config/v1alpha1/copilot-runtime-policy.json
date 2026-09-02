@@ -1,0 +1,118 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "CopilotRuntimePolicy",
+  "metadata": {
+    "version": "1.0.0",
+    "enabledByDefault": false
+  },
+  "toolchain": {
+    "ghAwVersion": "v0.86.2",
+    "ghAwActionRef": "48e5fa3ff52294d91d97715017a9f8693a48387f"
+  },
+  "modelSelection": {
+    "provider": "copilot",
+    "model": "gpt-5.4",
+    "fallbackAllowed": false,
+    "selectionAuthority": "administrator-policy-and-activation-lease"
+  },
+  "phaseBindings": [
+    {
+      "phase": "framing",
+      "role": "framer",
+      "agent": "runtime-framer",
+      "skill": "bounded-framing",
+      "safetySkills": ["authority-refusal"],
+      "capability": "core.frame-artifact@1.0.0",
+      "workflow": "agentic-framing",
+      "workflowClass": "framing-comment",
+      "slashCommand": {
+        "name": "agentic-frame",
+        "events": ["issues", "issue_comment"]
+      },
+      "githubToolsets": ["issues"],
+      "githubTools": ["issue_read"],
+      "modelInvocationAllowed": true
+    },
+    {
+      "phase": "execution",
+      "role": "executor",
+      "agent": "runtime-executor",
+      "skill": "bounded-execution",
+      "safetySkills": ["authority-refusal"],
+      "capability": "core.execute-bounded-change@1.0.0",
+      "workflow": "agentic-execution",
+      "workflowClass": "target-free-execution",
+      "slashCommand": {
+        "name": "agentic-execute",
+        "events": ["issue_comment"]
+      },
+      "githubToolsets": [],
+      "githubTools": [],
+      "modelInvocationAllowed": true
+    },
+    {
+      "phase": "verification",
+      "role": "reviewer",
+      "agent": "runtime-reviewer",
+      "skill": "current-head-review",
+      "safetySkills": ["authority-refusal"],
+      "capability": "core.review-current-head@1.0.0",
+      "workflow": "agentic-review",
+      "workflowClass": "current-head-comment-review",
+      "slashCommand": {
+        "name": "agentic-review",
+        "events": ["pull_request_comment"]
+      },
+      "githubToolsets": [],
+      "githubTools": [],
+      "modelInvocationAllowed": true
+    }
+  ],
+  "limits": {
+    "timeoutMinutes": 10,
+    "maxTurns": 8,
+    "maxContinuations": 1,
+    "maxAiCredits": 200,
+    "maxThreatDetectionAiCredits": 100,
+    "maxDailyAiCredits": 1500,
+    "maxConcurrency": 1,
+    "maxCascadeRuns": 0,
+    "maxRecursionDepth": 0,
+    "maxRepairLoops": 2,
+    "maxPatchBytes": 262144,
+    "maxEvidenceAgeMs": 300000
+  },
+  "access": {
+    "networkDestinations": [],
+    "mcpEnabled": false,
+    "mcpServers": [],
+    "mcpTools": [],
+    "secretNames": [],
+    "patFallbackAllowed": false
+  },
+  "safeOutputs": {
+    "allowed": ["issue-comment", "target-free-implementation-patch", "pull-request-review-comment"],
+    "pullRequestReviewEvents": ["COMMENT"],
+    "requireThreatDetectionStatus": "success"
+  },
+  "protectedFiles": {
+    "mode": "blocked",
+    "paths": [
+      ".git*",
+      ".git/**",
+      ".github/**",
+      "config/**",
+      "schemas/**",
+      "scripts/**",
+      "src/**",
+      "tests/**",
+      "package.json",
+      "package-lock.json",
+      "npm-shrinkwrap.json",
+      "pnpm-lock.yaml",
+      "yarn.lock",
+      "tsconfig.json",
+      "LICENSE"
+    ]
+  }
+}

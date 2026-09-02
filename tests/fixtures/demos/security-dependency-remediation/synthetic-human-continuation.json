@@ -1,0 +1,21 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationSyntheticHumanContinuation",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:93ceb8df7877ef1499d87a9d14d893b6a303923ee79697f85b0f6d726798f850",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "predecessorTraceDigest": "sha256:a48432db6e87e78ea976326611d9e43f20d6165d8ceab0cdf4afcea886089bd6",
+    "fromStageId": "human-review",
+    "toStageId": "completed",
+    "fromCoreState": "HUMAN_REVIEW",
+    "toCoreState": "COMPLETED",
+    "routeId": "review.accept",
+    "headSha": "9999999999999999999999999999999999999999",
+    "actorClass": "reviewer",
+    "independent": true,
+    "automationActor": false,
+    "humanEvidenceDigest": "sha256:780414aca0be5104e1798e5d64a5eff683d39a63deab2d2800ebabb58e79d59d",
+    "externalCallCount": 0
+  }
+}

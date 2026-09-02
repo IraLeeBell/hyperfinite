@@ -1,0 +1,153 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "adaptive-delivery-demo-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-29T12:00:00Z",
+    "createdBy": "synthetic-human-42"
+  },
+  "binding": {
+    "repositoryId": 987654321,
+    "repositoryNodeId": "R_synthetic_hyperfinite",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:9ba1f10bca75c0a6eb37a4eb25ae0676fc6483e39e1b42db613abe172e705264",
+    "workItemNodeId": "I_synthetic_adaptive_delivery_1",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/adaptive-delivery-demo",
+    "sourceDigest": "sha256:4a890a7057cee476f618dc38976c8b349487827c580ccbfe9f74d16685fdd0ff",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": "sha256:2555b206740bf46d96dc40939b0c02fe0eed7bac4a59c0060485a4dbd99db540"
+  },
+  "objective": {
+    "outcome": "Demonstrate guided Adaptive Delivery with fixed and prescribed user-selected agents through a draft pull request and exact-head COMMENT review.",
+    "inScope": [
+      "delivery-source",
+      "delivery-tests"
+    ],
+    "outOfScope": [
+      "Autonomous approval or merge",
+      "Deployment or publication",
+      "Agent selection outside reviewed stages",
+      "Live runtime activation"
+    ],
+    "assumptions": [
+      "Project selection is authenticated untrusted intent.",
+      "The trusted binding fixes repository, work item, Project item, and exact base SHA."
+    ],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "adaptive-delivery-demo@1.0.0",
+    "domainPackDigest": "sha256:2b459fdc443c734bdf08dfb28cb0da1c90afffd9e6979fdae0cb70a59ede7dd2",
+    "capabilityRegistryDigest": "sha256:27c22d79be46d615ec8ca0f366b70ddde9593f22fc498b34e4be2cdaf181690f",
+    "depthProfile": "D2",
+    "riskClass": "moderate",
+    "privacyClass": "internal",
+    "phaseContracts": {
+      "framing": {
+        "reference": "adaptive-delivery.framing@1.0.0",
+        "digest": "sha256:5730fb0bb9a874bc0948ae21872de81246de75010e80676eb2492bee6fe0a171"
+      },
+      "planning": {
+        "reference": "adaptive-delivery.planning@1.0.0",
+        "digest": "sha256:f51b9555a55d6658d815c7e4ddc8bbfdb6b4b7e84b8cdedca238fd70e4f4571e"
+      },
+      "execution": {
+        "reference": "adaptive-delivery.execution@1.0.0",
+        "digest": "sha256:86785488e275661b4b844325760a9e8e6b211859d47bac558062bd58f375b67c"
+      },
+      "verification": {
+        "reference": "adaptive-delivery.verification@1.0.0",
+        "digest": "sha256:529181717de59c805b13c87a6f7b9d95629cea7a7624aa752a010048f2d770f6"
+      },
+      "human-review": {
+        "reference": "adaptive-delivery.human-review@1.0.0",
+        "digest": "sha256:b94860e37440f09b4fb5c797f0268480fa6bfe9c6e6957d70357ebbcf4a52049"
+      }
+    },
+    "requestedCapabilities": [
+      "demo.adaptive-delivery.context-inventory@1.0.0",
+      "demo.adaptive-delivery.customer-value-explorer@1.0.0",
+      "demo.adaptive-delivery.technical-options-explorer@1.0.0",
+      "demo.adaptive-delivery.delivery-risk-challenger@1.0.0",
+      "demo.adaptive-delivery.guided-synthesis@1.0.0",
+      "demo.adaptive-delivery.minimal-slice-builder@1.0.0",
+      "demo.adaptive-delivery.resilience-first-builder@1.0.0",
+      "demo.adaptive-delivery.test-and-verification@1.0.0"
+    ],
+    "allowedPaths": [
+      "examples/demos/adaptive-delivery/sandbox/src/change.ts",
+      "examples/demos/adaptive-delivery/sandbox/tests/change.test.ts"
+    ],
+    "prohibitedEffects": [
+      "mark-ready",
+      "approve",
+      "dismiss-review",
+      "merge",
+      "deploy",
+      "publish",
+      "project-administration",
+      "credential-administration"
+    ],
+    "tools": [
+      "read",
+      "search"
+    ],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": [
+      "github.issue_read",
+      "safeoutputs.add_comment",
+      "safeoutputs.submit_pull_request_review"
+    ],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 8,
+    "maxTokens": 40000,
+    "maxCostUnits": 100,
+    "maxDurationMs": 1800000,
+    "maxRetries": 1,
+    "maxLoops": 3,
+    "maxParallel": 1,
+    "maxPatchBytes": 131072,
+    "expiresAt": "2027-08-30T00:00:00Z"
+  },
+  "deliverables": [
+    "Bounded discovery and synthesis artifacts",
+    "Deterministic implementation plan",
+    "Target-free selected-builder patch",
+    "Exact-head COMMENT verification report",
+    "Human-review package"
+  ],
+  "evidence": {
+    "required": [
+      "hybrid-criteria-trace-complete",
+      "selected-agent-grant-current",
+      "tests-pass",
+      "comment-only-review",
+      "independent-human-merge-observed"
+    ],
+    "verificationCommands": [
+      "adaptive-acceptance-tests",
+      "adaptive-regression-tests",
+      "adaptive-typecheck",
+      "git-diff-check"
+    ],
+    "approverPolicy": "eligible-independent-human-current-head"
+  },
+  "humanGates": [
+    "activate",
+    "accept-frame",
+    "accept-plan",
+    "approve-current-head"
+  ],
+  "retention": {
+    "receiptDays": 365,
+    "artifactDays": 90,
+    "cancelOnExpiry": false
+  }
+}

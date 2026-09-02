@@ -1,0 +1,43 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationDraftPatchPullRequestEvidence",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:5c3a10333c727b1cb9e55b0fdde9ad50f2038f32834599643dfeebe176159b48",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "patch-implementation",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:322466bea79012801e5b919205801699e91e73d7e8b0f3a600634912f221dde6",
+    "headSha": "9999999999999999999999999999999999999999",
+    "status": "verified",
+    "assertions": [
+      {
+        "id": "target-free-patch",
+        "status": "success",
+        "evidenceDigest": "sha256:322466bea79012801e5b919205801699e91e73d7e8b0f3a600634912f221dde6"
+      },
+      {
+        "id": "trusted-slot-map",
+        "status": "success",
+        "evidenceDigest": "sha256:206a959da34e02858563f57cec283b39a28a9dc6916f0869781b626d00956dde"
+      },
+      {
+        "id": "open-draft-pr-only",
+        "status": "success",
+        "evidenceDigest": "sha256:4449dc56e1a39958bf1ef66ccfb214eccee84079b0da7d4c40cfdecec9bbc6c1"
+      },
+      {
+        "id": "trusted-single-writer-delivery",
+        "status": "success",
+        "evidenceDigest": "sha256:5a3b59278276bfcbee033c829eb8306d0d55a020f5d6816bdcb1489b057dcf8b"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

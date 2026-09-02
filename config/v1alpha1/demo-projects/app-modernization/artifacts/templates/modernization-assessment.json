@@ -1,0 +1,23 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationAssessment",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:ef91de7f24eda4b834c2180acc3f026ff89cce7103e1c325c53f5877fe1d73d1",
+  "spec": {
+    "inventoryDigest": "sha256:0f45c476d49c550b6a033f0fb3ca446faa3d36cff398a0b4cb40010dc7af1569",
+    "architectureStyle": "Layered control plane with replaceable trusted adapters.",
+    "maintainability": [
+      {
+        "id": "runtime-binding-wiring",
+        "severity": "moderate",
+        "summary": "Per-demo bindings require explicit trusted adapter injection.",
+        "evidenceDigest": "sha256:ed7793bd1223d3de8eaca80e6d73f99b36459590922114fecaac462948204718"
+      }
+    ],
+    "constraints": [
+      "Preserve deterministic authority order.",
+      "Keep repository work hermetic and reviewable."
+    ],
+    "openQuestions": []
+  }
+}

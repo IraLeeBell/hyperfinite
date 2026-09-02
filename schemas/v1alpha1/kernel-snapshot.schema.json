@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/kernel-snapshot.schema.json",
+  "title": "Kernel snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "lifecycleVersion", "lifecycleGraphDigest", "state", "phaseOwner", "stateVersion", "lastEventSequence", "bindingDigest", "workAccordDigest", "capabilityRegistryDigest", "domainPackDigest", "phaseContractDigest", "compiledPolicyDigest", "policyDigest", "currentHead", "receiptHead", "suspendedState", "recoveryState", "usage", "phaseUsage", "routeAttempts", "processedEvents"],
+  "allOf": [
+    {
+      "oneOf": [
+        { "properties": { "state": { "const": "CAPTURED" }, "phaseOwner": { "const": "intake" } } },
+        { "properties": { "state": { "const": "ACTIVATION_PENDING" }, "phaseOwner": { "const": "kernel" } } },
+        { "properties": { "state": { "const": "FRAMING" }, "phaseOwner": { "const": "framing" } } },
+        { "properties": { "state": { "const": "PLANNED" }, "phaseOwner": { "const": "planning" } } },
+        { "properties": { "state": { "const": "EXECUTING" }, "phaseOwner": { "const": "execution" } } },
+        { "properties": { "state": { "const": "VERIFYING" }, "phaseOwner": { "const": "verification" } } },
+        { "properties": { "state": { "const": "HUMAN_REVIEW" }, "phaseOwner": { "const": "human-review" } } },
+        { "properties": { "state": { "enum": ["COMPLETED", "PAUSED", "BLOCKED", "CANCELLED"] }, "phaseOwner": { "const": "kernel" } } }
+      ]
+    },
+    {
+      "if": {
+        "properties": {
+          "state": { "enum": ["CAPTURED", "ACTIVATION_PENDING", "CANCELLED"] }
+        },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": {
+          "phaseContractDigest": { "type": "null" },
+          "compiledPolicyDigest": { "type": "null" }
+        }
+      },
+      "else": {
+        "properties": {
+          "phaseContractDigest": { "$ref": "#/$defs/digest" },
+          "compiledPolicyDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "phaseContractDigest": { "type": "null" } },
+        "required": ["phaseContractDigest"]
+      },
+      "then": {
+        "properties": { "compiledPolicyDigest": { "type": "null" } }
+      },
+      "else": {
+        "properties": { "compiledPolicyDigest": { "$ref": "#/$defs/digest" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "state": { "const": "PAUSED" } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": { "suspendedState": { "$ref": "#/$defs/state" } }
+      }
+    },
+    {
+      "if": {
+        "properties": { "state": { "const": "BLOCKED" } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": { "recoveryState": { "$ref": "#/$defs/state" } }
+      }
+    }
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "lifecycleVersion": { "const": "1.0.0" },
+    "lifecycleGraphDigest": { "$ref": "#/$defs/digest" },
+    "state": { "$ref": "#/$defs/state" },
+    "phaseOwner": { "$ref": "#/$defs/phase" },
+    "stateVersion": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "lastEventSequence": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "bindingDigest": { "$ref": "#/$defs/digest" },
+    "workAccordDigest": { "$ref": "#/$defs/digest" },
+    "capabilityRegistryDigest": { "$ref": "#/$defs/digest" },
+    "domainPackDigest": { "$ref": "#/$defs/digest" },
+    "phaseContractDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "compiledPolicyDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "policyDigest": { "$ref": "#/$defs/digest" },
+    "currentHead": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "receiptHead": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "suspendedState": { "anyOf": [{ "$ref": "#/$defs/state" }, { "type": "null" }] },
+    "recoveryState": { "anyOf": [{ "$ref": "#/$defs/state" }, { "type": "null" }] },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["calls", "tokens", "costUnits", "loops", "retries"],
+      "properties": {
+        "calls": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "tokens": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "costUnits": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "loops": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "retries": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+      }
+    },
+    "phaseUsage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["calls", "tokens", "costUnits", "loops", "retries"],
+      "properties": {
+        "calls": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "tokens": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "costUnits": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "loops": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "retries": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+      }
+    },
+    "routeAttempts": {
+      "type": "object",
+      "propertyNames": { "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+      "additionalProperties": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+    },
+    "processedEvents": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["eventDigest", "receiptDigest", "idempotencyKey", "deliveryId"],
+        "properties": {
+          "eventDigest": { "$ref": "#/$defs/digest" },
+          "receiptDigest": { "$ref": "#/$defs/digest" },
+          "idempotencyKey": { "$ref": "#/$defs/digest" },
+          "deliveryId": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "state": {
+      "enum": ["CAPTURED", "ACTIVATION_PENDING", "FRAMING", "PLANNED", "EXECUTING", "VERIFYING", "HUMAN_REVIEW", "COMPLETED", "PAUSED", "BLOCKED", "CANCELLED"]
+    },
+    "phase": {
+      "enum": ["intake", "framing", "planning", "execution", "verification", "human-review", "kernel"]
+    }
+  }
+}

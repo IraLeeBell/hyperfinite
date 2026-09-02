@@ -1,0 +1,79 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubAppRegistrationPlan",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-28T12:00:00Z",
+  "manifestVersion": "1.0.0",
+  "appName": "hyperfinite-synthetic-app",
+  "operations": [
+    {
+      "operationId": "resolveBinding",
+      "permissions": [
+        { "name": "metadata", "level": "read", "scope": "repository" },
+        { "name": "issues", "level": "read", "scope": "repository" },
+        { "name": "pull_requests", "level": "read", "scope": "repository" },
+        { "name": "organization_projects", "level": "read", "scope": "organization" }
+      ]
+    },
+    {
+      "operationId": "authorizeActor",
+      "permissions": [
+        { "name": "metadata", "level": "read", "scope": "repository" },
+        { "name": "members", "level": "read", "scope": "organization" },
+        { "name": "pull_requests", "level": "read", "scope": "repository" }
+      ]
+    },
+    {
+      "operationId": "issue-comment",
+      "permissions": [
+        { "name": "metadata", "level": "read", "scope": "repository" },
+        { "name": "issues", "level": "write", "scope": "repository" }
+      ]
+    },
+    {
+      "operationId": "pull-request-review-comment",
+      "permissions": [
+        { "name": "metadata", "level": "read", "scope": "repository" },
+        { "name": "pull_requests", "level": "write", "scope": "repository" }
+      ]
+    },
+    {
+      "operationId": "check-run",
+      "permissions": [
+        { "name": "metadata", "level": "read", "scope": "repository" },
+        { "name": "checks", "level": "write", "scope": "repository" },
+        { "name": "issues", "level": "write", "scope": "repository" },
+        { "name": "pull_requests", "level": "read", "scope": "repository" }
+      ]
+    },
+    {
+      "operationId": "project-field-update",
+      "permissions": [
+        { "name": "metadata", "level": "read", "scope": "repository" },
+        { "name": "issues", "level": "write", "scope": "repository" },
+        { "name": "organization_projects", "level": "write", "scope": "organization" }
+      ]
+    }
+  ],
+  "deniedPermissionNames": [
+    "administration",
+    "actions",
+    "deployments",
+    "organization_administration",
+    "repository_hooks",
+    "workflows"
+  ],
+  "leastPrivilegeUnion": [
+    { "name": "members", "level": "read", "scope": "organization" },
+    { "name": "organization_projects", "level": "write", "scope": "organization" },
+    { "name": "checks", "level": "write", "scope": "repository" },
+    { "name": "issues", "level": "write", "scope": "repository" },
+    { "name": "metadata", "level": "read", "scope": "repository" },
+    { "name": "pull_requests", "level": "write", "scope": "repository" }
+  ],
+  "nonAuthoritative": {
+    "cannotInstallOrTransferApp": true,
+    "cannotAuthenticateApp": true,
+    "cannotMintInstallationToken": true
+  }
+}

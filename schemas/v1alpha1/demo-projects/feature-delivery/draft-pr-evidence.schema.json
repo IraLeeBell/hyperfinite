@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/feature-delivery/draft-pr-evidence.schema.json",
+  "title": "Feature Delivery draft pull request evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "FeatureDeliveryDraftPullRequestEvidence"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repositoryBindingDigest",
+        "patchDigest",
+        "baseSha",
+        "pullRequest",
+        "deliveryAuthority",
+        "prohibitedAutomation"
+      ],
+      "properties": {
+        "repositoryBindingDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "patchDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "baseSha": {
+          "$ref": "#/$defs/sha"
+        },
+        "pullRequest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "number",
+            "nodeId",
+            "headSha",
+            "draft",
+            "state"
+          ],
+          "properties": {
+            "number": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "nodeId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "headSha": {
+              "$ref": "#/$defs/sha"
+            },
+            "draft": {
+              "const": true
+            },
+            "state": {
+              "const": "open"
+            }
+          }
+        },
+        "deliveryAuthority": {
+          "const": "trusted-adapter"
+        },
+        "prohibitedAutomation": {
+          "type": "array",
+          "minItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "mark-ready",
+              "approve",
+              "dismiss-review",
+              "merge",
+              "deploy",
+              "publish"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    }
+  }
+}

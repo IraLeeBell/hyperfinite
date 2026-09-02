@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-run-state.schema.json",
+  "title": "Autonomous demo run state",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoRunState" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "catalogDigest",
+        "identityReservationsDigest",
+        "projectProfileDigest",
+        "journeyDefinitionDigest",
+        "stageAgentBindingsDigest",
+        "capabilityShardDigest",
+        "activationProfileDigest",
+        "projectionMappingDigest",
+        "repositoryId",
+        "workItemNodeId",
+        "repositoryBindingDigest",
+        "authorityEpoch",
+        "generation",
+        "runId",
+        "runAttempt",
+        "core",
+        "journey",
+        "fenceDigest",
+        "fenceBaseRunStateDigest",
+        "currentDraftPullRequest",
+        "status",
+        "updatedAt"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "catalogDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "identityReservationsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projectProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "journeyDefinitionDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "stageAgentBindingsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "capabilityShardDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "activationProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projectionMappingDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "repositoryId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "workItemNodeId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "repositoryBindingDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "authorityEpoch": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "generation": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+        },
+        "runId": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_-]{1,128}$"
+        },
+        "runAttempt": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "core": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/coreStateBinding"
+        },
+        "journey": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "currentStageId",
+            "currentStageOrdinal",
+            "previousStageReceiptDigest",
+            "completedStageReceiptDigests"
+          ],
+          "properties": {
+            "currentStageId": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+            },
+            "currentStageOrdinal": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+            },
+            "previousStageReceiptDigest": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nullableDigest"
+            },
+            "completedStageReceiptDigests": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+              }
+            }
+          }
+        },
+        "fenceDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nullableDigest"
+        },
+        "fenceBaseRunStateDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nullableDigest"
+        },
+        "currentDraftPullRequest": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["number", "nodeId", "headSha", "draft", "state"],
+              "properties": {
+                "number": {
+                  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+                },
+                "nodeId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                },
+                "headSha": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{40}$"
+                },
+                "draft": { "const": true },
+                "state": { "const": "open" }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "status": {
+          "enum": [
+            "ready",
+            "running",
+            "waiting-human",
+            "blocked",
+            "completed",
+            "cancelled"
+          ]
+        },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

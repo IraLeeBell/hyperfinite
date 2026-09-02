@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/capability-registry.schema.json",
+  "title": "Capability Registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "metadata", "defaults", "capabilities"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "CapabilityRegistry" },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version"],
+      "properties": { "version": { "const": "1.0.0" } }
+    },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tools", "network", "writes", "secrets"],
+      "properties": {
+        "tools": { "const": "deny" },
+        "network": { "const": "deny" },
+        "writes": { "const": "deny" },
+        "secrets": { "const": "deny" }
+      }
+    },
+    "capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/capability" }
+    }
+  },
+  "$defs": {
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "publisher", "owner", "description", "status", "implementation", "allowedPhases", "actorClasses", "inputSchema", "outputSchema", "access", "effectClass", "risk", "limits", "humanGates", "idempotency", "evidence", "evaluations", "provenance", "compatibility"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "publisher": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["active", "disabled", "deprecated"] },
+        "implementation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "provider"],
+          "properties": {
+            "kind": { "enum": ["deterministic", "model"] },
+            "provider": { "type": "string", "minLength": 1 }
+          }
+        },
+        "allowedPhases": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/activePhase" }
+        },
+        "actorClasses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/actorClass" }
+        },
+        "inputSchema": { "type": "object" },
+        "outputSchema": { "type": "object" },
+        "access": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["readScopes", "write", "tools", "shellCommands", "networkDestinations", "mcpTools", "mcpReadTools", "mcpMutationTools", "secretNames"],
+          "properties": {
+            "readScopes": { "$ref": "#/$defs/strings" },
+            "write": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["allowed", "scopes"],
+              "properties": {
+                "allowed": { "const": false },
+                "scopes": { "type": "array", "maxItems": 0 }
+              }
+            },
+            "tools": { "$ref": "#/$defs/strings" },
+            "shellCommands": { "$ref": "#/$defs/strings" },
+            "networkDestinations": { "$ref": "#/$defs/strings" },
+            "mcpTools": { "$ref": "#/$defs/strings" },
+            "mcpReadTools": { "$ref": "#/$defs/strings" },
+            "mcpMutationTools": { "$ref": "#/$defs/strings" },
+            "secretNames": { "type": "array", "maxItems": 0 }
+          }
+        },
+        "effectClass": { "enum": ["none", "advisory-artifact", "verification-result"] },
+        "risk": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["class", "trustZone", "privacyClass"],
+          "properties": {
+            "class": { "enum": ["low", "moderate", "high"] },
+            "trustZone": { "enum": ["T0", "T2", "T3", "T4"] },
+            "privacyClass": { "enum": ["public", "internal", "confidential", "restricted"] }
+          }
+        },
+        "limits": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["maxCalls", "maxCostUnits", "timeoutMs", "maxRetries", "maxOutputBytes", "maxConcurrency", "parallelSafe"],
+          "properties": {
+            "maxCalls": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "maxCostUnits": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+            "timeoutMs": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "maxRetries": { "type": "integer", "minimum": 0, "maximum": 20 },
+            "maxOutputBytes": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "maxConcurrency": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "parallelSafe": { "type": "boolean" }
+          }
+        },
+        "humanGates": { "$ref": "#/$defs/strings" },
+        "idempotency": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["required", "scope"],
+          "properties": {
+            "required": { "const": true },
+            "scope": { "enum": ["work-item", "contract-revision", "event"] }
+          }
+        },
+        "evidence": { "$ref": "#/$defs/strings" },
+        "evaluations": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["structural", "behavioral"],
+          "properties": {
+            "structural": { "$ref": "#/$defs/strings" },
+            "behavioral": { "$ref": "#/$defs/strings" }
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["classification", "legalReview", "securityReview"],
+          "properties": {
+            "classification": { "enum": ["original", "conceptual", "adapted", "verbatim"] },
+            "legalReview": { "enum": ["not-required", "pending", "approved", "rejected"] },
+            "securityReview": { "enum": ["pending", "approved", "rejected"] }
+          }
+        },
+        "compatibility": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["lifecycle", "replacement"],
+          "properties": {
+            "lifecycle": { "const": "1.0.0" },
+            "replacement": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "activePhase": {
+      "enum": ["framing", "planning", "execution", "verification", "human-review"]
+    },
+    "actorClass": {
+      "enum": ["requester", "reviewer", "maintainer", "administrator", "system", "policy"]
+    }
+  }
+}

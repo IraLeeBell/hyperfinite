@@ -1,0 +1,80 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationHandsOffTrace",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:a48432db6e87e78ea976326611d9e43f20d6165d8ceab0cdf4afcea886089bd6",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "runId": "security-remediation-hands-off-1",
+    "entries": [
+      {
+        "stageId": "intake",
+        "ordinal": 1,
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "deterministic",
+        "agentId": null,
+        "receiptDigest": "sha256:7f62e0936cd87a7577012d48916a25d0331e0235cb4c194587eb6c100cd9786a"
+      },
+      {
+        "stageId": "triage",
+        "ordinal": 2,
+        "coreState": "FRAMING",
+        "executionKind": "model",
+        "agentId": "security-dependency-remediation-triage",
+        "receiptDigest": "sha256:fee3ed467a3aa062848732a724b2283dfc11b4f1a066504d12b47ea43226e297"
+      },
+      {
+        "stageId": "reproduction-and-impact-analysis",
+        "ordinal": 3,
+        "coreState": "FRAMING",
+        "executionKind": "model",
+        "agentId": "security-dependency-remediation-reproduction-and-impact-analysis",
+        "receiptDigest": "sha256:48b3dc9e2b37d1b1b26838e62e8fd9332cab85ced37a647ab121e3085801c1b8"
+      },
+      {
+        "stageId": "remediation-design",
+        "ordinal": 4,
+        "coreState": "FRAMING",
+        "executionKind": "model",
+        "agentId": "security-dependency-remediation-remediation-design",
+        "receiptDigest": "sha256:c3b3ab2bb7424e3ceabb7979dd8eacc3555d691ec7a93cf88869ac118be2281f"
+      },
+      {
+        "stageId": "patch-planning",
+        "ordinal": 5,
+        "coreState": "PLANNED",
+        "executionKind": "planning",
+        "agentId": null,
+        "receiptDigest": "sha256:bd78aba6ef136c6a83fee190962ff9f15d58b899822f65042a21cfcac9e70b8d"
+      },
+      {
+        "stageId": "patch-implementation",
+        "ordinal": 6,
+        "coreState": "EXECUTING",
+        "executionKind": "model",
+        "agentId": "security-dependency-remediation-patch-implementation",
+        "receiptDigest": "sha256:9100385e4e1b93d3e829fc09189bca40db569b935bb4184a627517d1e2f60d22"
+      },
+      {
+        "stageId": "security-verification",
+        "ordinal": 7,
+        "coreState": "VERIFYING",
+        "executionKind": "model",
+        "agentId": "security-dependency-remediation-security-verification",
+        "receiptDigest": "sha256:7a8e34394839cbe52d836c9293c57818bb1d3610c866562f02f45641369b515d"
+      },
+      {
+        "stageId": "human-review",
+        "ordinal": 8,
+        "coreState": "HUMAN_REVIEW",
+        "executionKind": "human",
+        "agentId": null,
+        "receiptDigest": null
+      }
+    ],
+    "currentStageId": "human-review",
+    "currentCoreState": "HUMAN_REVIEW",
+    "humanActionCount": 0,
+    "externalCallCount": 0
+  }
+}

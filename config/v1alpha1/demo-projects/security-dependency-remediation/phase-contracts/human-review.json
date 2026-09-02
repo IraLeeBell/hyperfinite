@@ -1,0 +1,86 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "demo.security-dependency-remediation.human-review",
+    "version": "1.0.0"
+  },
+  "phase": "human-review",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "work-accord-current",
+    "verification-receipt-current",
+    "draft-pr-exact-head-current"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "security-regression-verification",
+    "comment-only-review",
+    "known-alert-unchanged"
+  ],
+  "allowedCapabilities": [],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "reviewPackageDigest",
+      "headSha"
+    ],
+    "properties": {
+      "reviewPackageDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "headSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "decision",
+      "reviewerEvidenceDigest",
+      "headSha"
+    ],
+    "properties": {
+      "decision": {
+        "enum": [
+          "accept",
+          "request-revision",
+          "cancel"
+        ]
+      },
+      "reviewerEvidenceDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "headSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "eligible-independent-human-accepts-current-head",
+      "event": "outcome-accepted"
+    }
+  ],
+  "limits": {
+    "maxLoops": 0,
+    "maxCalls": 0,
+    "maxCostUnits": 0,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "approve-current-head"
+  ],
+  "privacy": {
+    "maximumClass": "internal",
+    "retentionDays": 365
+  }
+}

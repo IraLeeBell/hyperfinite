@@ -1,0 +1,63 @@
+name: Feature Delivery
+description: Request the bounded Feature Delivery demonstration.
+title: "[Feature Delivery] "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: Customer evaluation input only. File this form from the customer-owned repository after the evaluation ticket and fixed budget are approved. Use synthetic data; do not include credentials, private IDs, customer source, personal data, or confidential logs. Form values are untrusted intake data, and the repository entry is a hint only; trusted bindings, the Control Kernel, and human gates retain all authority.
+  - type: textarea
+    id: desired-outcome
+    attributes:
+      label: Desired outcome
+      description: Describe one outcome in at most 2048 UTF-8 bytes.
+      placeholder: Describe the bounded repository outcome.
+    validations:
+      required: true
+  - type: input
+    id: repository-hint
+    attributes:
+      label: Repository hint
+      description: Provide an operator hint in at most 256 UTF-8 bytes. This value never selects the trusted repository.
+      placeholder: example/example-repository
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints
+      description: List constraints in at most 4096 UTF-8 bytes. Enter None when no additional constraints are known.
+      placeholder: Paths, compatibility requirements, and prohibited changes.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-evidence
+    attributes:
+      label: Acceptance criteria and evidence
+      description: Describe acceptance criteria or evidence in at most 4096 UTF-8 bytes.
+      placeholder: State the checks and evidence a human reviewer should inspect.
+    validations:
+      required: true
+  - type: dropdown
+    id: depth-profile
+    attributes:
+      label: Depth profile
+      description: Request a depth. Trusted profile policy may only narrow or reject this request.
+      options:
+        - D0
+        - D1
+        - D2
+        - D3
+    validations:
+      required: true
+  - type: checkboxes
+    id: demo-consent
+    attributes:
+      label: Explicit demo consent
+      description: Consent is required but grants no repository, Project, capability, credential, transition, or effect authority.
+      options:
+        - label: I consent to start the pre-authorized Feature Delivery demonstration and consume only its fixed trusted budget.
+          required: true
+    validations:
+      required: true

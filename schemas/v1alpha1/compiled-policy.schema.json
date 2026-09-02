@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/compiled-policy.schema.json",
+  "title": "Compiled policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["digest", "phase", "allowedCapabilities", "capabilities", "requiredHumanGates", "limits"],
+  "properties": {
+    "digest": { "$ref": "#/$defs/digest" },
+    "phase": { "$ref": "#/$defs/activePhase" },
+    "allowedCapabilities": { "$ref": "#/$defs/strings" },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["reference", "actorClasses", "humanGates", "readScopes", "tools", "shellCommands", "networkDestinations", "mcpTools", "riskClass", "privacyClass", "limits", "evidence", "structuralEvaluations", "behavioralEvaluations"],
+        "properties": {
+          "reference": { "type": "string", "minLength": 1 },
+          "actorClasses": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/actorClass" }
+          },
+          "humanGates": { "$ref": "#/$defs/strings" },
+          "readScopes": { "$ref": "#/$defs/strings" },
+          "tools": { "$ref": "#/$defs/strings" },
+          "shellCommands": { "$ref": "#/$defs/strings" },
+          "networkDestinations": { "$ref": "#/$defs/strings" },
+          "mcpTools": { "$ref": "#/$defs/strings" },
+          "riskClass": { "enum": ["low", "moderate", "high"] },
+          "privacyClass": { "enum": ["public", "internal", "confidential", "restricted"] },
+          "limits": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["maxCalls", "maxCostUnits", "timeoutMs", "maxRetries", "maxOutputBytes", "maxConcurrency", "parallelSafe"],
+            "properties": {
+              "maxCalls": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+              "maxCostUnits": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+              "timeoutMs": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+              "maxRetries": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+              "maxOutputBytes": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+              "maxConcurrency": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+              "parallelSafe": { "type": "boolean" }
+            }
+          },
+          "evidence": { "$ref": "#/$defs/strings" },
+          "structuralEvaluations": { "$ref": "#/$defs/strings" },
+          "behavioralEvaluations": { "$ref": "#/$defs/strings" }
+        }
+      }
+    },
+    "requiredHumanGates": { "$ref": "#/$defs/strings" },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxCalls", "maxTokens", "maxCostUnits", "maxLoops", "maxRetries", "maxParallel"],
+      "properties": {
+        "maxCalls": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+        "maxTokens": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+        "maxCostUnits": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+        "maxLoops": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+        "maxRetries": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+        "maxParallel": { "$ref": "#/$defs/nonNegativeSafeInteger" }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "activePhase": {
+      "enum": ["framing", "planning", "execution", "verification", "human-review"]
+    },
+    "actorClass": { "enum": ["requester", "reviewer", "maintainer", "administrator", "system", "policy"] },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "nonNegativeSafeInteger": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  }
+}

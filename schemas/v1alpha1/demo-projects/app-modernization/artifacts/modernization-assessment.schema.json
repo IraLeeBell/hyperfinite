@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/modernization-assessment.schema.json",
+  "title": "App Modernization assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationAssessment" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["inventoryDigest", "architectureStyle", "maintainability", "constraints", "openQuestions"],
+      "properties": {
+        "inventoryDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "architectureStyle": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "maintainability": {
+          "type": "array",
+          "maxItems": 64,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "severity", "summary", "evidenceDigest"],
+            "properties": {
+              "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
+              "severity": { "enum": ["low", "moderate", "high"] },
+              "summary": { "type": "string", "minLength": 1, "maxLength": 512 },
+              "evidenceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+            }
+          }
+        },
+        "constraints": { "type": "array", "maxItems": 32, "items": { "type": "string", "minLength": 1, "maxLength": 512 } },
+        "openQuestions": { "type": "array", "maxItems": 20, "items": { "type": "string", "minLength": 1, "maxLength": 512 } }
+      }
+    }
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-project-target-manifest.schema.json",
+  "title": "Exact live demo Project target manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoProjectTargetManifest" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["owner", "repository", "projects"],
+      "properties": {
+        "owner": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "login", "nodeId"],
+          "properties": {
+            "type": { "const": "organization" },
+            "login": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$"
+            },
+            "nodeId": { "type": "string", "minLength": 1 }
+          }
+        },
+        "repository": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fullName", "nodeId"],
+          "properties": {
+            "fullName": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+            },
+            "nodeId": { "type": "string", "minLength": 1 }
+          }
+        },
+        "projects": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "demoProjectId",
+              "title",
+              "number",
+              "nodeId",
+              "viewNodeId",
+              "visibility",
+              "closed",
+              "initialItemCount",
+              "initialViewName",
+              "initialViewLayout"
+            ],
+            "properties": {
+              "demoProjectId": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+              },
+              "title": { "type": "string", "minLength": 1 },
+              "number": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+              },
+              "nodeId": { "type": "string", "minLength": 1 },
+              "viewNodeId": { "type": "string", "minLength": 1 },
+              "visibility": { "const": "private" },
+              "closed": { "const": false },
+              "initialItemCount": { "const": 0 },
+              "initialViewName": { "const": "View 1" },
+              "initialViewLayout": { "const": "BOARD_LAYOUT" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

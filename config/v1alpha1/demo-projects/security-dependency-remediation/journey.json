@@ -1,0 +1,106 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoJourneyDefinition",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "initialStageId": "intake",
+    "terminalStageId": "completed",
+    "stages": [
+      {
+        "stageId": "intake",
+        "displayName": "Intake",
+        "ordinal": 1,
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "deterministic"
+      },
+      {
+        "stageId": "triage",
+        "displayName": "Triage",
+        "ordinal": 2,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "reproduction-and-impact-analysis",
+        "displayName": "Reproduction and impact analysis",
+        "ordinal": 3,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "remediation-design",
+        "displayName": "Remediation design",
+        "ordinal": 4,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "patch-planning",
+        "displayName": "Patch planning",
+        "ordinal": 5,
+        "coreState": "PLANNED",
+        "executionKind": "planning"
+      },
+      {
+        "stageId": "patch-implementation",
+        "displayName": "Patch implementation",
+        "ordinal": 6,
+        "coreState": "EXECUTING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "security-verification",
+        "displayName": "Security verification",
+        "ordinal": 7,
+        "coreState": "VERIFYING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "human-review",
+        "displayName": "Human review",
+        "ordinal": 8,
+        "coreState": "HUMAN_REVIEW",
+        "executionKind": "human"
+      },
+      {
+        "stageId": "completed",
+        "displayName": "Completed",
+        "ordinal": 9,
+        "coreState": "COMPLETED",
+        "executionKind": "terminal"
+      }
+    ],
+    "controlStages": [
+      {
+        "stageId": "activation-pending",
+        "displayName": "Activation Pending",
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "paused",
+        "displayName": "Paused",
+        "coreState": "PAUSED",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "blocked",
+        "displayName": "Blocked",
+        "coreState": "BLOCKED",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "cancelled",
+        "displayName": "Cancelled",
+        "coreState": "CANCELLED",
+        "executionKind": "kernel"
+      }
+    ]
+  },
+  "contentDigest": "sha256:3b74dd36f041d19ce588b80746971eebe0b3d3e6a594eed89331151886f16aab"
+}

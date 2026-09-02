@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/marketing/positioning-messaging.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "positioning-messaging" },
+    "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" },
+    "upstreamArtifactDigests": { "$ref": "#/$defs/digests" },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["positioning", "messages"],
+      "properties": {
+        "positioning": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/claim" }
+        },
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/claim" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim", "claimType", "evidenceDigests", "rightsIds"],
+      "properties": {
+        "claim": { "type": "string", "minLength": 1 },
+        "claimType": { "enum": ["factual", "comparative", "quantitative", "superlative", "security", "roadmap", "customer", "opinion"] },
+        "evidenceDigests": { "$ref": "#/$defs/digests" },
+        "rightsIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^rights:[a-z0-9-]+$" } }
+      }
+    }
+  }
+}

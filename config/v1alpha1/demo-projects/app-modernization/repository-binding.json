@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationRepositoryBinding",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "repositoryId": 987654321,
+    "repositoryNodeId": "R_synthetic_hyperfinite",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:a7638e415879302e2df424b4936fae42b3064e1bf38761d46c74cda6735bc5c4",
+    "defaultRef": "refs/heads/main",
+    "exactSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "source": "trusted-adapter",
+    "allowlisted": true,
+    "repositoryHintsAuthoritative": false,
+    "observedPathsAuthoritative": false,
+    "networkDestinations": [],
+    "credentials": [],
+    "deniedOperations": [
+      "arbitrary-clone",
+      "arbitrary-fetch",
+      "remote-add",
+      "submodule",
+      "package-install",
+      "lifecycle-script",
+      "credential-access",
+      "network",
+      "model-selected-path"
+    ]
+  },
+  "contentDigest": "sha256:d0c1bd87ed216d87b38cfbea70a1ecfd830bcb198b6f363da586885bd30b8ddb"
+}

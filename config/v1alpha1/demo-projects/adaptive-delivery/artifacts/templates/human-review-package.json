@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveHumanReviewPackageTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "authority": "advisory-only",
+    "targetFree": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "findings",
+        "openQuestions"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array"
+        },
+        "openQuestions": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "contentDigest": "sha256:db88d9849e4f0eba13309325481681d446477391456b072aa1cf68a330e78e82"
+}

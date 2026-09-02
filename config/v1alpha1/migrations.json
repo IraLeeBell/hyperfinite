@@ -1,0 +1,27 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "MigrationManifest",
+  "schemaVersion": "1.0.0",
+  "packageName": "agentic-framework",
+  "currentVersion": "0.1.0",
+  "steps": [
+    {
+      "id": "package-0-0-0-to-0-1-0",
+      "from": "0.0.0",
+      "to": "0.1.0",
+      "checksum": "sha256:45f62c3a4173de36d1795b48c50e9e79f22f4e5c071a56b3fb60a6d64dba89e0",
+      "preconditions": [
+        "backup-evidence-present",
+        "exact-source-version",
+        "exact-target-head-current",
+        "receipt-chain-valid"
+      ],
+      "irreversible": false,
+      "rollback": {
+        "supported": true,
+        "humanApprovalRequired": true
+      },
+      "evidenceRetention": "preserve"
+    }
+  ]
+}

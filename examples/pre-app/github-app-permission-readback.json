@@ -1,0 +1,36 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubAppPermissionReadback",
+  "schemaVersion": "1.0.0",
+  "observedAt": "2026-08-28T00:05:00Z",
+  "planDigest": "sha256:9364899f428d1e16c48d0d0090f142eb94d3a4a1f24e46a4bd7fac7a8f93906d",
+  "ownerId": 987654001,
+  "ownerNodeId": "O_synthetic0001",
+  "ownerLogin": "example-organization",
+  "accountType": "organization",
+  "appId": 987654002,
+  "appNodeId": "A_synthetic0002",
+  "installationId": 987654321,
+  "selectedRepositories": [
+    {
+      "id": 987654003,
+      "nodeId": "R_synthetic0003",
+      "owner": "example-organization",
+      "name": "example-repository",
+      "fullName": "example-organization/example-repository"
+    }
+  ],
+  "observedPermissions": [
+    { "name": "members", "level": "read", "scope": "organization" },
+    { "name": "organization_projects", "level": "write", "scope": "organization" },
+    { "name": "checks", "level": "write", "scope": "repository" },
+    { "name": "issues", "level": "write", "scope": "repository" },
+    { "name": "metadata", "level": "read", "scope": "repository" },
+    { "name": "pull_requests", "level": "write", "scope": "repository" }
+  ],
+  "nonAuthoritative": {
+    "cannotInstallOrTransferApp": true,
+    "cannotAuthenticateApp": true,
+    "cannotMintInstallationToken": true
+  }
+}

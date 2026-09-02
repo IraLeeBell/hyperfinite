@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/copilot-runtime-policy.schema.json",
+  "title": "Copilot Runtime Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "metadata", "toolchain", "modelSelection", "phaseBindings", "limits", "access", "safeOutputs", "protectedFiles"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "CopilotRuntimePolicy" },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "enabledByDefault"],
+      "properties": {
+        "version": { "const": "1.0.0" },
+        "enabledByDefault": { "const": false }
+      }
+    },
+    "toolchain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ghAwVersion", "ghAwActionRef"],
+      "properties": {
+        "ghAwVersion": { "const": "v0.86.2" },
+        "ghAwActionRef": { "const": "48e5fa3ff52294d91d97715017a9f8693a48387f" }
+      }
+    },
+    "modelSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "model", "fallbackAllowed", "selectionAuthority"],
+      "properties": {
+        "provider": { "const": "copilot" },
+        "model": { "type": "string", "minLength": 1 },
+        "fallbackAllowed": { "const": false },
+        "selectionAuthority": { "const": "administrator-policy-and-activation-lease" }
+      }
+    },
+    "phaseBindings": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["phase", "role", "agent", "skill", "safetySkills", "capability", "workflow", "workflowClass", "slashCommand", "githubToolsets", "githubTools", "modelInvocationAllowed"],
+        "properties": {
+          "phase": { "enum": ["framing", "execution", "verification"] },
+          "role": { "enum": ["framer", "executor", "reviewer"] },
+          "agent": { "type": "string", "pattern": "^runtime-[a-z-]+$" },
+          "skill": { "type": "string", "pattern": "^[a-z][a-z-]+$" },
+          "safetySkills": {
+            "const": ["authority-refusal"]
+          },
+          "capability": { "type": "string", "pattern": "^[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "workflow": {
+            "oneOf": [
+              { "type": "string", "pattern": "^agentic-[a-z-]+$" },
+              { "type": "null" }
+            ]
+          },
+          "workflowClass": {
+            "enum": [
+              "framing-comment",
+              "target-free-execution",
+              "current-head-comment-review"
+            ]
+          },
+          "slashCommand": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "events"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]{0,127}$"
+              },
+              "events": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "enum": [
+                    "issues",
+                    "issue_comment",
+                    "pull_request_comment"
+                  ]
+                }
+              }
+            }
+          },
+          "githubToolsets": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "githubTools": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "minLength": 1 }
+          },
+          "modelInvocationAllowed": { "const": true }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["timeoutMinutes", "maxTurns", "maxContinuations", "maxAiCredits", "maxThreatDetectionAiCredits", "maxDailyAiCredits", "maxConcurrency", "maxCascadeRuns", "maxRecursionDepth", "maxRepairLoops", "maxPatchBytes", "maxEvidenceAgeMs"],
+      "properties": {
+        "timeoutMinutes": { "const": 10 },
+        "maxTurns": { "const": 8 },
+        "maxContinuations": { "const": 1 },
+        "maxAiCredits": { "const": 200 },
+        "maxThreatDetectionAiCredits": { "const": 100 },
+        "maxDailyAiCredits": { "const": 1500 },
+        "maxConcurrency": { "const": 1 },
+        "maxCascadeRuns": { "const": 0 },
+        "maxRecursionDepth": { "const": 0 },
+        "maxRepairLoops": { "const": 2 },
+        "maxPatchBytes": { "const": 262144 },
+        "maxEvidenceAgeMs": { "const": 300000 }
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["networkDestinations", "mcpEnabled", "mcpServers", "mcpTools", "secretNames", "patFallbackAllowed"],
+      "properties": {
+        "networkDestinations": { "type": "array", "maxItems": 0 },
+        "mcpEnabled": { "const": false },
+        "mcpServers": { "type": "array", "maxItems": 0 },
+        "mcpTools": { "type": "array", "maxItems": 0 },
+        "secretNames": { "type": "array", "maxItems": 0 },
+        "patFallbackAllowed": { "const": false }
+      }
+    },
+    "safeOutputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed", "pullRequestReviewEvents", "requireThreatDetectionStatus"],
+      "properties": {
+        "allowed": {
+          "const": ["issue-comment", "target-free-implementation-patch", "pull-request-review-comment"]
+        },
+        "pullRequestReviewEvents": { "const": ["COMMENT"] },
+        "requireThreatDetectionStatus": { "const": "success" }
+      }
+    },
+    "protectedFiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "paths"],
+      "properties": {
+        "mode": { "const": "blocked" },
+        "paths": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

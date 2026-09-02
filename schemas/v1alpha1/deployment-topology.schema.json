@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/deployment-topology.schema.json",
+  "title": "Closed provider-neutral pre-App deployment topology plan",
+  "description": "A closed, versioned, provider-neutral declaration of the independent trust-service identities, durable stores, budgets, monitoring, retention, and protections required before any live App installation or activation. This document is a plan only; it grants no target, credential, or effect authority and cannot be applied by automation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "generatedAt",
+    "services",
+    "durableStores",
+    "budgets",
+    "monitoring",
+    "retention",
+    "protections",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DeploymentTopologyPlan" },
+    "schemaVersion": { "const": "1.0.0" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "services": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/service" }
+    },
+    "durableStores": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/durableStore" }
+    },
+    "budgets": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/budget" }
+    },
+    "monitoring": { "$ref": "#/$defs/monitoring" },
+    "retention": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/retentionEntry" }
+    },
+    "protections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/protection" }
+    },
+    "nonAuthoritative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cannotInstallOrTransferApp",
+        "cannotMintOrHoldCredentials",
+        "cannotSelectLiveTarget",
+        "cannotDeployOrActivate"
+      ],
+      "properties": {
+        "cannotInstallOrTransferApp": { "const": true },
+        "cannotMintOrHoldCredentials": { "const": true },
+        "cannotSelectLiveTarget": { "const": true },
+        "cannotDeployOrActivate": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "repositoryFullName": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "service": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["serviceId", "kind", "identity", "health", "network", "isolation"],
+      "properties": {
+        "serviceId": {
+          "enum": [
+            "webhook-verifier",
+            "runtime-state-publisher",
+            "authorization-redeemer",
+            "evidence-signer",
+            "evidence-and-grant-store-broker",
+            "github-token-broker",
+            "single-writer-reconciler",
+            "installation-and-release-adapter"
+          ]
+        },
+        "kind": {
+          "enum": [
+            "webhook-ingress",
+            "state-publisher",
+            "oidc-redeemer",
+            "evidence-signer",
+            "durable-store-service",
+            "credential-broker",
+            "single-writer",
+            "installation-adapter"
+          ]
+        },
+        "identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "principalId",
+            "oidcAudience",
+            "allowedRepositories",
+            "allowedWorkflows",
+            "signingKeyId",
+            "credentialCustody"
+          ],
+          "properties": {
+            "principalId": {
+              "description": "A fixed, code-derived logical principal identity, one per service. Not a credential.",
+              "type": "string",
+              "pattern": "^principal:[a-z][a-z0-9-]{0,63}$"
+            },
+            "oidcAudience": { "type": "string", "minLength": 1, "maxLength": 256 },
+            "allowedRepositories": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "#/$defs/repositoryFullName" }
+            },
+            "allowedWorkflows": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1, "maxLength": 256 }
+            },
+            "signingKeyId": {
+              "description": "An opaque key identifier only. Key material must never appear in this document.",
+              "$ref": "#/$defs/opaqueId"
+            },
+            "credentialCustody": {
+              "enum": ["sign-only-broker", "short-lived-scoped-token", "none"]
+            }
+          }
+        },
+        "health": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["endpointPath", "exposesSecretMaterial", "failClosedOnDependencyUnavailable"],
+          "properties": {
+            "endpointPath": { "type": "string", "pattern": "^/[a-z0-9/_-]{1,127}$" },
+            "exposesSecretMaterial": { "const": false },
+            "failClosedOnDependencyUnavailable": { "const": true }
+          }
+        },
+        "network": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["denyByDefaultEgress", "allowedEgressHosts"],
+          "properties": {
+            "denyByDefaultEgress": { "const": true },
+            "allowedEgressHosts": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": { "type": "string", "minLength": 1, "maxLength": 253 }
+            }
+          }
+        },
+        "isolation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "sharedWithModelRunner",
+            "sharedWithReviewerJob",
+            "sharedWithUntrustedActionsJob",
+            "dedicatedCredential"
+          ],
+          "properties": {
+            "sharedWithModelRunner": { "const": false },
+            "sharedWithReviewerJob": { "const": false },
+            "sharedWithUntrustedActionsJob": { "const": false },
+            "dedicatedCredential": { "const": true }
+          }
+        }
+      }
+    },
+    "durableStore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["storeId", "kind", "identity", "atomicGuarantees", "isolation"],
+      "properties": {
+        "storeId": {
+          "enum": [
+            "evidence-store",
+            "operation-grant-store",
+            "receipt-journal",
+            "runtime-state-store"
+          ]
+        },
+        "kind": { "$ref": "#/$defs/opaqueId" },
+        "identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["namespace", "credentialId"],
+          "properties": {
+            "namespace": {
+              "description": "An opaque backend namespace identifier only, never a real connection string or endpoint.",
+              "$ref": "#/$defs/opaqueId"
+            },
+            "credentialId": {
+              "description": "An opaque credential identifier only. Credential material must never appear in this document.",
+              "$ref": "#/$defs/opaqueId"
+            }
+          }
+        },
+        "atomicGuarantees": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "casSupported",
+            "idempotentWrites",
+            "replayRefusal",
+            "restartContinuity",
+            "boundedJournal"
+          ],
+          "properties": {
+            "casSupported": { "const": true },
+            "idempotentWrites": { "const": true },
+            "replayRefusal": { "const": true },
+            "restartContinuity": { "const": true },
+            "boundedJournal": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["maxEntries", "enforced"],
+              "properties": {
+                "maxEntries": { "type": "integer", "minimum": 1, "maximum": 512 },
+                "enforced": { "const": true }
+              }
+            }
+          }
+        },
+        "isolation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["dedicatedCredential", "sharedWithModelRunner"],
+          "properties": {
+            "dedicatedCredential": { "const": true },
+            "sharedWithModelRunner": { "const": false }
+          }
+        }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["budgetId", "appliesToServiceId", "limitKind", "windowSeconds", "maxUnits"],
+      "properties": {
+        "budgetId": { "$ref": "#/$defs/opaqueId" },
+        "appliesToServiceId": {
+          "enum": [
+            "webhook-verifier",
+            "runtime-state-publisher",
+            "authorization-redeemer",
+            "evidence-signer",
+            "evidence-and-grant-store-broker",
+            "github-token-broker",
+            "single-writer-reconciler",
+            "installation-and-release-adapter"
+          ]
+        },
+        "limitKind": { "enum": ["requests", "tokens", "cost-units", "concurrency"] },
+        "windowSeconds": { "type": "integer", "minimum": 1, "maximum": 604800 },
+        "maxUnits": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 }
+      }
+    },
+    "monitoring": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requiredSignals", "alertRouting"],
+      "properties": {
+        "requiredSignals": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "health",
+              "latency",
+              "errorRate",
+              "budgetExhaustion",
+              "evidenceSigningFailure",
+              "replayRejection",
+              "durableStoreUnavailable",
+              "journalCapacityWarning"
+            ]
+          }
+        },
+        "alertRouting": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["ownerRole", "channel"],
+          "properties": {
+            "ownerRole": { "enum": ["security-owner", "platform-owner", "on-call-admin"] },
+            "channel": { "enum": ["incident-queue", "paging", "email"] }
+          }
+        }
+      }
+    },
+    "retentionEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactKind", "minRetentionDays", "maxRetentionDays"],
+      "properties": {
+        "artifactKind": {
+          "enum": ["signed-evidence", "receipt-journal", "audit-log", "installation-backup"]
+        },
+        "minRetentionDays": { "type": "integer", "minimum": 1, "maximum": 36500 },
+        "maxRetentionDays": { "type": "integer", "minimum": 1, "maximum": 36500 }
+      }
+    },
+    "protection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["protectionId", "scope", "requiresHumanApproval", "allowsAutomationBypass"],
+      "properties": {
+        "protectionId": { "$ref": "#/$defs/opaqueId" },
+        "scope": {
+          "enum": [
+            "app-installation",
+            "ruleset",
+            "required-check",
+            "actions-policy",
+            "ghas-setting",
+            "project-binding",
+            "billing",
+            "visibility"
+          ]
+        },
+        "requiresHumanApproval": { "const": true },
+        "allowsAutomationBypass": { "const": false }
+      }
+    }
+  }
+}

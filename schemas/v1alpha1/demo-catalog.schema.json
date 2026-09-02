@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-catalog.schema.json",
+  "title": "Autonomous demo catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoCatalog" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entries"],
+      "properties": {
+        "entries": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "title",
+              "projectProfileRef",
+              "journeyDefinitionRef",
+              "stageAgentBindingsRef",
+              "capabilityShardRef",
+              "activationProfileRef",
+              "projectionMappingRef"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+              },
+              "title": {
+                "enum": [
+                  "App Modernization",
+                  "Feature Delivery",
+                  "Security and Dependency Remediation",
+                  "Adaptive Delivery"
+                ]
+              },
+              "projectProfileRef": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/reference"
+              },
+              "journeyDefinitionRef": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/reference"
+              },
+              "stageAgentBindingsRef": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/reference"
+              },
+              "capabilityShardRef": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/reference"
+              },
+              "activationProfileRef": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/reference"
+              },
+              "projectionMappingRef": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/reference"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

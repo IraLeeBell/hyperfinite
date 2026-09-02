@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/copilot-runtime-state.schema.json",
+  "title": "Copilot Runtime State",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "repositoryId", "repositoryFullName", "workItemNodeId", "projectNodeId", "projectItemNodeId", "bindingDigest", "kernelBindingDigest", "workAccordSourceDigest", "state", "phase", "role", "capability", "contractRevision", "workAccordDigest", "policyDigest", "kernelPolicyDigest", "activationLeaseDigest", "kernelReceiptDigest", "kernelRouteId", "workflowId", "activationNonce", "currentHead", "executionContext", "remainingAiCredits", "repairCount", "recursionDepth", "expiresAt", "signature"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "CopilotRuntimeState" },
+    "schemaVersion": { "const": "2.0.0" },
+    "repositoryId": { "type": "integer", "minimum": 1 },
+    "repositoryFullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+    "workItemNodeId": { "type": "string", "minLength": 1 },
+    "projectNodeId": { "type": "string", "minLength": 1 },
+    "projectItemNodeId": { "type": "string", "minLength": 1 },
+    "bindingDigest": { "$ref": "#/$defs/digest" },
+    "kernelBindingDigest": { "$ref": "#/$defs/digest" },
+    "workAccordSourceDigest": { "$ref": "#/$defs/digest" },
+    "state": { "enum": ["FRAMING", "EXECUTING", "VERIFYING"] },
+    "phase": { "enum": ["framing", "execution", "verification"] },
+    "role": { "enum": ["framer", "executor", "reviewer"] },
+    "capability": { "type": "string", "pattern": "^[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "contractRevision": { "type": "integer", "minimum": 1 },
+    "workAccordDigest": { "$ref": "#/$defs/digest" },
+    "policyDigest": { "$ref": "#/$defs/digest" },
+    "kernelPolicyDigest": { "$ref": "#/$defs/digest" },
+    "activationLeaseDigest": { "$ref": "#/$defs/digest" },
+    "kernelReceiptDigest": { "$ref": "#/$defs/digest" },
+    "kernelRouteId": { "type": "string", "minLength": 1 },
+    "workflowId": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,127}$" },
+    "stageAgentSelection": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "grantDigest",
+            "authorityEpoch",
+            "generation",
+            "runId",
+            "runAttempt",
+            "receiptHead",
+            "policyGeneration",
+            "selectionPolicyDigest",
+            "stageAgentBindingsDigest",
+            "capabilityRegistryDigest",
+            "budgetAuthorityDigest"
+          ],
+          "properties": {
+            "grantDigest": { "$ref": "#/$defs/digest" },
+            "authorityEpoch": { "type": "integer", "minimum": 1 },
+            "generation": { "type": "integer", "minimum": 0 },
+            "runId": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,128}$"
+            },
+            "runAttempt": { "type": "integer", "minimum": 1 },
+            "receiptHead": {
+              "oneOf": [
+                { "$ref": "#/$defs/digest" },
+                { "type": "null" }
+              ]
+            },
+            "policyGeneration": { "type": "integer", "minimum": 1 },
+            "selectionPolicyDigest": { "$ref": "#/$defs/digest" },
+            "stageAgentBindingsDigest": { "$ref": "#/$defs/digest" },
+            "capabilityRegistryDigest": { "$ref": "#/$defs/digest" },
+            "budgetAuthorityDigest": { "$ref": "#/$defs/digest" }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "activationNonce": { "type": "string", "pattern": "^[A-Za-z0-9_-]{32,128}$" },
+    "currentHead": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "string", "pattern": "^[a-f0-9]{40}$" }
+      ]
+    },
+    "executionContext": { "$ref": "#/$defs/nullableExecutionContext" },
+    "remainingAiCredits": { "type": "integer", "minimum": 0 },
+    "repairCount": { "type": "integer", "minimum": 0 },
+    "recursionDepth": { "type": "integer", "minimum": 0 },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "value"],
+      "properties": {
+        "algorithm": { "const": "ed25519" },
+        "keyId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+          "minLength": 4,
+          "maxLength": 1024
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "nullableExecutionContext": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["schemaVersion", "planningArtifact", "planningArtifactDigest", "canonicalWorkAccord", "canonicalExecutionGrant", "executionGrantDigest", "patchSchema"],
+          "properties": {
+            "schemaVersion": { "const": "1.0.0" },
+            "planningArtifact": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["schemaVersion", "steps", "targetSlots", "verificationIds"],
+              "properties": {
+                "schemaVersion": { "const": "1.0.0" },
+                "steps": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+                "targetSlots": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" } },
+                "verificationIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+              }
+            },
+            "planningArtifactDigest": { "$ref": "#/$defs/digest" },
+            "canonicalWorkAccord": { "type": "string", "minLength": 2 },
+            "canonicalExecutionGrant": { "type": "string", "minLength": 2 },
+            "executionGrantDigest": { "$ref": "#/$defs/digest" },
+            "patchSchema": { "const": "TargetFreePatch@1.0.0" }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/stage-agent-binding-set.schema.json",
+  "title": "Autonomous demo stage-agent binding set",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "StageAgentBindingSet" },
+    "schemaVersion": { "const": "2.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "catalogDigest",
+        "identityReservationsDigest",
+        "projectProfileDigest",
+        "journeyDefinitionDigest",
+        "capabilityShardDigest",
+        "participationPolicyDigest",
+        "stageBindings",
+        "controlBindings"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "catalogDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "identityReservationsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projectProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "journeyDefinitionDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "capabilityShardDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "participationPolicyDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "stageBindings": {
+          "$ref": "#/$defs/bindings"
+        },
+        "controlBindings": {
+          "$ref": "#/$defs/bindings"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "bindings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "stageId",
+          "executionKind",
+          "participationMode",
+          "userInputRequired",
+          "eligibleActorClasses",
+          "requiredEvidenceClass",
+          "selectionFieldKey",
+          "allowedOptionKeys",
+          "fallbackPolicy",
+          "clearSelectionOnExit",
+          "runtimeBindings"
+        ],
+        "properties": {
+          "stageId": {
+            "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+          },
+          "executionKind": {
+            "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/executionKind"
+          },
+          "participationMode": {
+            "enum": ["none", "fixed", "user-selectable"]
+          },
+          "userInputRequired": { "type": "boolean" },
+          "eligibleActorClasses": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "enum": [
+                "system",
+                "enterprise-owner",
+                "organization-owner",
+                "project-owner",
+                "project-member",
+                "bot"
+              ]
+            }
+          },
+          "requiredEvidenceClass": {
+            "enum": [
+              "none",
+              "activation",
+              "accepted-frame",
+              "accepted-plan",
+              "fresh-project-selection",
+              "exact-current-head",
+              "human-gate",
+              "kernel-state"
+            ]
+          },
+          "selectionFieldKey": {
+            "oneOf": [
+              { "const": "requested-stage-agent" },
+              { "type": "null" }
+            ]
+          },
+          "allowedOptionKeys": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+            }
+          },
+          "fallbackPolicy": { "const": "none" },
+          "clearSelectionOnExit": { "type": "boolean" },
+          "runtimeBindings": {
+            "type": "array",
+            "maxItems": 8,
+            "uniqueItems": true,
+            "items": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/runtimeBinding"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/feature-delivery/target-free-patch.schema.json",
+  "title": "Feature Delivery target-free patch artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "FeatureDeliveryTargetFreePatch"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "planningArtifactDigest",
+        "summary",
+        "changes",
+        "acceptanceCriterionIds"
+      ],
+      "properties": {
+        "planningArtifactDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "changes": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slot",
+              "content",
+              "contentDigest"
+            ],
+            "properties": {
+              "slot": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]{0,62}$"
+              },
+              "content": {
+                "type": "string",
+                "maxLength": 32768
+              },
+              "contentDigest": {
+                "$ref": "#/$defs/digest"
+              }
+            }
+          }
+        },
+        "acceptanceCriterionIds": {
+          "$ref": "#/$defs/acceptanceIds"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "acceptanceIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^FD-AC-[0-9]{3}$"
+      }
+    }
+  }
+}

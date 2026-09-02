@@ -1,0 +1,51 @@
+{
+  "name": "agentic-framework",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic control kernel and validation tooling for agentic-framework.",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test tests/*.test.mjs dist/tests/*.test.js",
+    "validate": "npm run validate:customer-readiness && npm run typecheck && npm test && npm run validate:schemas && npm run validate:runtime && npm run validate:eval-fixtures && npm run validate:provenance && npm run validate:workflows && npm run validate:gh-aw && npm run validate:packaging && npm run validate:demos && npm run simulate:demos && npm run validate:hardening",
+    "github:setup": "npm run build && node dist/scripts/github-setup.js",
+    "installer": "npm run build && node dist/scripts/installer.js",
+    "release:local": "npm run build && node dist/scripts/release-local.js",
+    "starter:local": "npm run build && node dist/scripts/customer-starter-local.js",
+    "validate:customer-starter-extraction": "npm run build && node dist/scripts/validate-customer-starter-extraction.js",
+    "validate:customer-readiness": "npm run build && node dist/scripts/validate-customer-readiness.js",
+    "validate:packaging": "npm run build && node dist/scripts/validate-packaging.js",
+    "validate:provenance": "node scripts/validate-provenance.mjs",
+    "validate:schemas": "npm run build && node dist/scripts/validate-schemas.js",
+    "validate:runtime": "npm run build && node dist/scripts/validate-runtime-config.js",
+    "validate:workflows": "npm run build && node dist/scripts/validate-workflows.js",
+    "validate:gh-aw": "npm run build && node dist/scripts/validate-gh-aw.js",
+    "validate:review-agent-runtime": "npm run build && node dist/scripts/probe-review-agent-runtime.js",
+    "validate:eval-fixtures": "npm run build && node dist/scripts/validate-eval-fixtures.js",
+    "validate:demos": "npm run build && node dist/scripts/validate-demos.js",
+    "validate:hardening": "npm run build && node dist/scripts/validate-demo-hardening.js",
+    "simulate:demos": "npm run build && node dist/scripts/simulate-demos.js",
+    "canary:synthetic": "npm run build && node dist/scripts/run-synthetic-sandbox-canary.js",
+    "customer:configure": "npm run build && node dist/scripts/configure-customer-repository.js",
+    "customer:repin": "npm run build && node dist/scripts/repin-customer-starter.js",
+    "handoff:administrator": "npm run build && node dist/scripts/run-administrator-handoff.js",
+    "eval:behavioral": "npm run build && node dist/scripts/run-behavioral-evals.js",
+    "generate:hybrid-demo-contracts": "node scripts/generate-hybrid-demo-contracts.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "26.2.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "markdown-it": "14.3.0",
+    "spdx-expression-parse": "4.0.0",
+    "typescript": "7.0.2",
+    "yaml": "2.9.0"
+  }
+}

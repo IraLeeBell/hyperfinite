@@ -1,0 +1,86 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "marketing-pack-example-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-27T12:00:00Z",
+    "createdBy": "example-maintainer"
+  },
+  "binding": {
+    "repositoryId": 1,
+    "repositoryNodeId": "R_hyperfinite_fixture",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "workItemNodeId": "marketing-pack-example",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/marketing-pack-example",
+    "sourceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": null
+  },
+  "objective": {
+    "outcome": "Prepare an internal, evidence-backed marketing proposal for repository review.",
+    "inScope": ["examples/marketing/workspace/"],
+    "outOfScope": ["publication", "scheduling", "audience activation", "spend", "production telemetry"],
+    "assumptions": ["All evidence and actors are synthetic hermetic fixtures."],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "marketing@1.0.0",
+    "domainPackDigest": "sha256:e80ad6b938b2d92aa1213c00ba20a430bf722079affc00c34e8b13421db2f6c7",
+    "capabilityRegistryDigest": "sha256:acb1d33037998590786d2934625eeb069df8e0429fc5949523791146f9da7427",
+    "depthProfile": "D1",
+    "riskClass": "high",
+    "privacyClass": "confidential",
+    "phaseContracts": {
+      "framing": { "reference": "marketing.framing@1.0.0", "digest": "sha256:2ce97341ae1e71295aed3698115e7932216ae700bd7ff3a9bb2ed00b9893c0bf" },
+      "planning": { "reference": "marketing.planning@1.0.0", "digest": "sha256:1a9e1e3d037b5d8f550cb135a85eacd0a0f35334198cba53810dac31fdf250d3" },
+      "execution": { "reference": "marketing.execution@1.0.0", "digest": "sha256:fc87030429f9bac157a737d0bbea730b16a9f6b26690d1eaea500c7ad7313cf9" },
+      "verification": { "reference": "marketing.verification@1.0.0", "digest": "sha256:ddbb938e0d79cba6e380f1336707064f71017e5b32a72b1ee6b3a487e706d5c5" },
+      "human-review": { "reference": "marketing.human-review@1.0.0", "digest": "sha256:78c0918ad434492cc19a8dc45fae2e5cd02851685c755d300f5976d7c84fcea3" }
+    },
+    "requestedCapabilities": [
+      "marketing.frame-initiative@1.0.0",
+      "marketing.create-repository-artifacts@1.0.0",
+      "marketing.review-repository-artifacts@1.0.0"
+    ],
+    "allowedPaths": [
+      "examples/marketing/workspace/initiative-intake.json",
+      "examples/marketing/workspace/audience-evidence.json",
+      "examples/marketing/workspace/positioning-messaging.json",
+      "examples/marketing/workspace/content-plan.json",
+      "examples/marketing/workspace/content-drafts.json",
+      "examples/marketing/workspace/measurement-plan.json",
+      "examples/marketing/workspace/brand-legal-assessment.json",
+      "examples/marketing/workspace/launch-readiness-assessment.json"
+    ],
+    "prohibitedEffects": ["approve", "merge", "deploy", "publish", "external-publication", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change", "cms-mutation", "email-send", "social-post", "ads-mutation", "customer-communication"],
+    "tools": [],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": [],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 4,
+    "maxTokens": 20000,
+    "maxCostUnits": 40,
+    "maxDurationMs": 600000,
+    "maxRetries": 1,
+    "maxLoops": 1,
+    "maxParallel": 1,
+    "maxPatchBytes": 262144,
+    "expiresAt": "2027-08-27T12:00:00Z"
+  },
+  "deliverables": ["Eight proposal-only marketing artifacts in one draft repository pull request"],
+  "evidence": {
+    "required": ["exact-head", "brand-approval", "legal-approval", "comment-only-review"],
+    "verificationCommands": [],
+    "approverPolicy": "separate-eligible-brand-and-legal-humans"
+  },
+  "humanGates": ["activate", "accept-frame", "accept-plan", "brand-review", "legal-review", "approve-current-head"],
+  "retention": { "receiptDays": 90, "artifactDays": 90, "cancelOnExpiry": false }
+}

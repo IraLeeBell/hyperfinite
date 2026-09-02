@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationRepositoryInventory",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:0f45c476d49c550b6a033f0fb3ca446faa3d36cff398a0b4cb40010dc7af1569",
+  "spec": {
+    "intakeDigest": "sha256:0eaeb6d1e3c22131bb55ab3005dc1683ab053f238dbe63dc3f9d290feaf13fdf",
+    "repositoryBindingDigest": "sha256:8b805d39a1ccc89e29eba003eca46380f898020dd2999ead32233dae4158f825",
+    "headSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "languages": [
+      "TypeScript"
+    ],
+    "manifests": [
+      "package.json"
+    ],
+    "dependencies": [
+      {
+        "name": "legacy-http-client",
+        "versionConstraint": "1.x",
+        "sourceDigest": "sha256:09167452b188dded790348d9dbd25bab49cb2e4601737d19453a54107f3f31eb"
+      }
+    ],
+    "buildSystems": [
+      "node"
+    ],
+    "observedPathDigests": [
+      "sha256:a85f9359626b447c6b23ee91a86acce3cd49079608c9d43a1d65f17e2b63f334"
+    ],
+    "untrustedEvidence": true
+  }
+}

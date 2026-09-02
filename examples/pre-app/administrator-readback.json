@@ -1,0 +1,99 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdministratorReadback",
+  "schemaVersion": "1.0.0",
+  "observedAt": "2026-08-28T01:00:00Z",
+  "planDigest": "sha256:26c0a297d23aac8c518d47750c982def1bd3c315c004ba19ca31214a6752bdcb",
+  "repository": {
+    "id": 987654003,
+    "nodeId": "R_synthetic0003",
+    "owner": "example-organization",
+    "name": "example-repository",
+    "fullName": "example-organization/example-repository"
+  },
+  "classicBranchProtectionObserved": false,
+  "rulesets": [
+    {
+      "rulesetId": "main-branch-ruleset",
+      "source": "organization",
+      "target": "branch",
+      "refConditions": { "include": ["refs/heads/main"], "exclude": [] },
+      "effectiveProtectedRefs": ["refs/heads/main"],
+      "enforcement": "active",
+      "bypassActors": [],
+      "requiresPullRequest": true,
+      "requiresCodeownerReview": true,
+      "requiresCurrentHeadApproval": true
+    },
+    {
+      "rulesetId": "release-tag-ruleset",
+      "source": "organization",
+      "target": "tag",
+      "refConditions": { "include": ["refs/tags/v1.0.0"], "exclude": [] },
+      "effectiveProtectedRefs": ["refs/tags/v1.0.0"],
+      "enforcement": "active",
+      "bypassActors": [],
+      "restrictsTagCreation": true,
+      "restrictsTagUpdate": true,
+      "restrictsTagDeletion": true
+    }
+  ],
+  "environments": [
+    {
+      "environmentId": "copilot",
+      "requiresReviewers": false,
+      "hasProtectionRules": false
+    }
+  ],
+  "requiredChecks": [
+    { "checkName": "typecheck", "required": true },
+    { "checkName": "build", "required": true },
+    { "checkName": "test", "required": true },
+    { "checkName": "validate:schemas", "required": true },
+    { "checkName": "validate:runtime", "required": true },
+    { "checkName": "validate:workflows", "required": true },
+    { "checkName": "validate:gh-aw", "required": true },
+    { "checkName": "validate:packaging", "required": true },
+    { "checkName": "validate:demos", "required": true },
+    { "checkName": "validate:hardening", "required": true },
+    { "checkName": "codeql", "required": true },
+    { "checkName": "dependency-review", "required": true }
+  ],
+  "actionsPolicy": {
+    "allowedActions": "all",
+    "defaultWorkflowPermissions": "read",
+    "canApprovePullRequestReviews": true,
+    "shaPinningRequired": false,
+    "requireApprovalForForkPullRequests": true
+  },
+  "ghas": {
+    "advancedSecurity": true,
+    "dependabotAlerts": true,
+    "dependabotSecurityUpdates": true,
+    "secretScanning": true,
+    "secretScanningPushProtection": true,
+    "secretScanningValidityChecks": true,
+    "secretScanningNonProviderPatterns": true,
+    "codeScanningDefaultSetup": true,
+    "delegatedAlertDismissal": false,
+    "delegatedBypass": false
+  },
+  "projectBinding": {
+    "projectNumber": 1,
+    "ownerLogin": "example-organization",
+    "schemaDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "mutationRequiresExplicitConfirmation": true
+  },
+  "incidentContacts": [
+    { "role": "security-owner", "contactHandle": "synthetic-security-owner" },
+    { "role": "platform-owner", "contactHandle": "synthetic-platform-owner" }
+  ],
+  "nonAuthoritative": {
+    "cannotApplyRuleset": true,
+    "cannotApplyActionsPolicy": true,
+    "cannotApplyGhasSetting": true,
+    "cannotMutateProject": true,
+    "cannotChangeVisibilityOrBilling": true
+  },
+  "driftFound": true
+}

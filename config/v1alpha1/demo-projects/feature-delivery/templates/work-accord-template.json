@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "feature-delivery",
+  "requiredBindings": [
+    "trusted-repository",
+    "exact-base-sha",
+    "exact-work-item",
+    "project-projection"
+  ],
+  "requiredHumanGates": [
+    "activate",
+    "accept-frame",
+    "accept-plan",
+    "approve-current-head"
+  ],
+  "fixedAuthority": {
+    "activationEnabled": false,
+    "maxParallel": 1,
+    "draftPullRequestOnly": true,
+    "automatedReviewEvent": "COMMENT",
+    "externalCalls": 0
+  }
+}

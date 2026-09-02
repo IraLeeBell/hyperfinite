@@ -1,0 +1,13 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DurableStoreJournalRecord",
+  "schemaVersion": "1.0.0",
+  "storeId": "receipt-journal",
+  "namespace": "stage-receipts",
+  "key": "receipt-0002",
+  "sequence": 2,
+  "previousHead": "sha256:461e5756f44dd66499bf818f61a4600a9df7a34af01e4ae48aca48cd47770187",
+  "head": "sha256:dd7f10c39e53755e839ecf87d847a79948a00abc5e7ceaee28e5a75e3d2c6da6",
+  "bodyDigest": "sha256:e59374da816ae307aedf8b16c74990ca2d281ea307a0008b2b3456ba7b87fda5",
+  "nonAuthoritative": true
+}

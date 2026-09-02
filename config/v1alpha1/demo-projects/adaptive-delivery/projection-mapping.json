@@ -1,0 +1,112 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoProjectionMapping",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "projectProfileDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4",
+    "journeyDefinitionDigest": "sha256:894bd983fb5e714459399a81d30384722a10e76e00d1aa198aae441d1297167c",
+    "stageAgentBindingsDigest": "sha256:f0093a372b2ac87dae57708557dd127ae1a9be7bf9dac508b83da4d64e2b763a",
+    "fields": [
+      {
+        "key": "stage",
+        "name": "Stage",
+        "source": "kernel-snapshot",
+        "displayOnly": true,
+        "writeOrder": 14
+      },
+      {
+        "key": "journey-stage",
+        "name": "Journey Stage",
+        "source": "signed-stage-receipt",
+        "displayOnly": true,
+        "writeOrder": 1
+      },
+      {
+        "key": "demo-project-profile",
+        "name": "Demo Project Profile",
+        "source": "project-profile",
+        "displayOnly": true,
+        "writeOrder": 2
+      },
+      {
+        "key": "depth-profile",
+        "name": "Depth Profile",
+        "source": "work-accord",
+        "displayOnly": true,
+        "writeOrder": 3
+      },
+      {
+        "key": "gate-status",
+        "name": "Gate Status",
+        "source": "demo-run-state",
+        "displayOnly": true,
+        "writeOrder": 4
+      },
+      {
+        "key": "contract-revision",
+        "name": "Contract Revision",
+        "source": "work-accord",
+        "displayOnly": true,
+        "writeOrder": 5
+      },
+      {
+        "key": "last-receipt",
+        "name": "Last Receipt",
+        "source": "signed-stage-receipt",
+        "displayOnly": true,
+        "writeOrder": 6
+      },
+      {
+        "key": "attention",
+        "name": "Attention",
+        "source": "demo-run-state",
+        "displayOnly": true,
+        "writeOrder": 7
+      },
+      {
+        "key": "target-repository",
+        "name": "Target Repository",
+        "source": "trusted-binding",
+        "displayOnly": true,
+        "writeOrder": 8
+      },
+      {
+        "key": "run-attempt",
+        "name": "Run / Attempt",
+        "source": "demo-run-state",
+        "displayOnly": true,
+        "writeOrder": 9
+      },
+      {
+        "key": "current-draft-pr",
+        "name": "Current Draft PR",
+        "source": "demo-run-state",
+        "displayOnly": true,
+        "writeOrder": 10
+      },
+      {
+        "key": "current-stage-agent",
+        "name": "Current Stage Agent",
+        "source": "stage-agent-selection",
+        "displayOnly": true,
+        "writeOrder": 11
+      },
+      {
+        "key": "stage-interaction",
+        "name": "Stage Interaction",
+        "source": "stage-agent-binding-set",
+        "displayOnly": true,
+        "writeOrder": 12
+      },
+      {
+        "key": "agent-selection-status",
+        "name": "Agent Selection Status",
+        "source": "stage-agent-selection",
+        "displayOnly": true,
+        "writeOrder": 13
+      }
+    ]
+  },
+  "contentDigest": "sha256:a7b173f87fa49aefdd72fff19e94321660078261c48f6bb895a0065b5db06d9d"
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "app-modernization",
+  "runId": "app-modernization-hands-off-1",
+  "runAttempt": 1,
+  "startStage": "intake",
+  "stopStage": "human-review",
+  "stageSequence": [
+    "intake",
+    "repository-discovery",
+    "current-state-inventory",
+    "modernization-assessment",
+    "target-architecture",
+    "migration-plan",
+    "implementation",
+    "verification",
+    "human-review"
+  ],
+  "modelInvocationCount": 5,
+  "draftPullRequestOnly": true,
+  "automatedReviewEvent": "COMMENT",
+  "humanAuthoritySynthesized": false,
+  "externalCallCounters": {
+    "network": 0,
+    "externalMcp": 0,
+    "credentials": 0,
+    "packageInstall": 0,
+    "gitRemote": 0,
+    "liveGitHub": 0
+  }
+}

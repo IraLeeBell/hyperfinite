@@ -1,0 +1,691 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoCapabilityRegistryShard",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
+    "capabilities": [
+      {
+        "id": "demo.security-dependency-remediation.triage",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces the closed Triage artifact for the synthetic Security and Dependency Remediation demo.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 32768,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "framing-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "approved"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.security-dependency-remediation.reproduction-and-impact-analysis",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces the closed Reproduction and impact analysis artifact for the synthetic Security and Dependency Remediation demo.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 32768,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "framing-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "approved"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.security-dependency-remediation.remediation-design",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces the closed Remediation design artifact for the synthetic Security and Dependency Remediation demo.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 32768,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "framing-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "approved"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.security-dependency-remediation.patch-implementation",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces the closed Patch implementation artifact for the synthetic Security and Dependency Remediation demo.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "execution"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence",
+            "targetSlots",
+            "maxPatchBytes"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "targetSlots": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]{0,62}$"
+              }
+            },
+            "maxPatchBytes": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "changes",
+            "findings",
+            "openQuestions",
+            "result"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "changes": {
+              "type": "array",
+              "maxItems": 100,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "slot",
+                  "content"
+                ],
+                "properties": {
+                  "slot": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9-]{0,62}$"
+                  },
+                  "content": {
+                    "type": "string",
+                    "maxLength": 262144
+                  }
+                }
+              }
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            },
+            "result": {
+              "enum": [
+                "drafted",
+                "blocked",
+                "failed"
+              ]
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [],
+          "mcpReadTools": [],
+          "mcpMutationTools": [],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "high",
+          "trustZone": "T3",
+          "privacyClass": "confidential"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 20,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 262144,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "accept-frame",
+          "accept-plan"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "patch-digest"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "path-bounded",
+            "target-free"
+          ],
+          "behavioral": [
+            "execution-role-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "approved"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.security-dependency-remediation.security-verification",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces the closed Security verification artifact for the synthetic Security and Dependency Remediation demo.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "verification"
+        ],
+        "actorClasses": [
+          "system",
+          "reviewer"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "headSha",
+            "evidence"
+          ],
+          "properties": {
+            "headSha": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "authorized-review-evidence",
+            "trusted-review-profile",
+            "trusted-review-skills",
+            "trusted-gh-aw-runtime-control"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [
+            "read",
+            "search"
+          ],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "mcpReadTools": [],
+          "mcpMutationTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "verification-result",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "confidential"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 20,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "approve-current-head"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "event"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "current-head-digest",
+          "threat-detection-success"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free",
+            "comment-only"
+          ],
+          "behavioral": [
+            "evidence-quality-rubric-v1",
+            "review-authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "approved"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      }
+    ]
+  },
+  "contentDigest": "sha256:b3fb06d53a7c5c6e446ec4902287f715b0342707d89714768494e2a0609ae1fa"
+}

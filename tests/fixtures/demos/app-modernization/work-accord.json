@@ -1,0 +1,150 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "app-modernization-demo-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-29T12:00:00Z",
+    "createdBy": "synthetic-maintainer"
+  },
+  "binding": {
+    "repositoryId": 987654321,
+    "repositoryNodeId": "R_synthetic_hyperfinite",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:a7638e415879302e2df424b4936fae42b3064e1bf38761d46c74cda6735bc5c4",
+    "workItemNodeId": "I_app_modernization_demo",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/app-modernization-demo",
+    "sourceDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": "sha256:5fa10adc67e3cfd7f40cf7ef3f99b181280093b26630a897f588cd1da11c2080"
+  },
+  "objective": {
+    "outcome": "Produce a bounded draft pull request demonstrating a behavior-preserving application modernization.",
+    "inScope": [
+      "application-source",
+      "application-tests",
+      "migration-notes"
+    ],
+    "outOfScope": [
+      "deployment",
+      "production migration",
+      "external publication",
+      "approval",
+      "merge"
+    ],
+    "assumptions": [
+      "The trusted repository binding remains at its exact source SHA."
+    ],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "app-modernization-demo@1.0.0",
+    "domainPackDigest": "sha256:4adf6f0b07bf5d8e24572f8db1f453c99b0d55cb673b0a149a58446e67610637",
+    "capabilityRegistryDigest": "sha256:8f800d0115bcbc9c4c3f26f02ba2dc1aa7777a2b936c018c16543b57304f25ef",
+    "depthProfile": "D2",
+    "riskClass": "high",
+    "privacyClass": "confidential",
+    "phaseContracts": {
+      "framing": {
+        "reference": "demo.app-modernization.framing@1.0.0",
+        "digest": "sha256:523520c0b84ce233642b391afce8846d608b134b472d52a4e8fa0b483add3d40"
+      },
+      "planning": {
+        "reference": "demo.app-modernization.planning@1.0.0",
+        "digest": "sha256:814b8697cb85cc3849a51bf2d4851c089d9e400f58ed7a9cc1e1d4c11dc8406c"
+      },
+      "execution": {
+        "reference": "demo.app-modernization.execution@1.0.0",
+        "digest": "sha256:5f9ecd5de2b99f3f4946d48c96652857c30398162b0ff56fd062c12b3ee1a381"
+      },
+      "verification": {
+        "reference": "demo.app-modernization.verification@1.0.0",
+        "digest": "sha256:c3d8a3c4f02ee3e16717bef59b819c7885a146e9a9598792a595356d5f5115c0"
+      },
+      "human-review": {
+        "reference": "demo.app-modernization.human-review@1.0.0",
+        "digest": "sha256:7eb0c86ddb244ff18ab322a51c99894bbefcba20b37312fc4806e86f40c04a47"
+      }
+    },
+    "requestedCapabilities": [
+      "demo.app-modernization.current-state-inventory@1.0.0",
+      "demo.app-modernization.modernization-assessment@1.0.0",
+      "demo.app-modernization.target-architecture@1.0.0",
+      "demo.app-modernization.implementation@1.0.0",
+      "demo.app-modernization.verification@1.0.0"
+    ],
+    "allowedPaths": [
+      "src/modernized/application.ts",
+      "tests/modernized/application.test.ts",
+      "docs/modernization/migration.md"
+    ],
+    "prohibitedEffects": [
+      "approve",
+      "merge",
+      "deploy",
+      "publish",
+      "production-mutation",
+      "crm-mutation",
+      "erp-mutation",
+      "payment",
+      "license-change",
+      "visibility-change"
+    ],
+    "tools": ["read", "search"],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": [
+      "github.issue_read",
+      "safeoutputs.add_comment",
+      "safeoutputs.submit_pull_request_review"
+    ],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 5,
+    "maxTokens": 50000,
+    "maxCostUnits": 100,
+    "maxDurationMs": 1800000,
+    "maxRetries": 1,
+    "maxLoops": 5,
+    "maxParallel": 1,
+    "maxPatchBytes": 163840,
+    "expiresAt": "2027-08-29T12:00:00Z"
+  },
+  "deliverables": [
+    "Nine closed modernization artifacts",
+    "One draft pull request"
+  ],
+  "evidence": {
+    "required": [
+      "trusted-repository-binding",
+      "signed-stage-receipts",
+      "fixed-offline-verification",
+      "comment-only-current-head-review",
+      "independent-human-merge-observation"
+    ],
+    "verificationCommands": [
+      "typecheck",
+      "build",
+      "unit-tests",
+      "security",
+      "compatibility",
+      "migration-dry-run"
+    ],
+    "approverPolicy": "eligible-independent-reviewer"
+  },
+  "humanGates": [
+    "activate",
+    "accept-frame",
+    "accept-plan",
+    "approve-current-head"
+  ],
+  "retention": {
+    "receiptDays": 365,
+    "artifactDays": 90,
+    "cancelOnExpiry": false
+  }
+}

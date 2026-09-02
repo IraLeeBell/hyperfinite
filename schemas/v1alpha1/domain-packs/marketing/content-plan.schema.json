@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/marketing/content-plan.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "content-plan" },
+    "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" },
+    "upstreamArtifactDigests": { "$ref": "#/$defs/digests" },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["deliverables"],
+      "properties": {
+        "deliverables": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["artifactId", "purpose", "evidenceDigests", "rightsIds"],
+            "properties": {
+              "artifactId": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+              "purpose": { "type": "string", "minLength": 1 },
+              "evidenceDigests": { "$ref": "#/$defs/digests" },
+              "rightsIds": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^rights:[a-z0-9-]+$" } }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } }
+  }
+}

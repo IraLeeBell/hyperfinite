@@ -1,0 +1,428 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "StageAgentBindingSet",
+  "schemaVersion": "2.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4",
+    "journeyDefinitionDigest": "sha256:894bd983fb5e714459399a81d30384722a10e76e00d1aa198aae441d1297167c",
+    "capabilityShardDigest": "sha256:0e9be6cd85c4cc4e0964d6ab585e495010e50686dcb1d5655192d83ef60801bd",
+    "participationPolicyDigest": "sha256:f7c8ef2282725040cc6586231005efc73f23cf3e7fe7faf233d7dae1aa8f4746",
+    "stageBindings": [
+      {
+        "stageId": "intake",
+        "executionKind": "deterministic",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "context-inventory",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "adaptive-delivery-context-inventory",
+            "skill": "adaptive-delivery-context-inventory",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.context-inventory@1.0.0",
+            "workflow": "adaptive-delivery-context-inventory",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-context-inventory",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "discovery-studio",
+        "executionKind": "model",
+        "participationMode": "user-selectable",
+        "userInputRequired": true,
+        "eligibleActorClasses": [
+          "enterprise-owner",
+          "organization-owner",
+          "project-owner",
+          "project-member"
+        ],
+        "requiredEvidenceClass": "fresh-project-selection",
+        "selectionFieldKey": "requested-stage-agent",
+        "allowedOptionKeys": [
+          "discovery-customer-value-explorer",
+          "discovery-technical-options-explorer",
+          "discovery-delivery-risk-challenger"
+        ],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": true,
+        "runtimeBindings": [
+          {
+            "optionKey": "discovery-customer-value-explorer",
+            "userInvocable": true,
+            "agent": "adaptive-delivery-customer-value-explorer",
+            "skill": "adaptive-delivery-customer-value-explorer",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.customer-value-explorer@1.0.0",
+            "workflow": "adaptive-delivery-customer-value-explorer",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-customer-value-explorer",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          },
+          {
+            "optionKey": "discovery-technical-options-explorer",
+            "userInvocable": true,
+            "agent": "adaptive-delivery-technical-options-explorer",
+            "skill": "adaptive-delivery-technical-options-explorer",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.technical-options-explorer@1.0.0",
+            "workflow": "adaptive-delivery-technical-options-explorer",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-technical-options-explorer",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          },
+          {
+            "optionKey": "discovery-delivery-risk-challenger",
+            "userInvocable": true,
+            "agent": "adaptive-delivery-delivery-risk-challenger",
+            "skill": "adaptive-delivery-delivery-risk-challenger",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.delivery-risk-challenger@1.0.0",
+            "workflow": "adaptive-delivery-delivery-risk-challenger",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-delivery-risk-challenger",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "guided-synthesis",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "adaptive-delivery-guided-synthesis",
+            "skill": "adaptive-delivery-guided-synthesis",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.guided-synthesis@1.0.0",
+            "workflow": "adaptive-delivery-guided-synthesis",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-guided-synthesis",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "implementation-plan",
+        "executionKind": "planning",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "accepted-frame",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "implementation-studio",
+        "executionKind": "model",
+        "participationMode": "user-selectable",
+        "userInputRequired": true,
+        "eligibleActorClasses": [
+          "enterprise-owner",
+          "organization-owner",
+          "project-owner",
+          "project-member"
+        ],
+        "requiredEvidenceClass": "fresh-project-selection",
+        "selectionFieldKey": "requested-stage-agent",
+        "allowedOptionKeys": [
+          "implementation-minimal-slice-builder",
+          "implementation-resilience-first-builder"
+        ],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": true,
+        "runtimeBindings": [
+          {
+            "optionKey": "implementation-minimal-slice-builder",
+            "userInvocable": true,
+            "agent": "adaptive-delivery-minimal-slice-builder",
+            "skill": "adaptive-delivery-minimal-slice-builder",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.minimal-slice-builder@1.0.0",
+            "workflow": "adaptive-delivery-minimal-slice-builder",
+            "workflowClass": "target-free-execution",
+            "phase": "execution",
+            "role": "executor",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-minimal-slice-builder",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          },
+          {
+            "optionKey": "implementation-resilience-first-builder",
+            "userInvocable": true,
+            "agent": "adaptive-delivery-resilience-first-builder",
+            "skill": "adaptive-delivery-resilience-first-builder",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.resilience-first-builder@1.0.0",
+            "workflow": "adaptive-delivery-resilience-first-builder",
+            "workflowClass": "target-free-execution",
+            "phase": "execution",
+            "role": "executor",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-resilience-first-builder",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "test-and-verification",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "exact-current-head",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "adaptive-delivery-test-and-verification",
+            "skill": "adaptive-delivery-test-and-verification",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.adaptive-delivery.test-and-verification@1.0.0",
+            "workflow": "adaptive-delivery-test-and-verification",
+            "workflowClass": "current-head-comment-review",
+            "phase": "verification",
+            "role": "reviewer",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "adaptive-delivery-test-and-verification",
+              "events": [
+                "pull_request_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "human-review",
+        "executionKind": "human",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "human-gate",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "completed",
+        "executionKind": "terminal",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      }
+    ],
+    "controlBindings": [
+      {
+        "stageId": "activation-pending",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "paused",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "blocked",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "cancelled",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      }
+    ]
+  },
+  "contentDigest": "sha256:f0093a372b2ac87dae57708557dd127ae1a9be7bf9dac508b83da4d64e2b763a"
+}

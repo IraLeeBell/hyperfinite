@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-profile-catalog.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "profiles"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DomainProfileCatalog" },
+    "profiles": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "prefixItems": [
+        {
+          "type": "object",
+          "$ref": "#/$defs/profile",
+          "properties": { "id": { "const": "engineering" } }
+        },
+        {
+          "type": "object",
+          "$ref": "#/$defs/profile",
+          "properties": { "id": { "const": "marketing" } }
+        },
+        {
+          "type": "object",
+          "$ref": "#/$defs/profile",
+          "properties": { "id": { "const": "business-operations" } }
+        }
+      ],
+      "items": false
+    }
+  },
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "enabledByDefault", "policyRef", "definitionRef"],
+      "properties": {
+        "id": { "enum": ["engineering", "marketing", "business-operations"] },
+        "version": { "const": "1.0.0" },
+        "enabledByDefault": { "const": false },
+        "policyRef": { "type": "string", "pattern": "^config/v1alpha1/(?:domain-pack-policy|domain-packs/[a-z0-9-]+/policy)\\.json$" },
+        "definitionRef": {
+          "type": ["string", "null"],
+          "pattern": "^config/v1alpha1/domain-packs/[a-z0-9-]+/definition\\.json$"
+        }
+      }
+    }
+  }
+}

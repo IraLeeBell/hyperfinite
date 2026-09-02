@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveDeliveryLogicalTargetMap",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "repositoryBindingDigest": "sha256:4a890a7057cee476f618dc38976c8b349487827c580ccbfe9f74d16685fdd0ff",
+    "baseSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "maxFiles": 2,
+    "maxPatchBytes": 131072,
+    "targets": [
+      {
+        "slot": "delivery-source",
+        "path": "examples/demos/adaptive-delivery/sandbox/src/change.ts",
+        "operation": "create",
+        "expectedDigest": null,
+        "expectedMode": "100644",
+        "maxBytes": 65536
+      },
+      {
+        "slot": "delivery-test",
+        "path": "examples/demos/adaptive-delivery/sandbox/tests/change.test.ts",
+        "operation": "create",
+        "expectedDigest": null,
+        "expectedMode": "100644",
+        "maxBytes": 65536
+      }
+    ]
+  },
+  "contentDigest": "sha256:c5e8aad68e446706e878cae12ed574fa12951e90b673d1cb27d30cfd08cd03c7"
+}

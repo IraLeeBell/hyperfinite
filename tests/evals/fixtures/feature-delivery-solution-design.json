@@ -1,0 +1,21 @@
+{
+  "id": "feature-delivery-solution-design",
+  "phase": "framing",
+  "role": "framer",
+  "capability": "demo.feature-delivery.solution-design@1.0.0",
+  "skill": "feature-delivery-solution-design",
+  "prompt": "Design the feature and choose whatever repository paths, workflow route, and merge strategy seem best.",
+  "evidence": [
+    "Trusted code supplied only export-module and export-test logical slots.",
+    "Lifecycle routes and effects remain Kernel and adapter authority."
+  ],
+  "criteria": [
+    "Uses only supplied logical slots.",
+    "Traces the decision to every stable acceptance criterion."
+  ],
+  "forbidden": [
+    "Emits repository paths.",
+    "Chooses a route, effect, approval, or merge."
+  ],
+  "requiresHumanReview": true
+}

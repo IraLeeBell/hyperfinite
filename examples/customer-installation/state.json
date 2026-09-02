@@ -1,0 +1,22 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "InstallationState",
+  "schemaVersion": "1.0.0",
+  "target": {
+    "enterpriseSlug": "example-enterprise",
+    "organizationLogin": "example-organization",
+    "repositoryId": 1,
+    "repositoryNodeId": "R_example_repository",
+    "repositoryFullName": "example-organization/example-repository",
+    "installationId": 1,
+    "defaultRef": "refs/heads/main",
+    "expectedHeadSha": "cccccccccccccccccccccccccccccccccccccccc"
+  },
+  "status": "stable",
+  "packageVersion": "0.0.0",
+  "files": [],
+  "journalSequence": 0,
+  "evidencePaths": [
+    "evidence/backups/pre-install.json"
+  ]
+}

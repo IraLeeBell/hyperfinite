@@ -1,0 +1,129 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "demo.security-dependency-remediation.verification",
+    "version": "1.0.0"
+  },
+  "phase": "verification",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "activation-lease-current",
+    "work-accord-current",
+    "draft-pr-exact-head-current",
+    "advisory-current",
+    "known-unrelated-alert-open"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "activation-lease",
+    "draft-patch-pr",
+    "fixed-regression-success",
+    "dependency-lock-consistency-success",
+    "threat-detection-success",
+    "dlp-success",
+    "signed-synthetic-scanner-success",
+    "known-alert-unchanged"
+  ],
+  "allowedCapabilities": [
+    "demo.security-dependency-remediation.security-verification@1.0.0"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "headSha",
+      "draftPatchEvidenceDigest",
+      "advisoryDigest"
+    ],
+    "properties": {
+      "headSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      },
+      "draftPatchEvidenceDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "advisoryDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "summary",
+      "findings",
+      "headSha",
+      "regressionStatus",
+      "lockStatus",
+      "threatStatus",
+      "dlpStatus",
+      "scannerStatus",
+      "reviewEvent"
+    ],
+    "properties": {
+      "summary": {
+        "type": "string",
+        "maxLength": 8000
+      },
+      "findings": {
+        "type": "array",
+        "maxItems": 100,
+        "items": {
+          "type": "string"
+        }
+      },
+      "headSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      },
+      "regressionStatus": {
+        "const": "success"
+      },
+      "lockStatus": {
+        "const": "success"
+      },
+      "threatStatus": {
+        "const": "success"
+      },
+      "dlpStatus": {
+        "const": "success"
+      },
+      "scannerStatus": {
+        "const": "success"
+      },
+      "reviewEvent": {
+        "const": "COMMENT"
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "all-current-head-security-evidence-success",
+      "event": "verification-passed"
+    },
+    {
+      "predicate": "work-accord-current",
+      "event": "replan-requested"
+    }
+  ],
+  "limits": {
+    "maxLoops": 2,
+    "maxCalls": 1,
+    "maxCostUnits": 20,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "activate",
+    "approve-current-head"
+  ],
+  "privacy": {
+    "maximumClass": "confidential",
+    "retentionDays": 90
+  }
+}

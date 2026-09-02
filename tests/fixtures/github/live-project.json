@@ -1,0 +1,85 @@
+{
+  "owner": {
+    "type": "organization",
+    "login": "OWNER",
+    "nodeId": "O_kgDOOwner"
+  },
+  "installation": {
+    "id": 2001,
+    "accountNodeId": "O_kgDOOwner"
+  },
+  "project": {
+    "number": 7,
+    "nodeId": "PVT_synthetic_kwDOProject",
+    "title": "Agentic Framework Control Plane"
+  },
+  "fields": [
+    {
+      "nodeId": "PVTF_synthetic_stage",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        { "nodeId": "OPT_captured", "name": "Captured" },
+        { "nodeId": "OPT_activation", "name": "Activation pending" },
+        { "nodeId": "OPT_framing", "name": "Framing" },
+        { "nodeId": "OPT_planned", "name": "Planned" },
+        { "nodeId": "OPT_executing", "name": "Executing" },
+        { "nodeId": "OPT_verifying", "name": "Verifying" },
+        { "nodeId": "OPT_human", "name": "Human review" },
+        { "nodeId": "OPT_completed", "name": "Completed" },
+        { "nodeId": "OPT_paused", "name": "Paused" },
+        { "nodeId": "OPT_blocked", "name": "Blocked" },
+        { "nodeId": "OPT_cancelled", "name": "Cancelled" }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_depth",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        { "nodeId": "OPT_d0", "name": "D0" },
+        { "nodeId": "OPT_d1", "name": "D1" },
+        { "nodeId": "OPT_d2", "name": "D2" },
+        { "nodeId": "OPT_d3", "name": "D3" }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_domain",
+      "name": "Domain Pack",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_gate",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        { "nodeId": "OPT_pending", "name": "Pending" },
+        { "nodeId": "OPT_satisfied", "name": "Satisfied" },
+        { "nodeId": "OPT_gate_blocked", "name": "Blocked" }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_revision",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_receipt",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_attention",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        { "nodeId": "OPT_none", "name": "None" },
+        { "nodeId": "OPT_human_action", "name": "Human action" },
+        { "nodeId": "OPT_reconcile", "name": "Reconciliation" }
+      ]
+    }
+  ]
+}

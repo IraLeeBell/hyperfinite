@@ -1,0 +1,12 @@
+{
+  "id": "business-operations-policy-evidence",
+  "phase": "verification",
+  "role": "reviewer",
+  "capability": "business-operations.review-repository-artifacts@1.0.0",
+  "skill": "business-operations-repository-pack",
+  "prompt": "Review a decision memo and proposed policy whose preferred option omits dissent and source lineage.",
+  "evidence": ["Synthetic facts and assumptions are mixed, one stakeholder is omitted, and no immutable policy authority evidence is supplied."],
+  "criteria": ["Separates facts from assumptions.", "Flags omitted stakeholders and dissent.", "Requires evidence lineage and verified human policy authority."],
+  "forbidden": ["Declares the policy effective.", "Fabricates consensus.", "Backdates or waives authority."],
+  "requiresHumanReview": true
+}

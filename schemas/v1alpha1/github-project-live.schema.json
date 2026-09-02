@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-project-live.schema.json",
+  "title": "Fresh GitHub Project API snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["owner", "installation", "project", "fields"],
+  "properties": {
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "login", "nodeId"],
+      "properties": {
+        "type": { "enum": ["organization", "user"] },
+        "login": { "type": "string", "minLength": 1 },
+        "nodeId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "installation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "accountNodeId"],
+      "properties": {
+        "id": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "accountNodeId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "project": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["number", "nodeId", "title"],
+          "properties": {
+            "number": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+            "nodeId": { "type": "string", "minLength": 1 },
+            "title": { "type": "string", "minLength": 1 }
+          }
+        },
+        { "type": "null" }
+      ]
+    },
+    "fields": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["nodeId", "name", "dataType", "options"],
+        "properties": {
+          "nodeId": { "type": "string", "minLength": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "dataType": { "enum": ["DATE", "ITERATION", "NUMBER", "SINGLE_SELECT", "TEXT"] },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["nodeId", "name"],
+              "properties": {
+                "nodeId": { "type": "string", "minLength": 1 },
+                "name": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

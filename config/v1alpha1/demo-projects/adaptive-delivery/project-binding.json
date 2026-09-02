@@ -1,0 +1,16 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveDeliveryProjectBinding",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "synthetic": true,
+    "demoProjectId": "adaptive-delivery",
+    "ownerNodeId": "O_synthetic_example_organization",
+    "projectNodeId": "PVT_synthetic_adaptive_delivery",
+    "itemNodeId": "PVTI_synthetic_adaptive_delivery_1",
+    "projectSchemaDigest": "sha256:e204a353b6863534cc56088120bfb9022615a405055646efbbad7a395c74ba58",
+    "projectionOnly": true,
+    "administrativelyConfigured": false
+  },
+  "contentDigest": "sha256:957f85da46cae787f38adf79378828f2f6a78230d9abab6b150573b9535d9187"
+}

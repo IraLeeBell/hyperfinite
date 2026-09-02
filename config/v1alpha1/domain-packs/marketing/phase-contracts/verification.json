@@ -1,0 +1,17 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": { "id": "marketing.verification", "version": "1.0.0" },
+  "phase": "verification",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": ["activation-lease-current", "work-accord-current"],
+  "requiredEvidence": ["trusted-binding", "activation-lease", "validated-patch"],
+  "allowedCapabilities": ["marketing.review-repository-artifacts@1.0.0"],
+  "inputSchema": { "type": "object", "additionalProperties": false, "required": ["headSha", "patchDigest"], "properties": { "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" }, "patchDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" } } },
+  "outputSchema": { "type": "object", "additionalProperties": false, "required": ["summary", "findings", "openQuestions"], "properties": { "summary": { "type": "string" }, "findings": { "type": "array", "items": { "type": "string" } }, "openQuestions": { "type": "array", "items": { "type": "string" } } } },
+  "exitRules": [{ "predicate": "verification-evidence-passed", "event": "verification-passed" }],
+  "limits": { "maxLoops": 1, "maxCalls": 2, "maxCostUnits": 20, "maxParallel": 1 },
+  "humanGates": ["activate", "approve-current-head"],
+  "privacy": { "maximumClass": "confidential", "retentionDays": 90 }
+}

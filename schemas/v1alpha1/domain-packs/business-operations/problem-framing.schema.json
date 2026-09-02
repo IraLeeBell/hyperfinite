@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/business-operations/problem-framing.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "artifactType": { "const": "problem-framing" }, "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" }, "upstreamArtifactDigests": { "type": "array", "maxItems": 0 },
+    "data": { "type": "object", "additionalProperties": false, "required": ["problem", "facts", "assumptions"], "properties": {
+      "problem": { "type": "string", "minLength": 1 },
+      "facts": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+      "assumptions": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+    } }
+  },
+  "$defs": { "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } }
+}

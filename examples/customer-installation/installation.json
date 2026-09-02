@@ -1,0 +1,29 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "InstallationConfig",
+  "schemaVersion": "1.0.0",
+  "operation": "install",
+  "packageVersion": "0.1.0",
+  "releaseManifestDigest": "sha256:686a39bad86631f8c4c4ff2ccc66c3071918d7100df48b0582238efd7f890cd5",
+  "migrationManifestDigest": "sha256:5f72487f29054e1d1e072b473e7e2ec8b161646fa9c51184ad7ccfe710a645d5",
+  "backupEvidenceDigest": "sha256:cea8e48e37304d64c920e0babd13f9a314db228adc066a2e4e3990780d925646",
+  "recoveryBaseStateDigest": null,
+  "target": {
+    "enterpriseSlug": "example-enterprise",
+    "organizationLogin": "example-organization",
+    "repositoryId": 1,
+    "repositoryNodeId": "R_example_repository",
+    "repositoryFullName": "example-organization/example-repository",
+    "installationId": 1,
+    "defaultRef": "refs/heads/main",
+    "expectedHeadSha": "cccccccccccccccccccccccccccccccccccccccc"
+  },
+  "expectedResultHeadSha": "dddddddddddddddddddddddddddddddddddddddd",
+  "expectedStateDigest": "sha256:a867a2777ba3f0754cf9e15742e2d4980ed7b722918017a0f18b3e92e8b785bb",
+  "expectedJournalSequence": 0,
+  "expectedJournalHead": null,
+  "apply": {
+    "enabled": false,
+    "humanChangeId": null
+  }
+}

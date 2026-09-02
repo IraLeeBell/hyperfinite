@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/marketing/initiative-intake.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "initiative-intake" },
+    "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" },
+    "upstreamArtifactDigests": { "type": "array", "maxItems": 0 },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["objective", "constraints"],
+      "properties": {
+        "objective": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "constraints": { "type": "array", "items": { "type": "string", "minLength": 1 }, "maxItems": 30 }
+      }
+    }
+  },
+  "$defs": { "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } }
+}

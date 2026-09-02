@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-operation-grant-claim.schema.json",
+  "title": "Durable domain operation grant claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["purpose", "storeId", "storeSequence", "claimChallenge", "casResult", "grantDigest", "redemptionKey", "operation", "contextDigest", "repositoryIdentityDigest", "runId", "runAttempt", "operationSequence", "grantCheckedAt", "claimedAt", "grantExpiresAt", "previousHead", "head", "signature"],
+  "properties": {
+    "purpose": { "const": "domain-operation-grant-claim" },
+    "storeId": { "type": "string", "pattern": "^[a-z0-9]+(?:[._:-][a-z0-9]+)*$", "maxLength": 128 },
+    "storeSequence": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "claimChallenge": { "$ref": "#/$defs/digest" },
+    "casResult": { "const": "appended" },
+    "grantDigest": { "$ref": "#/$defs/digest" },
+    "redemptionKey": { "$ref": "#/$defs/digest" },
+    "operation": { "enum": ["model-create", "model-review", "repository-package", "repository-comment", "repository-merge-observe", "repository-closure"] },
+    "contextDigest": { "$ref": "#/$defs/digest" },
+    "repositoryIdentityDigest": { "$ref": "#/$defs/digest" },
+    "runId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "runAttempt": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "operationSequence": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "grantCheckedAt": { "type": "string", "format": "date-time" },
+    "claimedAt": { "type": "string", "format": "date-time" },
+    "grantExpiresAt": { "type": "string", "format": "date-time" },
+    "previousHead": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "head": { "$ref": "#/$defs/digest" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keyId", "algorithm", "value"],
+      "properties": {
+        "keyId": { "type": "string", "minLength": 1 },
+        "algorithm": { "const": "ed25519" },
+        "value": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  }
+}

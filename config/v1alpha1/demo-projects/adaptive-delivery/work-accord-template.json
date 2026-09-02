@@ -1,0 +1,50 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveDeliveryWorkAccordTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "depthProfile": "D2",
+    "participationPosture": "guided",
+    "requestedCapabilities": [
+      "demo.adaptive-delivery.context-inventory@1.0.0",
+      "demo.adaptive-delivery.customer-value-explorer@1.0.0",
+      "demo.adaptive-delivery.technical-options-explorer@1.0.0",
+      "demo.adaptive-delivery.delivery-risk-challenger@1.0.0",
+      "demo.adaptive-delivery.guided-synthesis@1.0.0",
+      "demo.adaptive-delivery.minimal-slice-builder@1.0.0",
+      "demo.adaptive-delivery.resilience-first-builder@1.0.0",
+      "demo.adaptive-delivery.test-and-verification@1.0.0"
+    ],
+    "selectableStages": [
+      "discovery-studio",
+      "implementation-studio"
+    ],
+    "logicalSlots": [
+      "delivery-source",
+      "delivery-tests"
+    ],
+    "verificationIds": [
+      "adaptive-acceptance-tests",
+      "adaptive-regression-tests",
+      "adaptive-typecheck",
+      "git-diff-check"
+    ],
+    "prohibitedEffects": [
+      "mark-ready",
+      "approve",
+      "dismiss-review",
+      "merge",
+      "deploy",
+      "publish",
+      "project-administration",
+      "credential-administration"
+    ],
+    "draftPullRequestOnly": true,
+    "automatedReviewEvent": "COMMENT",
+    "externalNetwork": false,
+    "externalMcp": false,
+    "secretAccess": false
+  },
+  "contentDigest": "sha256:d08e154579ebb3c59be95e3f5be4050a205c341098c0f3839f8af85b1b1d3386"
+}

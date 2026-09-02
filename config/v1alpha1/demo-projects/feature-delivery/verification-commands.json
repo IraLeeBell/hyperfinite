@@ -1,0 +1,55 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryVerificationCommandCatalog",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:56fccbfef2d39ac3d71747baafc409b54a6973617a5fee5e0ceee27b36fca38c",
+  "spec": {
+    "demoProjectId": "feature-delivery",
+    "commands": [
+      {
+        "id": "fd-acceptance-tests",
+        "purpose": "acceptance",
+        "executable": "node",
+        "args": [
+          "--test",
+          "examples/demos/feature-delivery/sandbox/tests/export.test.ts"
+        ],
+        "timeoutMs": 120000,
+        "maxOutputBytes": 65536
+      },
+      {
+        "id": "fd-regression-tests",
+        "purpose": "regression",
+        "executable": "npm",
+        "args": [
+          "test"
+        ],
+        "timeoutMs": 120000,
+        "maxOutputBytes": 65536
+      },
+      {
+        "id": "fd-typecheck",
+        "purpose": "regression",
+        "executable": "npm",
+        "args": [
+          "run",
+          "typecheck"
+        ],
+        "timeoutMs": 120000,
+        "maxOutputBytes": 65536
+      },
+      {
+        "id": "git-diff-check",
+        "purpose": "integrity",
+        "executable": "git",
+        "args": [
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "timeoutMs": 30000,
+        "maxOutputBytes": 65536
+      }
+    ]
+  }
+}

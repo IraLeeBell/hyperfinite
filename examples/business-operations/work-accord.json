@@ -1,0 +1,87 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "business-operations-pack-example-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-27T12:00:00Z",
+    "createdBy": "example-maintainer"
+  },
+  "binding": {
+    "repositoryId": 1,
+    "repositoryNodeId": "R_hyperfinite_fixture",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "workItemNodeId": "business-operations-pack-example",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/business-operations-pack-example",
+    "sourceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": null
+  },
+  "objective": {
+    "outcome": "Prepare an internal business-operations proposal for repository review.",
+    "inScope": ["examples/business-operations/workspace/artifacts/"],
+    "outOfScope": ["business-system mutation", "policy enactment", "implementation", "go-live", "real outcome attestation"],
+    "assumptions": ["All evidence, data, and actors are synthetic hermetic fixtures."],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "business-operations@1.0.0",
+    "domainPackDigest": "sha256:6b65fca72803615468085a9d1044ee007d594541895f384c553de774fe619c5f",
+    "capabilityRegistryDigest": "sha256:acb1d33037998590786d2934625eeb069df8e0429fc5949523791146f9da7427",
+    "depthProfile": "D1",
+    "riskClass": "high",
+    "privacyClass": "confidential",
+    "phaseContracts": {
+      "framing": { "reference": "business-operations.framing@1.0.0", "digest": "sha256:a6ecd6ae5150307c2a11a51cadbb8dcea90c6d2a3442144384f82a2ad4aad656" },
+      "planning": { "reference": "business-operations.planning@1.0.0", "digest": "sha256:905229e9028dd18f65cac910d60cc6f25f02179d67fbc3008d9a9940f96f0503" },
+      "execution": { "reference": "business-operations.execution@1.0.0", "digest": "sha256:7af740413dd5b5f82a9216628a984afb859b6896cb022e31d6d02f3f5d9dc1d2" },
+      "verification": { "reference": "business-operations.verification@1.0.0", "digest": "sha256:7a2afb4010c3b0070ff5dc203d2866ff887bd04c3e0a109106d59e3f0ed3e07f" },
+      "human-review": { "reference": "business-operations.human-review@1.0.0", "digest": "sha256:ac26ad06b2cebfd81491f355deede783b77b7ce7c9329ecbf84296040aa26d14" }
+    },
+    "requestedCapabilities": [
+      "business-operations.frame-problem@1.0.0",
+      "business-operations.create-repository-artifacts@1.0.0",
+      "business-operations.review-repository-artifacts@1.0.0"
+    ],
+    "allowedPaths": [
+      "examples/business-operations/workspace/artifacts/problem-framing.json",
+      "examples/business-operations/workspace/artifacts/stakeholder-analysis.json",
+      "examples/business-operations/workspace/artifacts/process-map.json",
+      "examples/business-operations/workspace/artifacts/decision-memo.json",
+      "examples/business-operations/workspace/artifacts/policy-process-design.json",
+      "examples/business-operations/workspace/artifacts/implementation-plan.json",
+      "examples/business-operations/workspace/artifacts/runbook.json",
+      "examples/business-operations/workspace/artifacts/controls-approvals.json",
+      "examples/business-operations/workspace/artifacts/outcome-measurement.json"
+    ],
+    "prohibitedEffects": ["approve", "merge", "deploy", "publish", "external-publication", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change", "ticketing-mutation", "procurement-mutation", "production-operation", "workflow-enablement"],
+    "tools": [],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": [],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 4,
+    "maxTokens": 20000,
+    "maxCostUnits": 40,
+    "maxDurationMs": 600000,
+    "maxRetries": 1,
+    "maxLoops": 1,
+    "maxParallel": 1,
+    "maxPatchBytes": 262144,
+    "expiresAt": "2027-08-27T12:00:00Z"
+  },
+  "deliverables": ["Nine proposal-only business-operations artifacts in one draft repository pull request"],
+  "evidence": {
+    "required": ["exact-head", "role-separation", "control-quorum", "comment-only-review"],
+    "verificationCommands": [],
+    "approverPolicy": "distinct-current-process-control-policy-and-measurement-owners"
+  },
+  "humanGates": ["activate", "accept-frame", "accept-plan", "process-owner-review", "control-owner-review", "policy-authority-review", "measurement-owner-review", "approve-current-head"],
+  "retention": { "receiptDays": 90, "artifactDays": 90, "cancelOnExpiry": false }
+}

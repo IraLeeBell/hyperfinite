@@ -1,0 +1,21 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationHumanReviewPackage",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:5ecdd5dd4db922120ac232c8addece21ec30a1b0f4947ed42844a3bd911abe39",
+  "spec": {
+    "verificationDigest": "sha256:cfcf99905864b9864bf2408f0d66650f3fdf4b2148d4e7c6afc34c297ae32336",
+    "headSha": "2222222222222222222222222222222222222222",
+    "draftPullRequestNumber": 126,
+    "automatedReviewEvent": "COMMENT",
+    "humanActions": [
+      "inspect-exact-head",
+      "decide-approval",
+      "decide-merge",
+      "record-merge-observation"
+    ],
+    "automationCanApprove": false,
+    "automationCanMerge": false,
+    "externalCallCount": 0
+  }
+}

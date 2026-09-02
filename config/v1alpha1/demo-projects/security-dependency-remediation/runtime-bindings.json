@@ -1,0 +1,338 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "StageAgentBindingSet",
+  "schemaVersion": "2.0.0",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
+    "journeyDefinitionDigest": "sha256:3b74dd36f041d19ce588b80746971eebe0b3d3e6a594eed89331151886f16aab",
+    "capabilityShardDigest": "sha256:b3fb06d53a7c5c6e446ec4902287f715b0342707d89714768494e2a0609ae1fa",
+    "participationPolicyDigest": "sha256:f7c8ef2282725040cc6586231005efc73f23cf3e7fe7faf233d7dae1aa8f4746",
+    "stageBindings": [
+      {
+        "stageId": "intake",
+        "executionKind": "deterministic",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "triage",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "security-dependency-remediation-triage",
+            "skill": "security-dependency-remediation-triage",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.security-dependency-remediation.triage@1.0.0",
+            "workflow": "security-dependency-remediation-triage",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "security-dependency-remediation-triage",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "reproduction-and-impact-analysis",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "security-dependency-remediation-reproduction-and-impact-analysis",
+            "skill": "security-dependency-remediation-reproduction-and-impact-analysis",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.security-dependency-remediation.reproduction-and-impact-analysis@1.0.0",
+            "workflow": "security-dependency-remediation-reproduction-and-impact-analysis",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "security-dependency-remediation-reproduction-and-impact-analysis",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "remediation-design",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "security-dependency-remediation-remediation-design",
+            "skill": "security-dependency-remediation-remediation-design",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.security-dependency-remediation.remediation-design@1.0.0",
+            "workflow": "security-dependency-remediation-remediation-design",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "security-dependency-remediation-remediation-design",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "patch-planning",
+        "executionKind": "planning",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "accepted-frame",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "patch-implementation",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "accepted-plan",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "security-dependency-remediation-patch-implementation",
+            "skill": "security-dependency-remediation-patch-implementation",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.security-dependency-remediation.patch-implementation@1.0.0",
+            "workflow": "security-dependency-remediation-patch-implementation",
+            "workflowClass": "target-free-execution",
+            "phase": "execution",
+            "role": "executor",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "security-dependency-remediation-patch-implementation",
+              "events": [
+                "issue_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "security-verification",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "exact-current-head",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "security-dependency-remediation-security-verification",
+            "skill": "security-dependency-remediation-security-verification",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.security-dependency-remediation.security-verification@1.0.0",
+            "workflow": "security-dependency-remediation-security-verification",
+            "workflowClass": "current-head-comment-review",
+            "phase": "verification",
+            "role": "reviewer",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "name": "security-dependency-remediation-security-verification",
+              "events": [
+                "pull_request_comment"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "human-review",
+        "executionKind": "human",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "human-gate",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "completed",
+        "executionKind": "terminal",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      }
+    ],
+    "controlBindings": [
+      {
+        "stageId": "activation-pending",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "paused",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "blocked",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "cancelled",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      }
+    ]
+  },
+  "contentDigest": "sha256:b9623fd1dc7d12cb1b5888005493007a8bb7a92aca4516c3e118741d1102d094"
+}

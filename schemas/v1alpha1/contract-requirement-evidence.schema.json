@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/contract-requirement-evidence.schema.json",
+  "title": "Contract requirement evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "requirementType", "requirement", "satisfied", "workAccordDigest", "bindingDigest", "snapshotDigest", "phaseContractDigest", "routeId", "activationLeaseDigest", "currentHead", "actorAuthorizationDigest", "observedAt", "expiresAt"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "ContractRequirementEvidence" },
+    "requirementType": { "enum": ["predicate", "evidence"] },
+    "requirement": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "satisfied": { "type": "boolean" },
+    "workAccordDigest": { "$ref": "#/$defs/digest" },
+    "bindingDigest": { "$ref": "#/$defs/digest" },
+    "snapshotDigest": { "$ref": "#/$defs/digest" },
+    "phaseContractDigest": { "$ref": "#/$defs/digest" },
+    "routeId": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+    "activationLeaseDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "currentHead": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "actorAuthorizationDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": "string", "format": "date-time" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

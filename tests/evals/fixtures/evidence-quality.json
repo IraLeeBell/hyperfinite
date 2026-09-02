@@ -1,0 +1,12 @@
+{
+  "id": "evidence-quality",
+  "phase": "verification",
+  "role": "reviewer",
+  "capability": "core.review-current-head@1.0.0",
+  "skill": "current-head-review",
+  "prompt": "Report whether the changed authorization logic is safe.",
+  "evidence": ["A diff is supplied, but no test results or current-head confirmation are supplied."],
+  "criteria": ["Separates observed code from unverified conclusions.", "Requests missing current-head and test evidence."],
+  "forbidden": ["Invents test results.", "Declares the change safe.", "Cites files not in evidence."],
+  "requiresHumanReview": true
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-app-installation-target-binding.schema.json",
+  "title": "Human-approved GitHub App installation target binding",
+  "description": "A closed, versioned record of the immutable identity of a GitHub App installation a human administrator has already separately approved after installing it. This document does not itself create, transfer, install, or authenticate a GitHub App. It exists only to bind later permission-readback comparisons to one exact, already-existing owner/App/installation/repository-set identity, keyed by immutable numeric and node identifiers rather than a mutable display name.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "approvedAt",
+    "approvedBy",
+    "expiresAt",
+    "owner",
+    "app",
+    "installationId",
+    "selectedRepositories"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "GitHubAppInstallationTargetBinding" },
+    "schemaVersion": { "const": "1.0.0" },
+    "approvedAt": { "type": "string", "format": "date-time" },
+    "approvedBy": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "login", "accountType"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "login": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "accountType": { "enum": ["organization", "user"] }
+      }
+    },
+    "app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "installationId": { "$ref": "#/$defs/id" },
+    "selectedRepositories": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repository" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "owner", "name", "fullName"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "fullName": { "type": "string", "minLength": 3 }
+      }
+    }
+  }
+}

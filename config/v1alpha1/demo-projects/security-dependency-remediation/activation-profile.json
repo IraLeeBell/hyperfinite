@@ -1,0 +1,33 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoActivationProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
+    "stageAgentBindingsDigest": "sha256:b9623fd1dc7d12cb1b5888005493007a8bb7a92aca4516c3e118741d1102d094",
+    "capabilityShardDigest": "sha256:b3fb06d53a7c5c6e446ec4902287f715b0342707d89714768494e2a0609ae1fa",
+    "enabled": false,
+    "authorityEpoch": 1,
+    "revocationGeneration": 0,
+    "allowedSubmitterIds": [
+      424242
+    ],
+    "allowedSource": "issue-form",
+    "consentField": "demo-consent",
+    "consentRequired": true,
+    "leaseTemplate": {
+      "maxCalls": 5,
+      "maxTokens": 25000,
+      "maxCostUnits": 70,
+      "maxDurationMs": 1800000,
+      "maxRetries": 1,
+      "maxParallel": 1
+    },
+    "validFrom": "2026-08-29T20:00:00Z",
+    "expiresAt": "2027-08-29T20:00:00Z",
+    "signingKeyId": "synthetic-security-remediation-activation-key"
+  },
+  "contentDigest": "sha256:e4258471bb6aab1f91fd6303a6c8072e657e1131a640f9ec00f3c53c37347463"
+}

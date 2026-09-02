@@ -1,0 +1,582 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoIdentityReservationManifest",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "projects": [
+      {
+        "demoProjectId": "app-modernization",
+        "journeyStages": [
+          {
+            "stageId": "intake",
+            "displayName": "Intake",
+            "ordinal": 1,
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "deterministic",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "repository-discovery",
+            "displayName": "Repository discovery",
+            "ordinal": 2,
+            "coreState": "FRAMING",
+            "executionKind": "deterministic",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "current-state-inventory",
+            "displayName": "Current-state inventory",
+            "ordinal": 3,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "app-modernization-current-state-inventory",
+                "capabilityId": "demo.app-modernization.current-state-inventory@1.0.0",
+                "workflowId": "app-modernization-current-state-inventory"
+              }
+            ]
+          },
+          {
+            "stageId": "modernization-assessment",
+            "displayName": "Modernization assessment",
+            "ordinal": 4,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "app-modernization-modernization-assessment",
+                "capabilityId": "demo.app-modernization.modernization-assessment@1.0.0",
+                "workflowId": "app-modernization-modernization-assessment"
+              }
+            ]
+          },
+          {
+            "stageId": "target-architecture",
+            "displayName": "Target architecture",
+            "ordinal": 5,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "app-modernization-target-architecture",
+                "capabilityId": "demo.app-modernization.target-architecture@1.0.0",
+                "workflowId": "app-modernization-target-architecture"
+              }
+            ]
+          },
+          {
+            "stageId": "migration-plan",
+            "displayName": "Migration plan",
+            "ordinal": 6,
+            "coreState": "PLANNED",
+            "executionKind": "planning",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "implementation",
+            "displayName": "Implementation",
+            "ordinal": 7,
+            "coreState": "EXECUTING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "app-modernization-implementation",
+                "capabilityId": "demo.app-modernization.implementation@1.0.0",
+                "workflowId": "app-modernization-implementation"
+              }
+            ]
+          },
+          {
+            "stageId": "verification",
+            "displayName": "Verification",
+            "ordinal": 8,
+            "coreState": "VERIFYING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "app-modernization-verification",
+                "capabilityId": "demo.app-modernization.verification@1.0.0",
+                "workflowId": "app-modernization-verification"
+              }
+            ]
+          },
+          {
+            "stageId": "human-review",
+            "displayName": "Human review",
+            "ordinal": 9,
+            "coreState": "HUMAN_REVIEW",
+            "executionKind": "human",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "completed",
+            "displayName": "Completed",
+            "ordinal": 10,
+            "coreState": "COMPLETED",
+            "executionKind": "terminal",
+            "runtimeBindings": []
+          }
+        ],
+        "controlStages": [
+          {
+            "stageId": "activation-pending",
+            "displayName": "Activation Pending",
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "paused",
+            "displayName": "Paused",
+            "coreState": "PAUSED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "blocked",
+            "displayName": "Blocked",
+            "coreState": "BLOCKED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "cancelled",
+            "displayName": "Cancelled",
+            "coreState": "CANCELLED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          }
+        ]
+      },
+      {
+        "demoProjectId": "feature-delivery",
+        "journeyStages": [
+          {
+            "stageId": "intake",
+            "displayName": "Intake",
+            "ordinal": 1,
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "deterministic",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "requirements-clarification",
+            "displayName": "Requirements clarification",
+            "ordinal": 2,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "feature-delivery-requirements-clarification",
+                "capabilityId": "demo.feature-delivery.requirements-clarification@1.0.0",
+                "workflowId": "feature-delivery-requirements-clarification"
+              }
+            ]
+          },
+          {
+            "stageId": "codebase-discovery",
+            "displayName": "Codebase discovery",
+            "ordinal": 3,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "feature-delivery-codebase-discovery",
+                "capabilityId": "demo.feature-delivery.codebase-discovery@1.0.0",
+                "workflowId": "feature-delivery-codebase-discovery"
+              }
+            ]
+          },
+          {
+            "stageId": "solution-design",
+            "displayName": "Solution design",
+            "ordinal": 4,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "feature-delivery-solution-design",
+                "capabilityId": "demo.feature-delivery.solution-design@1.0.0",
+                "workflowId": "feature-delivery-solution-design"
+              }
+            ]
+          },
+          {
+            "stageId": "implementation-plan",
+            "displayName": "Implementation plan",
+            "ordinal": 5,
+            "coreState": "PLANNED",
+            "executionKind": "planning",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "build",
+            "displayName": "Build",
+            "ordinal": 6,
+            "coreState": "EXECUTING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "feature-delivery-build",
+                "capabilityId": "demo.feature-delivery.build@1.0.0",
+                "workflowId": "feature-delivery-build"
+              }
+            ]
+          },
+          {
+            "stageId": "test-and-verification",
+            "displayName": "Test and verification",
+            "ordinal": 7,
+            "coreState": "VERIFYING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "feature-delivery-test-and-verification",
+                "capabilityId": "demo.feature-delivery.test-and-verification@1.0.0",
+                "workflowId": "feature-delivery-test-and-verification"
+              }
+            ]
+          },
+          {
+            "stageId": "human-review",
+            "displayName": "Human review",
+            "ordinal": 8,
+            "coreState": "HUMAN_REVIEW",
+            "executionKind": "human",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "completed",
+            "displayName": "Completed",
+            "ordinal": 9,
+            "coreState": "COMPLETED",
+            "executionKind": "terminal",
+            "runtimeBindings": []
+          }
+        ],
+        "controlStages": [
+          {
+            "stageId": "activation-pending",
+            "displayName": "Activation Pending",
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "paused",
+            "displayName": "Paused",
+            "coreState": "PAUSED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "blocked",
+            "displayName": "Blocked",
+            "coreState": "BLOCKED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "cancelled",
+            "displayName": "Cancelled",
+            "coreState": "CANCELLED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          }
+        ]
+      },
+      {
+        "demoProjectId": "security-dependency-remediation",
+        "journeyStages": [
+          {
+            "stageId": "intake",
+            "displayName": "Intake",
+            "ordinal": 1,
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "deterministic",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "triage",
+            "displayName": "Triage",
+            "ordinal": 2,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "security-dependency-remediation-triage",
+                "capabilityId": "demo.security-dependency-remediation.triage@1.0.0",
+                "workflowId": "security-dependency-remediation-triage"
+              }
+            ]
+          },
+          {
+            "stageId": "reproduction-and-impact-analysis",
+            "displayName": "Reproduction and impact analysis",
+            "ordinal": 3,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "security-dependency-remediation-reproduction-and-impact-analysis",
+                "capabilityId": "demo.security-dependency-remediation.reproduction-and-impact-analysis@1.0.0",
+                "workflowId": "security-dependency-remediation-reproduction-and-impact-analysis"
+              }
+            ]
+          },
+          {
+            "stageId": "remediation-design",
+            "displayName": "Remediation design",
+            "ordinal": 4,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "security-dependency-remediation-remediation-design",
+                "capabilityId": "demo.security-dependency-remediation.remediation-design@1.0.0",
+                "workflowId": "security-dependency-remediation-remediation-design"
+              }
+            ]
+          },
+          {
+            "stageId": "patch-planning",
+            "displayName": "Patch planning",
+            "ordinal": 5,
+            "coreState": "PLANNED",
+            "executionKind": "planning",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "patch-implementation",
+            "displayName": "Patch implementation",
+            "ordinal": 6,
+            "coreState": "EXECUTING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "security-dependency-remediation-patch-implementation",
+                "capabilityId": "demo.security-dependency-remediation.patch-implementation@1.0.0",
+                "workflowId": "security-dependency-remediation-patch-implementation"
+              }
+            ]
+          },
+          {
+            "stageId": "security-verification",
+            "displayName": "Security verification",
+            "ordinal": 7,
+            "coreState": "VERIFYING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "security-dependency-remediation-security-verification",
+                "capabilityId": "demo.security-dependency-remediation.security-verification@1.0.0",
+                "workflowId": "security-dependency-remediation-security-verification"
+              }
+            ]
+          },
+          {
+            "stageId": "human-review",
+            "displayName": "Human review",
+            "ordinal": 8,
+            "coreState": "HUMAN_REVIEW",
+            "executionKind": "human",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "completed",
+            "displayName": "Completed",
+            "ordinal": 9,
+            "coreState": "COMPLETED",
+            "executionKind": "terminal",
+            "runtimeBindings": []
+          }
+        ],
+        "controlStages": [
+          {
+            "stageId": "activation-pending",
+            "displayName": "Activation Pending",
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "paused",
+            "displayName": "Paused",
+            "coreState": "PAUSED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "blocked",
+            "displayName": "Blocked",
+            "coreState": "BLOCKED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "cancelled",
+            "displayName": "Cancelled",
+            "coreState": "CANCELLED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          }
+        ]
+      },
+      {
+        "demoProjectId": "adaptive-delivery",
+        "journeyStages": [
+          {
+            "stageId": "intake",
+            "displayName": "Intake",
+            "ordinal": 1,
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "deterministic",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "context-inventory",
+            "displayName": "Context inventory - autonomous",
+            "ordinal": 2,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "adaptive-delivery-context-inventory",
+                "capabilityId": "demo.adaptive-delivery.context-inventory@1.0.0",
+                "workflowId": "adaptive-delivery-context-inventory"
+              }
+            ]
+          },
+          {
+            "stageId": "discovery-studio",
+            "displayName": "Discovery studio - choose agent",
+            "ordinal": 3,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "adaptive-delivery-customer-value-explorer",
+                "capabilityId": "demo.adaptive-delivery.customer-value-explorer@1.0.0",
+                "workflowId": "adaptive-delivery-customer-value-explorer"
+              },
+              {
+                "agentId": "adaptive-delivery-technical-options-explorer",
+                "capabilityId": "demo.adaptive-delivery.technical-options-explorer@1.0.0",
+                "workflowId": "adaptive-delivery-technical-options-explorer"
+              },
+              {
+                "agentId": "adaptive-delivery-delivery-risk-challenger",
+                "capabilityId": "demo.adaptive-delivery.delivery-risk-challenger@1.0.0",
+                "workflowId": "adaptive-delivery-delivery-risk-challenger"
+              }
+            ]
+          },
+          {
+            "stageId": "guided-synthesis",
+            "displayName": "Guided synthesis - autonomous",
+            "ordinal": 4,
+            "coreState": "FRAMING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "adaptive-delivery-guided-synthesis",
+                "capabilityId": "demo.adaptive-delivery.guided-synthesis@1.0.0",
+                "workflowId": "adaptive-delivery-guided-synthesis"
+              }
+            ]
+          },
+          {
+            "stageId": "implementation-plan",
+            "displayName": "Implementation plan - deterministic gate",
+            "ordinal": 5,
+            "coreState": "PLANNED",
+            "executionKind": "planning",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "implementation-studio",
+            "displayName": "Implementation studio - choose agent",
+            "ordinal": 6,
+            "coreState": "EXECUTING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "adaptive-delivery-minimal-slice-builder",
+                "capabilityId": "demo.adaptive-delivery.minimal-slice-builder@1.0.0",
+                "workflowId": "adaptive-delivery-minimal-slice-builder"
+              },
+              {
+                "agentId": "adaptive-delivery-resilience-first-builder",
+                "capabilityId": "demo.adaptive-delivery.resilience-first-builder@1.0.0",
+                "workflowId": "adaptive-delivery-resilience-first-builder"
+              }
+            ]
+          },
+          {
+            "stageId": "test-and-verification",
+            "displayName": "Test and verification - autonomous",
+            "ordinal": 7,
+            "coreState": "VERIFYING",
+            "executionKind": "model",
+            "runtimeBindings": [
+              {
+                "agentId": "adaptive-delivery-test-and-verification",
+                "capabilityId": "demo.adaptive-delivery.test-and-verification@1.0.0",
+                "workflowId": "adaptive-delivery-test-and-verification"
+              }
+            ]
+          },
+          {
+            "stageId": "human-review",
+            "displayName": "Human review",
+            "ordinal": 8,
+            "coreState": "HUMAN_REVIEW",
+            "executionKind": "human",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "completed",
+            "displayName": "Completed",
+            "ordinal": 9,
+            "coreState": "COMPLETED",
+            "executionKind": "terminal",
+            "runtimeBindings": []
+          }
+        ],
+        "controlStages": [
+          {
+            "stageId": "activation-pending",
+            "displayName": "Activation Pending",
+            "coreState": "ACTIVATION_PENDING",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "paused",
+            "displayName": "Paused",
+            "coreState": "PAUSED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "blocked",
+            "displayName": "Blocked",
+            "coreState": "BLOCKED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          },
+          {
+            "stageId": "cancelled",
+            "displayName": "Cancelled",
+            "coreState": "CANCELLED",
+            "executionKind": "kernel",
+            "runtimeBindings": []
+          }
+        ]
+      }
+    ]
+  },
+  "contentDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac"
+}

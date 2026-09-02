@@ -1,0 +1,12 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "InstallationBackupEvidence",
+  "schemaVersion": "1.0.0",
+  "targetBindingDigest": "sha256:7d3948bdd0044a44be432d6eb1b9d035d8afcab7a65549c1bc6abc9907af8ac4",
+  "stateDigest": "sha256:a867a2777ba3f0754cf9e15742e2d4980ed7b722918017a0f18b3e92e8b785bb",
+  "journalSequence": 0,
+  "journalHead": null,
+  "backupArtifactDigest": "sha256:d3226149b0dc5c22388202ab96fc70ed87f4e757276513766c9cdedecd0de6c9",
+  "capturedAt": "2026-08-28T10:00:00Z",
+  "evidenceRetained": true
+}

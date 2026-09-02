@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/engineering-effect-evidence.schema.json",
+  "title": "Engineering delivery effect evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sequence",
+    "previousEvidenceDigest",
+    "effectKey",
+    "effectOrdinal",
+    "effectType",
+    "workflowId",
+    "contractRevision",
+    "planDigest",
+    "bindingDigest",
+    "state",
+    "effectDigest",
+    "createdAt",
+    "updatedAt",
+    "signature"
+  ],
+  "properties": {
+    "sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "previousEvidenceDigest": {
+      "anyOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    },
+    "effectKey": { "$ref": "#/$defs/digest" },
+    "effectOrdinal": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "effectType": {
+      "enum": [
+        "create-branch",
+        "create-commit",
+        "create-draft-pull-request",
+        "bind-pull-request",
+        "comment-review",
+        "project-converge",
+        "close-issue",
+        "record-delivery",
+        "operations-handoff"
+      ]
+    },
+    "workflowId": { "type": "string", "minLength": 1 },
+    "contractRevision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "planDigest": { "$ref": "#/$defs/digest" },
+    "bindingDigest": { "$ref": "#/$defs/digest" },
+    "state": { "enum": ["pending", "completed", "partial", "rejected"] },
+    "effectDigest": {
+      "anyOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "signature": { "$ref": "#/$defs/signature" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "value"],
+      "properties": {
+        "algorithm": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "keyId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "value": { "type": "string", "minLength": 1, "maxLength": 16384 }
+      }
+    }
+  }
+}

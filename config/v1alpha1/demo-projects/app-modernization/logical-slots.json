@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0.0",
+  "slots": [
+    {
+      "id": "application-source",
+      "relativePath": "src/modernized/application.ts",
+      "maxBytes": 65536,
+      "required": true
+    },
+    {
+      "id": "application-tests",
+      "relativePath": "tests/modernized/application.test.ts",
+      "maxBytes": 65536,
+      "required": true
+    },
+    {
+      "id": "migration-notes",
+      "relativePath": "docs/modernization/migration.md",
+      "maxBytes": 32768,
+      "required": true
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubProjectSchema",
+  "metadata": {
+    "name": "agentic-framework-control-plane",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "type": "organization",
+    "login": "OWNER"
+  },
+  "project": {
+    "title": "Agentic Framework Control Plane",
+    "shortDescription": "Human-governed projection of deterministic kernel state."
+  },
+  "fields": [
+    {
+      "key": "stage",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        { "key": "captured", "name": "Captured" },
+        { "key": "activation-pending", "name": "Activation pending" },
+        { "key": "framing", "name": "Framing" },
+        { "key": "planned", "name": "Planned" },
+        { "key": "executing", "name": "Executing" },
+        { "key": "verifying", "name": "Verifying" },
+        { "key": "human-review", "name": "Human review" },
+        { "key": "completed", "name": "Completed" },
+        { "key": "paused", "name": "Paused" },
+        { "key": "blocked", "name": "Blocked" },
+        { "key": "cancelled", "name": "Cancelled" }
+      ]
+    },
+    {
+      "key": "depth-profile",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        { "key": "d0", "name": "D0" },
+        { "key": "d1", "name": "D1" },
+        { "key": "d2", "name": "D2" },
+        { "key": "d3", "name": "D3" }
+      ]
+    },
+    {
+      "key": "domain-pack",
+      "name": "Domain Pack",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "gate-status",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        { "key": "pending", "name": "Pending" },
+        { "key": "satisfied", "name": "Satisfied" },
+        { "key": "blocked", "name": "Blocked" }
+      ]
+    },
+    {
+      "key": "contract-revision",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "last-receipt",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "attention",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        { "key": "none", "name": "None" },
+        { "key": "human-action", "name": "Human action" },
+        { "key": "reconciliation", "name": "Reconciliation" }
+      ]
+    }
+  ],
+  "projections": [
+    { "slot": "stage", "fieldKey": "stage" },
+    { "slot": "depth-profile", "fieldKey": "depth-profile" },
+    { "slot": "domain-pack", "fieldKey": "domain-pack" },
+    { "slot": "gate-status", "fieldKey": "gate-status" },
+    { "slot": "contract-revision", "fieldKey": "contract-revision" },
+    { "slot": "last-receipt", "fieldKey": "last-receipt" },
+    { "slot": "attention", "fieldKey": "attention" }
+  ]
+}

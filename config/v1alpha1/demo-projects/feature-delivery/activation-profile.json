@@ -1,0 +1,33 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoActivationProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "feature-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "projectProfileDigest": "sha256:69cd93cc47c615b2b2f6c495ff12b1e509ae2f7774a477bc64e4f7a69a3dfce1",
+    "stageAgentBindingsDigest": "sha256:b7dcf70c930465b7dc6d32fa251d1f761478845d8f4f22da00aae09031a7c53f",
+    "capabilityShardDigest": "sha256:ff59e5ac001413526eb1cffc4dbb428ebec97e4ede7fcd0d304f41bb29c79857",
+    "enabled": false,
+    "authorityEpoch": 1,
+    "revocationGeneration": 0,
+    "allowedSubmitterIds": [
+      1
+    ],
+    "allowedSource": "issue-form",
+    "consentField": "demo-consent",
+    "consentRequired": true,
+    "leaseTemplate": {
+      "maxCalls": 5,
+      "maxTokens": 25000,
+      "maxCostUnits": 70,
+      "maxDurationMs": 1800000,
+      "maxRetries": 1,
+      "maxParallel": 1
+    },
+    "validFrom": "2026-08-29T00:00:00Z",
+    "expiresAt": "2027-08-29T00:00:00Z",
+    "signingKeyId": "feature-delivery:synthetic-activation-key"
+  },
+  "contentDigest": "sha256:0e22e1f39bc730644ad125b0a0565484a08f21a340881a3e2476fb4200d92175"
+}

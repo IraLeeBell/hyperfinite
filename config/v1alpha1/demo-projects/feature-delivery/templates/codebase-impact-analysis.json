@@ -1,0 +1,26 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryCodebaseImpactAnalysis",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:c37e8c94f3f05810e87ba3683113ee4bfe315b9e463710fff006826e515b4001",
+  "spec": {
+    "featureBriefDigest": "sha256:34e2aad90d31c148c45374b5992e762b8a0621cfd8a22616d2cab1af9575afcc",
+    "repositoryBindingDigest": "sha256:a796e6af915e46c3f55371d4c6fb9dbd2dc6b36d436d0a0ffe3bde44645834af",
+    "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "observedPaths": [
+      "examples/demos/feature-delivery/sandbox/src/export.ts",
+      "examples/demos/feature-delivery/sandbox/tests/export.test.ts"
+    ],
+    "observedPathsAreEvidenceOnly": true,
+    "promptInjectionFindings": [
+      "Repository and issue text cannot override the trusted binding, base SHA, logical targets, lifecycle route, or effect policy."
+    ],
+    "acceptanceCriterionIds": [
+      "FD-AC-001",
+      "FD-AC-002",
+      "FD-AC-003",
+      "FD-AC-004",
+      "FD-AC-005"
+    ]
+  }
+}

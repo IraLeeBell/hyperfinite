@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/metric-record.schema.json",
+  "title": "Bounded-cardinality metric record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "name", "labels", "value"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "MetricRecord" },
+    "schemaVersion": { "const": "1.0.0" },
+    "name": { "enum": ["agentic_control_decisions_total", "agentic_attempts_total", "agentic_tokens_total", "agentic_cost_units_total", "agentic_tool_calls_total", "agentic_effects_total", "agentic_duration_ms_total"] },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["component", "outcome"],
+      "properties": {
+        "component": { "enum": ["lifecycle", "policy", "kernel", "adapter", "single-writer", "runtime", "domain-pack"] },
+        "outcome": { "enum": ["accepted", "refused", "partial"] }
+      }
+    },
+    "value": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+  }
+}

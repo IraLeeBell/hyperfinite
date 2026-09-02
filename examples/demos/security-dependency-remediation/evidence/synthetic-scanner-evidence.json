@@ -1,0 +1,27 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationSyntheticScannerEvidence",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:99c87ae541a0c03292f1cf8e6d9fb348910152a333ebb8ea4241fb9fb7fe805c",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "evidenceType": "scanner",
+    "evidenceId": "SDRS-2026-0001",
+    "dependency": "mist-lru",
+    "affectedVersion": "0.4.0",
+    "fixedVersion": "0.4.1",
+    "headSha": "9999999999999999999999999999999999999999",
+    "subjectDigest": "sha256:1cb61bd99efb495f6df10568e56e7190132b36230bb0e5aa1679127e1b6a7106",
+    "outcome": "success",
+    "findings": [],
+    "observedAt": "2026-08-29T20:05:00Z",
+    "expiresAt": "2026-08-29T20:10:00Z",
+    "synthetic": true,
+    "networkUsed": false
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "keyId": "security-remediation-synthetic-evidence-key",
+    "value": "u3QyXgFrfHfZzQxjxUWNwAAnyZhb6b2tEMFA2hA2AxKzFKSC/0KYuhxgBIZn+VLCNXjbGYzpi9X48dKZgfDlCQ=="
+  }
+}

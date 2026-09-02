@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/human-gate-evidence.schema.json",
+  "title": "Human gate evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["gate", "actor", "workAccordDigest", "activationLeaseDigest", "currentHead", "observedAt", "expiresAt", "valid"],
+  "properties": {
+    "gate": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "class", "human", "bot", "roles", "authorizationDigest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "class": { "enum": ["requester", "reviewer", "maintainer", "administrator", "system", "policy"] },
+        "human": { "type": "boolean" },
+        "bot": { "type": "boolean" },
+        "roles": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "authorizationDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "workAccordDigest": { "$ref": "#/$defs/digest" },
+    "activationLeaseDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "currentHead": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "valid": { "type": "boolean" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

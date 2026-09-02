@@ -1,0 +1,26 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoProjectProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "app-modernization",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "title": "App Modernization",
+    "description": "Disabled-by-default, hermetic-first modernization journey bound to one reviewed repository identity and exact source SHA.",
+    "defaultDepthProfile": "D2",
+    "allowedDepthProfiles": [
+      "D1",
+      "D2"
+    ],
+    "repositoryBindingDigest": "sha256:d0c1bd87ed216d87b38cfbea70a1ecfd830bcb198b6f363da586885bd30b8ddb",
+    "projectBindingDigest": "sha256:7a6fb8c6ef2d64be49e302a706d410d4c270bc1801709ac24ceb6b6342c28e4d",
+    "workAccordTemplateDigest": "sha256:e48044aec40b2733752f1d2e0e5fbaf5af0347a69e7b2369f22ab9d45c3925b7",
+    "journeyDefinitionRef": "config/v1alpha1/demo-projects/app-modernization/journey.json",
+    "stageAgentBindingsRef": "config/v1alpha1/demo-projects/app-modernization/runtime-bindings.json",
+    "capabilityShardRef": "config/v1alpha1/demo-projects/app-modernization/capabilities.json",
+    "activationProfileRef": "config/v1alpha1/demo-projects/app-modernization/activation-profile.json",
+    "projectionMappingRef": "config/v1alpha1/demo-projects/app-modernization/projection-mapping.json"
+  },
+  "contentDigest": "sha256:0fa5790690aa483d2de2c5e9635120a737a7bb62ba6a529a877d6c9ab2748ccd"
+}

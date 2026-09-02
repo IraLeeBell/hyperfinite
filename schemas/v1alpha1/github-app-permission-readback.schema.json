@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-app-permission-readback.schema.json",
+  "title": "Authenticated GitHub App permission readback",
+  "description": "A closed, versioned record of the permissions and installation target identity actually observed on an installed GitHub App registration through an authenticated read. It is evidence only: it cannot install, authenticate, or reconfigure an App, and it does not by itself authorize any effect.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "observedAt",
+    "planDigest",
+    "ownerId",
+    "ownerNodeId",
+    "ownerLogin",
+    "accountType",
+    "appId",
+    "appNodeId",
+    "installationId",
+    "selectedRepositories",
+    "observedPermissions",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "GitHubAppPermissionReadback" },
+    "schemaVersion": { "const": "1.0.0" },
+    "observedAt": { "type": "string", "format": "date-time" },
+    "planDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "ownerId": { "$ref": "#/$defs/id" },
+    "ownerNodeId": { "type": "string", "minLength": 1 },
+    "ownerLogin": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "accountType": { "enum": ["organization", "user"] },
+    "appId": { "$ref": "#/$defs/id" },
+    "appNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "installationId": { "$ref": "#/$defs/id" },
+    "selectedRepositories": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 100,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/repository" }
+    },
+    "observedPermissions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "level", "scope"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1, "maxLength": 64 },
+          "level": { "enum": ["read", "write"] },
+          "scope": { "enum": ["organization", "repository"] }
+        }
+      }
+    },
+    "nonAuthoritative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cannotInstallOrTransferApp",
+        "cannotAuthenticateApp",
+        "cannotMintInstallationToken"
+      ],
+      "properties": {
+        "cannotInstallOrTransferApp": { "type": "boolean" },
+        "cannotAuthenticateApp": { "type": "boolean" },
+        "cannotMintInstallationToken": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "owner", "name", "fullName"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "fullName": { "type": "string", "minLength": 3 }
+      }
+    }
+  }
+}

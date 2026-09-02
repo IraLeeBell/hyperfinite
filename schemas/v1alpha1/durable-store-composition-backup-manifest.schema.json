@@ -1,0 +1,208 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/durable-store-composition-backup-manifest.schema.json",
+  "title": "Durable store composition backup manifest",
+  "description": "Signed, non-authoritative evidence binding one exact four-store backup set to one deployment topology and stable writer-quiescence checkpoint. The backupSetId and signatures are re-verified by trusted composition code before restore verification.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "topologyDigest",
+    "quiescence",
+    "stores",
+    "backupSetId",
+    "nonAuthoritative",
+    "signature"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "DurableStoreCompositionBackupManifest"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "topologyDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "quiescence": {
+      "$ref": "#/$defs/quiescence"
+    },
+    "stores": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "allOf": [
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "storeId": {
+                "const": "evidence-store"
+              }
+            },
+            "required": [
+              "storeId"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "storeId": {
+                "const": "operation-grant-store"
+              }
+            },
+            "required": [
+              "storeId"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "storeId": {
+                "const": "receipt-journal"
+              }
+            },
+            "required": [
+              "storeId"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        },
+        {
+          "contains": {
+            "type": "object",
+            "properties": {
+              "storeId": {
+                "const": "runtime-state-store"
+              }
+            },
+            "required": [
+              "storeId"
+            ]
+          },
+          "minContains": 1,
+          "maxContains": 1
+        }
+      ],
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "storeId",
+          "manifestDigest"
+        ],
+        "properties": {
+          "storeId": {
+            "enum": [
+              "evidence-store",
+              "operation-grant-store",
+              "receipt-journal",
+              "runtime-state-store"
+            ]
+          },
+          "manifestDigest": {
+            "$ref": "#/$defs/digest"
+          }
+        }
+      }
+    },
+    "backupSetId": {
+      "$ref": "#/$defs/digest"
+    },
+    "nonAuthoritative": {
+      "const": true
+    },
+    "signature": {
+      "$ref": "#/$defs/signature"
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "keyId",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "ed25519"
+        },
+        "keyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        }
+      }
+    },
+    "quiescence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "topologyDigest",
+        "writerDisabled",
+        "writerGeneration",
+        "checkpointDigest",
+        "observedAt",
+        "expiresAt",
+        "signature"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "topologyDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "writerDisabled": {
+          "const": true
+        },
+        "writerGeneration": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "checkpointDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "signature": {
+          "$ref": "#/$defs/signature"
+        }
+      }
+    }
+  }
+}

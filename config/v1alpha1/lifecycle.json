@@ -1,0 +1,80 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "LifecycleGraph",
+  "metadata": {
+    "name": "domain-neutral",
+    "version": "1.0.0"
+  },
+  "states": [
+    { "id": "CAPTURED", "phaseOwner": "intake", "costBearing": false, "terminal": false },
+    { "id": "ACTIVATION_PENDING", "phaseOwner": "kernel", "costBearing": false, "terminal": false },
+    { "id": "FRAMING", "phaseOwner": "framing", "costBearing": true, "terminal": false },
+    { "id": "PLANNED", "phaseOwner": "planning", "costBearing": false, "terminal": false },
+    { "id": "EXECUTING", "phaseOwner": "execution", "costBearing": true, "terminal": false },
+    { "id": "VERIFYING", "phaseOwner": "verification", "costBearing": true, "terminal": false },
+    { "id": "HUMAN_REVIEW", "phaseOwner": "human-review", "costBearing": false, "terminal": false },
+    { "id": "COMPLETED", "phaseOwner": "kernel", "costBearing": false, "terminal": true },
+    { "id": "PAUSED", "phaseOwner": "kernel", "costBearing": false, "terminal": false },
+    { "id": "BLOCKED", "phaseOwner": "kernel", "costBearing": false, "terminal": false },
+    { "id": "CANCELLED", "phaseOwner": "kernel", "costBearing": false, "terminal": true }
+  ],
+  "routes": [
+    { "id": "capture.request-activation", "version": "1.0.0", "from": "CAPTURED", "to": "ACTIVATION_PENDING", "event": "activation-requested", "actorClasses": ["requester", "maintainer"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "activation.begin-framing", "version": "1.0.0", "from": "ACTIVATION_PENDING", "to": "FRAMING", "event": "activation-approved", "actorClasses": ["maintainer", "administrator"], "phaseOwner": "framing", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "framing.clarify", "version": "1.0.0", "from": "FRAMING", "to": "FRAMING", "event": "clarification-recorded", "actorClasses": ["requester", "maintainer", "system"], "phaseOwner": "framing", "costBearing": true, "humanGate": null, "retryable": true, "maxAttempts": 4 },
+    { "id": "framing.accept", "version": "1.0.0", "from": "FRAMING", "to": "PLANNED", "event": "frame-accepted", "actorClasses": ["reviewer", "maintainer"], "phaseOwner": "planning", "costBearing": false, "humanGate": "accept-frame", "retryable": false, "maxAttempts": 1 },
+    { "id": "planning.repair-scope", "version": "1.0.0", "from": "PLANNED", "to": "FRAMING", "event": "scope-repair-requested", "actorClasses": ["requester", "reviewer", "maintainer"], "phaseOwner": "framing", "costBearing": true, "humanGate": null, "retryable": true, "maxAttempts": 3 },
+    { "id": "planning.execute", "version": "1.0.0", "from": "PLANNED", "to": "EXECUTING", "event": "execution-authorized", "actorClasses": ["reviewer", "maintainer"], "phaseOwner": "execution", "costBearing": true, "humanGate": "accept-plan", "retryable": false, "maxAttempts": 1 },
+    { "id": "execution.verify", "version": "1.0.0", "from": "EXECUTING", "to": "VERIFYING", "event": "work-submitted", "actorClasses": ["system"], "phaseOwner": "verification", "costBearing": true, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "verification.repair", "version": "1.0.0", "from": "VERIFYING", "to": "EXECUTING", "event": "repair-requested", "actorClasses": ["system", "reviewer", "maintainer"], "phaseOwner": "execution", "costBearing": true, "humanGate": null, "retryable": true, "maxAttempts": 3 },
+    { "id": "verification.replan", "version": "1.0.0", "from": "VERIFYING", "to": "PLANNED", "event": "replan-requested", "actorClasses": ["system", "reviewer", "maintainer"], "phaseOwner": "planning", "costBearing": false, "humanGate": null, "retryable": true, "maxAttempts": 2 },
+    { "id": "verification.request-review", "version": "1.0.0", "from": "VERIFYING", "to": "HUMAN_REVIEW", "event": "verification-passed", "actorClasses": ["system"], "phaseOwner": "human-review", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "review.request-revision", "version": "1.0.0", "from": "HUMAN_REVIEW", "to": "EXECUTING", "event": "revision-requested", "actorClasses": ["reviewer", "maintainer"], "phaseOwner": "execution", "costBearing": true, "humanGate": null, "retryable": true, "maxAttempts": 3 },
+    { "id": "review.accept", "version": "1.0.0", "from": "HUMAN_REVIEW", "to": "COMPLETED", "event": "outcome-accepted", "actorClasses": ["reviewer", "maintainer"], "phaseOwner": "kernel", "costBearing": false, "humanGate": "approve-current-head", "retryable": false, "maxAttempts": 1 },
+
+    { "id": "framing.pause", "version": "1.0.0", "from": "FRAMING", "to": "PAUSED", "event": "pause-requested", "actorClasses": ["requester", "maintainer", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "planning.pause", "version": "1.0.0", "from": "PLANNED", "to": "PAUSED", "event": "pause-requested", "actorClasses": ["requester", "maintainer", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "execution.pause", "version": "1.0.0", "from": "EXECUTING", "to": "PAUSED", "event": "pause-requested", "actorClasses": ["requester", "maintainer", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "verification.pause", "version": "1.0.0", "from": "VERIFYING", "to": "PAUSED", "event": "pause-requested", "actorClasses": ["requester", "maintainer", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "review.pause", "version": "1.0.0", "from": "HUMAN_REVIEW", "to": "PAUSED", "event": "pause-requested", "actorClasses": ["requester", "maintainer", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+
+    { "id": "pause.resume-framing", "version": "1.0.0", "from": "PAUSED", "to": "FRAMING", "event": "resume-requested", "actorClasses": ["requester", "maintainer"], "phaseOwner": "framing", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "pause.resume-planning", "version": "1.0.0", "from": "PAUSED", "to": "PLANNED", "event": "resume-requested", "actorClasses": ["requester", "maintainer"], "phaseOwner": "planning", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "pause.resume-execution", "version": "1.0.0", "from": "PAUSED", "to": "EXECUTING", "event": "resume-requested", "actorClasses": ["maintainer"], "phaseOwner": "execution", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "pause.resume-verification", "version": "1.0.0", "from": "PAUSED", "to": "VERIFYING", "event": "resume-requested", "actorClasses": ["maintainer"], "phaseOwner": "verification", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "pause.resume-review", "version": "1.0.0", "from": "PAUSED", "to": "HUMAN_REVIEW", "event": "resume-requested", "actorClasses": ["requester", "maintainer"], "phaseOwner": "human-review", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+
+    { "id": "framing.block", "version": "1.0.0", "from": "FRAMING", "to": "BLOCKED", "event": "dependency-blocked", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "planning.block", "version": "1.0.0", "from": "PLANNED", "to": "BLOCKED", "event": "dependency-blocked", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "execution.block", "version": "1.0.0", "from": "EXECUTING", "to": "BLOCKED", "event": "dependency-blocked", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "verification.block", "version": "1.0.0", "from": "VERIFYING", "to": "BLOCKED", "event": "dependency-blocked", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "review.block", "version": "1.0.0", "from": "HUMAN_REVIEW", "to": "BLOCKED", "event": "dependency-blocked", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "execution.partial-effect", "version": "1.0.0", "from": "EXECUTING", "to": "BLOCKED", "event": "partial-effect-recorded", "actorClasses": ["system"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "verification.partial-effect", "version": "1.0.0", "from": "VERIFYING", "to": "BLOCKED", "event": "partial-effect-recorded", "actorClasses": ["system"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+
+    { "id": "blocked.retry-framing", "version": "1.0.0", "from": "BLOCKED", "to": "FRAMING", "event": "retry-requested", "actorClasses": ["maintainer"], "phaseOwner": "framing", "costBearing": true, "humanGate": "activate", "retryable": true, "maxAttempts": 3 },
+    { "id": "blocked.retry-planning", "version": "1.0.0", "from": "BLOCKED", "to": "PLANNED", "event": "retry-requested", "actorClasses": ["maintainer"], "phaseOwner": "planning", "costBearing": false, "humanGate": null, "retryable": true, "maxAttempts": 3 },
+    { "id": "blocked.retry-execution", "version": "1.0.0", "from": "BLOCKED", "to": "EXECUTING", "event": "retry-requested", "actorClasses": ["maintainer"], "phaseOwner": "execution", "costBearing": true, "humanGate": "activate", "retryable": true, "maxAttempts": 3 },
+    { "id": "blocked.retry-verification", "version": "1.0.0", "from": "BLOCKED", "to": "VERIFYING", "event": "retry-requested", "actorClasses": ["maintainer"], "phaseOwner": "verification", "costBearing": true, "humanGate": "activate", "retryable": true, "maxAttempts": 3 },
+    { "id": "blocked.recover-framing", "version": "1.0.0", "from": "BLOCKED", "to": "FRAMING", "event": "recovery-approved", "actorClasses": ["maintainer", "administrator"], "phaseOwner": "framing", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "blocked.recover-planning", "version": "1.0.0", "from": "BLOCKED", "to": "PLANNED", "event": "recovery-approved", "actorClasses": ["maintainer", "administrator"], "phaseOwner": "planning", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "blocked.recover-execution", "version": "1.0.0", "from": "BLOCKED", "to": "EXECUTING", "event": "recovery-approved", "actorClasses": ["maintainer", "administrator"], "phaseOwner": "execution", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "blocked.recover-verification", "version": "1.0.0", "from": "BLOCKED", "to": "VERIFYING", "event": "recovery-approved", "actorClasses": ["maintainer", "administrator"], "phaseOwner": "verification", "costBearing": true, "humanGate": "activate", "retryable": false, "maxAttempts": 1 },
+    { "id": "blocked.recover-review", "version": "1.0.0", "from": "BLOCKED", "to": "HUMAN_REVIEW", "event": "recovery-approved", "actorClasses": ["maintainer", "administrator"], "phaseOwner": "human-review", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+
+    { "id": "framing.reauthorize", "version": "1.0.0", "from": "FRAMING", "to": "ACTIVATION_PENDING", "event": "authorization-invalidated", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "executing.reauthorize", "version": "1.0.0", "from": "EXECUTING", "to": "ACTIVATION_PENDING", "event": "authorization-invalidated", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "verifying.reauthorize", "version": "1.0.0", "from": "VERIFYING", "to": "ACTIVATION_PENDING", "event": "authorization-invalidated", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "activation.rebind-authority", "version": "1.0.0", "from": "ACTIVATION_PENDING", "to": "ACTIVATION_PENDING", "event": "binding-revalidated", "actorClasses": ["system", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+
+    { "id": "captured.cancel", "version": "1.0.0", "from": "CAPTURED", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "activation.cancel", "version": "1.0.0", "from": "ACTIVATION_PENDING", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "framing.cancel", "version": "1.0.0", "from": "FRAMING", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "planning.cancel", "version": "1.0.0", "from": "PLANNED", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "execution.cancel", "version": "1.0.0", "from": "EXECUTING", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "verification.cancel", "version": "1.0.0", "from": "VERIFYING", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "review.cancel", "version": "1.0.0", "from": "HUMAN_REVIEW", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "paused.cancel", "version": "1.0.0", "from": "PAUSED", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 },
+    { "id": "blocked.cancel", "version": "1.0.0", "from": "BLOCKED", "to": "CANCELLED", "event": "cancel-requested", "actorClasses": ["requester", "maintainer", "administrator", "policy"], "phaseOwner": "kernel", "costBearing": false, "humanGate": null, "retryable": false, "maxAttempts": 1 }
+  ]
+}

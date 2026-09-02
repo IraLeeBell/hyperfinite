@@ -1,0 +1,50 @@
+{
+  "synthetic": true,
+  "demoProjectId": "security-dependency-remediation",
+  "issue": {
+    "number": 1003,
+    "nodeId": "I_synthetic_security_dependency_1003",
+    "title": "Remediate a synthetic dependency advisory"
+  },
+  "formSubmission": {
+    "desiredOutcome": "Produce a bounded remediation patch for a synthetic dependency advisory.",
+    "repositoryHint": "example/security-remediation-sandbox",
+    "constraints": "Do not publish, deploy, or change repository settings.",
+    "acceptanceEvidence": "",
+    "depthProfile": "D3",
+    "consent": true
+  },
+  "projection": {
+    "Stage": "Blocked",
+    "Journey Stage": "Blocked",
+    "Demo Project Profile": "security-dependency-remediation@1.0.0",
+    "Depth Profile": "D3",
+    "Gate Status": "Blocked",
+    "Contract Revision": 1,
+    "Last Receipt": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "Attention": "Human action",
+    "Target Repository": "example/security-remediation-sandbox",
+    "Run / Attempt": "synthetic-run-1003 / 1",
+    "Current Draft PR": "none",
+    "Current Stage Agent": "none",
+    "Stage Interaction": "deterministic",
+    "Agent Selection Status": "not-applicable"
+  },
+  "blockingEvidence": {
+    "apiVersion": "agentic-framework.github.com/v1alpha1",
+    "kind": "DemoMissingInformationRequest",
+    "schemaVersion": "1.0.0",
+    "contentDigest": "sha256:8fcfdfda53f99156a5dea7a83ecf8dee7db437943e67fd0d980b1c0604452170",
+    "spec": {
+      "demoProjectId": "security-dependency-remediation",
+      "issueNodeId": "I_synthetic_security_dependency_1003",
+      "field": "acceptance-evidence",
+      "request": "Provide the acceptance criteria or evidence a human should inspect.",
+      "evidence": {
+        "kind": "issue-form-submission",
+        "formId": "security-dependency-remediation",
+        "submissionDigest": "sha256:ea1b90e529191aefaddf273ed8604981fa13315acfd4ac6ca8efe8d3c58bc785"
+      }
+    }
+  }
+}

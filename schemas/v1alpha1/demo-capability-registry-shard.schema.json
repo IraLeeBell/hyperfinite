@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-capability-registry-shard.schema.json",
+  "title": "Autonomous demo capability registry shard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoCapabilityRegistryShard" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "catalogDigest",
+        "identityReservationsDigest",
+        "projectProfileDigest",
+        "capabilities"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "catalogDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "identityReservationsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projectProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/capability-registry.schema.json#/$defs/capability"
+          }
+        }
+      }
+    }
+  }
+}

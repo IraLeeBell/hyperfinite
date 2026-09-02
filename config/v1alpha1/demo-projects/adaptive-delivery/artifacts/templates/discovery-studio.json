@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveDiscoveryArtifactTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "authority": "advisory-only",
+    "targetFree": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "findings",
+        "openQuestions"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array"
+        },
+        "openQuestions": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "contentDigest": "sha256:0771d18f787645ec45d719aa650edf753c23e8d505f16c8b16e2f3ab2557f88b"
+}

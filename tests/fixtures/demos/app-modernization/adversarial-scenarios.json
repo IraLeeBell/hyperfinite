@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "cases": [
+    { "id": "missing-stage", "boundary": "journey", "expected": "refuse-before-inference" },
+    { "id": "skipped-stage", "boundary": "journey", "expected": "refuse-before-inference" },
+    { "id": "reordered-stage", "boundary": "journey", "expected": "refuse-before-inference" },
+    { "id": "generic-agent-fallback", "boundary": "binding", "expected": "refuse-before-inference" },
+    { "id": "wrong-capability", "boundary": "binding", "expected": "refuse-before-inference" },
+    { "id": "cross-demo-evidence", "boundary": "artifact", "expected": "refuse-before-inference" },
+    { "id": "stale-predecessor", "boundary": "receipt", "expected": "refuse-before-inference" },
+    { "id": "duplicate-agent-identity", "boundary": "binding", "expected": "refuse-before-inference" },
+    { "id": "repository-substitution", "boundary": "repository", "expected": "refuse-before-read" },
+    { "id": "arbitrary-clone", "boundary": "repository", "expected": "refuse-before-tool" },
+    { "id": "network-request", "boundary": "capability", "expected": "refuse-before-tool" },
+    { "id": "model-selected-tool", "boundary": "capability", "expected": "refuse-before-tool" },
+    { "id": "prompt-injection", "boundary": "model-output", "expected": "treat-as-data" },
+    { "id": "malformed-artifact", "boundary": "artifact", "expected": "refuse-before-receipt" },
+    { "id": "oversized-artifact", "boundary": "artifact", "expected": "refuse-before-receipt" },
+    { "id": "path-traversal", "boundary": "patch", "expected": "refuse-before-diff" },
+    { "id": "symlink", "boundary": "patch", "expected": "refuse-before-diff" },
+    { "id": "case-collision", "boundary": "patch", "expected": "refuse-before-diff" },
+    { "id": "unexpected-diff", "boundary": "patch", "expected": "refuse-before-draft-pr" },
+    { "id": "head-movement", "boundary": "verification", "expected": "invalidate-evidence" },
+    { "id": "approve-request", "boundary": "review", "expected": "comment-only-refusal" },
+    { "id": "merge-request", "boundary": "review", "expected": "human-gate" }
+  ]
+}

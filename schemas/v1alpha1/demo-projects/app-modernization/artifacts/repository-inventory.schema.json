@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/repository-inventory.schema.json",
+  "title": "App Modernization repository inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationRepositoryInventory" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intakeDigest", "repositoryBindingDigest", "headSha", "languages", "manifests", "dependencies", "buildSystems", "observedPathDigests", "untrustedEvidence"],
+      "properties": {
+        "intakeDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "repositoryBindingDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "languages": { "type": "array", "maxItems": 32, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 64 } },
+        "manifests": { "type": "array", "maxItems": 64, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 256 } },
+        "dependencies": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "versionConstraint", "sourceDigest"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1, "maxLength": 128 },
+              "versionConstraint": { "type": "string", "minLength": 1, "maxLength": 128 },
+              "sourceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+            }
+          }
+        },
+        "buildSystems": { "type": "array", "maxItems": 16, "uniqueItems": true, "items": { "type": "string", "minLength": 1, "maxLength": 64 } },
+        "observedPathDigests": { "type": "array", "maxItems": 256, "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" } },
+        "untrustedEvidence": { "const": true }
+      }
+    }
+  }
+}

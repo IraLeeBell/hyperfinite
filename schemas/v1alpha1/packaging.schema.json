@@ -1,0 +1,693 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/packaging.schema.json",
+  "title": "Agentic framework packaging contracts",
+  "oneOf": [
+    { "$ref": "#/$defs/installationConfig" },
+    { "$ref": "#/$defs/installationBackupEvidence" },
+    { "$ref": "#/$defs/installationState" },
+    { "$ref": "#/$defs/installationPlan" },
+    { "$ref": "#/$defs/installationAuthorization" },
+    { "$ref": "#/$defs/installationReceipt" },
+    { "$ref": "#/$defs/installationLiveValidation" },
+    { "$ref": "#/$defs/migrationManifest" },
+    { "$ref": "#/$defs/releaseManifest" },
+    { "$ref": "#/$defs/compatibilityMatrix" },
+    { "$ref": "#/$defs/openSourceReadiness" },
+    { "$ref": "#/$defs/releaseCandidate" },
+    { "$ref": "#/$defs/customerStarterSelection" },
+    { "$ref": "#/$defs/customerStarterManifest" },
+    { "$ref": "#/$defs/customerStarterPreflightReport" }
+  ],
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "version": { "type": "string", "minLength": 5, "maxLength": 32, "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" },
+    "path": { "type": "string", "minLength": 1, "maxLength": 240, "pattern": "^(?!/)(?!.*//)(?!.*\\/$)(?!.*\\\\)(?!.*(?:^|/)(?:\\.{1,2}|\\.git)(?:/|$))[^\\u0000]+$" },
+    "releasePath": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 224,
+      "pattern": "^(?!/)(?!.*//)(?!.*\\/$)(?!.*\\\\)(?!.*(?:^|/)(?:\\.{1,2}|\\.git)(?:/|$))(?!.*[\\u0000-\\u001f\\u007f-\\u009f]).+$",
+      "format": "release-path",
+      "description": "The registered release-path format delegates to the authoritative assertReleasePath semantic validator for NFC, denied characters/segments, and canonical UTF-8 ustar name/prefix representability."
+    },
+    "base": {
+      "type": "object",
+      "properties": {
+        "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+        "schemaVersion": { "const": "1.0.0" }
+      },
+      "required": ["apiVersion", "schemaVersion"]
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["enterpriseSlug", "organizationLogin", "repositoryId", "repositoryNodeId", "repositoryFullName", "installationId", "defaultRef", "expectedHeadSha"],
+      "properties": {
+        "enterpriseSlug": { "type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,37}[a-z0-9])?$" },
+        "organizationLogin": { "type": "string", "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$" },
+        "repositoryId": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "repositoryNodeId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "repositoryFullName": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+        "installationId": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "defaultRef": { "type": "string", "pattern": "^refs/heads/[A-Za-z0-9._/-]+$" },
+        "expectedHeadSha": { "$ref": "#/$defs/sha" }
+      }
+    },
+    "file": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "type", "mode", "size", "digest"],
+      "properties": {
+        "path": { "$ref": "#/$defs/releasePath" },
+        "type": { "const": "file" },
+        "mode": { "enum": ["100644", "100755"] },
+        "size": { "type": "integer", "minimum": 0, "maximum": 8388608 },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keyId", "algorithm", "value"],
+      "properties": {
+        "keyId": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "algorithm": { "const": "ed25519" },
+        "value": { "type": "string", "minLength": 8, "maxLength": 512, "pattern": "^[A-Za-z0-9+/=_-]+$" }
+      }
+    },
+    "installationConfig": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "operation", "packageVersion", "releaseManifestDigest", "migrationManifestDigest", "backupEvidenceDigest", "recoveryBaseStateDigest", "target", "expectedResultHeadSha", "expectedStateDigest", "expectedJournalSequence", "expectedJournalHead", "apply"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationConfig" },
+            "schemaVersion": { "const": "1.0.0" },
+            "operation": { "enum": ["install", "upgrade", "rollback", "recover", "uninstall"] },
+            "packageVersion": { "oneOf": [{ "$ref": "#/$defs/version" }, { "type": "null" }] },
+            "releaseManifestDigest": { "$ref": "#/$defs/digest" },
+            "migrationManifestDigest": { "$ref": "#/$defs/digest" },
+            "backupEvidenceDigest": { "$ref": "#/$defs/digest" },
+            "recoveryBaseStateDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "target": { "$ref": "#/$defs/target" },
+            "expectedResultHeadSha": { "$ref": "#/$defs/sha" },
+            "expectedStateDigest": { "$ref": "#/$defs/digest" },
+            "expectedJournalSequence": { "type": "integer", "minimum": 0, "maximum": 512 },
+            "expectedJournalHead": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "apply": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["enabled", "humanChangeId"],
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "humanChangeId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "installationBackupEvidence": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "targetBindingDigest", "stateDigest", "journalSequence", "journalHead", "backupArtifactDigest", "capturedAt", "evidenceRetained"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationBackupEvidence" },
+            "schemaVersion": { "const": "1.0.0" },
+            "targetBindingDigest": { "$ref": "#/$defs/digest" },
+            "stateDigest": { "$ref": "#/$defs/digest" },
+            "journalSequence": { "type": "integer", "minimum": 0, "maximum": 512 },
+            "journalHead": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "backupArtifactDigest": { "$ref": "#/$defs/digest" },
+            "capturedAt": { "type": "string", "format": "date-time", "maxLength": 24 },
+            "evidenceRetained": { "const": true }
+          }
+        }
+      ]
+    },
+    "installationState": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "target", "status", "packageVersion", "files", "journalSequence", "evidencePaths"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationState" },
+            "schemaVersion": { "const": "1.0.0" },
+            "target": { "$ref": "#/$defs/target" },
+            "status": { "enum": ["stable", "partial", "ambiguous"] },
+            "packageVersion": { "oneOf": [{ "$ref": "#/$defs/version" }, { "type": "null" }] },
+            "files": { "type": "array", "maxItems": 512, "items": { "$ref": "#/$defs/file" } },
+            "journalSequence": { "type": "integer", "minimum": 0, "maximum": 512 },
+            "evidencePaths": { "type": "array", "maxItems": 512, "uniqueItems": true, "items": { "$ref": "#/$defs/path" } }
+          }
+        }
+      ]
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "path", "beforeDigest", "afterDigest", "mode", "requiresHumanApproval"],
+      "properties": {
+        "type": { "enum": ["write-package-file", "remove-package-file", "reconcile-package-file"] },
+        "path": { "$ref": "#/$defs/releasePath" },
+        "beforeDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "afterDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+        "mode": { "enum": ["100644", "100755"] },
+        "requiresHumanApproval": { "const": true }
+      }
+    },
+    "installationPlan": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "mode", "operation", "packageName", "fromVersion", "toVersion", "releaseManifestDigest", "releaseManifest", "migrationManifestDigest", "migrationManifest", "releaseSource", "target", "targetBindingDigest", "configurationDigest", "configuration", "expectedStateDigest", "expectedState", "recoveryBaseStateDigest", "recoveryBaseState", "expectedResultStateDigest", "expectedResultState", "expectedResultHeadSha", "expectedJournalSequence", "expectedJournalHead", "migrationPath", "migrationSteps", "irreversibleSteps", "requiredPreconditions", "actions", "retainedEvidencePaths", "applyRequested", "humanChangeId", "idempotencyKey", "planDigest"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationPlan" },
+            "schemaVersion": { "const": "1.0.0" },
+            "mode": { "const": "plan" },
+            "operation": { "enum": ["install", "upgrade", "rollback", "recover", "uninstall"] },
+            "packageName": { "const": "agentic-framework" },
+            "fromVersion": { "oneOf": [{ "$ref": "#/$defs/version" }, { "type": "null" }] },
+            "toVersion": { "oneOf": [{ "$ref": "#/$defs/version" }, { "type": "null" }] },
+            "releaseManifestDigest": { "$ref": "#/$defs/digest" },
+            "releaseManifest": { "$ref": "#/$defs/releaseManifest" },
+            "migrationManifestDigest": { "$ref": "#/$defs/digest" },
+            "migrationManifest": { "$ref": "#/$defs/migrationManifest" },
+            "releaseSource": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["server", "repository", "baseSha", "headSha"],
+              "properties": {
+                "server": { "type": "string", "pattern": "^(?:github\\.com|[a-z0-9-]+\\.ghe\\.com)$" },
+                "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+                "baseSha": { "$ref": "#/$defs/sha" },
+                "headSha": { "$ref": "#/$defs/sha" }
+              }
+            },
+            "target": { "$ref": "#/$defs/target" },
+            "targetBindingDigest": { "$ref": "#/$defs/digest" },
+            "configurationDigest": { "$ref": "#/$defs/digest" },
+            "configuration": { "$ref": "#/$defs/installationConfig" },
+            "expectedStateDigest": { "$ref": "#/$defs/digest" },
+            "expectedState": { "$ref": "#/$defs/installationState" },
+            "recoveryBaseStateDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "recoveryBaseState": { "oneOf": [{ "$ref": "#/$defs/installationState" }, { "type": "null" }] },
+            "expectedResultStateDigest": { "$ref": "#/$defs/digest" },
+            "expectedResultState": { "$ref": "#/$defs/installationState" },
+            "expectedResultHeadSha": { "$ref": "#/$defs/sha" },
+            "expectedJournalSequence": { "type": "integer", "minimum": 0, "maximum": 512 },
+            "expectedJournalHead": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "migrationPath": { "type": "array", "maxItems": 64, "items": { "type": "string", "pattern": "^(?:rollback:)?[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+            "migrationSteps": {
+              "type": "array",
+              "maxItems": 64,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "checksum", "direction", "irreversible"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                  "checksum": { "$ref": "#/$defs/digest" },
+                  "direction": { "enum": ["forward", "rollback"] },
+                  "irreversible": { "type": "boolean" }
+                }
+              }
+            },
+            "irreversibleSteps": { "type": "array", "maxItems": 64, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" } },
+            "requiredPreconditions": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "evidenceDigest"],
+                "properties": {
+                  "id": { "enum": ["backup-evidence-present", "exact-source-version", "exact-target-head-current", "receipt-chain-valid"] },
+                  "evidenceDigest": { "$ref": "#/$defs/digest" }
+                }
+              }
+            },
+            "actions": { "type": "array", "maxItems": 512, "items": { "$ref": "#/$defs/action" } },
+            "retainedEvidencePaths": { "type": "array", "maxItems": 512, "uniqueItems": true, "items": { "$ref": "#/$defs/path" } },
+            "applyRequested": { "type": "boolean" },
+            "humanChangeId": { "type": ["string", "null"], "minLength": 1, "maxLength": 128 },
+            "idempotencyKey": { "$ref": "#/$defs/digest" },
+            "planDigest": { "$ref": "#/$defs/digest" }
+          }
+        }
+      ]
+    },
+    "installationAuthorization": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "planDigest", "configurationDigest", "migrationManifestDigest", "releaseHeadSha", "targetBindingDigest", "expectedHeadSha", "expectedResultHeadSha", "expectedStateDigest", "idempotencyKey", "operation", "humanChangeId", "approverDigest", "destructiveApproved", "irreversibleApproved", "approvedAt", "expiresAt", "signature"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationAuthorization" },
+            "schemaVersion": { "const": "1.0.0" },
+            "planDigest": { "$ref": "#/$defs/digest" },
+            "configurationDigest": { "$ref": "#/$defs/digest" },
+            "migrationManifestDigest": { "$ref": "#/$defs/digest" },
+            "releaseHeadSha": { "$ref": "#/$defs/sha" },
+            "targetBindingDigest": { "$ref": "#/$defs/digest" },
+            "expectedHeadSha": { "$ref": "#/$defs/sha" },
+            "expectedResultHeadSha": { "$ref": "#/$defs/sha" },
+            "expectedStateDigest": { "$ref": "#/$defs/digest" },
+            "idempotencyKey": { "$ref": "#/$defs/digest" },
+            "operation": { "enum": ["install", "upgrade", "rollback", "recover", "uninstall"] },
+            "humanChangeId": { "type": "string", "minLength": 1, "maxLength": 128 },
+            "approverDigest": { "$ref": "#/$defs/digest" },
+            "destructiveApproved": { "type": "boolean" },
+            "irreversibleApproved": { "type": "boolean" },
+            "approvedAt": { "type": "string", "format": "date-time", "maxLength": 24 },
+            "expiresAt": { "type": "string", "format": "date-time", "maxLength": 24 },
+            "signature": { "$ref": "#/$defs/signature" }
+          }
+        }
+      ]
+    },
+    "installationReceipt": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "sequence", "previousReceiptDigest", "planDigest", "targetBindingDigest", "idempotencyKey", "operation", "expectedStateDigest", "resultStateDigest", "appliedHeadSha", "status", "evidenceRetained", "appliedAt", "signature"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationReceipt" },
+            "schemaVersion": { "const": "1.0.0" },
+            "sequence": { "type": "integer", "minimum": 1, "maximum": 512 },
+            "previousReceiptDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "planDigest": { "$ref": "#/$defs/digest" },
+            "targetBindingDigest": { "$ref": "#/$defs/digest" },
+            "idempotencyKey": { "$ref": "#/$defs/digest" },
+            "operation": { "enum": ["install", "upgrade", "rollback", "recover", "uninstall"] },
+            "expectedStateDigest": { "$ref": "#/$defs/digest" },
+            "resultStateDigest": { "$ref": "#/$defs/digest" },
+            "appliedHeadSha": { "$ref": "#/$defs/sha" },
+            "status": { "const": "applied" },
+            "evidenceRetained": { "const": true },
+            "appliedAt": { "type": "string", "format": "date-time", "maxLength": 24 },
+            "signature": { "$ref": "#/$defs/signature" }
+          }
+        }
+      ]
+    },
+    "installationLiveValidation": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "mode", "adapterId", "planDigest", "authorizationDigest", "targetBindingDigest", "expectedStateDigest", "observedStateDigest", "expectedHeadSha", "observedHeadSha", "validatedAt", "signature"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "InstallationLiveValidation" },
+            "schemaVersion": { "const": "1.0.0" },
+            "mode": { "const": "live-read-only" },
+            "adapterId": { "type": "string", "minLength": 1, "maxLength": 128 },
+            "planDigest": { "$ref": "#/$defs/digest" },
+            "authorizationDigest": { "$ref": "#/$defs/digest" },
+            "targetBindingDigest": { "$ref": "#/$defs/digest" },
+            "expectedStateDigest": { "$ref": "#/$defs/digest" },
+            "observedStateDigest": { "$ref": "#/$defs/digest" },
+            "expectedHeadSha": { "$ref": "#/$defs/sha" },
+            "observedHeadSha": { "$ref": "#/$defs/sha" },
+            "validatedAt": { "type": "string", "format": "date-time", "maxLength": 24 },
+            "signature": { "$ref": "#/$defs/signature" }
+          }
+        }
+      ]
+    },
+    "migrationStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "from", "to", "checksum", "preconditions", "irreversible", "rollback", "evidenceRetention"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "from": { "$ref": "#/$defs/version" },
+        "to": { "$ref": "#/$defs/version" },
+        "checksum": { "$ref": "#/$defs/digest" },
+        "preconditions": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": { "enum": ["backup-evidence-present", "exact-source-version", "exact-target-head-current", "receipt-chain-valid"] }
+        },
+        "irreversible": { "type": "boolean" },
+        "rollback": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["supported", "humanApprovalRequired"],
+          "properties": {
+            "supported": { "type": "boolean" },
+            "humanApprovalRequired": { "const": true }
+          }
+        },
+        "evidenceRetention": { "const": "preserve" }
+      }
+    },
+    "migrationManifest": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageName", "currentVersion", "steps"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "MigrationManifest" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageName": { "const": "agentic-framework" },
+            "currentVersion": { "$ref": "#/$defs/version" },
+            "steps": { "type": "array", "maxItems": 64, "items": { "$ref": "#/$defs/migrationStep" } }
+          }
+        }
+      ]
+    },
+    "releaseManifest": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageName", "packageVersion", "source", "dependencyLockDigest", "licenseDigest", "noticesDigest", "files"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "ReleaseManifest" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageName": { "const": "agentic-framework" },
+            "packageVersion": { "$ref": "#/$defs/version" },
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["server", "repository", "baseSha", "headSha", "sourceDateEpoch"],
+              "properties": {
+                "server": { "type": "string", "pattern": "^(?:github\\.com|[a-z0-9-]+\\.ghe\\.com)$" },
+                "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+                "baseSha": { "$ref": "#/$defs/sha" },
+                "headSha": { "$ref": "#/$defs/sha" },
+                "sourceDateEpoch": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+              }
+            },
+            "dependencyLockDigest": { "$ref": "#/$defs/digest" },
+            "licenseDigest": { "$ref": "#/$defs/digest" },
+            "noticesDigest": { "$ref": "#/$defs/digest" },
+            "files": { "type": "array", "minItems": 1, "maxItems": 512, "items": { "$ref": "#/$defs/file" } }
+          }
+        }
+      ]
+    },
+    "compatibilityMatrix": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "nodeMajors", "npmMajors", "ghCliVersion", "gitMinimumVersion", "ghAwVersion", "copilotCliVersion", "actions", "platforms", "contractVersions"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "CompatibilityMatrix" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageVersion": { "$ref": "#/$defs/version" },
+            "nodeMajors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [24, 26] } },
+            "npmMajors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [11] } },
+            "ghCliVersion": { "const": "2.96.0" },
+            "gitMinimumVersion": { "const": "2.46.0" },
+            "ghAwVersion": { "const": "v0.86.2" },
+            "copilotCliVersion": { "const": "1.0.79" },
+            "actions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["runner", "setupNodeMajor"],
+              "properties": {
+                "runner": { "const": "ubuntu-slim" },
+                "setupNodeMajor": { "const": 24 }
+              }
+            },
+            "platforms": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["ghec", "ghes"],
+              "properties": {
+                "ghec": { "const": "supported" },
+                "ghes": { "const": "unsupported-unverified" }
+              }
+            },
+            "contractVersions": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "packaging",
+                "control",
+                "project",
+                "runtime",
+                "demoProject",
+                "stageAgentBinding",
+                "agentSelection",
+                "deploymentTopology",
+                "githubAppRegistration",
+                "administratorPlan",
+                "administratorHandoff",
+                "durableStore"
+              ],
+              "properties": {
+                "packaging": { "const": "1.0.0" },
+                "control": { "const": "1.0.0" },
+                "project": { "const": "1.0.0" },
+                "runtime": { "const": "1.0.0" },
+                "demoProject": { "const": "2.0.0" },
+                "stageAgentBinding": { "const": "2.0.0" },
+                "agentSelection": { "const": "1.0.0" },
+                "deploymentTopology": { "const": "1.0.0" },
+                "githubAppRegistration": { "const": "1.0.0" },
+                "administratorPlan": { "const": "1.0.0" },
+                "administratorHandoff": { "const": "1.0.0" },
+                "durableStore": { "const": "1.0.0" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "openSourceReadiness": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "decision", "authoritative", "licensePreserved", "categories", "prohibitedDecisions"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "OpenSourceReadinessAssessment" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageVersion": { "$ref": "#/$defs/version" },
+            "decision": { "const": "not-ready" },
+            "authoritative": { "const": false },
+            "licensePreserved": { "const": true },
+            "categories": { "$ref": "#/$defs/readinessCategories" },
+            "prohibitedDecisions": {
+              "const": ["license-change", "publication", "repository-visibility-change", "release"]
+            }
+          }
+        }
+      ]
+    },
+    "releaseCandidate": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "headSha", "archiveDigest", "releaseManifestDigest", "sbomDigest", "provenanceDigest", "attestationDigest", "decision", "authoritative", "selfApproved", "checks", "residualRisks", "deploymentPrerequisites", "unsupportedEnvironments", "rollbackLimits", "manualLiveProbes", "noGoConditions"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "ReleaseCandidateChecklist" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageVersion": { "$ref": "#/$defs/version" },
+            "headSha": { "$ref": "#/$defs/sha" },
+            "archiveDigest": { "$ref": "#/$defs/digest" },
+            "releaseManifestDigest": { "$ref": "#/$defs/digest" },
+            "sbomDigest": { "$ref": "#/$defs/digest" },
+            "provenanceDigest": { "$ref": "#/$defs/digest" },
+            "attestationDigest": { "$ref": "#/$defs/digest" },
+            "decision": { "const": "no-go" },
+            "authoritative": { "const": false },
+            "selfApproved": { "const": false },
+            "checks": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 64,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "status", "evidenceDigest"],
+                "properties": {
+                  "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+                  "status": { "enum": ["requires-exact-head-evidence", "requires-human-approval", "unsupported"] },
+                  "evidenceDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] }
+                }
+              }
+            },
+            "residualRisks": { "$ref": "#/$defs/nonemptyStrings" },
+            "deploymentPrerequisites": { "$ref": "#/$defs/nonemptyStrings" },
+            "unsupportedEnvironments": { "$ref": "#/$defs/nonemptyStrings" },
+            "rollbackLimits": { "$ref": "#/$defs/nonemptyStrings" },
+            "manualLiveProbes": { "$ref": "#/$defs/nonemptyStrings" },
+            "noGoConditions": { "$ref": "#/$defs/nonemptyStrings" }
+          }
+        }
+      ]
+    },
+    "nonemptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 512 }
+    },
+    "profileId": { "type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "readinessCategories": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "requiredEvidence", "owners"],
+        "properties": {
+          "id": { "enum": ["license-notice-provenance", "contribution-security-governance", "dependency-licensing", "trademarks-branding", "secrets-customer-data", "support-sla", "build-reproducibility", "release-signing", "internal-references"] },
+          "status": { "const": "unresolved-human-gate" },
+          "requiredEvidence": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 256 } },
+          "owners": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["legal", "ospo", "product", "security", "maintainer"] } }
+        }
+      }
+    },
+    "customerStarterSelection": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "profileId", "extendsProfileId", "baseSelectionDigest", "sourceHeadSha", "includedPaths", "excludedPaths", "resolvedClosureDigest"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "CustomerStarterSelection" },
+            "schemaVersion": { "const": "1.0.0" },
+            "profileId": { "$ref": "#/$defs/profileId" },
+            "extendsProfileId": { "oneOf": [{ "$ref": "#/$defs/profileId" }, { "type": "null" }] },
+            "baseSelectionDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "sourceHeadSha": { "$ref": "#/$defs/sha" },
+            "includedPaths": { "type": "array", "minItems": 1, "maxItems": 512, "uniqueItems": true, "items": { "$ref": "#/$defs/releasePath" } },
+            "excludedPaths": { "type": "array", "maxItems": 512, "uniqueItems": true, "items": { "$ref": "#/$defs/releasePath" } },
+            "resolvedClosureDigest": { "$ref": "#/$defs/digest" }
+          }
+        }
+      ]
+    },
+    "customerStarterManifest": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageName", "packageVersion", "profileId", "extendsProfileId", "baseManifestDigest", "selectionDigest", "source", "licenseDigest", "noticesDigest", "dependencyLockDigest", "internalReferenceDenylistDigest", "customerDataDenylistDigest", "advertisedScriptsDigest", "files"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "CustomerStarterManifest" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageName": { "const": "agentic-framework" },
+            "packageVersion": { "$ref": "#/$defs/version" },
+            "profileId": { "$ref": "#/$defs/profileId" },
+            "extendsProfileId": { "oneOf": [{ "$ref": "#/$defs/profileId" }, { "type": "null" }] },
+            "baseManifestDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "selectionDigest": { "$ref": "#/$defs/digest" },
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["server", "repository", "baseSha", "headSha", "sourceDateEpoch"],
+              "properties": {
+                "server": { "type": "string", "pattern": "^(?:github\\.com|[a-z0-9-]+\\.ghe\\.com)$" },
+                "repository": { "type": "string", "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$" },
+                "baseSha": { "$ref": "#/$defs/sha" },
+                "headSha": { "$ref": "#/$defs/sha" },
+                "sourceDateEpoch": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+              }
+            },
+            "licenseDigest": { "$ref": "#/$defs/digest" },
+            "noticesDigest": { "$ref": "#/$defs/digest" },
+            "dependencyLockDigest": { "oneOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+            "internalReferenceDenylistDigest": { "$ref": "#/$defs/digest" },
+            "customerDataDenylistDigest": { "$ref": "#/$defs/digest" },
+            "advertisedScriptsDigest": { "$ref": "#/$defs/digest" },
+            "files": { "type": "array", "minItems": 1, "maxItems": 4096, "items": { "$ref": "#/$defs/file" } }
+          }
+        }
+      ]
+    },
+    "customerStarterPreflightReport": {
+      "allOf": [
+        { "$ref": "#/$defs/base" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "profileId", "extendsProfileId", "sourceHeadSha", "starterManifestDigest", "sbomDigest", "provenanceDigest", "openSourceReadinessDigest", "decision", "authoritative", "selfApproved", "scans", "categories", "residualRisks"],
+          "properties": {
+            "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+            "kind": { "const": "CustomerStarterPreflightReport" },
+            "schemaVersion": { "const": "1.0.0" },
+            "packageVersion": { "$ref": "#/$defs/version" },
+            "profileId": { "$ref": "#/$defs/profileId" },
+            "extendsProfileId": { "oneOf": [{ "$ref": "#/$defs/profileId" }, { "type": "null" }] },
+            "sourceHeadSha": { "$ref": "#/$defs/sha" },
+            "starterManifestDigest": { "$ref": "#/$defs/digest" },
+            "sbomDigest": { "$ref": "#/$defs/digest" },
+            "provenanceDigest": { "$ref": "#/$defs/digest" },
+            "openSourceReadinessDigest": { "$ref": "#/$defs/digest" },
+            "decision": { "const": "no-go" },
+            "authoritative": { "const": false },
+            "selfApproved": { "const": false },
+            "scans": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["id", "status", "findingsDigest"],
+                "properties": {
+                  "id": { "enum": ["secret-scan", "internal-reference-scan", "customer-data-scan", "generated-workflow-source-closure", "schema-reference-closure", "module-import-closure", "markdown-link-closure", "package-script-closure"] },
+                  "status": { "const": "clean" },
+                  "findingsDigest": { "$ref": "#/$defs/digest" }
+                }
+              }
+            },
+            "categories": { "$ref": "#/$defs/readinessCategories" },
+            "residualRisks": { "$ref": "#/$defs/nonemptyStrings" }
+          }
+        }
+      ]
+    }
+  }
+}

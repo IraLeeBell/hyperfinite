@@ -1,0 +1,119 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationRecoveryScenarios",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:5124e9df7f8f05a8f514f3b788b0bc8d5fa92b6b7e23d8e1853dd8b63a546bf3",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "scenarios": [
+      {
+        "id": "pause",
+        "input": "pause-requested preserves the current stage cursor and records the resume state.",
+        "expectedAction": "pause",
+        "expectedState": "PAUSED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "block",
+        "input": "dependency-blocked preserves the current stage cursor and records the recovery state.",
+        "expectedAction": "block",
+        "expectedState": "BLOCKED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "cancel",
+        "input": "cancel-requested is terminal and cannot resume.",
+        "expectedAction": "cancel",
+        "expectedState": "CANCELLED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "repair",
+        "input": "repair-requested returns verification to patch implementation with a new generation.",
+        "expectedAction": "repair",
+        "expectedState": "EXECUTING",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "replan",
+        "input": "replan-requested returns verification to deterministic patch planning with a new generation.",
+        "expectedAction": "replan",
+        "expectedState": "PLANNED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "revision",
+        "input": "revision-requested returns Human Review to patch implementation with a new generation.",
+        "expectedAction": "revise",
+        "expectedState": "EXECUTING",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "retry",
+        "input": "retry-requested requires remaining signed budget and increments attempt and generation once.",
+        "expectedAction": "retry",
+        "expectedState": "VERIFYING",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "partial-effect",
+        "input": "A partial draft-PR effect blocks and reconciles by the original idempotency key.",
+        "expectedAction": "reconcile",
+        "expectedState": "BLOCKED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "lost-ack",
+        "input": "A lost acknowledgement requires stable exact readback and never blindly retries.",
+        "expectedAction": "reconcile",
+        "expectedState": "BLOCKED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "scanner-unavailable",
+        "input": "Unavailable scanner evidence cannot satisfy exact success.",
+        "expectedAction": "block",
+        "expectedState": "BLOCKED",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "stale-advisory",
+        "input": "Expired advisory evidence invalidates activation and requires refreshed signed evidence.",
+        "expectedAction": "reauthorize",
+        "expectedState": "ACTIVATION_PENDING",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      },
+      {
+        "id": "reauthorization",
+        "input": "Material authority or base movement invalidates prior activation and returns to Activation Pending.",
+        "expectedAction": "reauthorize",
+        "expectedState": "ACTIVATION_PENDING",
+        "inferenceAllowed": false,
+        "effectAllowed": false,
+        "externalCallCount": 0
+      }
+    ]
+  }
+}

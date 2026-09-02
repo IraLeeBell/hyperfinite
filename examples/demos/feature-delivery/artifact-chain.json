@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "feature-delivery",
+  "artifacts": [
+    {
+      "stageId": "requirements-clarification",
+      "kind": "FeatureDeliveryFeatureBrief",
+      "digest": "sha256:34e2aad90d31c148c45374b5992e762b8a0621cfd8a22616d2cab1af9575afcc"
+    },
+    {
+      "stageId": "codebase-discovery",
+      "kind": "FeatureDeliveryCodebaseImpactAnalysis",
+      "digest": "sha256:c37e8c94f3f05810e87ba3683113ee4bfe315b9e463710fff006826e515b4001"
+    },
+    {
+      "stageId": "solution-design",
+      "kind": "FeatureDeliverySolutionDesign",
+      "digest": "sha256:a36b226e49d27dae2d5c1e1b1685d694e97722cb99f1e9c38f34b72972e333c2"
+    },
+    {
+      "stageId": "implementation-plan",
+      "kind": "FeatureDeliveryImplementationPlan",
+      "digest": "sha256:171ce245eb71a21a97e00d57b8305aec4dc3df5b529e1ff971875dedc245a4dc"
+    },
+    {
+      "stageId": "build",
+      "kind": "FeatureDeliveryTargetFreePatch",
+      "digest": "sha256:a891065c48252ba1d0b966acf1f31d2ed428272afc6972bc97bb044e76ca921f"
+    },
+    {
+      "stageId": "build",
+      "kind": "FeatureDeliveryDraftPullRequestEvidence",
+      "digest": "sha256:1f4f355ab66b8bfbaab2a0fde3575db3d5eec2b237b30435aba658a33d61a392"
+    },
+    {
+      "stageId": "test-and-verification",
+      "kind": "FeatureDeliveryVerificationReport",
+      "digest": "sha256:cbf19948b5d212dfad198359b680f4493b5678a793a51b4ee70f77a497d40ab7"
+    },
+    {
+      "stageId": "human-review",
+      "kind": "FeatureDeliveryHumanReviewPackage",
+      "digest": "sha256:95a2dab9ed2d6e93425f5b62f513e62d58eef479ea0bec7a36c95c20c1967565"
+    }
+  ],
+  "externalCalls": 0
+}

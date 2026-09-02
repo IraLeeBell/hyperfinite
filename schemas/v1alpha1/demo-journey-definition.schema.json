@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-journey-definition.schema.json",
+  "title": "Autonomous demo journey definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoJourneyDefinition" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "catalogDigest",
+        "identityReservationsDigest",
+        "projectProfileDigest",
+        "lifecycleGraphDigest",
+        "initialStageId",
+        "terminalStageId",
+        "stages",
+        "controlStages"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "catalogDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "identityReservationsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projectProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "lifecycleGraphDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "initialStageId": { "const": "intake" },
+        "terminalStageId": { "const": "completed" },
+        "stages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stageId",
+              "displayName",
+              "ordinal",
+              "coreState",
+              "executionKind"
+            ],
+            "properties": {
+              "stageId": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+              },
+              "displayName": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "ordinal": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+              },
+              "coreState": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/lifecycleState"
+              },
+              "executionKind": {
+                "enum": [
+                  "model",
+                  "deterministic",
+                  "planning",
+                  "human",
+                  "terminal"
+                ]
+              }
+            }
+          }
+        },
+        "controlStages": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "stageId",
+              "displayName",
+              "coreState",
+              "executionKind"
+            ],
+            "properties": {
+              "stageId": {
+                "enum": [
+                  "activation-pending",
+                  "paused",
+                  "blocked",
+                  "cancelled"
+                ]
+              },
+              "displayName": {
+                "enum": [
+                  "Activation Pending",
+                  "Paused",
+                  "Blocked",
+                  "Cancelled"
+                ]
+              },
+              "coreState": {
+                "enum": [
+                  "ACTIVATION_PENDING",
+                  "PAUSED",
+                  "BLOCKED",
+                  "CANCELLED"
+                ]
+              },
+              "executionKind": { "const": "kernel" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

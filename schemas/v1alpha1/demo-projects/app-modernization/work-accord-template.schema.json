@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/work-accord-template.schema.json",
+  "title": "App Modernization Work Accord template",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationWorkAccordTemplate" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "depthProfile",
+        "logicalSlots",
+        "verificationIds",
+        "requestedCapabilities",
+        "humanGates",
+        "prohibitedEffects",
+        "draftPullRequestOnly",
+        "automatedReviewEvent",
+        "externalNetwork",
+        "externalMcp",
+        "secretAccess"
+      ],
+      "properties": {
+        "demoProjectId": { "const": "app-modernization" },
+        "depthProfile": { "const": "D2" },
+        "logicalSlots": {
+          "const": [
+            "application-source",
+            "application-tests",
+            "migration-notes"
+          ]
+        },
+        "verificationIds": {
+          "const": [
+            "typecheck",
+            "build",
+            "unit-tests",
+            "security",
+            "compatibility",
+            "migration-dry-run"
+          ]
+        },
+        "requestedCapabilities": {
+          "const": [
+            "demo.app-modernization.current-state-inventory@1.0.0",
+            "demo.app-modernization.modernization-assessment@1.0.0",
+            "demo.app-modernization.target-architecture@1.0.0",
+            "demo.app-modernization.implementation@1.0.0",
+            "demo.app-modernization.verification@1.0.0"
+          ]
+        },
+        "humanGates": {
+          "const": [
+            "activate",
+            "accept-frame",
+            "accept-plan",
+            "approve-current-head"
+          ]
+        },
+        "prohibitedEffects": {
+          "const": [
+            "approve",
+            "merge",
+            "deploy",
+            "publish",
+            "production-mutation",
+            "crm-mutation",
+            "erp-mutation",
+            "payment",
+            "license-change",
+            "visibility-change"
+          ]
+        },
+        "draftPullRequestOnly": { "const": true },
+        "automatedReviewEvent": { "const": "COMMENT" },
+        "externalNetwork": { "const": false },
+        "externalMcp": { "const": false },
+        "secretAccess": { "const": false }
+      }
+    }
+  }
+}

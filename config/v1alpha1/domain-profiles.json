@@ -1,0 +1,27 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainProfileCatalog",
+  "profiles": [
+    {
+      "id": "engineering",
+      "version": "1.0.0",
+      "enabledByDefault": false,
+      "policyRef": "config/v1alpha1/domain-pack-policy.json",
+      "definitionRef": null
+    },
+    {
+      "id": "marketing",
+      "version": "1.0.0",
+      "enabledByDefault": false,
+      "policyRef": "config/v1alpha1/domain-packs/marketing/policy.json",
+      "definitionRef": "config/v1alpha1/domain-packs/marketing/definition.json"
+    },
+    {
+      "id": "business-operations",
+      "version": "1.0.0",
+      "enabledByDefault": false,
+      "policyRef": "config/v1alpha1/domain-packs/business-operations/policy.json",
+      "definitionRef": "config/v1alpha1/domain-packs/business-operations/definition.json"
+    }
+  ]
+}

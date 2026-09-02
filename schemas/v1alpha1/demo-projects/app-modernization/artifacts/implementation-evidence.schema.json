@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/implementation-evidence.schema.json",
+  "title": "App Modernization draft implementation evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationImplementationEvidence" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["migrationPlanDigest", "baseSha", "headSha", "patchDigest", "treeDigest", "logicalSlots", "draftPullRequest", "externalCallCount"],
+      "properties": {
+        "migrationPlanDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "baseSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "patchDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "treeDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "logicalSlots": { "type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" } },
+        "draftPullRequest": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["number", "nodeId", "isDraft", "open"],
+          "properties": {
+            "number": { "type": "integer", "minimum": 1 },
+            "nodeId": { "type": "string", "pattern": "^PR_[A-Za-z0-9_]+$" },
+            "isDraft": { "const": true },
+            "open": { "const": true }
+          }
+        },
+        "externalCallCount": { "const": 0 }
+      }
+    }
+  }
+}

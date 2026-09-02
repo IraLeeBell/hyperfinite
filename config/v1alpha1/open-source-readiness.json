@@ -1,0 +1,90 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "OpenSourceReadinessAssessment",
+  "schemaVersion": "1.0.0",
+  "packageVersion": "0.1.0",
+  "decision": "not-ready",
+  "authoritative": false,
+  "licensePreserved": true,
+  "categories": [
+    {
+      "id": "license-notice-provenance",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Written copyright-owner and qualified-counsel review of the repository license and outbound obligations.",
+        "OSPO approval of notices, provenance, similarity review, and outbound obligations."
+      ],
+      "owners": ["legal", "ospo", "maintainer"]
+    },
+    {
+      "id": "contribution-security-governance",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Approved contributor terms, AI-assisted contribution policy, code of conduct, governance, and vulnerability process."
+      ],
+      "owners": ["legal", "security", "maintainer"]
+    },
+    {
+      "id": "dependency-licensing",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Human-reviewed SBOM and file-level dependency license and notice disposition."
+      ],
+      "owners": ["legal", "ospo", "security"]
+    },
+    {
+      "id": "trademarks-branding",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Product and legal approval for names, marks, screenshots, and compatibility claims."
+      ],
+      "owners": ["legal", "product"]
+    },
+    {
+      "id": "secrets-customer-data",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Exact-head secret scanning, privacy review, customer-data exclusion review, and redacted artifact inspection."
+      ],
+      "owners": ["security", "legal"]
+    },
+    {
+      "id": "support-sla",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Approved support scope, lifecycle, deprecation, maintenance, and service-level posture."
+      ],
+      "owners": ["product", "maintainer"]
+    },
+    {
+      "id": "build-reproducibility",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Independent byte-for-byte package and evidence reproduction from the exact reviewed head."
+      ],
+      "owners": ["security", "maintainer"]
+    },
+    {
+      "id": "release-signing",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Approved release service, protected signing key custody, identity policy, transparency, and verification procedure."
+      ],
+      "owners": ["security", "ospo"]
+    },
+    {
+      "id": "internal-references",
+      "status": "unresolved-human-gate",
+      "requiredEvidence": [
+        "Human review that source, docs, examples, history, and artifacts contain no confidential internal or customer references."
+      ],
+      "owners": ["legal", "product", "security"]
+    }
+  ],
+  "prohibitedDecisions": [
+    "license-change",
+    "publication",
+    "repository-visibility-change",
+    "release"
+  ]
+}

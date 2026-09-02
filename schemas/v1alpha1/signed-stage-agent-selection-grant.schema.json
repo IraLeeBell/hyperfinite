@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/signed-stage-agent-selection-grant.schema.json",
+  "title": "Signed exact-agent stage selection grant",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec",
+    "signature"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "SignedStageAgentSelectionGrant" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "stageId",
+        "selectionKey",
+        "optionKey",
+        "projectNodeId",
+        "projectItemNodeId",
+        "projectBindingDigest",
+        "repositoryId",
+        "workItemNodeId",
+        "authorityEpoch",
+        "generation",
+        "runId",
+        "runAttempt",
+        "receiptHead",
+        "pullRequestHeadSha",
+        "policyGeneration",
+        "selectionPolicyDigest",
+        "stageAgentBindingsDigest",
+        "workAccordDigest",
+        "phaseContractDigest",
+        "capabilityRegistryDigest",
+        "activationLeaseDigest",
+        "budgetAuthorityDigest",
+        "agentId",
+        "skillId",
+        "capabilityId",
+        "workflowId",
+        "workflowClass",
+        "phase",
+        "role",
+        "inputSchema",
+        "outputSchema",
+        "toolCeiling",
+        "budgetCeiling",
+        "issuedAt",
+        "expiresAt"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "stageId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "selectionKey": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "optionKey": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "projectNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "projectItemNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "projectBindingDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "repositoryId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "workItemNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "authorityEpoch": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "generation": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+        },
+        "runId": { "type": "string", "pattern": "^[A-Za-z0-9_-]{1,128}$" },
+        "runAttempt": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "receiptHead": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nullableDigest"
+        },
+        "pullRequestHeadSha": {
+          "oneOf": [
+            { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+            { "type": "null" }
+          ]
+        },
+        "policyGeneration": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "selectionPolicyDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "stageAgentBindingsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "workAccordDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "phaseContractDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "capabilityRegistryDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "activationLeaseDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "budgetAuthorityDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "agentId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "skillId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "capabilityId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "workflowId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "workflowClass": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/workflowClass"
+        },
+        "phase": { "enum": ["framing", "execution", "verification"] },
+        "role": { "enum": ["framer", "executor", "reviewer"] },
+        "inputSchema": { "type": "object" },
+        "outputSchema": { "type": "object" },
+        "toolCeiling": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tools",
+            "shellCommands",
+            "networkDestinations",
+            "mcpTools",
+            "secretNames"
+          ],
+          "properties": {
+            "tools": { "$ref": "#/$defs/strings" },
+            "shellCommands": { "$ref": "#/$defs/strings" },
+            "networkDestinations": { "$ref": "#/$defs/strings" },
+            "mcpTools": { "$ref": "#/$defs/strings" },
+            "secretNames": { "type": "array", "maxItems": 0 }
+          }
+        },
+        "budgetCeiling": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "maxCalls",
+            "maxTokens",
+            "maxCostUnits",
+            "maxDurationMs",
+            "maxRetries",
+            "maxOutputBytes",
+            "maxConcurrency"
+          ],
+          "properties": {
+            "maxCalls": { "const": 1 },
+            "maxTokens": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+            },
+            "maxCostUnits": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+            },
+            "maxDurationMs": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+            },
+            "maxRetries": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+            },
+            "maxOutputBytes": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+            },
+            "maxConcurrency": { "const": 1 }
+          }
+        },
+        "issuedAt": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "signature": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/signature"
+    }
+  },
+  "$defs": {
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

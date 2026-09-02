@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/migration-plan.schema.json",
+  "title": "App Modernization phased migration plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationMigrationPlan" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["targetArchitectureDigest", "riskCompatibilityDigest", "waves", "rollback", "fixedVerificationIds", "acceptedByHuman"],
+      "properties": {
+        "targetArchitectureDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "riskCompatibilityDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "waves": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["ordinal", "title", "logicalSlots", "entryEvidence", "exitEvidence"],
+            "properties": {
+              "ordinal": { "type": "integer", "minimum": 1, "maximum": 8 },
+              "title": { "type": "string", "minLength": 1, "maxLength": 128 },
+              "logicalSlots": { "type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" } },
+              "entryEvidence": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 256 } },
+              "exitEvidence": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 256 } }
+            }
+          }
+        },
+        "rollback": { "type": "array", "minItems": 1, "maxItems": 16, "items": { "type": "string", "minLength": 1, "maxLength": 512 } },
+        "fixedVerificationIds": {
+          "const": [
+            "typecheck",
+            "build",
+            "unit-tests",
+            "security",
+            "compatibility",
+            "migration-dry-run"
+          ]
+        },
+        "acceptedByHuman": { "const": false }
+      }
+    }
+  }
+}

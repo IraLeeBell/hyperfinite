@@ -1,0 +1,12 @@
+[
+  {
+    "id": "email-address",
+    "pattern": "(?<![\\w.])(?!evil@)[A-Za-z0-9._%+-]+@(?!(?:[A-Za-z0-9-]+\\.)?(?:example|invalid|test|localhost|evil)(?:\\.(?:com|org|net))?\\b)[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+    "reason": "A concrete email address outside the RFC 2606 reserved example/invalid/test/localhost domains (plus this repository's own adversarial-fixture convention of evil.com/evil@ addresses in negative security tests) likely identifies a real person or customer tenant."
+  },
+  {
+    "id": "private-ipv4-address",
+    "pattern": "\\b(?:10\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}|192\\.168\\.\\d{1,3}\\.\\d{1,3}|172\\.(?:1[6-9]|2\\d|3[01])\\.\\d{1,3}\\.\\d{1,3})\\b",
+    "reason": "A private-range IP address suggests a real deployed network, not a synthetic example."
+  }
+]

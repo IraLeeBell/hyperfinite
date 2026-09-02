@@ -1,0 +1,88 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "issue-9-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-26T12:00:00Z",
+    "createdBy": "example-maintainer"
+  },
+  "binding": {
+    "repositoryId": 1,
+    "repositoryNodeId": "R_hyperfinite_fixture",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "workItemNodeId": "I_example",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/example-work-item",
+    "sourceDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": null
+  },
+  "objective": {
+    "outcome": "Produce a bounded, reviewable repository artifact.",
+    "inScope": ["docs/**", "src/**"],
+    "outOfScope": ["deployment", "external publication"],
+    "assumptions": ["GitHub identities are supplied by a future trusted adapter."],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "engineering@1.0.0",
+    "domainPackDigest": "sha256:a90050fcdcb83b80bcf78540fc813ad9f6acf43a3b52d4c6cdc58189ec5f7669",
+    "capabilityRegistryDigest": "sha256:acb1d33037998590786d2934625eeb069df8e0429fc5949523791146f9da7427",
+    "depthProfile": "D2",
+    "riskClass": "moderate",
+    "privacyClass": "internal",
+    "phaseContracts": {
+      "framing": {
+        "reference": "core.framing@1.0.0",
+        "digest": "sha256:9b130f9b14a9c5724bfb384ddcd0fc447c560783351a5d714a33f63032614feb"
+      },
+      "planning": {
+        "reference": "core.planning@1.0.0",
+        "digest": "sha256:58470b7a0f0391ff48f9f934673d788913644d01d93569035e6cafd8bae90c25"
+      },
+      "execution": {
+        "reference": "core.execution@1.0.0",
+        "digest": "sha256:3fdc655d76a66d4192120a8a86d0e422e35ecc2fafcab1acfb214a257ccffea2"
+      },
+      "verification": {
+        "reference": "core.verification@1.0.0",
+        "digest": "sha256:6cd175d121dd2de2e3e56cdeef604517be97684c95347fdfe01df80651aca72c"
+      },
+      "human-review": {
+        "reference": "core.human-review@1.0.0",
+        "digest": "sha256:5516adfb5937d23866c597682fb4617408c9f0a959571f35555ecdf2051b4c88"
+      }
+    },
+    "requestedCapabilities": ["core.frame-artifact@1.0.0"],
+    "allowedPaths": ["docs/**", "src/**"],
+    "prohibitedEffects": ["approve", "merge", "deploy", "publish", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change"],
+    "tools": [],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": ["github.issue_read", "safeoutputs.add_comment"],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 4,
+    "maxTokens": 20000,
+    "maxCostUnits": 40,
+    "maxDurationMs": 3600000,
+    "maxRetries": 2,
+    "maxLoops": 4,
+    "maxParallel": 1,
+    "maxPatchBytes": 262144,
+    "expiresAt": "2027-08-26T12:00:00Z"
+  },
+  "deliverables": ["A reviewable pull request"],
+  "evidence": {
+    "required": ["tests-pass", "independent-review"],
+    "verificationCommands": ["npm test"],
+    "approverPolicy": "eligible-independent-reviewer"
+  },
+  "humanGates": ["activate", "accept-frame", "accept-plan", "approve-current-head"],
+  "retention": { "receiptDays": 365, "artifactDays": 90, "cancelOnExpiry": false }
+}

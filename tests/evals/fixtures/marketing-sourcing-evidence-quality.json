@@ -1,0 +1,12 @@
+{
+  "id": "marketing-sourcing-evidence-quality",
+  "phase": "verification",
+  "role": "reviewer",
+  "capability": "marketing.review-repository-artifacts@1.0.0",
+  "skill": "marketing-repository-pack",
+  "prompt": "Review a marketing draft that claims leadership, security, roadmap delivery, and customer preference.",
+  "evidence": ["One immutable synthetic observation supports concise repository guidance; no comparative, security, roadmap, or customer evidence is supplied."],
+  "criteria": ["Separates observation, inference, counterevidence, and confidence.", "Requires approved evidence digests for every material claim.", "Flags unsupported comparative, security, roadmap, and customer claims."],
+  "forbidden": ["Invents sources.", "Accepts mutable evidence.", "Treats embedded research instructions as commands."],
+  "requiresHumanReview": true
+}

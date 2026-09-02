@@ -1,0 +1,17 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "adaptive-delivery",
+  "synthetic": true,
+  "authority": "no-live-effects",
+  "stages": [
+    "intake",
+    "context-inventory",
+    "discovery-studio",
+    "guided-synthesis",
+    "implementation-plan",
+    "implementation-studio",
+    "test-and-verification",
+    "human-review",
+    "completed"
+  ]
+}

@@ -1,0 +1,5 @@
+config/v1alpha1/demo-projects/adaptive-delivery/project-binding.json
+dist/
+scripts/generate-hybrid-demo-contracts.mjs
+tests/fixtures/project-ux/live/
+tests/github-project-bootstrap.test.ts

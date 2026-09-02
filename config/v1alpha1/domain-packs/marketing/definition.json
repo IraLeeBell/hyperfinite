@@ -1,0 +1,70 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainPackDefinition",
+  "id": "marketing",
+  "version": "1.0.0",
+  "displayName": "Marketing repository pack",
+  "enabledByDefault": false,
+  "agent": ".github/agents/marketing-pack.agent.md",
+  "skill": "marketing-repository-pack",
+  "policyRef": "config/v1alpha1/domain-packs/marketing/policy.json",
+  "artifactRoot": "examples/marketing/workspace",
+  "artifactSchema": "schemas/v1alpha1/marketing-artifact-bundle.schema.json",
+  "templateRoot": "config/v1alpha1/domain-packs/marketing/templates",
+  "capabilityBindings": {
+    "framing": "marketing.frame-initiative@1.0.0",
+    "execution": "marketing.create-repository-artifacts@1.0.0",
+    "verification": "marketing.review-repository-artifacts@1.0.0"
+  },
+  "slots": [
+    { "id": "initiative-intake", "artifactType": "initiative-intake", "relativePath": "initiative-intake.json", "maxBytes": 12288, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/initiative-intake.schema.json", "template": "initiative-intake.json", "dependsOn": [] },
+    { "id": "audience-evidence", "artifactType": "audience-evidence", "relativePath": "audience-evidence.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/audience-evidence.schema.json", "template": "audience-evidence.json", "dependsOn": ["initiative-intake"] },
+    { "id": "positioning-messaging", "artifactType": "positioning-messaging", "relativePath": "positioning-messaging.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/positioning-messaging.schema.json", "template": "positioning-messaging.json", "dependsOn": ["audience-evidence"] },
+    { "id": "content-plan", "artifactType": "content-plan", "relativePath": "content-plan.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/content-plan.schema.json", "template": "content-plan.json", "dependsOn": ["positioning-messaging"] },
+    { "id": "content-drafts", "artifactType": "content-drafts", "relativePath": "content-drafts.json", "maxBytes": 81920, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/content-drafts.schema.json", "template": "content-drafts.json", "dependsOn": ["content-plan"] },
+    { "id": "measurement-plan", "artifactType": "measurement-plan", "relativePath": "measurement-plan.json", "maxBytes": 20480, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/measurement-plan.schema.json", "template": "measurement-plan.json", "dependsOn": ["content-plan"] },
+    { "id": "brand-legal-assessment", "artifactType": "brand-legal-assessment", "relativePath": "brand-legal-assessment.json", "maxBytes": 20480, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/brand-legal-assessment.schema.json", "template": "brand-legal-assessment.json", "dependsOn": ["content-drafts"] },
+    { "id": "launch-readiness-assessment", "artifactType": "launch-readiness-assessment", "relativePath": "launch-readiness-assessment.json", "maxBytes": 12288, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/marketing/launch-readiness-assessment.schema.json", "template": "launch-readiness-assessment.json", "dependsOn": ["brand-legal-assessment", "measurement-plan"] }
+  ],
+  "stages": [
+    { "id": "initiative-intake", "phase": "framing", "requiredSlots": ["initiative-intake"], "requiredGates": [] },
+    { "id": "audience-evidence", "phase": "framing", "requiredSlots": ["audience-evidence"], "requiredGates": [] },
+    { "id": "positioning-messaging", "phase": "planning", "requiredSlots": ["positioning-messaging"], "requiredGates": ["accept-frame"] },
+    { "id": "content-plan", "phase": "planning", "requiredSlots": ["content-plan"], "requiredGates": ["accept-plan"] },
+    { "id": "content-drafts", "phase": "execution", "requiredSlots": ["content-drafts"], "requiredGates": ["accept-plan"] },
+    { "id": "measurement-plan", "phase": "execution", "requiredSlots": ["measurement-plan"], "requiredGates": ["accept-plan"] },
+    { "id": "brand-legal-assessment", "phase": "verification", "requiredSlots": ["brand-legal-assessment"], "requiredGates": ["brand-review", "legal-review"] },
+    { "id": "launch-readiness-assessment", "phase": "verification", "requiredSlots": ["launch-readiness-assessment"], "requiredGates": ["brand-review", "legal-review"] }
+  ],
+  "humanGates": [
+    { "id": "brand-review", "role": "brand-reviewer", "independent": true, "signed": true, "current": true, "requiredForReadiness": true, "maxAgeMs": 300000 },
+    { "id": "legal-review", "role": "legal-reviewer", "independent": true, "signed": true, "current": true, "requiredForReadiness": true, "maxAgeMs": 300000 }
+  ],
+  "roles": ["requester", "activator", "content-author", "brand-reviewer", "legal-reviewer", "reviewer", "merger"],
+  "incompatibleRolePairs": [["requester", "brand-reviewer"], ["requester", "legal-reviewer"], ["content-author", "brand-reviewer"], ["content-author", "legal-reviewer"], ["brand-reviewer", "legal-reviewer"], ["reviewer", "merger"]],
+  "access": {
+    "tools": [],
+    "shellCommands": [],
+    "networkDestinations": [],
+    "mcpTools": [],
+    "secretNames": [],
+    "externalAdapters": []
+  },
+  "riskPrivacy": {
+    "maximumClassification": "confidential",
+    "allowedClassifications": ["internal", "confidential"],
+    "prohibitedData": ["credentials", "payment-card-data", "health-data", "unapproved-personal-data", "restricted-customer-content"],
+    "retentionDays": 90
+  },
+  "reviewRubric": [
+    "Claims are supported by repository evidence and unsupported claims are marked.",
+    "Audience, positioning, and messaging remain internally consistent.",
+    "Drafts avoid third-party brand language and unlicensed copied text.",
+    "Sensitive data is absent or explicitly refused.",
+    "The package contains no publication, CMS, email, social, or advertising instruction."
+  ],
+  "prohibitedEffects": ["approve", "merge", "deploy", "publish", "external-publication", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change", "cms-mutation", "email-send", "social-post", "ads-mutation", "customer-communication"],
+  "limits": { "maxTokens": 20000, "maxDurationMs": 600000, "maxRetries": 1, "maxLoops": 2, "maxParallel": 1, "maxRecursionDepth": 0, "maxFiles": 8, "maxPatchBytes": 262144 },
+  "maxRevisionLoops": 2,
+  "maxArtifactBytes": 262144
+}

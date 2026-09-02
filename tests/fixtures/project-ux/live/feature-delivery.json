@@ -1,0 +1,304 @@
+{
+  "owner": {
+    "type": "organization",
+    "login": "example-organization",
+    "nodeId": "O_synthetic_example_organization"
+  },
+  "installation": {
+    "id": 2402,
+    "accountNodeId": "O_synthetic_example_organization"
+  },
+  "project": {
+    "number": 102,
+    "nodeId": "PVT_synthetic_feature_delivery",
+    "title": "Feature Delivery - Hyperfinite"
+  },
+  "fields": [
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_1",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_1",
+          "name": "Captured"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_2",
+          "name": "Activation pending"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_3",
+          "name": "Framing"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_4",
+          "name": "Planned"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_5",
+          "name": "Executing"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_6",
+          "name": "Verifying"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_7",
+          "name": "Human review"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_8",
+          "name": "Completed"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_9",
+          "name": "Paused"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_10",
+          "name": "Blocked"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_1_11",
+          "name": "Cancelled"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_2",
+      "name": "Journey Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_1",
+          "name": "Intake"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_2",
+          "name": "Requirements clarification"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_3",
+          "name": "Codebase discovery"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_4",
+          "name": "Solution design"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_5",
+          "name": "Implementation plan"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_6",
+          "name": "Build"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_7",
+          "name": "Test and verification"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_8",
+          "name": "Human review"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_9",
+          "name": "Completed"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_10",
+          "name": "Activation Pending"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_11",
+          "name": "Paused"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_12",
+          "name": "Blocked"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_2_13",
+          "name": "Cancelled"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_3",
+      "name": "Demo Project Profile",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_4",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_4_1",
+          "name": "D0"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_4_2",
+          "name": "D1"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_4_3",
+          "name": "D2"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_4_4",
+          "name": "D3"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_5",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_5_1",
+          "name": "Pending"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_5_2",
+          "name": "Satisfied"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_5_3",
+          "name": "Blocked"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_6",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_7",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_8",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_8_1",
+          "name": "None"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_8_2",
+          "name": "Human action"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_8_3",
+          "name": "Reconciliation"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_9",
+      "name": "Target Repository",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_10",
+      "name": "Run / Attempt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_11",
+      "name": "Current Draft PR",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_12",
+      "name": "Current Stage Agent",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_13",
+      "name": "Stage Interaction",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_13_1",
+          "name": "Backend autonomous"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_13_2",
+          "name": "User-selectable agent"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_13_3",
+          "name": "Human gate"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_13_4",
+          "name": "Deterministic"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_13_5",
+          "name": "Kernel control"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_13_6",
+          "name": "Terminal"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_14",
+      "name": "Requested Stage Agent",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_14_1",
+          "name": "User selection unavailable - locked project"
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_feature_delivery_15",
+      "name": "Agent Selection Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_15_1",
+          "name": "not-applicable"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_15_2",
+          "name": "awaiting-selection"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_15_3",
+          "name": "accepted"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_15_4",
+          "name": "invalid"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_15_5",
+          "name": "stale"
+        },
+        {
+          "nodeId": "PVTO_synthetic_feature_delivery_15_6",
+          "name": "reconciliation-required"
+        }
+      ]
+    }
+  ]
+}

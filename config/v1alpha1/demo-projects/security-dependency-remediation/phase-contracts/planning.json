@@ -1,0 +1,97 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "demo.security-dependency-remediation.planning",
+    "version": "1.0.0"
+  },
+  "phase": "planning",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "work-accord-current",
+    "remediation-design-receipt-current"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "remediation-design"
+  ],
+  "allowedCapabilities": [],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "remediationDesignDigest",
+      "trustedBindingDigest"
+    ],
+    "properties": {
+      "remediationDesignDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "trustedBindingDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "steps",
+      "targetSlots",
+      "verificationIds"
+    ],
+    "properties": {
+      "steps": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 20,
+        "items": {
+          "type": "string"
+        }
+      },
+      "targetSlots": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4,
+        "items": {
+          "enum": [
+            "dependency-manifest",
+            "dependency-lock",
+            "cache-key-source",
+            "cache-key-regression"
+          ]
+        }
+      },
+      "verificationIds": {
+        "type": "array",
+        "minItems": 6,
+        "maxItems": 6,
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "eligible-human-accepts-target-free-patch-plan",
+      "event": "execution-authorized"
+    }
+  ],
+  "limits": {
+    "maxLoops": 1,
+    "maxCalls": 0,
+    "maxCostUnits": 0,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "accept-plan"
+  ],
+  "privacy": {
+    "maximumClass": "internal",
+    "retentionDays": 90
+  }
+}

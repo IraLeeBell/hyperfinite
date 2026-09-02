@@ -1,0 +1,77 @@
+name: Customer evaluation feedback
+description: Share customer-safe Hyperfinite evaluation feedback or a reproducible defect.
+title: "[Customer Feedback] "
+labels: []
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, private keys, tokens, live node IDs, customer source, personal data, private URLs, prompts or responses containing sensitive data, or confidential logs. Use the customer's approved secure channel for protected evidence.
+  - type: dropdown
+    id: feedback-type
+    attributes:
+      label: Feedback type
+      options:
+        - Reproducible defect
+        - Documentation or setup gap
+        - Security or governance observation
+        - Operator experience
+        - Business outcome
+        - Feature request
+    validations:
+      required: true
+  - type: input
+    id: customer-role
+    attributes:
+      label: Your evaluation role
+      placeholder: Evaluation lead, platform engineer, security reviewer, operator, executive sponsor
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Copied version or exact customer commit
+      description: Use a version or commit identifier that contains no private repository URL.
+    validations:
+      required: true
+  - type: input
+    id: area
+    attributes:
+      label: Demonstration, stage, or component
+      placeholder: Feature Delivery / solution design, Project setup, authorization redeemer
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior or outcome
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior or outcome
+      description: Prefer typed reason codes, bounded metrics, and redacted evidence digests.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Business or operational impact
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Suggested improvement
+    validations:
+      required: false
+  - type: checkboxes
+    id: safe-content
+    attributes:
+      label: Customer-safe content confirmation
+      options:
+        - label: I confirmed this issue contains no credentials, customer data, live platform IDs, private links, sensitive prompts/responses, or confidential logs.
+          required: true
+    validations:
+      required: true

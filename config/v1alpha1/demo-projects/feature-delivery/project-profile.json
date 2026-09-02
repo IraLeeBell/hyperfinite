@@ -1,0 +1,26 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoProjectProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "feature-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "title": "Feature Delivery",
+    "description": "Disabled-by-default, hermetic-first feature delivery from bounded intake through independent human review.",
+    "defaultDepthProfile": "D2",
+    "allowedDepthProfiles": [
+      "D1",
+      "D2"
+    ],
+    "repositoryBindingDigest": "sha256:8b761022fff6b08839449f46824f83975077cc1e4a7bacde61fc9485aba4bafd",
+    "projectBindingDigest": "sha256:19e5c57fc25a780ad9774c6778b4a07c8290c63c23523db5180527fc35364b73",
+    "workAccordTemplateDigest": "sha256:0632f33b9b86083e2c74d512f066c39ae4d9ec260ea16918b31db478c3cec5e2",
+    "journeyDefinitionRef": "config/v1alpha1/demo-projects/feature-delivery/journey.json",
+    "stageAgentBindingsRef": "config/v1alpha1/demo-projects/feature-delivery/runtime-bindings.json",
+    "capabilityShardRef": "config/v1alpha1/demo-projects/feature-delivery/capabilities.json",
+    "activationProfileRef": "config/v1alpha1/demo-projects/feature-delivery/activation-profile.json",
+    "projectionMappingRef": "config/v1alpha1/demo-projects/feature-delivery/projection-mapping.json"
+  },
+  "contentDigest": "sha256:69cd93cc47c615b2b2f6c495ff12b1e509ae2f7774a477bc64e4f7a69a3dfce1"
+}

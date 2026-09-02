@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-safe-output.schema.json",
+  "title": "Target-free GitHub safe output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "summary", "findings", "openQuestions", "result"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "GitHubSafeOutput" },
+    "schemaVersion": { "const": "1.0.0" },
+    "summary": { "type": "string", "maxLength": 65536 },
+    "findings": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "severity", "message"],
+        "properties": {
+          "code": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]{0,63}$" },
+          "severity": { "enum": ["info", "warning", "blocking"] },
+          "message": { "type": "string", "minLength": 1, "maxLength": 8192 }
+        }
+      }
+    },
+    "openQuestions": {
+      "type": "array",
+      "maxItems": 128,
+      "items": { "type": "string", "minLength": 1, "maxLength": 8192 }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "details"],
+      "properties": {
+        "status": { "enum": ["success", "blocked", "failed"] },
+        "details": { "type": "string", "maxLength": 65536 }
+      }
+    }
+  }
+}

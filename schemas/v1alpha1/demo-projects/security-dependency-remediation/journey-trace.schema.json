@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/security-dependency-remediation/journey-trace.schema.json",
+  "title": "Security and Dependency Remediation hermetic journey trace",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/handsOffTrace"
+    },
+    {
+      "$ref": "#/$defs/humanContinuation"
+    }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "base": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "contentDigest",
+        "spec"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "spec": {
+          "type": "object"
+        }
+      }
+    },
+    "handsOffTrace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "contentDigest",
+        "spec"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "const": "SecurityRemediationHandsOffTrace"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "spec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "demoProjectId",
+            "runId",
+            "entries",
+            "currentStageId",
+            "currentCoreState",
+            "humanActionCount",
+            "externalCallCount"
+          ],
+          "properties": {
+            "demoProjectId": {
+              "const": "security-dependency-remediation"
+            },
+            "runId": {
+              "const": "security-remediation-hands-off-1"
+            },
+            "entries": {
+              "type": "array",
+              "minItems": 8,
+              "maxItems": 8,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "stageId",
+                  "ordinal",
+                  "coreState",
+                  "executionKind",
+                  "agentId",
+                  "receiptDigest"
+                ],
+                "properties": {
+                  "stageId": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9-]+$"
+                  },
+                  "ordinal": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 8
+                  },
+                  "coreState": {
+                    "enum": [
+                      "ACTIVATION_PENDING",
+                      "FRAMING",
+                      "PLANNED",
+                      "EXECUTING",
+                      "VERIFYING",
+                      "HUMAN_REVIEW"
+                    ]
+                  },
+                  "executionKind": {
+                    "enum": [
+                      "deterministic",
+                      "model",
+                      "planning",
+                      "human"
+                    ]
+                  },
+                  "agentId": {
+                    "oneOf": [
+                      {
+                        "type": "string",
+                        "pattern": "^security-dependency-remediation-[a-z0-9-]+$"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "receiptDigest": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/$defs/digest"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            "currentStageId": {
+              "const": "human-review"
+            },
+            "currentCoreState": {
+              "const": "HUMAN_REVIEW"
+            },
+            "humanActionCount": {
+              "const": 0
+            },
+            "externalCallCount": {
+              "const": 0
+            }
+          }
+        }
+      }
+    },
+    "humanContinuation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "contentDigest",
+        "spec"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "const": "SecurityRemediationSyntheticHumanContinuation"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "spec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "demoProjectId",
+            "predecessorTraceDigest",
+            "fromStageId",
+            "toStageId",
+            "fromCoreState",
+            "toCoreState",
+            "routeId",
+            "headSha",
+            "actorClass",
+            "independent",
+            "automationActor",
+            "humanEvidenceDigest",
+            "externalCallCount"
+          ],
+          "properties": {
+            "demoProjectId": {
+              "const": "security-dependency-remediation"
+            },
+            "predecessorTraceDigest": {
+              "$ref": "#/$defs/digest"
+            },
+            "fromStageId": {
+              "const": "human-review"
+            },
+            "toStageId": {
+              "const": "completed"
+            },
+            "fromCoreState": {
+              "const": "HUMAN_REVIEW"
+            },
+            "toCoreState": {
+              "const": "COMPLETED"
+            },
+            "routeId": {
+              "const": "review.accept"
+            },
+            "headSha": {
+              "$ref": "#/$defs/sha"
+            },
+            "actorClass": {
+              "enum": [
+                "reviewer",
+                "maintainer"
+              ]
+            },
+            "independent": {
+              "const": true
+            },
+            "automationActor": {
+              "const": false
+            },
+            "humanEvidenceDigest": {
+              "$ref": "#/$defs/digest"
+            },
+            "externalCallCount": {
+              "const": 0
+            }
+          }
+        }
+      }
+    }
+  }
+}

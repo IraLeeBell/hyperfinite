@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/feature-delivery/verification-report.schema.json",
+  "title": "Feature Delivery verification report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "FeatureDeliveryVerificationReport"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "draftPullRequestEvidenceDigest",
+        "headSha",
+        "commands",
+        "acceptanceCriteria",
+        "review",
+        "headMovementInvalidates"
+      ],
+      "properties": {
+        "draftPullRequestEvidenceDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "headSha": {
+          "$ref": "#/$defs/sha"
+        },
+        "commands": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "status",
+              "stdoutDigest",
+              "stderrDigest"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]{0,62}$"
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed"
+                ]
+              },
+              "stdoutDigest": {
+                "$ref": "#/$defs/digest"
+              },
+              "stderrDigest": {
+                "$ref": "#/$defs/digest"
+              }
+            }
+          }
+        },
+        "acceptanceCriteria": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "status",
+              "evidenceDigests"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/acceptanceId"
+              },
+              "status": {
+                "enum": [
+                  "passed",
+                  "failed",
+                  "pending"
+                ]
+              },
+              "evidenceDigests": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "#/$defs/digest"
+                }
+              }
+            }
+          }
+        },
+        "review": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "event",
+            "findings"
+          ],
+          "properties": {
+            "event": {
+              "const": "COMMENT"
+            },
+            "findings": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        },
+        "headMovementInvalidates": {
+          "const": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "acceptanceId": {
+      "type": "string",
+      "pattern": "^FD-AC-[0-9]{3}$"
+    }
+  }
+}

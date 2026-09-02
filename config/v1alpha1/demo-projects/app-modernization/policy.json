@@ -1,0 +1,34 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainPackPolicy",
+  "id": "app-modernization-demo",
+  "version": "1.0.0",
+  "allowedCapabilities": [
+    "demo.app-modernization.current-state-inventory@1.0.0",
+    "demo.app-modernization.modernization-assessment@1.0.0",
+    "demo.app-modernization.target-architecture@1.0.0",
+    "demo.app-modernization.implementation@1.0.0",
+    "demo.app-modernization.verification@1.0.0",
+    "core.refuse-authority-escalation@1.0.0"
+  ],
+  "prohibitedEffects": [
+    "approve",
+    "merge",
+    "deploy",
+    "publish",
+    "production-mutation",
+    "crm-mutation",
+    "erp-mutation",
+    "payment",
+    "license-change",
+    "visibility-change"
+  ],
+  "depthCeiling": "D2",
+  "riskCeiling": "high",
+  "privacyCeiling": "confidential",
+  "maxCalls": 5,
+  "maxCostUnits": 100,
+  "maxLoops": 5,
+  "maxRetries": 1,
+  "maxParallel": 1
+}

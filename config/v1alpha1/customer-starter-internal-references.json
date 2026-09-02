@@ -1,0 +1,17 @@
+[
+  {
+    "id": "hyperfinite-worktree-path",
+    "pattern": "\\.copilot[\\\\/]repos[\\\\/]copilot-worktrees",
+    "reason": "Local session worktree paths are host-specific and must never appear in shipped evidence."
+  },
+  {
+    "id": "internal-issue-cross-reference",
+    "pattern": "github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/(issues|pull)/\\d+",
+    "reason": "Links to source issue and pull-request history are coordination artifacts, not portable customer documentation."
+  },
+  {
+    "id": "live-project-node-id",
+    "pattern": "\\bPVT(?:I|F|SSF|V)?_(?!synthetic_)[A-Za-z0-9_-]{4,}\\b",
+    "reason": "Live customer Project, view, item, field, and option node identities must remain protected deployment evidence."
+  }
+]

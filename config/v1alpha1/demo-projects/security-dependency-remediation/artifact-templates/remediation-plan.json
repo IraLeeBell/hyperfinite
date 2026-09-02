@@ -1,0 +1,38 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationPlan",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:44540c6a329868d8acc0803f9fe76f486daec41e622f43408db6fb557d338252",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "remediation-design",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:322466bea79012801e5b919205801699e91e73d7e8b0f3a600634912f221dde6",
+    "headSha": null,
+    "status": "draft",
+    "assertions": [
+      {
+        "id": "length-prefix-design",
+        "status": "success",
+        "evidenceDigest": "sha256:00a433a8edd1f83e0ef1ea52a7ce4dd5eadc99cd3a8d2dfa63cec128504b343b"
+      },
+      {
+        "id": "target-slots-only",
+        "status": "success",
+        "evidenceDigest": "sha256:113ca5d9fc5e2e46c0216a9261405f6d146de540f637333a1dd3d3b5f8a6f91e"
+      },
+      {
+        "id": "fixed-check-set-bound",
+        "status": "success",
+        "evidenceDigest": "sha256:3dd9564e72c0e30148f45d764977014c69cb6ef3b076d04b84d4bfc1c57e18d5"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/budget-decision-evidence.schema.json",
+  "title": "Run budget decision evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "authorityDigest", "budgetDigest", "usageDigest", "reservationDigest", "previousDecisionDigest", "status", "reasonCode", "projectedUsage", "startedAt", "evaluatedAt"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "BudgetDecisionEvidence" },
+    "schemaVersion": { "const": "1.0.0" },
+    "authorityDigest": { "$ref": "#/$defs/digest" },
+    "budgetDigest": { "$ref": "#/$defs/digest" },
+    "usageDigest": { "$ref": "#/$defs/digest" },
+    "reservationDigest": { "$ref": "#/$defs/digest" },
+    "previousDecisionDigest": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] },
+    "status": { "enum": ["authorized", "refused"] },
+    "reasonCode": { "enum": ["AUTHORIZED", "BUDGET_EXPIRED", "WALL_CLOCK_EXHAUSTED", "ATTEMPT_LIMIT_EXHAUSTED", "FANOUT_LIMIT_EXHAUSTED", "CONCURRENCY_LIMIT_EXHAUSTED", "TOKEN_LIMIT_EXHAUSTED", "TOOL_LIMIT_EXHAUSTED", "EFFECT_LIMIT_EXHAUSTED"] },
+    "projectedUsage": { "$ref": "#/$defs/usage" },
+    "startedAt": { "type": "string", "format": "date-time", "maxLength": 24 },
+    "evaluatedAt": { "type": "string", "format": "date-time", "maxLength": 24 }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "counter": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "usage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["attempts", "fanout", "concurrency", "tokens", "toolCalls", "effects"],
+      "properties": {
+        "attempts": { "$ref": "#/$defs/counter" },
+        "fanout": { "$ref": "#/$defs/counter" },
+        "concurrency": { "$ref": "#/$defs/counter" },
+        "tokens": { "$ref": "#/$defs/counter" },
+        "toolCalls": { "$ref": "#/$defs/counter" },
+        "effects": { "$ref": "#/$defs/counter" }
+      }
+    }
+  }
+}

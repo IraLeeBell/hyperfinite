@@ -1,0 +1,898 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoPortfolioHardeningPlan",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-30T07:13:49.744Z",
+  "mode": "hermetic",
+  "demos": [
+    "app-modernization",
+    "feature-delivery",
+    "security-dependency-remediation",
+    "adaptive-delivery"
+  ],
+  "testFiles": [
+    "dist/tests/control-kernel.test.js",
+    "dist/tests/copilot-runtime.test.js",
+    "dist/tests/github-adapter.test.js",
+    "dist/tests/bounded-worktree.test.js",
+    "dist/tests/demo-portfolio.test.js",
+    "dist/tests/demo-runtime.test.js",
+    "dist/tests/project-ux.test.js",
+    "dist/tests/demo-integration.test.js",
+    "dist/tests/app-modernization-demo.test.js",
+    "dist/tests/feature-delivery-demo.test.js",
+    "dist/tests/security-dependency-remediation-demo.test.js",
+    "dist/tests/engineering-slice.test.js",
+    "dist/tests/domain-packs.test.js",
+    "dist/tests/security-regression.test.js",
+    "dist/tests/packaging.test.js",
+    "dist/tests/observability.test.js",
+    "dist/tests/portfolio-hardening.test.js",
+    "dist/tests/review-agent-runtime.test.js",
+    "dist/tests/adaptive-delivery-demo.test.js",
+    "dist/tests/hybrid-agent-selection.test.js",
+    "dist/tests/github-project-bootstrap.test.js"
+  ],
+  "demoAnchors": {
+    "app-modernization": [
+      "recovery and adversarial fixtures cover every required fail-closed path"
+    ],
+    "feature-delivery": [
+      "substituted stages, agents, capabilities, consent, targets, and heads are rejected"
+    ],
+    "security-dependency-remediation": [
+      "untrusted user text cannot select demo control or effect authority"
+    ],
+    "adaptive-delivery": [
+      "guided selection resolves one exact candidate and rejects stale or wrong-stage intent"
+    ]
+  },
+  "scenarios": [
+    {
+      "id": "stage-agent-exclusivity",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "trusted loader selects every exact catalog/profile/stage tuple without fallback"
+      ]
+    },
+    {
+      "id": "binding-capability-mismatch",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "identity reuse and cross-demo stage binding substitution fail before registration"
+      ]
+    },
+    {
+      "id": "repository-substitution",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "wrong repository and issue substitutions fail closed"
+      ]
+    },
+    {
+      "id": "issue-substitution",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "wrong repository and issue substitutions fail closed"
+      ]
+    },
+    {
+      "id": "project-substitution",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "installation and Project substitutions fail closed"
+      ]
+    },
+    {
+      "id": "unauthorized-submitter",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "all required intake failures stop before credentials, reservation, or inference"
+      ]
+    },
+    {
+      "id": "missing-consent",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "all required intake failures stop before credentials, reservation, or inference"
+      ]
+    },
+    {
+      "id": "disabled-profile",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "all required intake failures stop before credentials, reservation, or inference"
+      ]
+    },
+    {
+      "id": "expired-profile",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "trusted clocks reject expired, stale, and future runtime evidence"
+      ]
+    },
+    {
+      "id": "revoked-profile",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "scheduler revalidates lease and binding after awaited durable reservations"
+      ]
+    },
+    {
+      "id": "budget-exhaustion",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "run budgets fail closed for each exhausted ceiling"
+      ]
+    },
+    {
+      "id": "duplicate-event",
+      "outcome": "reconciled",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "valid transition is applied once and duplicate delivery is a no-op"
+      ]
+    },
+    {
+      "id": "out-of-order-event",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "replay, ordering, concurrency, and provenance checks fail closed"
+      ]
+    },
+    {
+      "id": "concurrent-event",
+      "outcome": "reconciled",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "identical concurrent attempt transitions authorize only one writer"
+      ]
+    },
+    {
+      "id": "stale-project",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "Project concurrent value change fails before mutation",
+        "fresh Project field and option mapping drift fails closed"
+      ]
+    },
+    {
+      "id": "stale-repository",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "stale contract, schema, receipt, and pull head are rejected before writes"
+      ]
+    },
+    {
+      "id": "stale-base",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "human approval and merge observation reject an advanced PR base"
+      ]
+    },
+    {
+      "id": "stale-pr-head",
+      "outcome": "blocked",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "COMMENT effects recheck the exact head immediately before mutation"
+      ]
+    },
+    {
+      "id": "stale-current-head",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "pack review bundles authenticate complete fixed evidence and exact current head"
+      ]
+    },
+    {
+      "id": "missing-evidence",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "security verification fails closed on missing, non-success, or stale evidence"
+      ]
+    },
+    {
+      "id": "wrong-evidence",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "wrong evidence App or author identity fails closed"
+      ]
+    },
+    {
+      "id": "stale-evidence",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "stale gate and lease evidence cannot shadow later valid evidence"
+      ]
+    },
+    {
+      "id": "model-target-attempt",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "safe-output schema rejects target-bearing and unknown fields"
+      ]
+    },
+    {
+      "id": "model-path-attempt",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "accepted plan narrows execution targets and rejects model changes to unplanned slots"
+      ]
+    },
+    {
+      "id": "model-next-stage-attempt",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "model output cannot supply control fields but retains logical target slots"
+      ]
+    },
+    {
+      "id": "model-route-attempt",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "model output cannot supply control fields but retains logical target slots"
+      ]
+    },
+    {
+      "id": "model-effect-attempt",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "model output cannot supply control fields but retains logical target slots"
+      ]
+    },
+    {
+      "id": "prompt-injection",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "untrusted user text cannot select demo control or effect authority"
+      ]
+    },
+    {
+      "id": "malformed-artifact",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "artifact-policy evidence schema is closed and rejects malformed identity"
+      ]
+    },
+    {
+      "id": "oversized-artifact",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "provider admission rejects oversized canonical input before inference"
+      ]
+    },
+    {
+      "id": "path-traversal",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree denies traversal, TCB paths, case collisions, and symlinks"
+      ]
+    },
+    {
+      "id": "symlink-attack",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree denies traversal, TCB paths, case collisions, and symlinks"
+      ]
+    },
+    {
+      "id": "case-collision",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree denies traversal, TCB paths, case collisions, and symlinks"
+      ]
+    },
+    {
+      "id": "mode-change",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree rejects unexpected, staged, mode, binary, empty, and oversized changes"
+      ]
+    },
+    {
+      "id": "binary-change",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree rejects unexpected, staged, mode, binary, empty, and oversized changes"
+      ]
+    },
+    {
+      "id": "rename-attack",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree rejects rename and submodule changes"
+      ]
+    },
+    {
+      "id": "submodule-attack",
+      "outcome": "refused",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "tests": [
+        "bounded worktree rejects rename and submodule changes"
+      ]
+    },
+    {
+      "id": "partial-acknowledgement",
+      "outcome": "blocked",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "tests": [
+        "single writer replays completed effects and fails closed on threat, CAS, and partial writes"
+      ]
+    },
+    {
+      "id": "lost-acknowledgement",
+      "outcome": "reconciled",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "tests": [
+        "lost write acknowledgement reconciles from fresh GitHub evidence"
+      ]
+    },
+    {
+      "id": "pause",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "pause, resume, block, retry, and cancel preserve or invalidate the demo cursor from Kernel state"
+      ]
+    },
+    {
+      "id": "resume",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "planning resume restores a ready cursor and converges a lagging PAUSED projection"
+      ]
+    },
+    {
+      "id": "block",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "review blocking persists blocked status over the human stage kind"
+      ]
+    },
+    {
+      "id": "cancel",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "blocked cancellation is terminal without rotating generation or requiring a budget store",
+        "cancelled non-model runs cannot resume through journey advancement"
+      ]
+    },
+    {
+      "id": "repair",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "scope repair uses the applied backward Kernel route to invalidate only the affected stage suffix"
+      ]
+    },
+    {
+      "id": "replan",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "verification replan applies the Kernel route and returns to planning"
+      ]
+    },
+    {
+      "id": "revision",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "in-phase revisions require activation but not a future artifact approval",
+        "reauthorization clears prior authority and re-enters through fresh framing gates"
+      ]
+    },
+    {
+      "id": "retry-ceiling",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "budget, loop, retry, and safe-integer limits fail closed"
+      ]
+    },
+    {
+      "id": "generation-invalidation",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "blocked.recover-framing",
+        "blocked.recover-planning",
+        "blocked.recover-execution",
+        "blocked.recover-verification",
+        "blocked.recover-review",
+        "scope repair uses the applied backward Kernel route to invalidate only the affected stage suffix",
+        "scheduler revalidates lease and binding after awaited durable reservations",
+        "redemption fails closed on run substitution, revocation, CAS, and missing service"
+      ]
+    },
+    {
+      "id": "authorization-invalidation",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "redemption fails closed on run substitution, revocation, CAS, and missing service",
+        "scheduler revalidates lease and binding after awaited durable reservations"
+      ]
+    },
+    {
+      "id": "cross-demo-confusion",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "trusted loader selects every exact catalog/profile/stage tuple without fallback",
+        "identity reuse and cross-demo stage binding substitution fail before registration"
+      ]
+    },
+    {
+      "id": "draft-only-pull-request",
+      "outcome": "accepted",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "tests": [
+        "branch and draft pull request derive a non-main authenticated default branch"
+      ]
+    },
+    {
+      "id": "current-head-review",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "runtime bridge emits only a current-head COMMENT review from signed redemption",
+        "pack review bundles authenticate complete fixed evidence and exact current head"
+      ]
+    },
+    {
+      "id": "comment-only-review",
+      "outcome": "accepted",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "tests": [
+        "permission manifest grants only minimal comment review scope and no merge authority",
+        "five stage-local workflows retain pinned guards and COMMENT-only review"
+      ]
+    },
+    {
+      "id": "refuse-approve",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "permission manifest grants only minimal comment review scope and no merge authority"
+      ]
+    },
+    {
+      "id": "refuse-dismiss",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "five stage-local workflows retain pinned guards and COMMENT-only review"
+      ]
+    },
+    {
+      "id": "refuse-merge",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "permission manifest grants only minimal comment review scope and no merge authority"
+      ]
+    },
+    {
+      "id": "refuse-deploy",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "trusted artifact policy blocks live operations and authority assertions"
+      ]
+    },
+    {
+      "id": "refuse-publish",
+      "outcome": "refused",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "trusted artifact policy blocks live operations and authority assertions"
+      ]
+    },
+    {
+      "id": "unsupported-environment",
+      "outcome": "blocked",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "non-Git verification requires a separately isolated credentialless runner"
+      ]
+    },
+    {
+      "id": "zero-fixture-declared-external-calls",
+      "outcome": "accepted",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "tests": [
+        "portfolio simulator is byte deterministic, hermetic, and rejects live mode",
+        "portfolio external-call assertions require all four zero categories per demo"
+      ]
+    }
+  ],
+  "faultBoundaries": [
+    {
+      "id": "credential-broker",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "GitHub App broker downscopes one installation token to one repository",
+        "GitHub App broker fails closed when signer or minter is unavailable",
+        "token scope expansion fails before the operation receives a client",
+        "elevated and extra token permissions fail before client use"
+      ]
+    },
+    {
+      "id": "activation-lease",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "every active-phase entry, resume, and recovery route requires lease authority"
+      ]
+    },
+    {
+      "id": "activation-claim",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "pre-authorized activation requires exact consent and reconciles one durable claim"
+      ]
+    },
+    {
+      "id": "dispatch-persistence",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "dispatcher selects only the first incomplete canonical stage and persisted decisions"
+      ]
+    },
+    {
+      "id": "budget-reservation",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "phase reservation is bounded by the Work Accord before model execution"
+      ]
+    },
+    {
+      "id": "run-fence",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "cross-workflow scheduler permits one fence winner and settles authenticated usage"
+      ]
+    },
+    {
+      "id": "post-await-authorization",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "scheduler revalidates lease and binding after awaited durable reservations"
+      ]
+    },
+    {
+      "id": "provider-attempt",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "provider failures and unverifiable usage hold the full reservation"
+      ]
+    },
+    {
+      "id": "provider-invocation",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "provider usage completing after invocation expiry is settled before output rejection"
+      ]
+    },
+    {
+      "id": "provider-usage-reconciliation",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "unknown provider usage remains held and never becomes a successful stage"
+      ]
+    },
+    {
+      "id": "budget-settlement",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "invalid settlement results never become returned budget authority",
+        "lost settlement acknowledgement is reconciled without double release"
+      ]
+    },
+    {
+      "id": "fence-release",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "provider completion after the trusted deadline settles usage and releases the expired fence as failure"
+      ]
+    },
+    {
+      "id": "stage-artifact",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "same-core stage completion consumes persisted artifact and fence evidence exactly once"
+      ]
+    },
+    {
+      "id": "stage-receipt",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "same-core stage completion consumes persisted artifact and fence evidence exactly once"
+      ]
+    },
+    {
+      "id": "kernel-persistence",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "cross-core completion persists the actual evaluateTransition result before its stage receipt"
+      ]
+    },
+    {
+      "id": "run-state-persistence",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "blocked.recover-framing",
+        "blocked.recover-planning",
+        "blocked.recover-execution",
+        "blocked.recover-verification",
+        "blocked.recover-review"
+      ]
+    },
+    {
+      "id": "project-field-cas",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "Project concurrent value change fails before mutation"
+      ]
+    },
+    {
+      "id": "project-readback",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "projection convergence writes Kernel Stage last and reconciles lost acknowledgements"
+      ]
+    },
+    {
+      "id": "branch-creation",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "typed postconditions reject wrong targets for every effect family"
+      ]
+    },
+    {
+      "id": "commit-creation",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "commit completion rejects no-op and wrong patch, tree, blob, or content"
+      ]
+    },
+    {
+      "id": "draft-pr-creation",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "draft pull request creation evidence retains the authorized base SHA"
+      ]
+    },
+    {
+      "id": "review-evidence",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "pack review bundles authenticate complete fixed evidence and exact current head"
+      ]
+    },
+    {
+      "id": "comment-application",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "COMMENT application atomically rejects movement after the final head read"
+      ]
+    },
+    {
+      "id": "closure",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "closure effects reconcile lost acknowledgements after a writer restart"
+      ]
+    },
+    {
+      "id": "cost-release",
+      "beforePaidInference": false,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "lost cost release acknowledgement resumes from a discoverable signed checkpoint",
+        "cost release failure prevents completion"
+      ]
+    },
+    {
+      "id": "evidence-ledger",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "incomplete evidence authentication fails before credential signing",
+        "durable operation-grant replay refusal prevents repository mutation"
+      ]
+    },
+    {
+      "id": "trust-service-unavailability",
+      "beforePaidInference": true,
+      "beforeMutation": true,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "GitHub App broker fails closed when signer or minter is unavailable",
+        "redemption fails closed on run substitution, revocation, CAS, and missing service",
+        "non-Git verification requires a separately isolated credentialless runner",
+        "authoritative DLP fails closed for sensitive and unavailable classifications"
+      ]
+    },
+    {
+      "id": "acknowledgement",
+      "beforePaidInference": false,
+      "beforeMutation": false,
+      "ambiguousOutcome": "exact-readback-or-blocked",
+      "tests": [
+        "lost write acknowledgement reconciles from fresh GitHub evidence",
+        "unobserved failed write records a partial effect and never retries mutation"
+      ]
+    }
+  ],
+  "requiredInvariants": [
+    "all-demos-stop-at-human-review",
+    "project-never-leads-kernel",
+    "kernel-receipt-before-projection",
+    "stage-written-last",
+    "read-after-write-before-next-event",
+    "draft-pull-requests-only",
+    "current-head-required",
+    "automated-review-comment-only",
+    "automation-cannot-approve",
+    "automation-cannot-merge",
+    "zero-fixture-declared-external-calls",
+    "live-mode-disabled",
+    "projects-not-provisioned"
+  ],
+  "readiness": {
+    "repositoryClassification": "repository-hermetic-demo-ready",
+    "sandboxLiveClassification": "blocked-pending-human-administration-and-canary",
+    "productionClassification": "customer-approval-required",
+    "projectsProvisioned": false,
+    "liveModeEnabled": false,
+    "requiredCanaryStage": "human-review"
+  }
+}

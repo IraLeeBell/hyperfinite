@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json",
+  "title": "Shared autonomous demo contract definitions",
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableDigest": {
+      "oneOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    },
+    "demoProjectId": {
+      "enum": [
+        "app-modernization",
+        "feature-delivery",
+        "security-dependency-remediation",
+        "adaptive-delivery"
+      ]
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,127}$"
+    },
+    "reference": {
+      "type": "string",
+      "pattern": "^(?:config|schemas)/[a-z0-9._/-]+\\.json$"
+    },
+    "lifecycleState": {
+      "enum": [
+        "CAPTURED",
+        "ACTIVATION_PENDING",
+        "FRAMING",
+        "PLANNED",
+        "EXECUTING",
+        "VERIFYING",
+        "HUMAN_REVIEW",
+        "COMPLETED",
+        "PAUSED",
+        "BLOCKED",
+        "CANCELLED"
+      ]
+    },
+    "executionKind": {
+      "enum": [
+        "model",
+        "deterministic",
+        "planning",
+        "human",
+        "kernel",
+        "terminal"
+      ]
+    },
+    "workflowClass": {
+      "enum": [
+        "framing-comment",
+        "target-free-execution",
+        "current-head-comment-review"
+      ]
+    },
+    "runtimeIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["agentId", "capabilityId", "workflowId"],
+      "properties": {
+        "agentId": { "$ref": "#/$defs/identifier" },
+        "capabilityId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "workflowId": { "$ref": "#/$defs/identifier" }
+      }
+    },
+    "runtimeBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "optionKey",
+        "userInvocable",
+        "agent",
+        "skill",
+        "safetySkills",
+        "capability",
+        "workflow",
+        "workflowClass",
+        "phase",
+        "role",
+        "githubToolsets",
+        "githubTools",
+        "modelInvocationAllowed",
+        "slashCommand"
+      ],
+      "properties": {
+        "optionKey": {
+          "oneOf": [
+            { "$ref": "#/$defs/identifier" },
+            { "type": "null" }
+          ]
+        },
+        "userInvocable": { "type": "boolean" },
+        "agent": { "$ref": "#/$defs/identifier" },
+        "skill": { "$ref": "#/$defs/identifier" },
+        "safetySkills": {
+          "const": ["authority-refusal"]
+        },
+        "capability": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*@[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "workflow": { "$ref": "#/$defs/identifier" },
+        "workflowClass": { "$ref": "#/$defs/workflowClass" },
+        "phase": {
+          "enum": ["framing", "execution", "verification"]
+        },
+        "role": {
+          "enum": ["framer", "executor", "reviewer"]
+        },
+        "githubToolsets": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "githubTools": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "modelInvocationAllowed": { "const": true },
+        "slashCommand": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "events"],
+          "properties": {
+            "name": { "$ref": "#/$defs/identifier" },
+            "events": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "enum": [
+                  "issues",
+                  "issue_comment",
+                  "pull_request_comment"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "value"],
+      "properties": {
+        "algorithm": { "const": "ed25519" },
+        "keyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]+={0,2}$",
+          "minLength": 4,
+          "maxLength": 1024
+        }
+      }
+    },
+    "positiveInteger": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "nonNegativeInteger": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "coreStateBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "stateVersion",
+        "bindingDigest",
+        "lifecycleGraphDigest",
+        "workAccordDigest",
+        "capabilityRegistryDigest",
+        "domainPackDigest",
+        "phaseContractDigest",
+        "compiledPolicyDigest",
+        "policyDigest",
+        "kernelReceiptDigest",
+        "kernelSnapshotDigest"
+      ],
+      "properties": {
+        "state": { "$ref": "#/$defs/lifecycleState" },
+        "stateVersion": { "$ref": "#/$defs/nonNegativeInteger" },
+        "bindingDigest": { "$ref": "#/$defs/digest" },
+        "lifecycleGraphDigest": { "$ref": "#/$defs/digest" },
+        "workAccordDigest": { "$ref": "#/$defs/digest" },
+        "capabilityRegistryDigest": { "$ref": "#/$defs/digest" },
+        "domainPackDigest": { "$ref": "#/$defs/digest" },
+        "phaseContractDigest": { "$ref": "#/$defs/nullableDigest" },
+        "compiledPolicyDigest": { "$ref": "#/$defs/nullableDigest" },
+        "policyDigest": { "$ref": "#/$defs/digest" },
+        "kernelReceiptDigest": { "$ref": "#/$defs/nullableDigest" },
+        "kernelSnapshotDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

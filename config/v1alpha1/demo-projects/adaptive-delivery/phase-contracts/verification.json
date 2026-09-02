@@ -1,0 +1,98 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "adaptive-delivery.verification",
+    "version": "1.0.0"
+  },
+  "phase": "verification",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "activation-lease-current",
+    "work-accord-current",
+    "draft-pull-request-head-current"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "activation-lease",
+    "validated-patch",
+    "draft-pull-request-evidence",
+    "fixed-command-catalog"
+  ],
+  "allowedCapabilities": [
+    "demo.adaptive-delivery.test-and-verification@1.0.0"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "headSha",
+      "patchDigest",
+      "verificationCommandIds"
+    ],
+    "properties": {
+      "headSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      },
+      "patchDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "verificationCommandIds": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,62}$"
+        }
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "headSha",
+      "verificationReportDigest",
+      "reviewEvent"
+    ],
+    "properties": {
+      "headSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      },
+      "verificationReportDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "reviewEvent": {
+        "const": "COMMENT"
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "exact-head-verification-passed",
+      "event": "verification-passed"
+    },
+    {
+      "predicate": "work-accord-current",
+      "event": "replan-requested"
+    }
+  ],
+  "limits": {
+    "maxLoops": 2,
+    "maxCalls": 1,
+    "maxCostUnits": 20,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "activate",
+    "approve-current-head"
+  ],
+  "privacy": {
+    "maximumClass": "confidential",
+    "retentionDays": 90
+  }
+}

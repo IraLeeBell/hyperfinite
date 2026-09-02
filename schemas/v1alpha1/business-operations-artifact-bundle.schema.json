@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/business-operations-artifact-bundle.schema.json",
+  "title": "Business operations repository artifact bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "packId", "repositoryId", "workItemId", "repositoryIdentityDigest", "baseSha", "headSha", "classification", "authorityDigest", "approvedSourceDigests", "artifactSetDigest", "executionEvidenceDigests", "artifacts", "approvalEvidenceDigests", "readiness"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "BusinessOperationsArtifactBundle" },
+    "packId": { "const": "business-operations" },
+    "repositoryId": { "type": "integer", "minimum": 1 },
+    "workItemId": { "$ref": "#/$defs/opaqueNodeId" },
+    "repositoryIdentityDigest": { "$ref": "#/$defs/digest" },
+    "baseSha": { "$ref": "#/$defs/sha" },
+    "headSha": { "$ref": "#/$defs/sha" },
+    "classification": { "enum": ["internal", "confidential"] },
+    "authorityDigest": { "$ref": "#/$defs/digest" },
+    "approvedSourceDigests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } },
+    "artifactSetDigest": { "$ref": "#/$defs/digest" },
+    "executionEvidenceDigests": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "problem-framing" }, "slot": { "const": "problem-framing" }, "path": { "const": "examples/business-operations/workspace/artifacts/problem-framing.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "stakeholder-analysis" }, "slot": { "const": "stakeholder-analysis" }, "path": { "const": "examples/business-operations/workspace/artifacts/stakeholder-analysis.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "process-map" }, "slot": { "const": "process-map" }, "path": { "const": "examples/business-operations/workspace/artifacts/process-map.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "decision-memo" }, "slot": { "const": "decision-memo" }, "path": { "const": "examples/business-operations/workspace/artifacts/decision-memo.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "policy-process-design" }, "slot": { "const": "policy-process-design" }, "path": { "const": "examples/business-operations/workspace/artifacts/policy-process-design.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "implementation-plan" }, "slot": { "const": "implementation-plan" }, "path": { "const": "examples/business-operations/workspace/artifacts/implementation-plan.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "runbook" }, "slot": { "const": "runbook" }, "path": { "const": "examples/business-operations/workspace/artifacts/runbook.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "controls-approvals" }, "slot": { "const": "controls-approvals" }, "path": { "const": "examples/business-operations/workspace/artifacts/controls-approvals.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "outcome-measurement" }, "slot": { "const": "outcome-measurement" }, "path": { "const": "examples/business-operations/workspace/artifacts/outcome-measurement.json" } } }] }
+      ],
+      "items": false
+    },
+    "approvalEvidenceDigests": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "readiness": { "$ref": "#/$defs/readiness" }
+  },
+  "$defs": {
+    "opaqueNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactType", "slot", "path", "mode", "schemaDigest", "templateDigest", "upstreamArtifactDigests", "content", "contentDigest"],
+      "properties": {
+        "artifactType": { "enum": ["problem-framing", "stakeholder-analysis", "process-map", "decision-memo", "policy-process-design", "implementation-plan", "runbook", "controls-approvals", "outcome-measurement"] },
+        "slot": { "enum": ["problem-framing", "stakeholder-analysis", "process-map", "decision-memo", "policy-process-design", "implementation-plan", "runbook", "controls-approvals", "outcome-measurement"] },
+        "path": { "type": "string", "pattern": "^examples/business-operations/workspace/artifacts/[a-z0-9-]+\\.json$" },
+        "mode": { "const": 100644 },
+        "schemaDigest": { "$ref": "#/$defs/digest" },
+        "templateDigest": { "$ref": "#/$defs/digest" },
+        "upstreamArtifactDigests": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } },
+        "content": { "type": "string", "minLength": 1, "maxLength": 262144 },
+        "contentDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "externalEffectsPerformed", "publicationPerformed", "productionMutationPerformed"],
+      "properties": {
+        "status": { "const": "proposal-artifacts-merged" },
+        "externalEffectsPerformed": { "const": false },
+        "publicationPerformed": { "const": false },
+        "productionMutationPerformed": { "const": false }
+      }
+    }
+  }
+}

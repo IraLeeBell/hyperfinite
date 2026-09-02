@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/business-operations/decision-memo.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "artifactType": { "const": "decision-memo" }, "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" }, "upstreamArtifactDigests": { "$ref": "#/$defs/digests" },
+    "data": { "type": "object", "additionalProperties": false, "required": ["options", "tradeoffs", "dissent", "reversibility", "status"], "properties": {
+      "options": { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 } },
+      "tradeoffs": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+      "dissent": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+      "reversibility": { "type": "string", "minLength": 1 },
+      "status": { "const": "proposed" }
+    } }
+  },
+  "$defs": { "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } }
+}

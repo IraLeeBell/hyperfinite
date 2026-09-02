@@ -1,0 +1,50 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoCatalog",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "entries": [
+      {
+        "id": "app-modernization",
+        "title": "App Modernization",
+        "projectProfileRef": "config/v1alpha1/demo-projects/app-modernization/project-profile.json",
+        "journeyDefinitionRef": "config/v1alpha1/demo-projects/app-modernization/journey.json",
+        "stageAgentBindingsRef": "config/v1alpha1/demo-projects/app-modernization/runtime-bindings.json",
+        "capabilityShardRef": "config/v1alpha1/demo-projects/app-modernization/capabilities.json",
+        "activationProfileRef": "config/v1alpha1/demo-projects/app-modernization/activation-profile.json",
+        "projectionMappingRef": "config/v1alpha1/demo-projects/app-modernization/projection-mapping.json"
+      },
+      {
+        "id": "feature-delivery",
+        "title": "Feature Delivery",
+        "projectProfileRef": "config/v1alpha1/demo-projects/feature-delivery/project-profile.json",
+        "journeyDefinitionRef": "config/v1alpha1/demo-projects/feature-delivery/journey.json",
+        "stageAgentBindingsRef": "config/v1alpha1/demo-projects/feature-delivery/runtime-bindings.json",
+        "capabilityShardRef": "config/v1alpha1/demo-projects/feature-delivery/capabilities.json",
+        "activationProfileRef": "config/v1alpha1/demo-projects/feature-delivery/activation-profile.json",
+        "projectionMappingRef": "config/v1alpha1/demo-projects/feature-delivery/projection-mapping.json"
+      },
+      {
+        "id": "security-dependency-remediation",
+        "title": "Security and Dependency Remediation",
+        "projectProfileRef": "config/v1alpha1/demo-projects/security-dependency-remediation/project-profile.json",
+        "journeyDefinitionRef": "config/v1alpha1/demo-projects/security-dependency-remediation/journey.json",
+        "stageAgentBindingsRef": "config/v1alpha1/demo-projects/security-dependency-remediation/runtime-bindings.json",
+        "capabilityShardRef": "config/v1alpha1/demo-projects/security-dependency-remediation/capabilities.json",
+        "activationProfileRef": "config/v1alpha1/demo-projects/security-dependency-remediation/activation-profile.json",
+        "projectionMappingRef": "config/v1alpha1/demo-projects/security-dependency-remediation/projection-mapping.json"
+      },
+      {
+        "id": "adaptive-delivery",
+        "title": "Adaptive Delivery",
+        "projectProfileRef": "config/v1alpha1/demo-projects/adaptive-delivery/project-profile.json",
+        "journeyDefinitionRef": "config/v1alpha1/demo-projects/adaptive-delivery/journey.json",
+        "stageAgentBindingsRef": "config/v1alpha1/demo-projects/adaptive-delivery/runtime-bindings.json",
+        "capabilityShardRef": "config/v1alpha1/demo-projects/adaptive-delivery/capabilities.json",
+        "activationProfileRef": "config/v1alpha1/demo-projects/adaptive-delivery/activation-profile.json",
+        "projectionMappingRef": "config/v1alpha1/demo-projects/adaptive-delivery/projection-mapping.json"
+      }
+    ]
+  },
+  "contentDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2"
+}

@@ -1,0 +1,26 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "ReleaseManifest",
+  "schemaVersion": "1.0.0",
+  "packageName": "agentic-framework",
+  "packageVersion": "0.1.0",
+  "source": {
+    "server": "github.com",
+    "repository": "example-organization/hyperfinite",
+    "baseSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "headSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "sourceDateEpoch": 0
+  },
+  "dependencyLockDigest": "sha256:22191e2d3bb2e60ec2a8fb5814063186054fcd00dbead1749c3e30d42c681fd6",
+  "licenseDigest": "sha256:a684a9cd0e1d738cd9643bccc85f2a440ff1f3bb18b8b6872da5e4f46d1ec361",
+  "noticesDigest": "sha256:e2a7100a780abf1edfb0e7e2df63f4fbc4216f36eaa7aea120f8f4e46b90a168",
+  "files": [
+    {
+      "path": "payload/example.txt",
+      "type": "file",
+      "mode": "100644",
+      "size": 24,
+      "digest": "sha256:1d1ced1127cd9e997523ec6ffb5492f37770c878266ca42536ef24ab734f5eb4"
+    }
+  ]
+}

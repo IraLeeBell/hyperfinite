@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-schedule-decision.schema.json",
+  "title": "Autonomous demo scheduler decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoScheduleDecision" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "runStateDigest",
+        "dispatchDecisionDigest",
+        "dispatchPersistenceReceiptDigest",
+        "stageId",
+        "action",
+        "runtimeBinding",
+        "runFenceDigest",
+        "budgetReservation",
+        "refusalDigest",
+        "decidedAt"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "runStateDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "dispatchDecisionDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "dispatchPersistenceReceiptDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "stageId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "action": {
+          "enum": [
+            "reserve-and-invoke",
+            "run-deterministic",
+            "wait",
+            "reconcile",
+            "noop",
+            "refuse"
+          ]
+        },
+        "runtimeBinding": {
+          "oneOf": [
+            {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/runtimeIdentity"
+            },
+            { "type": "null" }
+          ]
+        },
+        "runFenceDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nullableDigest"
+        },
+        "budgetReservation": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["calls", "tokens", "costUnits"],
+              "properties": {
+                "calls": {
+                  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+                },
+                "tokens": {
+                  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+                },
+                "costUnits": {
+                  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+                }
+              }
+            },
+            { "type": "null" }
+          ]
+        },
+        "refusalDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nullableDigest"
+        },
+        "decidedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

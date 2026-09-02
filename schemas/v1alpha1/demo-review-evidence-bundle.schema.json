@@ -1,0 +1,211 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-review-evidence-bundle.schema.json",
+  "title": "Authenticated bounded demo review evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "demoProjectId",
+    "stageId",
+    "trustedRuntimeBindingDigest",
+    "projectProfileDigest",
+    "journeyDefinitionDigest",
+    "stageAgentBindingsDigest",
+    "capabilityShardDigest",
+    "repositoryBindingDigest",
+    "trustedGitHubBindingDigest",
+    "repositoryId",
+    "workItemNodeId",
+    "pullRequest",
+    "diffFiles",
+    "diffFileCount",
+    "diffPageCount",
+    "diffCollectionComplete",
+    "diffCollectionDigest",
+    "commandCatalogDigest",
+    "commands",
+    "checks",
+    "reviewEvent",
+    "headMovementInvalidates",
+    "externalCallCount",
+    "createdAt",
+    "expiresAt",
+    "bundleDigest",
+    "signature"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "demoProjectId": {
+      "enum": [
+        "app-modernization",
+        "feature-delivery",
+        "security-dependency-remediation",
+        "adaptive-delivery"
+      ]
+    },
+    "stageId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,62}$"
+    },
+    "trustedRuntimeBindingDigest": { "$ref": "#/$defs/digest" },
+    "projectProfileDigest": { "$ref": "#/$defs/digest" },
+    "journeyDefinitionDigest": { "$ref": "#/$defs/digest" },
+    "stageAgentBindingsDigest": { "$ref": "#/$defs/digest" },
+    "capabilityShardDigest": { "$ref": "#/$defs/digest" },
+    "repositoryBindingDigest": { "$ref": "#/$defs/digest" },
+    "trustedGitHubBindingDigest": { "$ref": "#/$defs/digest" },
+    "repositoryId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "workItemNodeId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "pullRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "baseSha", "headSha", "draft", "state"],
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "baseSha": { "$ref": "#/$defs/sha" },
+        "headSha": { "$ref": "#/$defs/sha" },
+        "draft": { "const": true },
+        "state": { "const": "open" }
+      }
+    },
+    "diffFiles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 299,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pathDigest",
+          "status",
+          "additions",
+          "deletions",
+          "blobSha",
+          "patchDigest"
+        ],
+        "properties": {
+          "pathDigest": { "$ref": "#/$defs/digest" },
+          "status": { "enum": ["added", "modified"] },
+          "additions": { "$ref": "#/$defs/counter" },
+          "deletions": { "$ref": "#/$defs/counter" },
+          "blobSha": { "$ref": "#/$defs/sha" },
+          "patchDigest": {
+            "anyOf": [
+              { "$ref": "#/$defs/digest" },
+              { "type": "null" }
+            ]
+          }
+        }
+      }
+    },
+    "diffFileCount": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 299
+    },
+    "diffPageCount": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
+    "diffCollectionComplete": { "const": true },
+    "diffCollectionDigest": { "$ref": "#/$defs/digest" },
+    "commandCatalogDigest": { "$ref": "#/$defs/digest" },
+    "commands": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "stdoutDigest", "stderrDigest"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,62}$"
+          },
+          "status": { "const": "success" },
+          "stdoutDigest": { "$ref": "#/$defs/digest" },
+          "stderrDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "status", "evidenceDigest"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,62}$"
+          },
+          "status": { "enum": ["success", "information"] },
+          "evidenceDigest": { "$ref": "#/$defs/digest" }
+        }
+      }
+    },
+    "reviewEvent": { "const": "COMMENT" },
+    "headMovementInvalidates": { "const": true },
+    "externalCallCount": { "const": 0 },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 24
+    },
+    "expiresAt": {
+      "type": "string",
+      "format": "date-time",
+      "maxLength": 24
+    },
+    "bundleDigest": { "$ref": "#/$defs/digest" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "value"],
+      "properties": {
+        "algorithm": { "const": "ed25519" },
+        "keyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "counter": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    }
+  }
+}

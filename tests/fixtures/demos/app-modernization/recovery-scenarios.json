@@ -1,0 +1,15 @@
+{
+  "schemaVersion": "1.0.0",
+  "scenarios": [
+    { "id": "pause", "route": "execution.pause", "expected": "preserve-cursor" },
+    { "id": "block", "route": "execution.block", "expected": "preserve-cursor" },
+    { "id": "cancel", "route": "blocked.cancel", "expected": "terminal-no-retry" },
+    { "id": "repair", "route": "verification.repair", "expected": "increment-generation-truncate-implementation" },
+    { "id": "replan", "route": "verification.replan", "expected": "increment-generation-truncate-migration-plan" },
+    { "id": "revision", "route": "review.request-revision", "expected": "increment-generation-truncate-implementation" },
+    { "id": "retry", "route": "blocked.retry-execution", "expected": "increment-attempt-and-generation-once" },
+    { "id": "partial-effect", "route": "execution.partial-effect", "expected": "block-for-reconciliation" },
+    { "id": "lost-ack", "route": "projection-reconcile", "expected": "stable-double-read-only" },
+    { "id": "reauthorization", "route": "executing.reauthorize", "expected": "activation-pending-new-authority" }
+  ]
+}

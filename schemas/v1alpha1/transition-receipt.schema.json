@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/transition-receipt.schema.json",
+  "title": "Transition receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "eventId", "eventDigest", "routeId", "routeVersion", "from", "to", "stateVersion", "previousReceipt", "idempotencyKey", "replacementAuthorityDigest", "bindingDigest", "lifecycleGraphDigest", "workAccordDigest", "capabilityRegistryDigest", "domainPackDigest", "destinationBindingDigest", "destinationLifecycleGraphDigest", "destinationWorkAccordDigest", "destinationCapabilityRegistryDigest", "destinationDomainPackDigest", "sourcePhaseContractDigest", "sourceCompiledPolicyDigest", "destinationPhaseContractDigest", "destinationCompiledPolicyDigest", "policyDigest", "destinationPolicyDigest", "actorId", "actorAuthorizationDigest", "occurredAt", "effectPlanDigest"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "eventId": { "type": "string", "minLength": 1 },
+    "eventDigest": { "$ref": "#/$defs/digest" },
+    "routeId": { "type": "string", "minLength": 1 },
+    "routeVersion": { "const": "1.0.0" },
+    "from": { "$ref": "#/$defs/state" },
+    "to": { "$ref": "#/$defs/state" },
+    "stateVersion": { "$ref": "#/$defs/nonNegativeSafeInteger" },
+    "previousReceipt": { "$ref": "#/$defs/nullableDigest" },
+    "idempotencyKey": { "$ref": "#/$defs/digest" },
+    "replacementAuthorityDigest": { "$ref": "#/$defs/nullableDigest" },
+    "bindingDigest": { "$ref": "#/$defs/digest" },
+    "lifecycleGraphDigest": { "$ref": "#/$defs/digest" },
+    "workAccordDigest": { "$ref": "#/$defs/digest" },
+    "capabilityRegistryDigest": { "$ref": "#/$defs/digest" },
+    "domainPackDigest": { "$ref": "#/$defs/digest" },
+    "destinationBindingDigest": { "$ref": "#/$defs/digest" },
+    "destinationLifecycleGraphDigest": { "$ref": "#/$defs/digest" },
+    "destinationWorkAccordDigest": { "$ref": "#/$defs/digest" },
+    "destinationCapabilityRegistryDigest": { "$ref": "#/$defs/digest" },
+    "destinationDomainPackDigest": { "$ref": "#/$defs/digest" },
+    "sourcePhaseContractDigest": { "$ref": "#/$defs/nullableDigest" },
+    "sourceCompiledPolicyDigest": { "$ref": "#/$defs/nullableDigest" },
+    "destinationPhaseContractDigest": { "$ref": "#/$defs/nullableDigest" },
+    "destinationCompiledPolicyDigest": { "$ref": "#/$defs/nullableDigest" },
+    "policyDigest": { "$ref": "#/$defs/digest" },
+    "destinationPolicyDigest": { "$ref": "#/$defs/digest" },
+    "actorId": { "type": "string", "minLength": 1 },
+    "actorAuthorizationDigest": { "$ref": "#/$defs/digest" },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "effectPlanDigest": { "$ref": "#/$defs/digest" }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "nullableDigest": {
+      "anyOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    },
+    "nonNegativeSafeInteger": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "state": {
+      "enum": ["CAPTURED", "ACTIVATION_PENDING", "FRAMING", "PLANNED", "EXECUTING", "VERIFYING", "HUMAN_REVIEW", "COMPLETED", "PAUSED", "BLOCKED", "CANCELLED"]
+    }
+  }
+}

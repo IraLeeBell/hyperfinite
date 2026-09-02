@@ -1,0 +1,112 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "demo.security-dependency-remediation.framing",
+    "version": "1.0.0"
+  },
+  "phase": "framing",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "activation-lease-current",
+    "work-accord-current",
+    "trusted-security-remediation-binding-current",
+    "synthetic-advisory-signature-valid",
+    "network-denied"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "activation-lease",
+    "signed-synthetic-advisory",
+    "hermetic-reproduction-policy"
+  ],
+  "allowedCapabilities": [
+    "demo.security-dependency-remediation.triage@1.0.0",
+    "demo.security-dependency-remediation.reproduction-and-impact-analysis@1.0.0",
+    "demo.security-dependency-remediation.remediation-design@1.0.0"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "stageId",
+      "trustedBindingDigest",
+      "predecessorArtifactDigest"
+    ],
+    "properties": {
+      "stageId": {
+        "enum": [
+          "triage",
+          "reproduction-and-impact-analysis",
+          "remediation-design"
+        ]
+      },
+      "trustedBindingDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "predecessorArtifactDigest": {
+        "anyOf": [
+          {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "summary",
+      "artifactDigest",
+      "openQuestions"
+    ],
+    "properties": {
+      "summary": {
+        "type": "string",
+        "maxLength": 8000
+      },
+      "artifactDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "openQuestions": {
+        "type": "array",
+        "maxItems": 20,
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "signed-stage-artifact-valid-and-hermetic",
+      "event": "clarification-recorded"
+    },
+    {
+      "predicate": "eligible-human-accepts-remediation-frame",
+      "event": "frame-accepted"
+    }
+  ],
+  "limits": {
+    "maxLoops": 3,
+    "maxCalls": 3,
+    "maxCostUnits": 30,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "activate",
+    "accept-frame"
+  ],
+  "privacy": {
+    "maximumClass": "internal",
+    "retentionDays": 90
+  }
+}

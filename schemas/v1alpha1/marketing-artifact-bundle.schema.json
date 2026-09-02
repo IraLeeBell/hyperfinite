@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/marketing-artifact-bundle.schema.json",
+  "title": "Marketing repository artifact bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "packId", "repositoryId", "workItemId", "repositoryIdentityDigest", "baseSha", "headSha", "classification", "authorityDigest", "approvedSourceDigests", "artifactSetDigest", "executionEvidenceDigests", "artifacts", "approvalEvidenceDigests", "readiness"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "MarketingArtifactBundle" },
+    "packId": { "const": "marketing" },
+    "repositoryId": { "type": "integer", "minimum": 1 },
+    "workItemId": { "$ref": "#/$defs/opaqueNodeId" },
+    "repositoryIdentityDigest": { "$ref": "#/$defs/digest" },
+    "baseSha": { "$ref": "#/$defs/sha" },
+    "headSha": { "$ref": "#/$defs/sha" },
+    "classification": { "enum": ["internal", "confidential"] },
+    "authorityDigest": { "$ref": "#/$defs/digest" },
+    "approvedSourceDigests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } },
+    "artifactSetDigest": { "$ref": "#/$defs/digest" },
+    "executionEvidenceDigests": {
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "prefixItems": [
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "initiative-intake" }, "slot": { "const": "initiative-intake" }, "path": { "const": "examples/marketing/workspace/initiative-intake.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "audience-evidence" }, "slot": { "const": "audience-evidence" }, "path": { "const": "examples/marketing/workspace/audience-evidence.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "positioning-messaging" }, "slot": { "const": "positioning-messaging" }, "path": { "const": "examples/marketing/workspace/positioning-messaging.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "content-plan" }, "slot": { "const": "content-plan" }, "path": { "const": "examples/marketing/workspace/content-plan.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "content-drafts" }, "slot": { "const": "content-drafts" }, "path": { "const": "examples/marketing/workspace/content-drafts.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "measurement-plan" }, "slot": { "const": "measurement-plan" }, "path": { "const": "examples/marketing/workspace/measurement-plan.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "brand-legal-assessment" }, "slot": { "const": "brand-legal-assessment" }, "path": { "const": "examples/marketing/workspace/brand-legal-assessment.json" } } }] },
+        { "allOf": [{ "$ref": "#/$defs/artifact" }, { "type": "object", "properties": { "artifactType": { "const": "launch-readiness-assessment" }, "slot": { "const": "launch-readiness-assessment" }, "path": { "const": "examples/marketing/workspace/launch-readiness-assessment.json" } } }] }
+      ],
+      "items": false
+    },
+    "approvalEvidenceDigests": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/digest" }
+    },
+    "readiness": { "$ref": "#/$defs/readiness" }
+  },
+  "$defs": {
+    "opaqueNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+    "sha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifactType", "slot", "path", "mode", "schemaDigest", "templateDigest", "upstreamArtifactDigests", "content", "contentDigest"],
+      "properties": {
+        "artifactType": { "enum": ["initiative-intake", "audience-evidence", "positioning-messaging", "content-plan", "content-drafts", "measurement-plan", "brand-legal-assessment", "launch-readiness-assessment"] },
+        "slot": { "enum": ["initiative-intake", "audience-evidence", "positioning-messaging", "content-plan", "content-drafts", "measurement-plan", "brand-legal-assessment", "launch-readiness-assessment"] },
+        "path": { "type": "string", "pattern": "^examples/marketing/workspace/[a-z0-9-]+\\.json$" },
+        "mode": { "const": 100644 },
+        "schemaDigest": { "$ref": "#/$defs/digest" },
+        "templateDigest": { "$ref": "#/$defs/digest" },
+        "upstreamArtifactDigests": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } },
+        "content": { "type": "string", "minLength": 1, "maxLength": 262144 },
+        "contentDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "externalEffectsPerformed", "publicationPerformed", "productionMutationPerformed"],
+      "properties": {
+        "status": { "const": "proposal-artifacts-merged" },
+        "externalEffectsPerformed": { "const": false },
+        "publicationPerformed": { "const": false },
+        "productionMutationPerformed": { "const": false }
+      }
+    }
+  }
+}

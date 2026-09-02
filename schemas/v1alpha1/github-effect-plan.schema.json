@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-effect-plan.schema.json",
+  "title": "Deterministic GitHub effect plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "idempotencyKey", "bindingDigest", "eventId", "routeId", "attempt", "expected", "effect"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "GitHubEffectPlan" },
+    "schemaVersion": { "const": "1.0.0" },
+    "idempotencyKey": { "$ref": "#/$defs/digest" },
+    "bindingDigest": { "$ref": "#/$defs/digest" },
+    "eventId": { "type": "string", "minLength": 1 },
+    "routeId": { "type": "string", "minLength": 1 },
+    "attempt": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "expected": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contractDigest", "receiptHead", "projectSchemaDigest", "baseSha", "headSha"],
+      "properties": {
+        "contractDigest": { "$ref": "#/$defs/digest" },
+        "receiptHead": { "$ref": "#/$defs/nullableDigest" },
+        "projectSchemaDigest": { "$ref": "#/$defs/digest" },
+        "baseSha": { "$ref": "#/$defs/nullableSha" },
+        "headSha": { "$ref": "#/$defs/nullableSha" }
+      }
+    },
+    "effect": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "repository", "workItem", "body"],
+          "properties": {
+            "type": { "const": "issue-comment" },
+            "repository": { "$ref": "#/$defs/repository" },
+            "workItem": { "$ref": "#/$defs/workItem" },
+            "body": { "type": "string", "maxLength": 65536 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "repository", "pullRequest", "headSha", "name", "status", "conclusion", "summary"],
+          "properties": {
+            "type": { "const": "check-run" },
+            "repository": { "$ref": "#/$defs/repository" },
+            "pullRequest": { "$ref": "#/$defs/pullRequest" },
+            "headSha": { "$ref": "#/$defs/sha" },
+            "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+            "status": { "enum": ["queued", "in_progress", "completed"] },
+            "conclusion": {
+              "anyOf": [
+                { "enum": ["action_required", "cancelled", "failure", "neutral", "success", "timed_out"] },
+                { "type": "null" }
+              ]
+            },
+            "summary": { "type": "string", "maxLength": 65536 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "repository", "pullRequest", "headSha", "event", "body"],
+          "properties": {
+            "type": { "const": "pull-request-review-comment" },
+            "repository": { "$ref": "#/$defs/repository" },
+            "pullRequest": { "$ref": "#/$defs/pullRequest" },
+            "headSha": { "$ref": "#/$defs/sha" },
+            "event": { "const": "COMMENT" },
+            "body": { "type": "string", "maxLength": 65536 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type", "projectOwnerNodeId", "projectNodeId", "itemNodeId", "projectBindingDigest", "fieldKey", "fieldNodeId", "fieldDataType", "expectedCurrentValue", "value"],
+          "properties": {
+            "type": { "const": "project-field-update" },
+            "projectOwnerNodeId": { "type": "string", "minLength": 1 },
+            "projectNodeId": { "type": "string", "minLength": 1 },
+            "itemNodeId": { "type": "string", "minLength": 1 },
+            "projectBindingDigest": { "$ref": "#/$defs/digest" },
+            "fieldKey": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
+            "fieldNodeId": { "type": "string", "minLength": 1 },
+            "fieldDataType": { "enum": ["DATE", "ITERATION", "NUMBER", "SINGLE_SELECT", "TEXT"] },
+            "expectedCurrentValue": {
+              "anyOf": [
+                { "$ref": "#/$defs/projectValue" },
+                { "type": "null" }
+              ]
+            },
+            "value": {
+              "$ref": "#/$defs/projectValue"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "nullableDigest": {
+      "anyOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    },
+    "sha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "nullableSha": {
+      "anyOf": [
+        { "$ref": "#/$defs/sha" },
+        { "type": "null" }
+      ]
+    },
+    "id": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "owner", "name", "fullName"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "fullName": { "type": "string", "minLength": 3 }
+      }
+    },
+    "workItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "number", "nodeId"],
+      "properties": {
+        "kind": { "enum": ["issue", "pull-request"] },
+        "number": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 }
+      }
+    },
+    "pullRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["number", "nodeId", "base", "head"],
+      "properties": {
+        "number": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "base": { "$ref": "#/$defs/pullRef" },
+        "head": { "$ref": "#/$defs/pullRef" }
+      }
+    },
+    "pullRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "ref", "sha"],
+      "properties": {
+        "repository": { "$ref": "#/$defs/repository" },
+        "ref": { "type": "string", "minLength": 1 },
+        "sha": { "$ref": "#/$defs/sha" }
+      }
+    },
+    "projectValue": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "optionNodeId"],
+          "properties": {
+            "kind": { "const": "single-select" },
+            "optionNodeId": { "type": "string", "minLength": 1 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "text"],
+          "properties": {
+            "kind": { "const": "text" },
+            "text": { "type": "string", "maxLength": 65536 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "number"],
+          "properties": {
+            "kind": { "const": "number" },
+            "number": { "type": "number" }
+          }
+        }
+      ]
+    }
+  }
+}

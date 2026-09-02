@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-identity-reservation-manifest.schema.json",
+  "title": "Autonomous demo identity reservation manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoIdentityReservationManifest" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogDigest", "projects"],
+      "properties": {
+        "catalogDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projects": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "demoProjectId",
+              "journeyStages",
+              "controlStages"
+            ],
+            "properties": {
+              "demoProjectId": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+              },
+              "journeyStages": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "stageId",
+                    "displayName",
+                    "ordinal",
+                    "coreState",
+                    "executionKind",
+                    "runtimeBindings"
+                  ],
+                  "properties": {
+                    "stageId": {
+                      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+                    },
+                    "displayName": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "ordinal": {
+                      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+                    },
+                    "coreState": {
+                      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/lifecycleState"
+                    },
+                    "executionKind": {
+                      "enum": [
+                        "model",
+                        "deterministic",
+                        "planning",
+                        "human",
+                        "terminal"
+                      ]
+                    },
+                    "runtimeBindings": {
+                      "type": "array",
+                      "maxItems": 8,
+                      "uniqueItems": true,
+                      "items": {
+                        "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/runtimeIdentity"
+                      }
+                    }
+                  }
+                }
+              },
+              "controlStages": {
+                "type": "array",
+                "minItems": 4,
+                "maxItems": 4,
+                "uniqueItems": true,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "stageId",
+                    "displayName",
+                    "coreState",
+                    "executionKind",
+                    "runtimeBindings"
+                  ],
+                  "properties": {
+                    "stageId": {
+                      "enum": [
+                        "activation-pending",
+                        "paused",
+                        "blocked",
+                        "cancelled"
+                      ]
+                    },
+                    "displayName": {
+                      "enum": [
+                        "Activation Pending",
+                        "Paused",
+                        "Blocked",
+                        "Cancelled"
+                      ]
+                    },
+                    "coreState": {
+                      "enum": [
+                        "ACTIVATION_PENDING",
+                        "PAUSED",
+                        "BLOCKED",
+                        "CANCELLED"
+                      ]
+                    },
+                    "executionKind": { "const": "kernel" },
+                    "runtimeBindings": {
+                      "type": "array",
+                      "maxItems": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

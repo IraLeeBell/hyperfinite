@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-activation-profile.schema.json",
+  "title": "Pre-authorized autonomous demo activation profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoActivationProfile" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "catalogDigest",
+        "projectProfileDigest",
+        "stageAgentBindingsDigest",
+        "capabilityShardDigest",
+        "enabled",
+        "authorityEpoch",
+        "revocationGeneration",
+        "allowedSubmitterIds",
+        "allowedSource",
+        "consentField",
+        "consentRequired",
+        "leaseTemplate",
+        "validFrom",
+        "expiresAt",
+        "signingKeyId"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "catalogDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "projectProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "stageAgentBindingsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "capabilityShardDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "enabled": { "type": "boolean" },
+        "authorityEpoch": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "revocationGeneration": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+        },
+        "allowedSubmitterIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+          }
+        },
+        "allowedSource": { "const": "issue-form" },
+        "consentField": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+        },
+        "consentRequired": { "const": true },
+        "leaseTemplate": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "maxCalls",
+            "maxTokens",
+            "maxCostUnits",
+            "maxDurationMs",
+            "maxRetries",
+            "maxParallel"
+          ],
+          "properties": {
+            "maxCalls": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+            },
+            "maxTokens": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+            },
+            "maxCostUnits": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/nonNegativeInteger"
+            },
+            "maxDurationMs": {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+            },
+            "maxRetries": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20
+            },
+            "maxParallel": { "const": 1 }
+          }
+        },
+        "validFrom": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "signingKeyId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      }
+    }
+  }
+}

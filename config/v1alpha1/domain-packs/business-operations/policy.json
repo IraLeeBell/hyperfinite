@@ -1,0 +1,21 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainPackPolicy",
+  "id": "business-operations",
+  "version": "1.0.0",
+  "allowedCapabilities": [
+    "business-operations.frame-problem@1.0.0",
+    "business-operations.create-repository-artifacts@1.0.0",
+    "business-operations.review-repository-artifacts@1.0.0",
+    "core.refuse-authority-escalation@1.0.0"
+  ],
+  "prohibitedEffects": ["approve", "merge", "deploy", "publish", "external-publication", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change", "ticketing-mutation", "procurement-mutation", "production-operation", "workflow-enablement"],
+  "depthCeiling": "D1",
+  "riskCeiling": "high",
+  "privacyCeiling": "confidential",
+  "maxCalls": 4,
+  "maxCostUnits": 40,
+  "maxLoops": 1,
+  "maxRetries": 1,
+  "maxParallel": 1
+}

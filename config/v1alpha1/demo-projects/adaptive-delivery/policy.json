@@ -1,0 +1,35 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainPackPolicy",
+  "id": "adaptive-delivery-demo",
+  "version": "1.0.0",
+  "allowedCapabilities": [
+    "demo.adaptive-delivery.context-inventory@1.0.0",
+    "demo.adaptive-delivery.customer-value-explorer@1.0.0",
+    "demo.adaptive-delivery.technical-options-explorer@1.0.0",
+    "demo.adaptive-delivery.delivery-risk-challenger@1.0.0",
+    "demo.adaptive-delivery.guided-synthesis@1.0.0",
+    "demo.adaptive-delivery.minimal-slice-builder@1.0.0",
+    "demo.adaptive-delivery.resilience-first-builder@1.0.0",
+    "demo.adaptive-delivery.test-and-verification@1.0.0",
+    "core.refuse-authority-escalation@1.0.0"
+  ],
+  "prohibitedEffects": [
+    "mark-ready",
+    "approve",
+    "dismiss-review",
+    "merge",
+    "deploy",
+    "publish",
+    "project-administration",
+    "credential-administration"
+  ],
+  "depthCeiling": "D2",
+  "riskCeiling": "high",
+  "privacyCeiling": "internal",
+  "maxCalls": 8,
+  "maxCostUnits": 100,
+  "maxLoops": 5,
+  "maxRetries": 1,
+  "maxParallel": 1
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/business-operations/policy-process-design.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "artifactType": { "const": "policy-process-design" }, "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" }, "upstreamArtifactDigests": { "$ref": "#/$defs/digests" },
+    "data": { "type": "object", "additionalProperties": false, "required": ["proposedPolicy", "authorityStatus", "controls", "exceptions", "effectiveStatus"], "properties": {
+      "proposedPolicy": { "type": "string", "minLength": 1 },
+      "authorityStatus": { "const": "unverified" },
+      "controls": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^control:[a-z0-9-]+$" } },
+      "exceptions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+      "effectiveStatus": { "const": "not-effective" }
+    } }
+  },
+  "$defs": { "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } }
+}

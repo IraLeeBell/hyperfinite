@@ -1,0 +1,113 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoJourneyDefinition",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "controlStages": [
+      {
+        "coreState": "ACTIVATION_PENDING",
+        "displayName": "Activation Pending",
+        "executionKind": "kernel",
+        "stageId": "activation-pending"
+      },
+      {
+        "coreState": "PAUSED",
+        "displayName": "Paused",
+        "executionKind": "kernel",
+        "stageId": "paused"
+      },
+      {
+        "coreState": "BLOCKED",
+        "displayName": "Blocked",
+        "executionKind": "kernel",
+        "stageId": "blocked"
+      },
+      {
+        "coreState": "CANCELLED",
+        "displayName": "Cancelled",
+        "executionKind": "kernel",
+        "stageId": "cancelled"
+      }
+    ],
+    "demoProjectId": "app-modernization",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "initialStageId": "intake",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "projectProfileDigest": "sha256:0fa5790690aa483d2de2c5e9635120a737a7bb62ba6a529a877d6c9ab2748ccd",
+    "stages": [
+      {
+        "coreState": "ACTIVATION_PENDING",
+        "displayName": "Intake",
+        "executionKind": "deterministic",
+        "ordinal": 1,
+        "stageId": "intake"
+      },
+      {
+        "coreState": "FRAMING",
+        "displayName": "Repository discovery",
+        "executionKind": "deterministic",
+        "ordinal": 2,
+        "stageId": "repository-discovery"
+      },
+      {
+        "coreState": "FRAMING",
+        "displayName": "Current-state inventory",
+        "executionKind": "model",
+        "ordinal": 3,
+        "stageId": "current-state-inventory"
+      },
+      {
+        "coreState": "FRAMING",
+        "displayName": "Modernization assessment",
+        "executionKind": "model",
+        "ordinal": 4,
+        "stageId": "modernization-assessment"
+      },
+      {
+        "coreState": "FRAMING",
+        "displayName": "Target architecture",
+        "executionKind": "model",
+        "ordinal": 5,
+        "stageId": "target-architecture"
+      },
+      {
+        "coreState": "PLANNED",
+        "displayName": "Migration plan",
+        "executionKind": "planning",
+        "ordinal": 6,
+        "stageId": "migration-plan"
+      },
+      {
+        "coreState": "EXECUTING",
+        "displayName": "Implementation",
+        "executionKind": "model",
+        "ordinal": 7,
+        "stageId": "implementation"
+      },
+      {
+        "coreState": "VERIFYING",
+        "displayName": "Verification",
+        "executionKind": "model",
+        "ordinal": 8,
+        "stageId": "verification"
+      },
+      {
+        "coreState": "HUMAN_REVIEW",
+        "displayName": "Human review",
+        "executionKind": "human",
+        "ordinal": 9,
+        "stageId": "human-review"
+      },
+      {
+        "coreState": "COMPLETED",
+        "displayName": "Completed",
+        "executionKind": "terminal",
+        "ordinal": 10,
+        "stageId": "completed"
+      }
+    ],
+    "terminalStageId": "completed"
+  },
+  "contentDigest": "sha256:493d045629647d698c9e5cdf6bdbf384f7acf2939139a42b747691b1896d30cd"
+}

@@ -1,0 +1,25 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoProjectProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "title": "Security and Dependency Remediation",
+    "description": "Disabled-by-default, hermetic-first synthetic remediation journey for a fictional local dependency advisory; it grants no live or production remediation authority.",
+    "defaultDepthProfile": "D3",
+    "allowedDepthProfiles": [
+      "D3"
+    ],
+    "repositoryBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "projectBindingDigest": "sha256:617e67953f08d1b0cc45f0afa2e1e87ca218b32a5fedcaf2ce9763013bad1944",
+    "workAccordTemplateDigest": "sha256:8e13d2a697a8ef70784ee0d27c4adc294bcc408e22023ef36db1684f5794c551",
+    "journeyDefinitionRef": "config/v1alpha1/demo-projects/security-dependency-remediation/journey.json",
+    "stageAgentBindingsRef": "config/v1alpha1/demo-projects/security-dependency-remediation/runtime-bindings.json",
+    "capabilityShardRef": "config/v1alpha1/demo-projects/security-dependency-remediation/capabilities.json",
+    "activationProfileRef": "config/v1alpha1/demo-projects/security-dependency-remediation/activation-profile.json",
+    "projectionMappingRef": "config/v1alpha1/demo-projects/security-dependency-remediation/projection-mapping.json"
+  },
+  "contentDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952"
+}

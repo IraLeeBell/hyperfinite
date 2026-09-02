@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/marketing/brand-legal-assessment.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "artifactType": { "const": "brand-legal-assessment" },
+    "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" },
+    "upstreamArtifactDigests": { "$ref": "#/$defs/digests" },
+    "data": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["advisoryOnly", "status", "findings"],
+      "properties": {
+        "advisoryOnly": { "const": true },
+        "status": { "enum": ["review-required", "blocked"] },
+        "findings": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/digest" } }
+  }
+}

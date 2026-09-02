@@ -1,0 +1,33 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationAffectedComponentInventory",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:d687fb101d6ad186000bf9493e87bfe97c5126e081c209a0696eb534b146ca05",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "triage",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:206a959da34e02858563f57cec283b39a28a9dc6916f0869781b626d00956dde",
+    "headSha": null,
+    "status": "verified",
+    "assertions": [
+      {
+        "id": "mist-lru-affected-version-observed",
+        "status": "success",
+        "evidenceDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7"
+      },
+      {
+        "id": "four-target-slots-from-trusted-binding",
+        "status": "success",
+        "evidenceDigest": "sha256:206a959da34e02858563f57cec283b39a28a9dc6916f0869781b626d00956dde"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

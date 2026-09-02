@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/lifecycle-graph.schema.json",
+  "title": "Lifecycle graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "metadata", "states", "routes"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "LifecycleGraph" },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "version": { "const": "1.0.0" }
+      }
+    },
+    "states": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "phaseOwner", "costBearing", "terminal"],
+        "properties": {
+          "id": { "$ref": "#/$defs/state" },
+          "phaseOwner": { "$ref": "#/$defs/phaseOwner" },
+          "costBearing": { "type": "boolean" },
+          "terminal": { "type": "boolean" }
+        },
+        "allOf": [
+          { "if": { "properties": { "id": { "const": "CAPTURED" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "intake" }, "costBearing": { "const": false }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "ACTIVATION_PENDING" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "kernel" }, "costBearing": { "const": false }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "FRAMING" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "framing" }, "costBearing": { "const": true }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "PLANNED" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "planning" }, "costBearing": { "const": false }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "EXECUTING" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "execution" }, "costBearing": { "const": true }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "VERIFYING" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "verification" }, "costBearing": { "const": true }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "HUMAN_REVIEW" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "human-review" }, "costBearing": { "const": false }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "COMPLETED" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "kernel" }, "costBearing": { "const": false }, "terminal": { "const": true } } } },
+          { "if": { "properties": { "id": { "const": "PAUSED" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "kernel" }, "costBearing": { "const": false }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "BLOCKED" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "kernel" }, "costBearing": { "const": false }, "terminal": { "const": false } } } },
+          { "if": { "properties": { "id": { "const": "CANCELLED" } }, "required": ["id"] }, "then": { "properties": { "phaseOwner": { "const": "kernel" }, "costBearing": { "const": false }, "terminal": { "const": true } } } }
+        ]
+      }
+    },
+    "routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "version",
+          "from",
+          "to",
+          "event",
+          "actorClasses",
+          "phaseOwner",
+          "costBearing",
+          "humanGate",
+          "retryable",
+          "maxAttempts"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+          "version": { "const": "1.0.0" },
+          "from": { "$ref": "#/$defs/state" },
+          "to": { "$ref": "#/$defs/state" },
+          "event": { "$ref": "#/$defs/eventType" },
+          "actorClasses": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/actorClass" }
+          },
+          "phaseOwner": { "$ref": "#/$defs/phaseOwner" },
+          "costBearing": { "type": "boolean" },
+          "humanGate": {
+            "type": ["string", "null"],
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          },
+          "retryable": { "type": "boolean" },
+          "maxAttempts": { "type": "integer", "minimum": 1, "maximum": 100 }
+        },
+        "allOf": [
+          { "not": { "properties": { "to": { "const": "CAPTURED" } }, "required": ["to"] } },
+          { "not": { "properties": { "from": { "enum": ["COMPLETED", "CANCELLED"] } }, "required": ["from"] } }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "state": {
+      "enum": [
+        "CAPTURED",
+        "ACTIVATION_PENDING",
+        "FRAMING",
+        "PLANNED",
+        "EXECUTING",
+        "VERIFYING",
+        "HUMAN_REVIEW",
+        "COMPLETED",
+        "PAUSED",
+        "BLOCKED",
+        "CANCELLED"
+      ]
+    },
+    "phaseOwner": {
+      "enum": ["intake", "framing", "planning", "execution", "verification", "human-review", "kernel"]
+    },
+    "actorClass": {
+      "enum": ["requester", "reviewer", "maintainer", "administrator", "system", "policy"]
+    },
+    "eventType": {
+      "enum": [
+        "activation-requested",
+        "activation-approved",
+        "clarification-recorded",
+        "frame-accepted",
+        "scope-repair-requested",
+        "execution-authorized",
+        "work-submitted",
+        "repair-requested",
+        "replan-requested",
+        "verification-passed",
+        "revision-requested",
+        "outcome-accepted",
+        "pause-requested",
+        "resume-requested",
+        "dependency-blocked",
+        "partial-effect-recorded",
+        "retry-requested",
+        "recovery-approved",
+        "cancel-requested",
+        "authorization-invalidated",
+        "binding-revalidated"
+      ]
+    }
+  }
+}

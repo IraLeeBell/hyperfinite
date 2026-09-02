@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/behavioral-eval-fixture.schema.json",
+  "title": "Behavioral evaluation fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "phase", "role", "capability", "skill", "prompt", "evidence", "criteria", "forbidden", "requiresHumanReview"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "phase": { "enum": ["framing", "execution", "verification"] },
+    "role": { "enum": ["framer", "executor", "reviewer"] },
+    "capability": { "type": "string", "pattern": "^[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "skill": { "type": "string", "pattern": "^[a-z][a-z-]+$" },
+    "prompt": { "type": "string", "minLength": 20 },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "forbidden": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "requiresHumanReview": { "const": true }
+  }
+}

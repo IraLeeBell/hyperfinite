@@ -1,0 +1,25 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationImplementationEvidence",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:cbfa45730fc9802e2ef6350e13613e705137956db555ba1844da9ffe41ca98c2",
+  "spec": {
+    "migrationPlanDigest": "sha256:e77a8ce3bfb900bb9aacaa060112971a73c8332fa44dbf993be62c0653a8961a",
+    "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "headSha": "2222222222222222222222222222222222222222",
+    "patchDigest": "sha256:5ec2fad3c9f1e5f4ad84c5f666dbeee8794102e7d5a0ef33c73fe4c40a6338b0",
+    "treeDigest": "sha256:b01f7bd19189353398f31c9c4fc78c0fd1dafc540b7a927bf162a8f0e059708d",
+    "logicalSlots": [
+      "application-source",
+      "application-tests",
+      "migration-notes"
+    ],
+    "draftPullRequest": {
+      "number": 126,
+      "nodeId": "PR_synthetic_app_modernization",
+      "isDraft": true,
+      "open": true
+    },
+    "externalCallCount": 0
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/feature-delivery/feature-brief.schema.json",
+  "title": "Feature Delivery feature brief",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "FeatureDeliveryFeatureBrief"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requestDigest",
+        "outcome",
+        "acceptanceCriteria",
+        "inScope",
+        "outOfScope",
+        "assumptions",
+        "openQuestions"
+      ],
+      "properties": {
+        "requestDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "outcome": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "acceptanceCriteria": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "statement",
+              "evidenceRequired"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/acceptanceId"
+              },
+              "statement": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              },
+              "evidenceRequired": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            }
+          }
+        },
+        "inScope": {
+          "$ref": "#/$defs/strings"
+        },
+        "outOfScope": {
+          "$ref": "#/$defs/strings"
+        },
+        "assumptions": {
+          "$ref": "#/$defs/strings"
+        },
+        "openQuestions": {
+          "$ref": "#/$defs/strings"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "acceptanceId": {
+      "type": "string",
+      "pattern": "^FD-AC-[0-9]{3}$"
+    },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationReproductionEvidence",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:97391ae2133421a7bc8e0e6c301193a80a19870590b82936c0003fdb532a413e",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "reproduction-and-impact-analysis",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7",
+    "headSha": null,
+    "status": "verified",
+    "assertions": [
+      {
+        "id": "pure-fixture-comparison",
+        "status": "success",
+        "evidenceDigest": "sha256:11206be62d9df0f5654ac8376b648c1e01659037322015d112298697c6a0e8f1"
+      },
+      {
+        "id": "no-production-exploit",
+        "status": "success",
+        "evidenceDigest": "sha256:638dfc79e31200b578c0b045ae5d14bdbd45abfd876b9fb2dea276f55529403d"
+      },
+      {
+        "id": "no-package-install-or-lifecycle-script",
+        "status": "success",
+        "evidenceDigest": "sha256:6279e40c7c3b19cf01c286d46a9fc4e7dad072ea2dd783190996d9fcd35919a2"
+      },
+      {
+        "id": "no-network-or-credentials",
+        "status": "success",
+        "evidenceDigest": "sha256:684ca6f18fc92a0c64d762649e934625998bb3dd563f0c8240830edeb6eac3f7"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

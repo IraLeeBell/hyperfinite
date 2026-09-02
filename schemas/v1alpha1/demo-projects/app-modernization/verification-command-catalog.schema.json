@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/verification-command-catalog.schema.json",
+  "title": "Fixed offline App Modernization verification commands",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "commands"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" },
+    "commands": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "executable", "args", "timeoutMs", "network", "credentials"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
+          "executable": { "enum": ["node", "npm"] },
+          "args": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 8,
+            "items": { "type": "string", "minLength": 1, "maxLength": 128 }
+          },
+          "timeoutMs": { "type": "integer", "minimum": 1000, "maximum": 600000 },
+          "network": { "const": false },
+          "credentials": { "const": false }
+        }
+      }
+    }
+  }
+}

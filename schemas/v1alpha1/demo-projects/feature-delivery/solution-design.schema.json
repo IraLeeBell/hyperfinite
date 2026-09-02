@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/feature-delivery/solution-design.schema.json",
+  "title": "Feature Delivery solution design",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "FeatureDeliverySolutionDesign"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "featureBriefDigest",
+        "impactAnalysisDigest",
+        "decision",
+        "alternatives",
+        "logicalSlots",
+        "acceptanceCriterionIds",
+        "authority"
+      ],
+      "properties": {
+        "featureBriefDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "impactAnalysisDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "decision": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4000
+        },
+        "alternatives": {
+          "$ref": "#/$defs/strings"
+        },
+        "logicalSlots": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]{0,62}$"
+          }
+        },
+        "acceptanceCriterionIds": {
+          "$ref": "#/$defs/acceptanceIds"
+        },
+        "authority": {
+          "const": "advisory-only"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptanceIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^FD-AC-[0-9]{3}$"
+      }
+    }
+  }
+}

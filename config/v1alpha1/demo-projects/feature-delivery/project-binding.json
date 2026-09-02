@@ -1,0 +1,16 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryProjectBinding",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "synthetic": true,
+    "demoProjectId": "feature-delivery",
+    "ownerNodeId": "O_synthetic_github",
+    "projectNodeId": "PVT_synthetic_feature_delivery",
+    "itemNodeId": "PVTI_synthetic_feature_delivery_27",
+    "projectSchemaDigest": "sha256:2ef81254b2e5369a4ca15340582e2db6e520400d6b21b2cd827e596aac553374",
+    "projectionOnly": true,
+    "administrativelyConfigured": false
+  },
+  "contentDigest": "sha256:19e5c57fc25a780ad9774c6778b4a07c8290c63c23523db5180527fc35364b73"
+}

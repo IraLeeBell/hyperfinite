@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/agent-participation-policy.schema.json",
+  "title": "Enterprise-governed demo agent participation policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AgentParticipationPolicy" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "policyGeneration",
+        "enterpriseMaximum",
+        "eligibleActorClasses",
+        "projects"
+      ],
+      "properties": {
+        "policyGeneration": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/positiveInteger"
+        },
+        "enterpriseMaximum": {
+          "enum": ["locked", "guided", "flexible"]
+        },
+        "eligibleActorClasses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "enterprise-owner",
+              "organization-owner",
+              "project-owner",
+              "project-member"
+            ]
+          }
+        },
+        "projects": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "demoProjectId",
+              "posture",
+              "selectableStageIds",
+              "allowedOptionKeys"
+            ],
+            "properties": {
+              "demoProjectId": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+              },
+              "posture": {
+                "enum": ["locked", "guided", "flexible"]
+              },
+              "selectableStageIds": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+                }
+              },
+              "allowedOptionKeys": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

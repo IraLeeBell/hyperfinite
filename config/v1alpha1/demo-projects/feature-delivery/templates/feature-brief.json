@@ -1,0 +1,52 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryFeatureBrief",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:34e2aad90d31c148c45374b5992e762b8a0621cfd8a22616d2cab1af9575afcc",
+  "spec": {
+    "requestDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "outcome": "Add a deterministic synthetic export option while preserving the existing API and human merge gate.",
+    "acceptanceCriteria": [
+      {
+        "id": "FD-AC-001",
+        "statement": "The export option produces deterministic output for the documented synthetic input.",
+        "evidenceRequired": "A fixed acceptance test passes at the exact draft pull-request head."
+      },
+      {
+        "id": "FD-AC-002",
+        "statement": "Existing API behavior remains unchanged.",
+        "evidenceRequired": "The fixed regression suite passes at the exact draft pull-request head."
+      },
+      {
+        "id": "FD-AC-003",
+        "statement": "Build emits only approved logical slots and trusted code creates only a draft pull request.",
+        "evidenceRequired": "The target-free patch and trusted draft pull-request evidence both validate."
+      },
+      {
+        "id": "FD-AC-004",
+        "statement": "Verification runs every fixed command and automated review emits COMMENT only.",
+        "evidenceRequired": "The exact-head verification report records all command IDs and a COMMENT review."
+      },
+      {
+        "id": "FD-AC-005",
+        "statement": "Completion requires an eligible independent human to accept the observed merged head.",
+        "evidenceRequired": "A separate synthetic-human continuation supplies current authorization and merge observation."
+      }
+    ],
+    "inScope": [
+      "One export module logical slot.",
+      "One export acceptance and regression test logical slot.",
+      "Draft pull-request delivery and exact-head COMMENT review."
+    ],
+    "outOfScope": [
+      "Autonomous approval or merge.",
+      "Deployment, publication, or live Project administration.",
+      "Model-selected repository paths, commands, routes, effects, or credentials."
+    ],
+    "assumptions": [
+      "The trusted binding and exact base SHA are supplied by conventional code.",
+      "All examples and tests use hermetic synthetic services."
+    ],
+    "openQuestions": []
+  }
+}

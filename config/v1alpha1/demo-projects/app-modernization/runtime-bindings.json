@@ -1,0 +1,351 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "StageAgentBindingSet",
+  "schemaVersion": "2.0.0",
+  "spec": {
+    "demoProjectId": "app-modernization",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:0fa5790690aa483d2de2c5e9635120a737a7bb62ba6a529a877d6c9ab2748ccd",
+    "journeyDefinitionDigest": "sha256:493d045629647d698c9e5cdf6bdbf384f7acf2939139a42b747691b1896d30cd",
+    "capabilityShardDigest": "sha256:dbffa57045f77122d8e115b91f2696f398230137075013412aec74d5c0d8cfda",
+    "participationPolicyDigest": "sha256:f7c8ef2282725040cc6586231005efc73f23cf3e7fe7faf233d7dae1aa8f4746",
+    "stageBindings": [
+      {
+        "stageId": "intake",
+        "executionKind": "deterministic",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "repository-discovery",
+        "executionKind": "deterministic",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "current-state-inventory",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "app-modernization-current-state-inventory",
+            "skill": "app-modernization-current-state-inventory",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.app-modernization.current-state-inventory@1.0.0",
+            "workflow": "app-modernization-current-state-inventory",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "events": [
+                "issue_comment"
+              ],
+              "name": "app-modernization-current-state-inventory"
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "modernization-assessment",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "app-modernization-modernization-assessment",
+            "skill": "app-modernization-modernization-assessment",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.app-modernization.modernization-assessment@1.0.0",
+            "workflow": "app-modernization-modernization-assessment",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "events": [
+                "issue_comment"
+              ],
+              "name": "app-modernization-modernization-assessment"
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "target-architecture",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "activation",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "app-modernization-target-architecture",
+            "skill": "app-modernization-target-architecture",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.app-modernization.target-architecture@1.0.0",
+            "workflow": "app-modernization-target-architecture",
+            "workflowClass": "framing-comment",
+            "phase": "framing",
+            "role": "framer",
+            "githubToolsets": [
+              "issues"
+            ],
+            "githubTools": [
+              "issue_read"
+            ],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "events": [
+                "issue_comment"
+              ],
+              "name": "app-modernization-target-architecture"
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "migration-plan",
+        "executionKind": "planning",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "accepted-frame",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "implementation",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "accepted-plan",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "app-modernization-implementation",
+            "skill": "app-modernization-implementation",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.app-modernization.implementation@1.0.0",
+            "workflow": "app-modernization-implementation",
+            "workflowClass": "target-free-execution",
+            "phase": "execution",
+            "role": "executor",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "events": [
+                "issue_comment"
+              ],
+              "name": "app-modernization-implementation"
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "verification",
+        "executionKind": "model",
+        "participationMode": "fixed",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "exact-current-head",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": [
+          {
+            "optionKey": null,
+            "userInvocable": false,
+            "agent": "app-modernization-verification",
+            "skill": "app-modernization-verification",
+            "safetySkills": [
+              "authority-refusal"
+            ],
+            "capability": "demo.app-modernization.verification@1.0.0",
+            "workflow": "app-modernization-verification",
+            "workflowClass": "current-head-comment-review",
+            "phase": "verification",
+            "role": "reviewer",
+            "githubToolsets": [],
+            "githubTools": [],
+            "modelInvocationAllowed": true,
+            "slashCommand": {
+              "events": [
+                "pull_request_comment"
+              ],
+              "name": "app-modernization-verification"
+            }
+          }
+        ]
+      },
+      {
+        "stageId": "human-review",
+        "executionKind": "human",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "human-gate",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "completed",
+        "executionKind": "terminal",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [],
+        "requiredEvidenceClass": "none",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      }
+    ],
+    "controlBindings": [
+      {
+        "stageId": "activation-pending",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "paused",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "blocked",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      },
+      {
+        "stageId": "cancelled",
+        "executionKind": "kernel",
+        "participationMode": "none",
+        "userInputRequired": false,
+        "eligibleActorClasses": [
+          "system"
+        ],
+        "requiredEvidenceClass": "kernel-state",
+        "selectionFieldKey": null,
+        "allowedOptionKeys": [],
+        "fallbackPolicy": "none",
+        "clearSelectionOnExit": false,
+        "runtimeBindings": []
+      }
+    ]
+  },
+  "contentDigest": "sha256:73bbd400a8743907836c2f38b9404f8ec1f2c5491a6f2d19131c5df88995b63e"
+}

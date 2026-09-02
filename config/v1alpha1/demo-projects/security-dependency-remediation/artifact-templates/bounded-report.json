@@ -1,0 +1,33 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationBoundedReport",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:f7de849f09c494c82d30d1d8a4024dabbca994acc643b4f4ee67c0dc6b9dc17f",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "triage",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7",
+    "headSha": null,
+    "status": "draft",
+    "assertions": [
+      {
+        "id": "advisory-signature-valid",
+        "status": "success",
+        "evidenceDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7"
+      },
+      {
+        "id": "trusted-scope-bound",
+        "status": "success",
+        "evidenceDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

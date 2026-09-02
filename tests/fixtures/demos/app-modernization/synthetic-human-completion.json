@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "app-modernization",
+  "runId": "app-modernization-hands-off-1",
+  "runAttempt": 1,
+  "startStage": "human-review",
+  "stopStage": "completed",
+  "modelInvocationCount": 0,
+  "automationCanApprove": false,
+  "automationCanMerge": false,
+  "humanEvidence": {
+    "actorId": 101,
+    "independent": true,
+    "headSha": "2222222222222222222222222222222222222222",
+    "approvalObservedAt": "2026-08-29T12:30:00Z",
+    "mergeObservedAt": "2026-08-29T12:31:00Z"
+  },
+  "completionEvidence": {
+    "mergedSha": "3333333333333333333333333333333333333333",
+    "deliveryEvidenceDigest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+    "operationsReceiptDigest": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+  },
+  "externalCallCounters": {
+    "network": 0,
+    "externalMcp": 0,
+    "credentials": 0,
+    "packageInstall": 0,
+    "gitRemote": 0,
+    "liveGitHub": 0
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "demoProjectId": "feature-delivery",
+  "startStage": "intake",
+  "stopStage": "human-review",
+  "stageCount": 8,
+  "modelStageCount": 5,
+  "draftPullRequest": true,
+  "automatedReviewEvent": "COMMENT",
+  "humanDecisionRequired": true,
+  "externalCalls": 0
+}

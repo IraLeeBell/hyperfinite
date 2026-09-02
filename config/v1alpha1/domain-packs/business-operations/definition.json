@@ -1,0 +1,74 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainPackDefinition",
+  "id": "business-operations",
+  "version": "1.0.0",
+  "displayName": "Business operations repository pack",
+  "enabledByDefault": false,
+  "agent": ".github/agents/business-operations-pack.agent.md",
+  "skill": "business-operations-repository-pack",
+  "policyRef": "config/v1alpha1/domain-packs/business-operations/policy.json",
+  "artifactRoot": "examples/business-operations/workspace/artifacts",
+  "artifactSchema": "schemas/v1alpha1/business-operations-artifact-bundle.schema.json",
+  "templateRoot": "config/v1alpha1/domain-packs/business-operations/templates",
+  "capabilityBindings": {
+    "framing": "business-operations.frame-problem@1.0.0",
+    "execution": "business-operations.create-repository-artifacts@1.0.0",
+    "verification": "business-operations.review-repository-artifacts@1.0.0"
+  },
+  "slots": [
+    { "id": "problem-framing", "artifactType": "problem-framing", "relativePath": "problem-framing.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/problem-framing.schema.json", "template": "problem-framing.json", "dependsOn": [] },
+    { "id": "stakeholder-analysis", "artifactType": "stakeholder-analysis", "relativePath": "stakeholder-analysis.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/stakeholder-analysis.schema.json", "template": "stakeholder-analysis.json", "dependsOn": ["problem-framing"] },
+    { "id": "process-map", "artifactType": "process-map", "relativePath": "process-map.json", "maxBytes": 32768, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/process-map.schema.json", "template": "process-map.json", "dependsOn": ["stakeholder-analysis"] },
+    { "id": "decision-memo", "artifactType": "decision-memo", "relativePath": "decision-memo.json", "maxBytes": 32768, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/decision-memo.schema.json", "template": "decision-memo.json", "dependsOn": ["process-map"] },
+    { "id": "policy-process-design", "artifactType": "policy-process-design", "relativePath": "policy-process-design.json", "maxBytes": 32768, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/policy-process-design.schema.json", "template": "policy-process-design.json", "dependsOn": ["decision-memo"] },
+    { "id": "implementation-plan", "artifactType": "implementation-plan", "relativePath": "implementation-plan.json", "maxBytes": 32768, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/implementation-plan.schema.json", "template": "implementation-plan.json", "dependsOn": ["policy-process-design"] },
+    { "id": "runbook", "artifactType": "runbook", "relativePath": "runbook.json", "maxBytes": 32768, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/runbook.schema.json", "template": "runbook.json", "dependsOn": ["implementation-plan"] },
+    { "id": "controls-approvals", "artifactType": "controls-approvals", "relativePath": "controls-approvals.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/controls-approvals.schema.json", "template": "controls-approvals.json", "dependsOn": ["runbook"] },
+    { "id": "outcome-measurement", "artifactType": "outcome-measurement", "relativePath": "outcome-measurement.json", "maxBytes": 24576, "mode": 100644, "schema": "schemas/v1alpha1/domain-packs/business-operations/outcome-measurement.schema.json", "template": "outcome-measurement.json", "dependsOn": ["controls-approvals"] }
+  ],
+  "stages": [
+    { "id": "problem-framing", "phase": "framing", "requiredSlots": ["problem-framing"], "requiredGates": [] },
+    { "id": "stakeholder-analysis", "phase": "framing", "requiredSlots": ["stakeholder-analysis"], "requiredGates": [] },
+    { "id": "process-map", "phase": "framing", "requiredSlots": ["process-map"], "requiredGates": [] },
+    { "id": "decision-memo", "phase": "planning", "requiredSlots": ["decision-memo"], "requiredGates": ["accept-frame"] },
+    { "id": "policy-process-design", "phase": "planning", "requiredSlots": ["policy-process-design"], "requiredGates": ["accept-frame"] },
+    { "id": "implementation-plan", "phase": "planning", "requiredSlots": ["implementation-plan"], "requiredGates": ["accept-plan"] },
+    { "id": "runbook", "phase": "execution", "requiredSlots": ["runbook"], "requiredGates": ["accept-plan"] },
+    { "id": "controls-approvals", "phase": "verification", "requiredSlots": ["controls-approvals"], "requiredGates": ["process-owner-review", "control-owner-review", "policy-authority-review"] },
+    { "id": "outcome-measurement", "phase": "verification", "requiredSlots": ["outcome-measurement"], "requiredGates": ["process-owner-review", "control-owner-review", "policy-authority-review", "measurement-owner-review"] }
+  ],
+  "humanGates": [
+    { "id": "process-owner-review", "role": "process-owner", "independent": true, "signed": true, "current": true, "requiredForReadiness": true, "maxAgeMs": 300000 },
+    { "id": "control-owner-review", "role": "control-owner", "independent": true, "signed": true, "current": true, "requiredForReadiness": true, "maxAgeMs": 300000 },
+    { "id": "policy-authority-review", "role": "policy-authority", "independent": true, "signed": true, "current": true, "requiredForReadiness": true, "maxAgeMs": 300000 },
+    { "id": "measurement-owner-review", "role": "measurement-owner", "independent": true, "signed": true, "current": true, "requiredForReadiness": true, "maxAgeMs": 300000 }
+  ],
+  "roles": ["requester", "activator", "proposer", "process-owner", "control-owner", "policy-authority", "implementer", "measurement-owner", "verifier", "reviewer", "merger"],
+  "incompatibleRolePairs": [["requester", "activator"], ["requester", "proposer"], ["requester", "process-owner"], ["requester", "control-owner"], ["requester", "policy-authority"], ["requester", "implementer"], ["requester", "measurement-owner"], ["requester", "verifier"], ["requester", "reviewer"], ["requester", "merger"], ["activator", "proposer"], ["activator", "process-owner"], ["activator", "control-owner"], ["activator", "policy-authority"], ["activator", "implementer"], ["activator", "measurement-owner"], ["activator", "verifier"], ["activator", "reviewer"], ["activator", "merger"], ["proposer", "process-owner"], ["proposer", "control-owner"], ["proposer", "policy-authority"], ["proposer", "implementer"], ["proposer", "measurement-owner"], ["proposer", "verifier"], ["proposer", "reviewer"], ["proposer", "merger"], ["process-owner", "control-owner"], ["process-owner", "policy-authority"], ["process-owner", "implementer"], ["process-owner", "measurement-owner"], ["process-owner", "verifier"], ["process-owner", "reviewer"], ["process-owner", "merger"], ["control-owner", "policy-authority"], ["control-owner", "implementer"], ["control-owner", "measurement-owner"], ["control-owner", "verifier"], ["control-owner", "reviewer"], ["control-owner", "merger"], ["policy-authority", "implementer"], ["policy-authority", "measurement-owner"], ["policy-authority", "verifier"], ["policy-authority", "reviewer"], ["policy-authority", "merger"], ["implementer", "measurement-owner"], ["implementer", "verifier"], ["implementer", "reviewer"], ["implementer", "merger"], ["measurement-owner", "verifier"], ["measurement-owner", "reviewer"], ["measurement-owner", "merger"], ["verifier", "reviewer"], ["verifier", "merger"], ["reviewer", "merger"]],
+  "access": {
+    "tools": [],
+    "shellCommands": [],
+    "networkDestinations": [],
+    "mcpTools": [],
+    "secretNames": [],
+    "externalAdapters": []
+  },
+  "riskPrivacy": {
+    "maximumClassification": "confidential",
+    "allowedClassifications": ["internal", "confidential"],
+    "prohibitedData": ["credentials", "payment-card-data", "health-data", "employee-case-data", "restricted-customer-content"],
+    "retentionDays": 90
+  },
+  "reviewRubric": [
+    "The problem, stakeholders, and current process are evidence-backed.",
+    "Decision criteria, alternatives, and tradeoffs are explicit.",
+    "Controls name owners, evidence, frequency, exceptions, and approvals.",
+    "Implementation and runbook steps remain proposals for human execution.",
+    "The package contains no CRM, ERP, ticketing, payment, procurement, or production mutation."
+  ],
+  "prohibitedEffects": ["approve", "merge", "deploy", "publish", "external-publication", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change", "ticketing-mutation", "procurement-mutation", "production-operation", "workflow-enablement"],
+  "limits": { "maxTokens": 20000, "maxDurationMs": 600000, "maxRetries": 1, "maxLoops": 2, "maxParallel": 1, "maxRecursionDepth": 0, "maxFiles": 9, "maxPatchBytes": 262144 },
+  "maxRevisionLoops": 2,
+  "maxArtifactBytes": 262144
+}

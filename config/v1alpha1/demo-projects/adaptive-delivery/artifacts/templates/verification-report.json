@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveVerificationReportTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "authority": "advisory-only",
+    "targetFree": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "findings",
+        "openQuestions"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array"
+        },
+        "openQuestions": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "contentDigest": "sha256:678ac87db50a20bfc5a05a38439820625fe34f45ce44af0b6cc3e440b43bf0c3"
+}

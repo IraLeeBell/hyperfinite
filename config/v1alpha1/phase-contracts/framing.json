@@ -1,0 +1,32 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": { "id": "core.framing", "version": "1.0.0" },
+  "phase": "framing",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": ["activation-lease-current", "work-accord-current"],
+  "requiredEvidence": ["trusted-binding", "activation-lease"],
+  "allowedCapabilities": ["core.frame-artifact@1.0.0"],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["evidence"],
+    "properties": { "evidence": { "type": "array", "items": { "type": "string" } } }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["summary", "openQuestions"],
+    "properties": {
+      "summary": { "type": "string" },
+      "openQuestions": { "type": "array", "items": { "type": "string" } }
+    }
+  },
+  "exitRules": [
+    { "predicate": "eligible-human-accepts-frame", "event": "frame-accepted" }
+  ],
+  "limits": { "maxLoops": 4, "maxCalls": 4, "maxCostUnits": 40, "maxParallel": 1 },
+  "humanGates": ["activate", "accept-frame"],
+  "privacy": { "maximumClass": "internal", "retentionDays": 30 }
+}

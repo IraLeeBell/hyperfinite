@@ -1,0 +1,493 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DeploymentTopologyPlan",
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-28T12:00:00Z",
+  "services": [
+    {
+      "serviceId": "webhook-verifier",
+      "kind": "webhook-ingress",
+      "identity": {
+        "principalId": "principal:webhook-verifier",
+        "oidcAudience": "synthetic://hyperfinite/webhook-verifier",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "webhook-ingress.yml"
+        ],
+        "signingKeyId": "synthetic-webhook-key-01",
+        "credentialCustody": "sign-only-broker"
+      },
+      "health": {
+        "endpointPath": "/healthz/webhook-verifier",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": []
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "runtime-state-publisher",
+      "kind": "state-publisher",
+      "identity": {
+        "principalId": "principal:runtime-state-publisher",
+        "oidcAudience": "synthetic://hyperfinite/runtime-state-publisher",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "runtime-state-publish.yml"
+        ],
+        "signingKeyId": "synthetic-state-key-01",
+        "credentialCustody": "sign-only-broker"
+      },
+      "health": {
+        "endpointPath": "/healthz/runtime-state-publisher",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": []
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "authorization-redeemer",
+      "kind": "oidc-redeemer",
+      "identity": {
+        "principalId": "principal:authorization-redeemer",
+        "oidcAudience": "synthetic://hyperfinite/authorization-redeemer",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "execution.yml"
+        ],
+        "signingKeyId": "synthetic-redeemer-key-01",
+        "credentialCustody": "short-lived-scoped-token"
+      },
+      "health": {
+        "endpointPath": "/healthz/authorization-redeemer",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": []
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "evidence-signer",
+      "kind": "evidence-signer",
+      "identity": {
+        "principalId": "principal:evidence-signer",
+        "oidcAudience": "synthetic://hyperfinite/evidence-signer",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "execution.yml",
+          "review.yml"
+        ],
+        "signingKeyId": "synthetic-evidence-key-01",
+        "credentialCustody": "sign-only-broker"
+      },
+      "health": {
+        "endpointPath": "/healthz/evidence-signer",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": []
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "evidence-and-grant-store-broker",
+      "kind": "durable-store-service",
+      "identity": {
+        "principalId": "principal:evidence-and-grant-store-broker",
+        "oidcAudience": "synthetic://hyperfinite/evidence-and-grant-store-broker",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "execution.yml"
+        ],
+        "signingKeyId": "synthetic-store-key-01",
+        "credentialCustody": "short-lived-scoped-token"
+      },
+      "health": {
+        "endpointPath": "/healthz/evidence-and-grant-store-broker",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": []
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "github-token-broker",
+      "kind": "credential-broker",
+      "identity": {
+        "principalId": "principal:github-token-broker",
+        "oidcAudience": "synthetic://hyperfinite/github-token-broker",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "execution.yml"
+        ],
+        "signingKeyId": "synthetic-token-broker-key-01",
+        "credentialCustody": "sign-only-broker"
+      },
+      "health": {
+        "endpointPath": "/healthz/github-token-broker",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": [
+          "api.github.com"
+        ]
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "single-writer-reconciler",
+      "kind": "single-writer",
+      "identity": {
+        "principalId": "principal:single-writer-reconciler",
+        "oidcAudience": "synthetic://hyperfinite/single-writer-reconciler",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "execution.yml"
+        ],
+        "signingKeyId": "synthetic-writer-key-01",
+        "credentialCustody": "short-lived-scoped-token"
+      },
+      "health": {
+        "endpointPath": "/healthz/single-writer-reconciler",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": [
+          "api.github.com"
+        ]
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    },
+    {
+      "serviceId": "installation-and-release-adapter",
+      "kind": "installation-adapter",
+      "identity": {
+        "principalId": "principal:installation-and-release-adapter",
+        "oidcAudience": "synthetic://hyperfinite/installation-and-release-adapter",
+        "allowedRepositories": [
+          "synthetic-org/hyperfinite"
+        ],
+        "allowedWorkflows": [
+          "installer.yml"
+        ],
+        "signingKeyId": "synthetic-installer-key-01",
+        "credentialCustody": "sign-only-broker"
+      },
+      "health": {
+        "endpointPath": "/healthz/installation-and-release-adapter",
+        "exposesSecretMaterial": false,
+        "failClosedOnDependencyUnavailable": true
+      },
+      "network": {
+        "denyByDefaultEgress": true,
+        "allowedEgressHosts": [
+          "api.github.com"
+        ]
+      },
+      "isolation": {
+        "sharedWithModelRunner": false,
+        "sharedWithReviewerJob": false,
+        "sharedWithUntrustedActionsJob": false,
+        "dedicatedCredential": true
+      }
+    }
+  ],
+  "durableStores": [
+    {
+      "storeId": "evidence-store",
+      "kind": "conditional-evidence-store",
+      "identity": {
+        "namespace": "namespace-evidence-store",
+        "credentialId": "credential-evidence-store"
+      },
+      "atomicGuarantees": {
+        "casSupported": true,
+        "idempotentWrites": true,
+        "replayRefusal": true,
+        "restartContinuity": true,
+        "boundedJournal": {
+          "maxEntries": 512,
+          "enforced": true
+        }
+      },
+      "isolation": {
+        "dedicatedCredential": true,
+        "sharedWithModelRunner": false
+      }
+    },
+    {
+      "storeId": "operation-grant-store",
+      "kind": "operation-grant-claim-store",
+      "identity": {
+        "namespace": "namespace-operation-grant-store",
+        "credentialId": "credential-operation-grant-store"
+      },
+      "atomicGuarantees": {
+        "casSupported": true,
+        "idempotentWrites": true,
+        "replayRefusal": true,
+        "restartContinuity": true,
+        "boundedJournal": {
+          "maxEntries": 512,
+          "enforced": true
+        }
+      },
+      "isolation": {
+        "dedicatedCredential": true,
+        "sharedWithModelRunner": false
+      }
+    },
+    {
+      "storeId": "receipt-journal",
+      "kind": "bounded-signed-receipt-journal",
+      "identity": {
+        "namespace": "namespace-receipt-journal",
+        "credentialId": "credential-receipt-journal"
+      },
+      "atomicGuarantees": {
+        "casSupported": true,
+        "idempotentWrites": true,
+        "replayRefusal": true,
+        "restartContinuity": true,
+        "boundedJournal": {
+          "maxEntries": 512,
+          "enforced": true
+        }
+      },
+      "isolation": {
+        "dedicatedCredential": true,
+        "sharedWithModelRunner": false
+      }
+    },
+    {
+      "storeId": "runtime-state-store",
+      "kind": "copilot-runtime-state-store",
+      "identity": {
+        "namespace": "namespace-runtime-state-store",
+        "credentialId": "credential-runtime-state-store"
+      },
+      "atomicGuarantees": {
+        "casSupported": true,
+        "idempotentWrites": true,
+        "replayRefusal": true,
+        "restartContinuity": true,
+        "boundedJournal": {
+          "maxEntries": 256,
+          "enforced": true
+        }
+      },
+      "isolation": {
+        "dedicatedCredential": true,
+        "sharedWithModelRunner": false
+      }
+    }
+  ],
+  "budgets": [
+    {
+      "budgetId": "webhook-verifier-requests",
+      "appliesToServiceId": "webhook-verifier",
+      "limitKind": "requests",
+      "windowSeconds": 60,
+      "maxUnits": 600
+    },
+    {
+      "budgetId": "runtime-state-publisher-requests",
+      "appliesToServiceId": "runtime-state-publisher",
+      "limitKind": "requests",
+      "windowSeconds": 60,
+      "maxUnits": 300
+    },
+    {
+      "budgetId": "authorization-redeemer-requests",
+      "appliesToServiceId": "authorization-redeemer",
+      "limitKind": "requests",
+      "windowSeconds": 60,
+      "maxUnits": 200
+    },
+    {
+      "budgetId": "evidence-signer-requests",
+      "appliesToServiceId": "evidence-signer",
+      "limitKind": "requests",
+      "windowSeconds": 60,
+      "maxUnits": 200
+    },
+    {
+      "budgetId": "evidence-and-grant-store-broker-concurrency",
+      "appliesToServiceId": "evidence-and-grant-store-broker",
+      "limitKind": "concurrency",
+      "windowSeconds": 1,
+      "maxUnits": 8
+    },
+    {
+      "budgetId": "github-token-broker-requests",
+      "appliesToServiceId": "github-token-broker",
+      "limitKind": "requests",
+      "windowSeconds": 3600,
+      "maxUnits": 500
+    },
+    {
+      "budgetId": "single-writer-reconciler-concurrency",
+      "appliesToServiceId": "single-writer-reconciler",
+      "limitKind": "concurrency",
+      "windowSeconds": 1,
+      "maxUnits": 1
+    },
+    {
+      "budgetId": "installation-and-release-adapter-requests",
+      "appliesToServiceId": "installation-and-release-adapter",
+      "limitKind": "requests",
+      "windowSeconds": 3600,
+      "maxUnits": 20
+    }
+  ],
+  "monitoring": {
+    "requiredSignals": [
+      "health",
+      "latency",
+      "errorRate",
+      "budgetExhaustion",
+      "evidenceSigningFailure",
+      "replayRejection",
+      "durableStoreUnavailable",
+      "journalCapacityWarning"
+    ],
+    "alertRouting": {
+      "ownerRole": "security-owner",
+      "channel": "incident-queue"
+    }
+  },
+  "retention": [
+    {
+      "artifactKind": "signed-evidence",
+      "minRetentionDays": 90,
+      "maxRetentionDays": 3650
+    },
+    {
+      "artifactKind": "receipt-journal",
+      "minRetentionDays": 90,
+      "maxRetentionDays": 3650
+    },
+    {
+      "artifactKind": "audit-log",
+      "minRetentionDays": 365,
+      "maxRetentionDays": 3650
+    },
+    {
+      "artifactKind": "installation-backup",
+      "minRetentionDays": 30,
+      "maxRetentionDays": 365
+    }
+  ],
+  "protections": [
+    {
+      "protectionId": "app-installation-protection",
+      "scope": "app-installation",
+      "requiresHumanApproval": true,
+      "allowsAutomationBypass": false
+    },
+    {
+      "protectionId": "ruleset-protection",
+      "scope": "ruleset",
+      "requiresHumanApproval": true,
+      "allowsAutomationBypass": false
+    },
+    {
+      "protectionId": "required-check-protection",
+      "scope": "required-check",
+      "requiresHumanApproval": true,
+      "allowsAutomationBypass": false
+    },
+    {
+      "protectionId": "actions-policy-protection",
+      "scope": "actions-policy",
+      "requiresHumanApproval": true,
+      "allowsAutomationBypass": false
+    },
+    {
+      "protectionId": "ghas-setting-protection",
+      "scope": "ghas-setting",
+      "requiresHumanApproval": true,
+      "allowsAutomationBypass": false
+    },
+    {
+      "protectionId": "project-binding-protection",
+      "scope": "project-binding",
+      "requiresHumanApproval": true,
+      "allowsAutomationBypass": false
+    }
+  ],
+  "nonAuthoritative": {
+    "cannotInstallOrTransferApp": true,
+    "cannotMintOrHoldCredentials": true,
+    "cannotSelectLiveTarget": true,
+    "cannotDeployOrActivate": true
+  }
+}

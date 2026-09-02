@@ -1,0 +1,58 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationVerification",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:41ccb7e90cea47b6b688fc49264b7748210d873bebe6675d723883d4dbec6b7c",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "security-verification",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:99c87ae541a0c03292f1cf8e6d9fb348910152a333ebb8ea4241fb9fb7fe805c",
+    "headSha": "9999999999999999999999999999999999999999",
+    "status": "verified",
+    "assertions": [
+      {
+        "id": "fixed-regression",
+        "status": "success",
+        "evidenceDigest": "sha256:ebb08d5ec30dfcf56ed143fa96291c3d174de86c39184191f89c23ae30944bd8"
+      },
+      {
+        "id": "dependency-lock-consistency",
+        "status": "success",
+        "evidenceDigest": "sha256:594b1c1bafd236af57a746afb521ddc39318ed1cdcb40b5da18a37251246ae85"
+      },
+      {
+        "id": "threat-detection",
+        "status": "success",
+        "evidenceDigest": "sha256:d490a0c4d703a7a462ef2003c37d7a6508ceb6d88ce0fecc7542785eeecf384b"
+      },
+      {
+        "id": "dlp-scan",
+        "status": "success",
+        "evidenceDigest": "sha256:a5839f6306b1cc369c944670235056c1fb92519a0acbbdf354393666ddead3c4"
+      },
+      {
+        "id": "synthetic-security-scan",
+        "status": "success",
+        "evidenceDigest": "sha256:99c87ae541a0c03292f1cf8e6d9fb348910152a333ebb8ea4241fb9fb7fe805c"
+      },
+      {
+        "id": "unrelated-scanner-finding-open-unchanged",
+        "status": "information",
+        "evidenceDigest": "sha256:18ca39df6a45c92bf2611406b1198f752fee0fcab3778c2401a846f2ce57b1d4"
+      },
+      {
+        "id": "automation-review-comment-only",
+        "status": "success",
+        "evidenceDigest": "sha256:0eb6831ababc800581e942df14c9a44f4fbf2c5a5ccd31208fea08e1153ed17d"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

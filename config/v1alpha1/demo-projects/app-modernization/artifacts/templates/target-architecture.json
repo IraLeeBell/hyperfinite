@@ -1,0 +1,39 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationTargetArchitecture",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:f8fb46c29305a9e5ec694bc369c658317a5bd7ad9a9fc375b21a984b15823999",
+  "spec": {
+    "assessmentDigest": "sha256:ef91de7f24eda4b834c2180acc3f026ff89cce7103e1c325c53f5877fe1d73d1",
+    "riskCompatibilityDigest": "sha256:f210053631e216d467d1f321c67812c560c5b93dda1b624573c64d1b9b480806",
+    "principles": [
+      "Preserve behavior before replacement.",
+      "Separate domain logic from transport."
+    ],
+    "components": [
+      {
+        "id": "application-core",
+        "responsibility": "Own transport-independent application behavior.",
+        "interfaces": [
+          "ApplicationRequest",
+          "ApplicationResponse"
+        ]
+      },
+      {
+        "id": "compatibility-adapter",
+        "responsibility": "Preserve the legacy entry-point contract.",
+        "interfaces": [
+          "LegacyHandler"
+        ]
+      }
+    ],
+    "decisions": [
+      "Use an incremental strangler boundary inside the repository."
+    ],
+    "nonGoals": [
+      "Production deployment",
+      "Data cutover",
+      "External publication"
+    ]
+  }
+}

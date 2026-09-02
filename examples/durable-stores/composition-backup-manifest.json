@@ -1,0 +1,45 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DurableStoreCompositionBackupManifest",
+  "schemaVersion": "1.0.0",
+  "topologyDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "quiescence": {
+    "schemaVersion": "1.0.0",
+    "topologyDigest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "writerDisabled": true,
+    "writerGeneration": 7,
+    "checkpointDigest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "observedAt": "2026-08-30T12:00:00.000Z",
+    "expiresAt": "2026-08-30T13:00:00.000Z",
+    "signature": {
+      "algorithm": "ed25519",
+      "keyId": "synthetic-backup-key",
+      "value": "c2ln"
+    }
+  },
+  "stores": [
+    {
+      "storeId": "evidence-store",
+      "manifestDigest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "storeId": "operation-grant-store",
+      "manifestDigest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "storeId": "receipt-journal",
+      "manifestDigest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    {
+      "storeId": "runtime-state-store",
+      "manifestDigest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    }
+  ],
+  "backupSetId": "sha256:4d90675ae1bf68a5ef3ad1f9716ec1947516745d4326abdfb944726c470a54c3",
+  "nonAuthoritative": true,
+  "signature": {
+    "algorithm": "ed25519",
+    "keyId": "synthetic-backup-key",
+    "value": "c2ln"
+  }
+}

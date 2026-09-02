@@ -1,0 +1,53 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationArtifactCatalog",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:0e620b842a7fe492c48d852e364818511f2a1f52b1512c589e131ef8b1eaf6bc",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "artifactSchemaRef": "schemas/v1alpha1/demo-projects/security-dependency-remediation/security-remediation-artifact.schema.json",
+    "syntheticEvidenceSchemaRef": "schemas/v1alpha1/demo-projects/security-dependency-remediation/synthetic-security-evidence.schema.json",
+    "artifacts": [
+      {
+        "kind": "SecurityRemediationBoundedReport",
+        "stageId": "triage",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/bounded-report.json"
+      },
+      {
+        "kind": "SecurityRemediationAffectedComponentInventory",
+        "stageId": "triage",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/affected-component-inventory.json"
+      },
+      {
+        "kind": "SecurityRemediationReproductionEvidence",
+        "stageId": "reproduction-and-impact-analysis",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/reproduction-evidence.json"
+      },
+      {
+        "kind": "SecurityRemediationImpactAssessment",
+        "stageId": "reproduction-and-impact-analysis",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/impact-assessment.json"
+      },
+      {
+        "kind": "SecurityRemediationPlan",
+        "stageId": "remediation-design",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/remediation-plan.json"
+      },
+      {
+        "kind": "SecurityRemediationDraftPatchPullRequestEvidence",
+        "stageId": "patch-implementation",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/draft-patch-pr-evidence.json"
+      },
+      {
+        "kind": "SecurityRemediationVerification",
+        "stageId": "security-verification",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/security-verification.json"
+      },
+      {
+        "kind": "SecurityRemediationHumanReviewPackage",
+        "stageId": "human-review",
+        "templateRef": "config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/human-review-package.json"
+      }
+    ]
+  }
+}

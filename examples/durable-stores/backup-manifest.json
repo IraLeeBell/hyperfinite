@@ -1,0 +1,18 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DurableStoreBackupManifest",
+  "schemaVersion": "1.0.0",
+  "storeId": "receipt-journal",
+  "storeNamespace": "namespace-receipt-journal",
+  "formatVersion": 1,
+  "namespaces": [
+    {
+      "namespace": "stage-receipts",
+      "sequence": 2,
+      "head": "sha256:dd7f10c39e53755e839ecf87d847a79948a00abc5e7ceaee28e5a75e3d2c6da6",
+      "entryCount": 2
+    }
+  ],
+  "entryCount": 2,
+  "nonAuthoritative": true
+}

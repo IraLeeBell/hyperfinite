@@ -1,0 +1,17 @@
+{
+  "synthetic": true,
+  "demoProjectId": "feature-delivery",
+  "sourceStage": "human-review",
+  "destinationStage": "completed",
+  "route": "review.accept",
+  "eligibleIndependentHuman": true,
+  "reviewedHeadSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "observedMergedSha": "cccccccccccccccccccccccccccccccccccccccc",
+  "acceptanceCriterion": {
+    "id": "FD-AC-005",
+    "status": "passed"
+  },
+  "automationApprovalAuthority": false,
+  "automationMergeAuthority": false,
+  "externalCalls": 0
+}

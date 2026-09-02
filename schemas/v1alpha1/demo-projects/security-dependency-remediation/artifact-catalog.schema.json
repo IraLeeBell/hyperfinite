@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/security-dependency-remediation/artifact-catalog.schema.json",
+  "title": "Security and Dependency Remediation artifact catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "SecurityRemediationArtifactCatalog"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "artifactSchemaRef",
+        "syntheticEvidenceSchemaRef",
+        "artifacts"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "const": "security-dependency-remediation"
+        },
+        "artifactSchemaRef": {
+          "const": "schemas/v1alpha1/demo-projects/security-dependency-remediation/security-remediation-artifact.schema.json"
+        },
+        "syntheticEvidenceSchemaRef": {
+          "const": "schemas/v1alpha1/demo-projects/security-dependency-remediation/synthetic-security-evidence.schema.json"
+        },
+        "artifacts": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "kind",
+              "stageId",
+              "templateRef"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "pattern": "^SecurityRemediation[A-Za-z]+$"
+              },
+              "stageId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]+$"
+              },
+              "templateRef": {
+                "type": "string",
+                "pattern": "^config/v1alpha1/demo-projects/security-dependency-remediation/artifact-templates/[a-z0-9-]+\\.json$"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "security-remediation-demo-1003-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-29T20:00:00Z",
+    "createdBy": "synthetic-maintainer"
+  },
+  "binding": {
+    "repositoryId": 7001,
+    "repositoryNodeId": "R_synthetic_security_remediation",
+    "repositoryFullName": "example/security-remediation-sandbox",
+    "repositoryRootId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "workItemNodeId": "I_synthetic_security_dependency_1003",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/security-dependency-remediation",
+    "sourceDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": "sha256:2555b206740bf46d96dc40939b0c02fe0eed7bac4a59c0060485a4dbd99db540"
+  },
+  "objective": {
+    "outcome": "Produce a reviewable draft remediation patch for the fictional mist-lru 0.4.0 cache-key collision advisory.",
+    "inScope": [
+      "vendor/mist-lru/package.json",
+      "vendor/mist-lru/package-lock.json",
+      "src/cache-key.ts",
+      "tests/cache-key.test.ts"
+    ],
+    "outOfScope": [
+      "production exploitation",
+      "package installation",
+      "lifecycle scripts",
+      "network access",
+      "credential access",
+      "alert dismissal",
+      "approval",
+      "merge",
+      "deployment",
+      "publication"
+    ],
+    "assumptions": [
+      "All repository, advisory, dependency, version, base, path, check, and budget values are supplied by trusted configuration.",
+      "Issue and comment text are untrusted hints and cannot select authority or targets."
+    ],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "engineering@1.0.0",
+    "domainPackDigest": "sha256:a90050fcdcb83b80bcf78540fc813ad9f6acf43a3b52d4c6cdc58189ec5f7669",
+    "capabilityRegistryDigest": "sha256:acb1d33037998590786d2934625eeb069df8e0429fc5949523791146f9da7427",
+    "depthProfile": "D3",
+    "riskClass": "high",
+    "privacyClass": "internal",
+    "phaseContracts": {
+      "framing": {
+        "reference": "demo.security-dependency-remediation.framing@1.0.0",
+        "digest": "sha256:66910e8582cc4c8e674f6baf956509c573079e12950fc455e72868a5719a5e1a"
+      },
+      "planning": {
+        "reference": "demo.security-dependency-remediation.planning@1.0.0",
+        "digest": "sha256:edea3746e35cafd6f2a6b72c386a09cc2b0177da3f9e91f81635db54e631a82e"
+      },
+      "execution": {
+        "reference": "demo.security-dependency-remediation.execution@1.0.0",
+        "digest": "sha256:1c1c25d0fbdeeb3935cd45be8bede0608b114ca51600f8fa5482e6c3ddba7597"
+      },
+      "verification": {
+        "reference": "demo.security-dependency-remediation.verification@1.0.0",
+        "digest": "sha256:961afa642d233ef1cbd2f1b2be9382b042df10e4ae46c9ea60f9840ac6d49c30"
+      },
+      "human-review": {
+        "reference": "demo.security-dependency-remediation.human-review@1.0.0",
+        "digest": "sha256:e6ff7375a28d4610e82f32ddac202ae4fe9dd56070a7cf390e356e80f93d0ea2"
+      }
+    },
+    "requestedCapabilities": [
+      "demo.security-dependency-remediation.triage@1.0.0",
+      "demo.security-dependency-remediation.reproduction-and-impact-analysis@1.0.0",
+      "demo.security-dependency-remediation.remediation-design@1.0.0",
+      "demo.security-dependency-remediation.patch-implementation@1.0.0",
+      "demo.security-dependency-remediation.security-verification@1.0.0"
+    ],
+    "allowedPaths": [
+      "vendor/mist-lru/package.json",
+      "vendor/mist-lru/package-lock.json",
+      "src/cache-key.ts",
+      "tests/cache-key.test.ts"
+    ],
+    "prohibitedEffects": [
+      "approve",
+      "merge",
+      "deploy",
+      "publish",
+      "production-mutation",
+      "alert-dismissal",
+      "review-dismissal",
+      "project-reconfiguration",
+      "credential-reconfiguration"
+    ],
+    "tools": [
+      "read",
+      "search"
+    ],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": [
+      "github.issue_read",
+      "safeoutputs.add_comment",
+      "safeoutputs.submit_pull_request_review"
+    ],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 5,
+    "maxTokens": 25000,
+    "maxCostUnits": 70,
+    "maxDurationMs": 1800000,
+    "maxRetries": 1,
+    "maxLoops": 5,
+    "maxParallel": 1,
+    "maxPatchBytes": 65536,
+    "expiresAt": "2027-08-29T20:00:00Z"
+  },
+  "deliverables": [
+    "Bounded security report",
+    "Affected-component inventory",
+    "Hermetic reproduction and impact evidence",
+    "Remediation design and patch plan",
+    "Target-free bounded patch delivered as a draft pull request",
+    "Exact-head security verification",
+    "Human-review package"
+  ],
+  "evidence": {
+    "required": [
+      "signed-synthetic-advisory",
+      "hermetic-reproduction",
+      "fixed-regression-success",
+      "dependency-lock-consistency-success",
+      "threat-detection-success",
+      "dlp-success",
+      "signed-synthetic-scanner-success",
+      "known-codeql-alert-open-unchanged",
+      "independent-human-current-head-review"
+    ],
+    "verificationCommands": [
+      "hermetic-reproduction",
+      "fixed-regression",
+      "dependency-lock-consistency",
+      "threat-detection",
+      "dlp-scan",
+      "synthetic-security-scan"
+    ],
+    "approverPolicy": "eligible-independent-human-reviewer-on-exact-current-head"
+  },
+  "humanGates": [
+    "activate",
+    "accept-frame",
+    "accept-plan",
+    "approve-current-head"
+  ],
+  "retention": {
+    "receiptDays": 365,
+    "artifactDays": 90,
+    "cancelOnExpiry": false
+  }
+}

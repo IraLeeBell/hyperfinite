@@ -1,0 +1,40 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "feature-delivery",
+  "cases": [
+    "missing-stage",
+    "skipped-stage",
+    "reordered-stage",
+    "generic-agent-fallback",
+    "wrong-capability",
+    "cross-demo-evidence",
+    "stale-predecessor",
+    "duplicate-agent-identity",
+    "missing-consent",
+    "missing-authorization",
+    "repository-substitution",
+    "prompt-injection",
+    "model-selected-path",
+    "model-selected-route",
+    "model-selected-effect",
+    "malformed-artifact",
+    "oversized-artifact",
+    "protected-path",
+    "unplanned-path",
+    "unexpected-diff",
+    "nonmodel-agent",
+    "non-draft-pull-request",
+    "automated-approve",
+    "automated-merge",
+    "head-movement",
+    "partial-effect-blind-retry",
+    "lost-ack-blind-retry",
+    "stale-reauthorization"
+  ],
+  "expected": {
+    "decision": "refuse",
+    "beforeInferenceOrEffect": true,
+    "externalCalls": 0,
+    "repositoryEffects": 0
+  }
+}

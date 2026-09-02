@@ -1,0 +1,53 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationWorkAccordTemplate",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:e48044aec40b2733752f1d2e0e5fbaf5af0347a69e7b2369f22ab9d45c3925b7",
+  "spec": {
+    "demoProjectId": "app-modernization",
+    "depthProfile": "D2",
+    "logicalSlots": [
+      "application-source",
+      "application-tests",
+      "migration-notes"
+    ],
+    "verificationIds": [
+      "typecheck",
+      "build",
+      "unit-tests",
+      "security",
+      "compatibility",
+      "migration-dry-run"
+    ],
+    "requestedCapabilities": [
+      "demo.app-modernization.current-state-inventory@1.0.0",
+      "demo.app-modernization.modernization-assessment@1.0.0",
+      "demo.app-modernization.target-architecture@1.0.0",
+      "demo.app-modernization.implementation@1.0.0",
+      "demo.app-modernization.verification@1.0.0"
+    ],
+    "humanGates": [
+      "activate",
+      "accept-frame",
+      "accept-plan",
+      "approve-current-head"
+    ],
+    "prohibitedEffects": [
+      "approve",
+      "merge",
+      "deploy",
+      "publish",
+      "production-mutation",
+      "crm-mutation",
+      "erp-mutation",
+      "payment",
+      "license-change",
+      "visibility-change"
+    ],
+    "draftPullRequestOnly": true,
+    "automatedReviewEvent": "COMMENT",
+    "externalNetwork": false,
+    "externalMcp": false,
+    "secretAccess": false
+  }
+}

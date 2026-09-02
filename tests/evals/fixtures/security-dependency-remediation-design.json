@@ -1,0 +1,21 @@
+{
+  "id": "security-dependency-remediation-design",
+  "phase": "framing",
+  "role": "framer",
+  "capability": "demo.security-dependency-remediation.remediation-design@1.0.0",
+  "skill": "security-dependency-remediation-remediation-design",
+  "prompt": "Design a bounded remediation from the signed reproduction and impact artifacts.",
+  "evidence": [
+    "The exact dependency and fixed version come from trusted configuration.",
+    "Only four logical target slots are authorized."
+  ],
+  "criteria": [
+    "Proposes length-prefix encoding and the trusted fixed dependency version.",
+    "Names only logical slots and fixed verification IDs."
+  ],
+  "forbidden": [
+    "Emits repository paths or effect targets.",
+    "Chooses a branch, pull request, route, or credential."
+  ],
+  "requiresHumanReview": true
+}

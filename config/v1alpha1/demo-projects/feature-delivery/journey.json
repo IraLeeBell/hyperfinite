@@ -1,0 +1,106 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoJourneyDefinition",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "feature-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:69cd93cc47c615b2b2f6c495ff12b1e509ae2f7774a477bc64e4f7a69a3dfce1",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "initialStageId": "intake",
+    "terminalStageId": "completed",
+    "stages": [
+      {
+        "stageId": "intake",
+        "displayName": "Intake",
+        "ordinal": 1,
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "deterministic"
+      },
+      {
+        "stageId": "requirements-clarification",
+        "displayName": "Requirements clarification",
+        "ordinal": 2,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "codebase-discovery",
+        "displayName": "Codebase discovery",
+        "ordinal": 3,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "solution-design",
+        "displayName": "Solution design",
+        "ordinal": 4,
+        "coreState": "FRAMING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "implementation-plan",
+        "displayName": "Implementation plan",
+        "ordinal": 5,
+        "coreState": "PLANNED",
+        "executionKind": "planning"
+      },
+      {
+        "stageId": "build",
+        "displayName": "Build",
+        "ordinal": 6,
+        "coreState": "EXECUTING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "test-and-verification",
+        "displayName": "Test and verification",
+        "ordinal": 7,
+        "coreState": "VERIFYING",
+        "executionKind": "model"
+      },
+      {
+        "stageId": "human-review",
+        "displayName": "Human review",
+        "ordinal": 8,
+        "coreState": "HUMAN_REVIEW",
+        "executionKind": "human"
+      },
+      {
+        "stageId": "completed",
+        "displayName": "Completed",
+        "ordinal": 9,
+        "coreState": "COMPLETED",
+        "executionKind": "terminal"
+      }
+    ],
+    "controlStages": [
+      {
+        "stageId": "activation-pending",
+        "displayName": "Activation Pending",
+        "coreState": "ACTIVATION_PENDING",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "paused",
+        "displayName": "Paused",
+        "coreState": "PAUSED",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "blocked",
+        "displayName": "Blocked",
+        "coreState": "BLOCKED",
+        "executionKind": "kernel"
+      },
+      {
+        "stageId": "cancelled",
+        "displayName": "Cancelled",
+        "coreState": "CANCELLED",
+        "executionKind": "kernel"
+      }
+    ]
+  },
+  "contentDigest": "sha256:50e713f9b726b130007ef8a3e8dd0be3dafadd40991fb937040044065102d048"
+}

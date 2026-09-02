@@ -1,0 +1,79 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryVerificationReport",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:cbf19948b5d212dfad198359b680f4493b5678a793a51b4ee70f77a497d40ab7",
+  "spec": {
+    "draftPullRequestEvidenceDigest": "sha256:1f4f355ab66b8bfbaab2a0fde3575db3d5eec2b237b30435aba658a33d61a392",
+    "headSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "commands": [
+      {
+        "id": "fd-acceptance-tests",
+        "status": "passed",
+        "stdoutDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "id": "fd-regression-tests",
+        "status": "passed",
+        "stdoutDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "id": "fd-typecheck",
+        "status": "passed",
+        "stdoutDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "id": "git-diff-check",
+        "status": "passed",
+        "stdoutDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderrDigest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "acceptanceCriteria": [
+      {
+        "id": "FD-AC-001",
+        "status": "passed",
+        "evidenceDigests": [
+          "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        ]
+      },
+      {
+        "id": "FD-AC-002",
+        "status": "passed",
+        "evidenceDigests": [
+          "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        ]
+      },
+      {
+        "id": "FD-AC-003",
+        "status": "passed",
+        "evidenceDigests": [
+          "sha256:a891065c48252ba1d0b966acf1f31d2ed428272afc6972bc97bb044e76ca921f",
+          "sha256:1f4f355ab66b8bfbaab2a0fde3575db3d5eec2b237b30435aba658a33d61a392"
+        ]
+      },
+      {
+        "id": "FD-AC-004",
+        "status": "passed",
+        "evidenceDigests": [
+          "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        ]
+      },
+      {
+        "id": "FD-AC-005",
+        "status": "pending",
+        "evidenceDigests": [
+          "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+        ]
+      }
+    ],
+    "review": {
+      "event": "COMMENT",
+      "findings": []
+    },
+    "headMovementInvalidates": true
+  }
+}

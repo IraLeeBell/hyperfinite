@@ -1,0 +1,25 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryHumanReviewPackage",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:95a2dab9ed2d6e93425f5b62f513e62d58eef479ea0bec7a36c95c20c1967565",
+  "spec": {
+    "headSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "draftPullRequestEvidenceDigest": "sha256:1f4f355ab66b8bfbaab2a0fde3575db3d5eec2b237b30435aba658a33d61a392",
+    "verificationReportDigest": "sha256:cbf19948b5d212dfad198359b680f4493b5678a793a51b4ee70f77a497d40ab7",
+    "acceptanceCriterionIds": [
+      "FD-AC-001",
+      "FD-AC-002",
+      "FD-AC-003",
+      "FD-AC-004",
+      "FD-AC-005"
+    ],
+    "automationAuthority": "comment-only",
+    "humanDecisionRequired": true,
+    "allowedHumanOutcomes": [
+      "request-revision",
+      "accept-merged-head"
+    ],
+    "status": "awaiting-human"
+  }
+}

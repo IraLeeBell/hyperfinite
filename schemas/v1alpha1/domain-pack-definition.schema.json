@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-pack-definition.schema.json",
+  "title": "First-party Domain Pack definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "id", "version", "displayName", "enabledByDefault", "agent", "skill", "policyRef", "artifactRoot", "artifactSchema", "templateRoot", "capabilityBindings", "slots", "stages", "humanGates", "roles", "incompatibleRolePairs", "access", "riskPrivacy", "reviewRubric", "prohibitedEffects", "limits", "maxRevisionLoops", "maxArtifactBytes"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DomainPackDefinition" },
+    "id": { "enum": ["marketing", "business-operations"] },
+    "version": { "const": "1.0.0" },
+    "displayName": { "type": "string", "minLength": 1 },
+    "enabledByDefault": { "const": false },
+    "agent": { "type": "string", "pattern": "^\\.github/agents/[a-z0-9-]+\\.agent\\.md$" },
+    "skill": { "type": "string", "pattern": "^[a-z][a-z0-9-]+$" },
+    "policyRef": { "type": "string", "pattern": "^config/v1alpha1/domain-packs/[a-z0-9-]+/policy\\.json$" },
+    "artifactRoot": { "enum": ["examples/marketing/workspace", "examples/business-operations/workspace/artifacts"] },
+    "artifactSchema": { "type": "string", "pattern": "^schemas/v1alpha1/[a-z0-9-]+\\.schema\\.json$" },
+    "templateRoot": { "type": "string", "pattern": "^config/v1alpha1/domain-packs/[a-z0-9-]+/templates$" },
+    "capabilityBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["framing", "execution", "verification"],
+      "properties": {
+        "framing": { "$ref": "#/$defs/capability" },
+        "execution": { "$ref": "#/$defs/capability" },
+        "verification": { "$ref": "#/$defs/capability" }
+      }
+    },
+    "slots": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "artifactType", "relativePath", "maxBytes", "mode", "schema", "template", "dependsOn"],
+        "properties": {
+          "id": { "$ref": "#/$defs/slug" },
+          "artifactType": { "$ref": "#/$defs/slug" },
+          "relativePath": { "type": "string", "pattern": "^[a-z0-9-]+\\.json$" },
+          "maxBytes": { "type": "integer", "minimum": 1, "maximum": 262144 },
+          "mode": { "const": 100644 },
+          "schema": { "type": "string", "pattern": "^schemas/v1alpha1/domain-packs/[a-z0-9-]+/[a-z0-9-]+\\.schema\\.json$" },
+          "template": { "type": "string", "pattern": "^[a-z0-9-]+\\.json$" },
+          "dependsOn": { "$ref": "#/$defs/slugs" }
+        }
+      }
+    },
+    "stages": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "phase", "requiredSlots", "requiredGates"],
+        "properties": {
+          "id": { "$ref": "#/$defs/slug" },
+          "phase": { "enum": ["framing", "planning", "execution", "verification", "human-review"] },
+          "requiredSlots": { "$ref": "#/$defs/slugs" },
+          "requiredGates": { "$ref": "#/$defs/slugs" }
+        }
+      }
+    },
+    "humanGates": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "role", "independent", "signed", "current", "requiredForReadiness", "maxAgeMs"],
+        "properties": {
+          "id": { "$ref": "#/$defs/slug" },
+          "role": { "$ref": "#/$defs/slug" },
+          "independent": { "const": true },
+          "signed": { "const": true },
+          "current": { "const": true },
+          "requiredForReadiness": { "const": true },
+          "maxAgeMs": { "type": "integer", "minimum": 1, "maximum": 86400000 }
+        }
+      }
+    },
+    "roles": { "$ref": "#/$defs/nonEmptyStrings" },
+    "incompatibleRolePairs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "array",
+        "minItems": 2,
+        "maxItems": 2,
+        "items": { "$ref": "#/$defs/slug" }
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tools", "shellCommands", "networkDestinations", "mcpTools", "secretNames", "externalAdapters"],
+      "properties": {
+        "tools": { "$ref": "#/$defs/empty" },
+        "shellCommands": { "$ref": "#/$defs/empty" },
+        "networkDestinations": { "$ref": "#/$defs/empty" },
+        "mcpTools": { "$ref": "#/$defs/empty" },
+        "secretNames": { "$ref": "#/$defs/empty" },
+        "externalAdapters": { "$ref": "#/$defs/empty" }
+      }
+    },
+    "riskPrivacy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maximumClassification", "allowedClassifications", "prohibitedData", "retentionDays"],
+      "properties": {
+        "maximumClassification": { "enum": ["internal", "confidential", "restricted"] },
+        "allowedClassifications": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["internal", "confidential", "restricted"] }
+        },
+        "prohibitedData": { "$ref": "#/$defs/strings" },
+        "retentionDays": { "type": "integer", "minimum": 1, "maximum": 365 }
+      }
+    },
+    "reviewRubric": { "$ref": "#/$defs/nonEmptyStrings" },
+    "prohibitedEffects": { "$ref": "#/$defs/nonEmptyStrings" },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxTokens", "maxDurationMs", "maxRetries", "maxLoops", "maxParallel", "maxRecursionDepth", "maxFiles", "maxPatchBytes"],
+      "properties": {
+        "maxTokens": { "type": "integer", "minimum": 0, "maximum": 20000 },
+        "maxDurationMs": { "type": "integer", "minimum": 1, "maximum": 600000 },
+        "maxRetries": { "type": "integer", "minimum": 0, "maximum": 1 },
+        "maxLoops": { "const": 2 },
+        "maxParallel": { "const": 1 },
+        "maxRecursionDepth": { "const": 0 },
+        "maxFiles": { "type": "integer", "minimum": 1, "maximum": 9 },
+        "maxPatchBytes": { "type": "integer", "minimum": 1, "maximum": 262144 }
+      }
+    },
+    "maxRevisionLoops": { "const": 2 },
+    "maxArtifactBytes": { "type": "integer", "minimum": 1, "maximum": 262144 }
+  },
+  "$defs": {
+    "slug": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
+    "capability": { "type": "string", "pattern": "^[a-z0-9.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "slugs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/slug" }
+    },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "empty": { "type": "array", "maxItems": 0 }
+  }
+}

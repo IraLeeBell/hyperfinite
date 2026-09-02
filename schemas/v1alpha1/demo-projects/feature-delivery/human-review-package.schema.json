@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/feature-delivery/human-review-package.schema.json",
+  "title": "Feature Delivery human-review package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "FeatureDeliveryHumanReviewPackage"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "headSha",
+        "draftPullRequestEvidenceDigest",
+        "verificationReportDigest",
+        "acceptanceCriterionIds",
+        "automationAuthority",
+        "humanDecisionRequired",
+        "allowedHumanOutcomes",
+        "status"
+      ],
+      "properties": {
+        "headSha": {
+          "$ref": "#/$defs/sha"
+        },
+        "draftPullRequestEvidenceDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "verificationReportDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "acceptanceCriterionIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^FD-AC-[0-9]{3}$"
+          }
+        },
+        "automationAuthority": {
+          "const": "comment-only"
+        },
+        "humanDecisionRequired": {
+          "const": true
+        },
+        "allowedHumanOutcomes": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "request-revision",
+              "accept-merged-head"
+            ]
+          }
+        },
+        "status": {
+          "const": "awaiting-human"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    }
+  }
+}

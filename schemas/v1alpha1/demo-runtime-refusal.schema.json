@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-runtime-refusal.schema.json",
+  "title": "Autonomous demo runtime refusal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoRuntimeRefusal" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "stageId",
+        "inputDigest",
+        "code",
+        "ruleId",
+        "message",
+        "retryable",
+        "recovery",
+        "refusedAt"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "stageId": {
+          "oneOf": [
+            {
+              "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/identifier"
+            },
+            { "type": "null" }
+          ]
+        },
+        "inputDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "code": {
+          "enum": [
+            "CATALOG_INVALID",
+            "PROFILE_INVALID",
+            "JOURNEY_INVALID",
+            "BINDING_INVALID",
+            "VERSION_UNKNOWN",
+            "DIGEST_MISMATCH",
+            "ACTIVATION_REQUIRED",
+            "FENCE_CONFLICT",
+            "BUDGET_EXHAUSTED",
+            "KERNEL_RECEIPT_MISMATCH",
+            "REPLAY_CONFLICT",
+            "MODEL_CONTROL_FIELD",
+            "RECONCILIATION_REQUIRED",
+            "SELECTION_REQUIRED",
+            "SELECTION_UNAUTHORIZED",
+            "SELECTION_INVALID",
+            "SELECTION_STALE",
+            "SELECTION_REPLAYED",
+            "SELECTION_POLICY_MISMATCH",
+            "SELECTION_TARGET_MISMATCH",
+            "SELECTION_STAGE_MISMATCH",
+            "SELECTION_BINDING_MISMATCH",
+            "SELECTION_GENERATION_MISMATCH",
+            "SELECTION_HEAD_MISMATCH"
+          ]
+        },
+        "ruleId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1024
+        },
+        "retryable": { "type": "boolean" },
+        "recovery": {
+          "enum": [
+            "none",
+            "human-authorization",
+            "new-contract",
+            "reconcile"
+          ]
+        },
+        "refusedAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  }
+}

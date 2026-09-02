@@ -1,0 +1,13 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoExternalCallAssertions",
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "app-modernization",
+  "scope": "fixture-declared-external-call-assertions",
+  "counters": {
+    "github": 0,
+    "network": 0,
+    "credentials": 0,
+    "paidInference": 0
+  }
+}

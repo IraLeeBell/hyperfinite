@@ -1,0 +1,25 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "ControlPolicy",
+  "version": "1.0.0",
+  "actorRules": [
+    { "actorClass": "requester", "requiredRoles": ["work-item-requester"], "human": true },
+    { "actorClass": "reviewer", "requiredRoles": ["eligible-reviewer"], "human": true },
+    { "actorClass": "maintainer", "requiredRoles": ["repository-maintainer"], "human": true },
+    { "actorClass": "administrator", "requiredRoles": ["repository-administrator"], "human": true },
+    { "actorClass": "system", "requiredRoles": ["trusted-kernel"], "human": false },
+    { "actorClass": "policy", "requiredRoles": ["trusted-policy"], "human": false }
+  ],
+  "independentGates": ["accept-frame", "accept-plan", "approve-current-head"],
+  "prohibitedEffects": ["approve", "merge", "deploy", "publish", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change"],
+  "ceilings": {
+    "depthProfile": "D3",
+    "riskClass": "critical",
+    "privacyClass": "restricted",
+    "maxCalls": 100,
+    "maxCostUnits": 1000,
+    "maxLoops": 20,
+    "maxRetries": 5,
+    "maxParallel": 4
+  }
+}

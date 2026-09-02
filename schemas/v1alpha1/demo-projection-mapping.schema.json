@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projection-mapping.schema.json",
+  "title": "Autonomous demo Project projection mapping",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DemoProjectionMapping" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": {
+      "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "projectProfileDigest",
+        "journeyDefinitionDigest",
+        "stageAgentBindingsDigest",
+        "fields"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+        },
+        "projectProfileDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "journeyDefinitionDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "stageAgentBindingsDigest": {
+          "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 14,
+          "maxItems": 14,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key",
+              "name",
+              "source",
+              "displayOnly",
+              "writeOrder"
+            ],
+            "properties": {
+              "key": {
+                "enum": [
+                  "stage",
+                  "journey-stage",
+                  "demo-project-profile",
+                  "depth-profile",
+                  "gate-status",
+                  "contract-revision",
+                  "last-receipt",
+                  "attention",
+                  "target-repository",
+                  "run-attempt",
+                  "current-draft-pr",
+                  "current-stage-agent",
+                  "stage-interaction",
+                  "agent-selection-status"
+                ]
+              },
+              "name": {
+                "enum": [
+                  "Stage",
+                  "Journey Stage",
+                  "Demo Project Profile",
+                  "Depth Profile",
+                  "Gate Status",
+                  "Contract Revision",
+                  "Last Receipt",
+                  "Attention",
+                  "Target Repository",
+                  "Run / Attempt",
+                  "Current Draft PR",
+                  "Current Stage Agent",
+                  "Stage Interaction",
+                  "Agent Selection Status"
+                ]
+              },
+              "source": {
+                "enum": [
+                  "kernel-snapshot",
+                  "signed-stage-receipt",
+                  "project-profile",
+                  "work-accord",
+                  "trusted-binding",
+                  "demo-run-state",
+                  "stage-agent-binding-set",
+                  "stage-agent-selection"
+                ]
+              },
+              "displayOnly": { "type": "boolean" },
+              "writeOrder": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 14
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

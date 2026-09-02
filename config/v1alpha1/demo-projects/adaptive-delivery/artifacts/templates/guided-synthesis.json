@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveGuidedSynthesisTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "authority": "advisory-only",
+    "targetFree": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "findings",
+        "openQuestions"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "findings": {
+          "type": "array"
+        },
+        "openQuestions": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "contentDigest": "sha256:d29e2e7ad165ed3edad21ca8ebd5dda674103a420f6be1ffd3093b3bac1c5e30"
+}

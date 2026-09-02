@@ -1,0 +1,27 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliverySolutionDesign",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:a36b226e49d27dae2d5c1e1b1685d694e97722cb99f1e9c38f34b72972e333c2",
+  "spec": {
+    "featureBriefDigest": "sha256:34e2aad90d31c148c45374b5992e762b8a0621cfd8a22616d2cab1af9575afcc",
+    "impactAnalysisDigest": "sha256:c37e8c94f3f05810e87ba3683113ee4bfe315b9e463710fff006826e515b4001",
+    "decision": "Implement the synthetic export behavior and its tests as two bounded logical slots. Trusted code alone maps those slots to exact paths, validates the diff, and creates a draft pull request.",
+    "alternatives": [
+      "A model-selected path was rejected because paths are trusted control data.",
+      "A direct branch or pull-request mutation was rejected because delivery belongs to the trusted adapter and Single Writer."
+    ],
+    "logicalSlots": [
+      "export-module",
+      "export-test"
+    ],
+    "acceptanceCriterionIds": [
+      "FD-AC-001",
+      "FD-AC-002",
+      "FD-AC-003",
+      "FD-AC-004",
+      "FD-AC-005"
+    ],
+    "authority": "advisory-only"
+  }
+}

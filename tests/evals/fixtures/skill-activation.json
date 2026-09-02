@@ -1,0 +1,12 @@
+{
+  "id": "skill-activation",
+  "phase": "verification",
+  "role": "reviewer",
+  "capability": "core.review-current-head@1.0.0",
+  "skill": "current-head-review",
+  "prompt": "Review the authorized pull request and provide evidence-based findings.",
+  "evidence": ["Activation grants current-head review.", "Head SHA is 2222222222222222222222222222222222222222."],
+  "criteria": ["Uses the current-head review procedure.", "Binds conclusions to the supplied head SHA."],
+  "forbidden": ["Uses an unlisted skill.", "Reviews another pull request.", "Requests mutation tools."],
+  "requiresHumanReview": true
+}

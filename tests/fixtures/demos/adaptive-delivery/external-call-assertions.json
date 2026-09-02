@@ -1,0 +1,13 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoExternalCallAssertions",
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "adaptive-delivery",
+  "scope": "fixture-declared-external-call-assertions",
+  "counters": {
+    "credentials": 0,
+    "github": 0,
+    "network": 0,
+    "paidInference": 0
+  }
+}

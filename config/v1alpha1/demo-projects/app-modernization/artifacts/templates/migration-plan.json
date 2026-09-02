@@ -1,0 +1,39 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationMigrationPlan",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:e77a8ce3bfb900bb9aacaa060112971a73c8332fa44dbf993be62c0653a8961a",
+  "spec": {
+    "targetArchitectureDigest": "sha256:f8fb46c29305a9e5ec694bc369c658317a5bd7ad9a9fc375b21a984b15823999",
+    "riskCompatibilityDigest": "sha256:f210053631e216d467d1f321c67812c560c5b93dda1b624573c64d1b9b480806",
+    "waves": [
+      {
+        "ordinal": 1,
+        "title": "Introduce bounded compatibility seam",
+        "logicalSlots": [
+          "application-source",
+          "application-tests",
+          "migration-notes"
+        ],
+        "entryEvidence": [
+          "Target architecture is current."
+        ],
+        "exitEvidence": [
+          "All fixed offline verification commands pass."
+        ]
+      }
+    ],
+    "rollback": [
+      "Revert the draft pull-request commit through human-reviewed Git history."
+    ],
+    "fixedVerificationIds": [
+      "typecheck",
+      "build",
+      "unit-tests",
+      "security",
+      "compatibility",
+      "migration-dry-run"
+    ],
+    "acceptedByHuman": false
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-app-registration-plan.schema.json",
+  "title": "Least-privilege GitHub App registration plan",
+  "description": "A closed, versioned plan derived from the reviewed GITHUB_PERMISSION_MANIFEST operation table. It declares the exact least-privilege permission union a human administrator must configure on the GitHub App registration. This document is plan-only: it does not create, transfer, or install an App and grants no credential or effect authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "generatedAt",
+    "manifestVersion",
+    "appName",
+    "operations",
+    "deniedPermissionNames",
+    "leastPrivilegeUnion",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "GitHubAppRegistrationPlan" },
+    "schemaVersion": { "const": "1.0.0" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "manifestVersion": { "type": "string", "minLength": 1, "maxLength": 32 },
+    "appName": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["operationId", "permissions"],
+        "properties": {
+          "operationId": { "type": "string", "minLength": 1, "maxLength": 128 },
+          "permissions": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/permissionGrant" }
+          }
+        }
+      }
+    },
+    "deniedPermissionNames": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1, "maxLength": 64 }
+    },
+    "leastPrivilegeUnion": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/permissionGrant" }
+    },
+    "nonAuthoritative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cannotInstallOrTransferApp",
+        "cannotAuthenticateApp",
+        "cannotMintInstallationToken"
+      ],
+      "properties": {
+        "cannotInstallOrTransferApp": { "const": true },
+        "cannotAuthenticateApp": { "const": true },
+        "cannotMintInstallationToken": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "permissionGrant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "level", "scope"],
+      "properties": {
+        "name": {
+          "enum": [
+            "checks",
+            "contents",
+            "issues",
+            "members",
+            "metadata",
+            "organization_projects",
+            "pull_requests"
+          ]
+        },
+        "level": { "enum": ["read", "write"] },
+        "scope": { "enum": ["organization", "repository"] }
+      }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveDeliveryVerificationCommandCatalog",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "commands": [
+      {
+        "id": "adaptive-acceptance-tests",
+        "purpose": "acceptance",
+        "executable": "node",
+        "args": [
+          "--test",
+          "examples/demos/adaptive-delivery/sandbox/tests/change.test.ts"
+        ],
+        "timeoutMs": 120000,
+        "maxOutputBytes": 65536
+      },
+      {
+        "id": "adaptive-regression-tests",
+        "purpose": "regression",
+        "executable": "npm",
+        "args": [
+          "test"
+        ],
+        "timeoutMs": 120000,
+        "maxOutputBytes": 65536
+      },
+      {
+        "id": "adaptive-typecheck",
+        "purpose": "regression",
+        "executable": "npm",
+        "args": [
+          "run",
+          "typecheck"
+        ],
+        "timeoutMs": 120000,
+        "maxOutputBytes": 65536
+      },
+      {
+        "id": "git-diff-check",
+        "purpose": "integrity",
+        "executable": "git",
+        "args": [
+          "diff",
+          "--cached",
+          "--check"
+        ],
+        "timeoutMs": 30000,
+        "maxOutputBytes": 65536
+      }
+    ]
+  },
+  "contentDigest": "sha256:1414b85a204f83f04967de8f67c9103318e44f7613f7bae3edce36f74eb97339"
+}

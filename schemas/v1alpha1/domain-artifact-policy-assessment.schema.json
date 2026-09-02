@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-artifact-policy-assessment.schema.json",
+  "title": "Trusted domain artifact policy assessment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["purpose", "packId", "authorityDigest", "artifactSetDigest", "inputDigest", "prohibitedEffectsDigest", "status", "findings", "assessor", "modelSelfAttested", "checkedAt", "expiresAt", "signature"],
+  "properties": {
+    "purpose": { "const": "domain-artifact-policy-assessment" },
+    "packId": { "enum": ["marketing", "business-operations"] },
+    "authorityDigest": { "$ref": "#/$defs/digest" },
+    "artifactSetDigest": { "$ref": "#/$defs/digest" },
+    "inputDigest": { "$ref": "#/$defs/digest" },
+    "prohibitedEffectsDigest": { "$ref": "#/$defs/digest" },
+    "status": { "enum": ["success", "violation", "unknown", "unavailable"] },
+    "findings": {
+      "type": "array",
+      "maxItems": 100,
+      "items": { "type": "string", "minLength": 1, "maxLength": 8192 }
+    },
+    "assessor": { "const": "trusted-independent-service" },
+    "modelSelfAttested": { "const": false },
+    "checkedAt": { "type": "string", "format": "date-time" },
+    "expiresAt": { "type": "string", "format": "date-time" },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["keyId", "algorithm", "value"],
+      "properties": {
+        "keyId": { "type": "string", "minLength": 1 },
+        "algorithm": { "const": "ed25519" },
+        "value": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
+  }
+}

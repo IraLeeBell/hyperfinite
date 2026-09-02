@@ -1,0 +1,53 @@
+{
+  "schemaVersion": "1.0.0",
+  "commands": [
+    {
+      "id": "typecheck",
+      "executable": "npm",
+      "args": ["run", "typecheck"],
+      "timeoutMs": 120000,
+      "network": false,
+      "credentials": false
+    },
+    {
+      "id": "build",
+      "executable": "npm",
+      "args": ["run", "build"],
+      "timeoutMs": 120000,
+      "network": false,
+      "credentials": false
+    },
+    {
+      "id": "unit-tests",
+      "executable": "npm",
+      "args": ["test"],
+      "timeoutMs": 600000,
+      "network": false,
+      "credentials": false
+    },
+    {
+      "id": "security",
+      "executable": "npm",
+      "args": ["run", "validate:runtime"],
+      "timeoutMs": 600000,
+      "network": false,
+      "credentials": false
+    },
+    {
+      "id": "compatibility",
+      "executable": "npm",
+      "args": ["run", "validate:packaging"],
+      "timeoutMs": 600000,
+      "network": false,
+      "credentials": false
+    },
+    {
+      "id": "migration-dry-run",
+      "executable": "npm",
+      "args": ["run", "validate:schemas"],
+      "timeoutMs": 600000,
+      "network": false,
+      "credentials": false
+    }
+  ]
+}

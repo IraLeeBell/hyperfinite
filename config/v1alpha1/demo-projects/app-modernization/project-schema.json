@@ -1,0 +1,423 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubProjectSchema",
+  "metadata": {
+    "name": "app-modernization",
+    "version": "2.0.0"
+  },
+  "owner": {
+    "type": "organization",
+    "login": "OWNER"
+  },
+  "project": {
+    "title": "App Modernization - Hyperfinite",
+    "shortDescription": "App Modernization locked projection of deterministic Kernel and receipt state."
+  },
+  "fields": [
+    {
+      "key": "stage",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "captured",
+          "name": "Captured"
+        },
+        {
+          "key": "activation-pending",
+          "name": "Activation pending"
+        },
+        {
+          "key": "framing",
+          "name": "Framing"
+        },
+        {
+          "key": "planned",
+          "name": "Planned"
+        },
+        {
+          "key": "executing",
+          "name": "Executing"
+        },
+        {
+          "key": "verifying",
+          "name": "Verifying"
+        },
+        {
+          "key": "human-review",
+          "name": "Human review"
+        },
+        {
+          "key": "completed",
+          "name": "Completed"
+        },
+        {
+          "key": "paused",
+          "name": "Paused"
+        },
+        {
+          "key": "blocked",
+          "name": "Blocked"
+        },
+        {
+          "key": "cancelled",
+          "name": "Cancelled"
+        }
+      ]
+    },
+    {
+      "key": "journey-stage",
+      "name": "Journey Stage",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "intake",
+          "name": "Intake"
+        },
+        {
+          "key": "repository-discovery",
+          "name": "Repository discovery"
+        },
+        {
+          "key": "current-state-inventory",
+          "name": "Current-state inventory"
+        },
+        {
+          "key": "modernization-assessment",
+          "name": "Modernization assessment"
+        },
+        {
+          "key": "target-architecture",
+          "name": "Target architecture"
+        },
+        {
+          "key": "migration-plan",
+          "name": "Migration plan"
+        },
+        {
+          "key": "implementation",
+          "name": "Implementation"
+        },
+        {
+          "key": "verification",
+          "name": "Verification"
+        },
+        {
+          "key": "human-review",
+          "name": "Human review"
+        },
+        {
+          "key": "completed",
+          "name": "Completed"
+        },
+        {
+          "key": "activation-pending",
+          "name": "Activation Pending"
+        },
+        {
+          "key": "paused",
+          "name": "Paused"
+        },
+        {
+          "key": "blocked",
+          "name": "Blocked"
+        },
+        {
+          "key": "cancelled",
+          "name": "Cancelled"
+        }
+      ]
+    },
+    {
+      "key": "demo-project-profile",
+      "name": "Demo Project Profile",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "depth-profile",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "d0",
+          "name": "D0"
+        },
+        {
+          "key": "d1",
+          "name": "D1"
+        },
+        {
+          "key": "d2",
+          "name": "D2"
+        },
+        {
+          "key": "d3",
+          "name": "D3"
+        }
+      ]
+    },
+    {
+      "key": "gate-status",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "pending",
+          "name": "Pending"
+        },
+        {
+          "key": "satisfied",
+          "name": "Satisfied"
+        },
+        {
+          "key": "blocked",
+          "name": "Blocked"
+        }
+      ]
+    },
+    {
+      "key": "contract-revision",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "last-receipt",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "attention",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "none",
+          "name": "None"
+        },
+        {
+          "key": "human-action",
+          "name": "Human action"
+        },
+        {
+          "key": "reconciliation",
+          "name": "Reconciliation"
+        }
+      ]
+    },
+    {
+      "key": "target-repository",
+      "name": "Target Repository",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "run-attempt",
+      "name": "Run / Attempt",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "current-draft-pr",
+      "name": "Current Draft PR",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "current-stage-agent",
+      "name": "Current Stage Agent",
+      "dataType": "TEXT",
+      "required": true,
+      "options": []
+    },
+    {
+      "key": "stage-interaction",
+      "name": "Stage Interaction",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "backend-autonomous",
+          "name": "Backend autonomous"
+        },
+        {
+          "key": "user-selectable",
+          "name": "User-selectable agent"
+        },
+        {
+          "key": "human-gate",
+          "name": "Human gate"
+        },
+        {
+          "key": "deterministic",
+          "name": "Deterministic"
+        },
+        {
+          "key": "kernel-control",
+          "name": "Kernel control"
+        },
+        {
+          "key": "terminal",
+          "name": "Terminal"
+        }
+      ]
+    },
+    {
+      "key": "requested-stage-agent",
+      "name": "Requested Stage Agent",
+      "dataType": "SINGLE_SELECT",
+      "required": false,
+      "options": [
+        {
+          "key": "selection-unavailable-locked",
+          "name": "User selection unavailable - locked project"
+        }
+      ]
+    },
+    {
+      "key": "agent-selection-status",
+      "name": "Agent Selection Status",
+      "dataType": "SINGLE_SELECT",
+      "required": true,
+      "options": [
+        {
+          "key": "not-applicable",
+          "name": "not-applicable"
+        },
+        {
+          "key": "awaiting-selection",
+          "name": "awaiting-selection"
+        },
+        {
+          "key": "accepted",
+          "name": "accepted"
+        },
+        {
+          "key": "invalid",
+          "name": "invalid"
+        },
+        {
+          "key": "stale",
+          "name": "stale"
+        },
+        {
+          "key": "reconciliation-required",
+          "name": "reconciliation-required"
+        }
+      ]
+    }
+  ],
+  "projections": [
+    {
+      "slot": "stage",
+      "fieldKey": "stage",
+      "source": "kernel-snapshot",
+      "displayOnly": true,
+      "writeOrder": 14
+    },
+    {
+      "slot": "journey-stage",
+      "fieldKey": "journey-stage",
+      "source": "signed-stage-receipt",
+      "displayOnly": true,
+      "writeOrder": 1
+    },
+    {
+      "slot": "demo-project-profile",
+      "fieldKey": "demo-project-profile",
+      "source": "project-profile",
+      "displayOnly": true,
+      "writeOrder": 2
+    },
+    {
+      "slot": "depth-profile",
+      "fieldKey": "depth-profile",
+      "source": "work-accord",
+      "displayOnly": true,
+      "writeOrder": 3
+    },
+    {
+      "slot": "gate-status",
+      "fieldKey": "gate-status",
+      "source": "demo-run-state",
+      "displayOnly": true,
+      "writeOrder": 4
+    },
+    {
+      "slot": "contract-revision",
+      "fieldKey": "contract-revision",
+      "source": "work-accord",
+      "displayOnly": true,
+      "writeOrder": 5
+    },
+    {
+      "slot": "last-receipt",
+      "fieldKey": "last-receipt",
+      "source": "signed-stage-receipt",
+      "displayOnly": true,
+      "writeOrder": 6
+    },
+    {
+      "slot": "attention",
+      "fieldKey": "attention",
+      "source": "demo-run-state",
+      "displayOnly": true,
+      "writeOrder": 7
+    },
+    {
+      "slot": "target-repository",
+      "fieldKey": "target-repository",
+      "source": "trusted-binding",
+      "displayOnly": true,
+      "writeOrder": 8
+    },
+    {
+      "slot": "run-attempt",
+      "fieldKey": "run-attempt",
+      "source": "demo-run-state",
+      "displayOnly": true,
+      "writeOrder": 9
+    },
+    {
+      "slot": "current-draft-pr",
+      "fieldKey": "current-draft-pr",
+      "source": "demo-run-state",
+      "displayOnly": true,
+      "writeOrder": 10
+    },
+    {
+      "slot": "current-stage-agent",
+      "fieldKey": "current-stage-agent",
+      "source": "stage-agent-selection",
+      "displayOnly": true,
+      "writeOrder": 11
+    },
+    {
+      "slot": "stage-interaction",
+      "fieldKey": "stage-interaction",
+      "source": "stage-agent-binding-set",
+      "displayOnly": true,
+      "writeOrder": 12
+    },
+    {
+      "slot": "agent-selection-status",
+      "fieldKey": "agent-selection-status",
+      "source": "stage-agent-selection",
+      "displayOnly": true,
+      "writeOrder": 13
+    }
+  ]
+}

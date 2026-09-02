@@ -1,0 +1,16 @@
+# A human maintainer owns every repository path. Customer copies replace this
+# owner with `npm run customer:configure -- --codeowner <owner>`.
+* @IraLeeBell
+
+/.github/ @IraLeeBell
+/config/ @IraLeeBell
+/schemas/ @IraLeeBell
+/src/ @IraLeeBell
+/scripts/ @IraLeeBell
+/tests/ @IraLeeBell
+/docs/adr/ @IraLeeBell
+/docs/security/ @IraLeeBell
+/docs/runbooks/ @IraLeeBell
+/.github/CODEOWNERS @IraLeeBell
+/LICENSE @IraLeeBell
+/SECURITY.md @IraLeeBell

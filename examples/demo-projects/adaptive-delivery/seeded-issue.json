@@ -1,0 +1,28 @@
+{
+  "synthetic": true,
+  "demoProjectId": "adaptive-delivery",
+  "formSubmission": {
+    "desiredOutcome": "Demonstrate a bounded synthetic hybrid delivery journey.",
+    "repositoryHint": "example/synthetic-adaptive-delivery",
+    "constraints": "No network, credentials, deployment, publication, approval, or merge.",
+    "acceptanceEvidence": "HYBRID-001 through HYBRID-030 remain deterministic and reviewable.",
+    "depthProfile": "D2",
+    "consent": true
+  },
+  "projection": {
+    "Stage": null,
+    "Journey Stage": null,
+    "Demo Project Profile": null,
+    "Depth Profile": null,
+    "Gate Status": null,
+    "Contract Revision": null,
+    "Last Receipt": null,
+    "Attention": null,
+    "Target Repository": null,
+    "Run / Attempt": null,
+    "Current Draft PR": null,
+    "Current Stage Agent": null,
+    "Stage Interaction": null,
+    "Agent Selection Status": null
+  }
+}

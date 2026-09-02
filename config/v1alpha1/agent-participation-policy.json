@@ -1,0 +1,51 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AgentParticipationPolicy",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "policyGeneration": 1,
+    "enterpriseMaximum": "flexible",
+    "eligibleActorClasses": [
+      "enterprise-owner",
+      "organization-owner",
+      "project-owner",
+      "project-member"
+    ],
+    "projects": [
+      {
+        "demoProjectId": "app-modernization",
+        "posture": "locked",
+        "selectableStageIds": [],
+        "allowedOptionKeys": []
+      },
+      {
+        "demoProjectId": "feature-delivery",
+        "posture": "locked",
+        "selectableStageIds": [],
+        "allowedOptionKeys": []
+      },
+      {
+        "demoProjectId": "security-dependency-remediation",
+        "posture": "locked",
+        "selectableStageIds": [],
+        "allowedOptionKeys": []
+      },
+      {
+        "demoProjectId": "adaptive-delivery",
+        "posture": "guided",
+        "selectableStageIds": [
+          "discovery-studio",
+          "implementation-studio"
+        ],
+        "allowedOptionKeys": [
+          "discovery-customer-value-explorer",
+          "discovery-technical-options-explorer",
+          "discovery-delivery-risk-challenger",
+          "implementation-minimal-slice-builder",
+          "implementation-resilience-first-builder"
+        ]
+      }
+    ]
+  },
+  "contentDigest": "sha256:f7c8ef2282725040cc6586231005efc73f23cf3e7fe7faf233d7dae1aa8f4746"
+}

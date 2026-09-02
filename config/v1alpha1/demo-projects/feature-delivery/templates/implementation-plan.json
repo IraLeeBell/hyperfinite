@@ -1,0 +1,53 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryImplementationPlan",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:171ce245eb71a21a97e00d57b8305aec4dc3df5b529e1ff971875dedc245a4dc",
+  "spec": {
+    "solutionDesignDigest": "sha256:a36b226e49d27dae2d5c1e1b1685d694e97722cb99f1e9c38f34b72972e333c2",
+    "deterministic": true,
+    "maxPatchBytes": 65536,
+    "nodes": [
+      {
+        "id": "FD-PLAN-001",
+        "dependsOn": [],
+        "logicalSlots": [
+          "export-module"
+        ],
+        "acceptanceCriterionIds": [
+          "FD-AC-001",
+          "FD-AC-002",
+          "FD-AC-003"
+        ],
+        "verificationCommandIds": [
+          "fd-acceptance-tests",
+          "fd-regression-tests",
+          "fd-typecheck",
+          "git-diff-check"
+        ]
+      },
+      {
+        "id": "FD-PLAN-002",
+        "dependsOn": [
+          "FD-PLAN-001"
+        ],
+        "logicalSlots": [
+          "export-test"
+        ],
+        "acceptanceCriterionIds": [
+          "FD-AC-001",
+          "FD-AC-002",
+          "FD-AC-003",
+          "FD-AC-004",
+          "FD-AC-005"
+        ],
+        "verificationCommandIds": [
+          "fd-acceptance-tests",
+          "fd-regression-tests",
+          "fd-typecheck",
+          "git-diff-check"
+        ]
+      }
+    ]
+  }
+}

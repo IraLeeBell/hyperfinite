@@ -1,0 +1,25 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "KernelEvent",
+  "id": "delivery-1:activation-requested",
+  "sequence": 1,
+  "occurredAt": "2026-08-26T12:00:00Z",
+  "expectedStateVersion": 0,
+  "type": "activation-requested",
+  "replacementAuthorityDigest": null,
+  "actor": {
+    "id": "requester-1",
+    "class": "requester",
+    "human": true,
+    "bot": false,
+    "roles": ["work-item-requester"],
+    "authorizationDigest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+  },
+  "provenance": {
+    "source": "test-fixture",
+    "deliveryId": "delivery-1",
+    "bindingDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "payloadDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "cost": { "calls": 0, "tokens": 0, "costUnits": 0, "loops": 0 }
+}

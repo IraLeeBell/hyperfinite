@@ -1,0 +1,43 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationHumanReviewPackage",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:48f35f78c08b2ad9beeb10cfeba72b7a946f50c766298346b877d177b5b2dcea",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "human-review",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:99c87ae541a0c03292f1cf8e6d9fb348910152a333ebb8ea4241fb9fb7fe805c",
+    "headSha": "9999999999999999999999999999999999999999",
+    "status": "waiting-human",
+    "assertions": [
+      {
+        "id": "exact-current-head",
+        "status": "success",
+        "evidenceDigest": "sha256:97d17d1e04cba4457685c6bbebf16f722d6a68b542dfcc58d24a71e4f39fb359"
+      },
+      {
+        "id": "verification-evidence-complete",
+        "status": "success",
+        "evidenceDigest": "sha256:99c87ae541a0c03292f1cf8e6d9fb348910152a333ebb8ea4241fb9fb7fe805c"
+      },
+      {
+        "id": "unrelated-scanner-finding-open-unchanged",
+        "status": "information",
+        "evidenceDigest": "sha256:f4207e13570ff2063ffa838858ce4db4eb9a7921fc170b437e68381237aa14fd"
+      },
+      {
+        "id": "independent-human-action-required",
+        "status": "information",
+        "evidenceDigest": "sha256:97ec01dd9a7491e9b525dc00059ce541b6f7077bec749bd6a8dd31407e8a3740"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

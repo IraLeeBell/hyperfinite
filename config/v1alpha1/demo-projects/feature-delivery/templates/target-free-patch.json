@@ -1,0 +1,29 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryTargetFreePatch",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:a891065c48252ba1d0b966acf1f31d2ed428272afc6972bc97bb044e76ca921f",
+  "spec": {
+    "planningArtifactDigest": "sha256:171ce245eb71a21a97e00d57b8305aec4dc3df5b529e1ff971875dedc245a4dc",
+    "summary": "Add the deterministic synthetic export behavior and its acceptance test.",
+    "changes": [
+      {
+        "slot": "export-module",
+        "content": "export function exportFeature(value: string): string { return `export:${value}`; }\n",
+        "contentDigest": "sha256:5121a9645389773e3c5c89695b752d3bbb4446d3a4921c1723dd602a655bbfd1"
+      },
+      {
+        "slot": "export-test",
+        "content": "import assert from \"node:assert/strict\";\nimport { test } from \"node:test\";\nimport { exportFeature } from \"../src/export.ts\";\ntest(\"feature export acceptance\", () => assert.equal(exportFeature(\"demo\"), \"export:demo\"));\n",
+        "contentDigest": "sha256:e65ee17618584b9a311d2a64624ddf6d0a4748d139c4cc28b5aae1af83289c7b"
+      }
+    ],
+    "acceptanceCriterionIds": [
+      "FD-AC-001",
+      "FD-AC-002",
+      "FD-AC-003",
+      "FD-AC-004",
+      "FD-AC-005"
+    ]
+  }
+}

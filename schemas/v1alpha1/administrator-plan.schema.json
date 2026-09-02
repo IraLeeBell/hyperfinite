@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/administrator-plan.schema.json",
+  "title": "Closed administrator configuration plan",
+  "description": "A closed, versioned declaration of the exact rulesets, required checks, Actions policy, GitHub Advanced Security settings, Project binding, and incident contacts a human administrator must configure. This document is plan-only: it cannot create/apply a ruleset, check, workflow permission, GHAS setting, or Project mutation, and it grants no bypass.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "generatedAt",
+    "repository",
+    "requiresRulesetBasedEnforcement",
+    "rulesets",
+    "environments",
+    "requiredChecks",
+    "actionsPolicy",
+    "ghas",
+    "projectBinding",
+    "incidentContacts",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AdministratorPlan" },
+    "schemaVersion": { "const": "1.0.0" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "repository": { "$ref": "#/$defs/repository" },
+    "requiresRulesetBasedEnforcement": { "const": true },
+    "rulesets": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "oneOf": [
+          { "$ref": "#/$defs/branchRuleset" },
+          { "$ref": "#/$defs/tagRuleset" }
+        ]
+      }
+    },
+    "environments": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["environmentId", "requiresReviewers", "hasProtectionRules"],
+        "properties": {
+          "environmentId": { "$ref": "#/$defs/opaqueId" },
+          "requiresReviewers": { "const": true },
+          "hasProtectionRules": { "const": true }
+        }
+      }
+    },
+    "requiredChecks": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["checkName", "required"],
+        "properties": {
+          "checkName": {
+            "enum": [
+              "typecheck",
+              "build",
+              "test",
+              "validate:schemas",
+              "validate:runtime",
+              "validate:workflows",
+              "validate:gh-aw",
+              "validate:packaging",
+              "validate:demos",
+              "validate:hardening",
+              "codeql",
+              "dependency-review"
+            ]
+          },
+          "required": { "const": true }
+        }
+      }
+    },
+    "actionsPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "allowedActions",
+        "defaultWorkflowPermissions",
+        "canApprovePullRequestReviews",
+        "shaPinningRequired",
+        "requireApprovalForForkPullRequests"
+      ],
+      "properties": {
+        "allowedActions": { "enum": ["local_only", "selected"] },
+        "defaultWorkflowPermissions": { "const": "read" },
+        "canApprovePullRequestReviews": { "const": false },
+        "shaPinningRequired": { "const": true },
+        "requireApprovalForForkPullRequests": { "const": true }
+      }
+    },
+    "ghas": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "advancedSecurity",
+        "dependabotAlerts",
+        "dependabotSecurityUpdates",
+        "secretScanning",
+        "secretScanningPushProtection",
+        "secretScanningValidityChecks",
+        "secretScanningNonProviderPatterns",
+        "codeScanningDefaultSetup",
+        "delegatedAlertDismissal",
+        "delegatedBypass"
+      ],
+      "properties": {
+        "advancedSecurity": { "const": true },
+        "dependabotAlerts": { "const": true },
+        "dependabotSecurityUpdates": { "const": true },
+        "secretScanning": { "const": true },
+        "secretScanningPushProtection": { "const": true },
+        "secretScanningValidityChecks": { "const": true },
+        "secretScanningNonProviderPatterns": { "const": true },
+        "codeScanningDefaultSetup": { "const": true },
+        "delegatedAlertDismissal": { "const": false },
+        "delegatedBypass": { "const": false }
+      }
+    },
+    "projectBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["projectNumber", "ownerLogin", "schemaDigest", "mutationRequiresExplicitConfirmation"],
+      "properties": {
+        "projectNumber": { "type": "integer", "minimum": 1 },
+        "ownerLogin": { "type": "string", "minLength": 1, "maxLength": 128 },
+        "schemaDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "mutationRequiresExplicitConfirmation": { "const": true }
+      }
+    },
+    "incidentContacts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "contactHandle"],
+        "properties": {
+          "role": { "enum": ["security-owner", "platform-owner", "on-call-admin"] },
+          "contactHandle": { "$ref": "#/$defs/opaqueId" }
+        }
+      }
+    },
+    "nonAuthoritative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "cannotApplyRuleset",
+        "cannotApplyActionsPolicy",
+        "cannotApplyGhasSetting",
+        "cannotMutateProject",
+        "cannotChangeVisibilityOrBilling"
+      ],
+      "properties": {
+        "cannotApplyRuleset": { "const": true },
+        "cannotApplyActionsPolicy": { "const": true },
+        "cannotApplyGhasSetting": { "const": true },
+        "cannotMutateProject": { "const": true },
+        "cannotChangeVisibilityOrBilling": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "opaqueId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{0,63}$"
+    },
+    "ref": {
+      "description": "A literal, fully-qualified ref name only. Wildcard/glob metacharacters (*, ?, [, ]) and whitespace are rejected because this closed contract does not implement GitHub's fnmatch glob semantics; exact-set ref arithmetic is only sound over literal refs.",
+      "type": "string",
+      "pattern": "^refs/(heads|tags)/[^\\s*?\\[\\]]+$"
+    },
+    "rulesetCommonProperties": {
+      "rulesetId": { "$ref": "#/$defs/opaqueId" },
+      "source": { "enum": ["repository", "organization"] },
+      "refConditions": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["include", "exclude"],
+        "properties": {
+          "include": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/ref" }
+          },
+          "exclude": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/ref" }
+          }
+        }
+      },
+      "effectiveProtectedRefs": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": { "$ref": "#/$defs/ref" }
+      },
+      "enforcement": { "const": "active" },
+      "bypassActors": { "type": "array", "maxItems": 0 }
+    },
+    "branchRuleset": {
+      "description": "A ruleset targeting branches. GitHub exposes pull-request/CODEOWNERS/current-head-approval rule types only for a branch target; a tag-targeted ruleset cannot carry these controls (see tagRuleset).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rulesetId",
+        "source",
+        "target",
+        "refConditions",
+        "effectiveProtectedRefs",
+        "enforcement",
+        "bypassActors",
+        "requiresPullRequest",
+        "requiresCodeownerReview",
+        "requiresCurrentHeadApproval"
+      ],
+      "properties": {
+        "rulesetId": { "$ref": "#/$defs/rulesetCommonProperties/rulesetId" },
+        "source": { "$ref": "#/$defs/rulesetCommonProperties/source" },
+        "target": { "const": "branch" },
+        "refConditions": { "$ref": "#/$defs/rulesetCommonProperties/refConditions" },
+        "effectiveProtectedRefs": { "$ref": "#/$defs/rulesetCommonProperties/effectiveProtectedRefs" },
+        "enforcement": { "$ref": "#/$defs/rulesetCommonProperties/enforcement" },
+        "bypassActors": { "$ref": "#/$defs/rulesetCommonProperties/bypassActors" },
+        "requiresPullRequest": { "const": true },
+        "requiresCodeownerReview": { "const": true },
+        "requiresCurrentHeadApproval": { "const": true }
+      }
+    },
+    "tagRuleset": {
+      "description": "A ruleset targeting tags. GitHub exposes restrict-creation/restrict-update/restrict-deletion rule types only for a tag target; the branch-only pull-request/CODEOWNERS/current-head-approval controls are not representable here (see branchRuleset).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rulesetId",
+        "source",
+        "target",
+        "refConditions",
+        "effectiveProtectedRefs",
+        "enforcement",
+        "bypassActors",
+        "restrictsTagCreation",
+        "restrictsTagUpdate",
+        "restrictsTagDeletion"
+      ],
+      "properties": {
+        "rulesetId": { "$ref": "#/$defs/rulesetCommonProperties/rulesetId" },
+        "source": { "$ref": "#/$defs/rulesetCommonProperties/source" },
+        "target": { "const": "tag" },
+        "refConditions": { "$ref": "#/$defs/rulesetCommonProperties/refConditions" },
+        "effectiveProtectedRefs": { "$ref": "#/$defs/rulesetCommonProperties/effectiveProtectedRefs" },
+        "enforcement": { "$ref": "#/$defs/rulesetCommonProperties/enforcement" },
+        "bypassActors": { "$ref": "#/$defs/rulesetCommonProperties/bypassActors" },
+        "restrictsTagCreation": { "const": true },
+        "restrictsTagUpdate": { "const": true },
+        "restrictsTagDeletion": { "const": true }
+      }
+    },
+    "id": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "owner", "name", "fullName"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "type": "string", "minLength": 1 },
+        "owner": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "fullName": { "type": "string", "minLength": 3 }
+      }
+    }
+  }
+}

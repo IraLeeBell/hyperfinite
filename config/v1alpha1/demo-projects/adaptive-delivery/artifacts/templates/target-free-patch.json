@@ -1,0 +1,39 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveTargetFreePatchTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "authority": "advisory-only",
+    "targetFree": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "changes",
+        "findings",
+        "openQuestions",
+        "result"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "changes": {
+          "type": "array"
+        },
+        "findings": {
+          "type": "array"
+        },
+        "openQuestions": {
+          "type": "array"
+        },
+        "result": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "contentDigest": "sha256:2de146e0f1eeadac540bf85e45079947c967d828706e44f40ddb133b8c646727"
+}

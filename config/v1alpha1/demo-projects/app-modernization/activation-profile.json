@@ -1,0 +1,33 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoActivationProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "allowedSource": "issue-form",
+    "allowedSubmitterIds": [
+      101
+    ],
+    "authorityEpoch": 1,
+    "capabilityShardDigest": "sha256:dbffa57045f77122d8e115b91f2696f398230137075013412aec74d5c0d8cfda",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "consentField": "demo-consent",
+    "consentRequired": true,
+    "demoProjectId": "app-modernization",
+    "enabled": false,
+    "expiresAt": "2027-08-29T12:00:00Z",
+    "leaseTemplate": {
+      "maxCalls": 5,
+      "maxCostUnits": 100,
+      "maxDurationMs": 1800000,
+      "maxParallel": 1,
+      "maxRetries": 1,
+      "maxTokens": 50000
+    },
+    "projectProfileDigest": "sha256:0fa5790690aa483d2de2c5e9635120a737a7bb62ba6a529a877d6c9ab2748ccd",
+    "revocationGeneration": 0,
+    "signingKeyId": "app-modernization:activation-key-1",
+    "stageAgentBindingsDigest": "sha256:73bbd400a8743907836c2f38b9404f8ec1f2c5491a6f2d19131c5df88995b63e",
+    "validFrom": "2026-08-29T12:00:00Z"
+  },
+  "contentDigest": "sha256:a62cc4e78406f5fe33f9ac276e36eabb9288f10afd4837edfced7b5603424c17"
+}

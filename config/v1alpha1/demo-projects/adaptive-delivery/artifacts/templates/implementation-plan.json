@@ -1,0 +1,31 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveImplementationPlanTemplate",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "authority": "advisory-only",
+    "targetFree": true,
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "steps",
+        "findings"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "steps": {
+          "type": "array"
+        },
+        "findings": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "contentDigest": "sha256:f8c95f6e67ccfbb289a84a072de1132462c41131dfac9bf20a97e4c0a21f3325"
+}

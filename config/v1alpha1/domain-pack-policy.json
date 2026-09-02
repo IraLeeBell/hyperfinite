@@ -1,0 +1,22 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DomainPackPolicy",
+  "id": "engineering",
+  "version": "1.0.0",
+  "allowedCapabilities": [
+    "core.frame-artifact@1.0.0",
+    "core.verify-evidence@1.0.0",
+    "core.execute-bounded-change@1.0.0",
+    "core.review-current-head@1.0.0",
+    "core.refuse-authority-escalation@1.0.0"
+  ],
+  "prohibitedEffects": ["approve", "merge", "deploy", "publish", "production-mutation", "crm-mutation", "erp-mutation", "payment", "license-change", "visibility-change"],
+  "depthCeiling": "D2",
+  "riskCeiling": "high",
+  "privacyCeiling": "confidential",
+  "maxCalls": 10,
+  "maxCostUnits": 100,
+  "maxLoops": 5,
+  "maxRetries": 3,
+  "maxParallel": 2
+}

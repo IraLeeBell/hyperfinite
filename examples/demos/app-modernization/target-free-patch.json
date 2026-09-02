@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "1.0.0",
+  "summary": "Introduce the compatibility seam through the three trusted logical slots.",
+  "changes": [
+    {
+      "slot": "application-source",
+      "content": "export const modernized = true;\n"
+    },
+    {
+      "slot": "application-tests",
+      "content": "import assert from \"node:assert/strict\";\nassert.equal(true, true);\n"
+    },
+    {
+      "slot": "migration-notes",
+      "content": "# Migration\n\nIntroduce the compatibility seam behind human-reviewed Git history.\n"
+    }
+  ]
+}

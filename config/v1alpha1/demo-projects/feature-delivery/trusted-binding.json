@@ -1,0 +1,28 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryTrustedBinding",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "synthetic": true,
+    "demoProjectId": "feature-delivery",
+    "repository": {
+      "id": 1,
+      "nodeId": "R_synthetic_hyperfinite",
+      "fullName": "example-organization/hyperfinite",
+      "rootId": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+    },
+    "workItem": {
+      "number": 27,
+      "nodeId": "I_synthetic_feature_delivery_27"
+    },
+    "defaultRef": "refs/heads/main",
+    "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "allowedEvidencePaths": [
+      "examples/demos/feature-delivery/sandbox/src/export.ts",
+      "examples/demos/feature-delivery/sandbox/tests/export.test.ts"
+    ],
+    "observedPathsAreEvidenceOnly": true,
+    "untrustedRepositoryHintsGrantAuthority": false
+  },
+  "contentDigest": "sha256:8b761022fff6b08839449f46824f83975077cc1e4a7bacde61fc9485aba4bafd"
+}

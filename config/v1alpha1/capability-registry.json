@@ -1,0 +1,486 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "CapabilityRegistry",
+  "metadata": { "version": "1.0.0" },
+  "defaults": {
+    "tools": "deny",
+    "network": "deny",
+    "writes": "deny",
+    "secrets": "deny"
+  },
+  "capabilities": [
+    {
+      "id": "core.frame-artifact",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Produces a target-free framing artifact for deterministic validation.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["framing"],
+      "actorClasses": ["system"],
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence"],
+        "properties": { "evidence": { "type": "array", "items": { "type": "string" } } }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["summary", "openQuestions"],
+        "properties": {
+          "summary": { "type": "string", "maxLength": 8000 },
+          "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 }
+        }
+      },
+      "access": {
+        "readScopes": ["accord-evidence"],
+        "write": { "allowed": false, "scopes": [] },
+        "tools": [],
+        "shellCommands": [],
+        "networkDestinations": [],
+        "mcpTools": ["github.issue_read", "safeoutputs.add_comment"],
+        "mcpReadTools": ["github.issue_read"],
+        "mcpMutationTools": ["safeoutputs.add_comment"],
+        "secretNames": []
+      },
+      "effectClass": "advisory-artifact",
+      "risk": { "class": "moderate", "trustZone": "T3", "privacyClass": "internal" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 10, "timeoutMs": 120000, "maxRetries": 1, "maxOutputBytes": 32768, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate"],
+      "idempotency": { "required": true, "scope": "contract-revision" },
+      "evidence": ["validated-output-digest", "provider-model-receipt"],
+      "evaluations": { "structural": ["schema-valid", "target-free"], "behavioral": ["framing-rubric-v1"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "core.verify-evidence",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Evaluates supplied evidence without selecting a target, route, or effect.",
+      "status": "active",
+      "implementation": { "kind": "deterministic", "provider": "local" },
+      "allowedPhases": ["verification"],
+      "actorClasses": ["system"],
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidenceDigests"],
+        "properties": { "evidenceDigests": { "type": "array", "items": { "type": "string" } } }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["result", "findings"],
+        "properties": {
+          "result": { "enum": ["success", "failure"] },
+          "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 }
+        }
+      },
+      "access": {
+        "readScopes": ["verification-evidence"],
+        "write": { "allowed": false, "scopes": [] },
+        "tools": [],
+        "shellCommands": [],
+        "networkDestinations": [],
+        "mcpTools": [],
+        "mcpReadTools": [],
+        "mcpMutationTools": [],
+        "secretNames": []
+      },
+      "effectClass": "verification-result",
+      "risk": { "class": "low", "trustZone": "T0", "privacyClass": "internal" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 0, "timeoutMs": 30000, "maxRetries": 0, "maxOutputBytes": 32768, "maxConcurrency": 1, "parallelSafe": true },
+      "humanGates": [],
+      "idempotency": { "required": true, "scope": "event" },
+      "evidence": ["validated-output-digest"],
+      "evaluations": { "structural": ["schema-valid", "target-free"], "behavioral": ["verification-rubric-v1"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "core.execute-bounded-change",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Drafts content for trusted logical target slots without shell, network, MCP, secrets, path selection, or GitHub mutation authority.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["execution"],
+      "actorClasses": ["system"],
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["evidence", "targetSlots", "maxPatchBytes"],
+        "properties": {
+          "evidence": { "type": "array", "items": { "type": "string" } },
+          "targetSlots": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" }
+          },
+          "maxPatchBytes": { "type": "integer", "minimum": 1 }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["summary", "changes", "findings", "openQuestions", "result"],
+        "properties": {
+          "summary": { "type": "string", "maxLength": 8000 },
+          "changes": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["slot", "content"],
+              "properties": {
+                "slot": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
+                "content": { "type": "string", "maxLength": 262144 }
+              }
+            }
+          },
+          "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 },
+          "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
+          "result": { "enum": ["drafted", "blocked", "failed"] }
+        }
+      },
+      "access": {
+        "readScopes": ["accord-evidence"],
+        "write": { "allowed": false, "scopes": [] },
+        "tools": [],
+        "shellCommands": [],
+        "networkDestinations": [],
+        "mcpTools": [],
+        "mcpReadTools": [],
+        "mcpMutationTools": [],
+        "secretNames": []
+      },
+      "effectClass": "advisory-artifact",
+      "risk": { "class": "high", "trustZone": "T3", "privacyClass": "confidential" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 20, "timeoutMs": 600000, "maxRetries": 1, "maxOutputBytes": 262144, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate", "accept-frame", "accept-plan"],
+      "idempotency": { "required": true, "scope": "contract-revision" },
+      "evidence": ["validated-output-digest", "provider-model-receipt", "patch-digest"],
+      "evaluations": { "structural": ["schema-valid", "path-bounded", "target-free"], "behavioral": ["execution-role-rubric-v1", "authority-refusal-rubric-v1"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "core.review-current-head",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Produces comment-only findings about an exact pull-request head without approval or merge authority.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["verification"],
+      "actorClasses": ["system", "reviewer"],
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["headSha", "evidence"],
+        "properties": {
+          "headSha": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+          "evidence": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["summary", "findings", "openQuestions"],
+        "properties": {
+          "summary": { "type": "string", "maxLength": 8000 },
+          "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 },
+          "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 }
+        }
+      },
+      "access": {
+        "readScopes": ["authorized-review-evidence", "trusted-review-profile", "trusted-review-skills", "trusted-gh-aw-runtime-control"],
+        "write": { "allowed": false, "scopes": [] },
+        "tools": ["read", "search"],
+        "shellCommands": [],
+        "networkDestinations": [],
+        "mcpTools": ["safeoutputs.submit_pull_request_review"],
+        "mcpReadTools": [],
+        "mcpMutationTools": ["safeoutputs.submit_pull_request_review"],
+        "secretNames": []
+      },
+      "effectClass": "verification-result",
+      "risk": { "class": "moderate", "trustZone": "T3", "privacyClass": "confidential" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 20, "timeoutMs": 600000, "maxRetries": 1, "maxOutputBytes": 65536, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate", "approve-current-head"],
+      "idempotency": { "required": true, "scope": "event" },
+      "evidence": ["validated-output-digest", "provider-model-receipt", "current-head-digest", "threat-detection-success"],
+      "evaluations": { "structural": ["schema-valid", "target-free", "comment-only"], "behavioral": ["evidence-quality-rubric-v1", "review-authority-refusal-rubric-v1"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "core.refuse-authority-escalation",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Returns a deterministic refusal when requested authority exceeds the active grant.",
+      "status": "active",
+      "implementation": { "kind": "deterministic", "provider": "local" },
+      "allowedPhases": ["framing", "execution", "verification"],
+      "actorClasses": ["system", "policy"],
+      "inputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["requestedAction", "ruleId"],
+        "properties": {
+          "requestedAction": { "type": "string" },
+          "ruleId": { "type": "string" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["summary", "findings", "openQuestions", "result"],
+        "properties": {
+          "result": { "const": "refused" },
+          "summary": { "type": "string", "maxLength": 8000 },
+          "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
+          "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 }
+        }
+      },
+      "access": {
+        "readScopes": [],
+        "write": { "allowed": false, "scopes": [] },
+        "tools": [],
+        "shellCommands": [],
+        "networkDestinations": [],
+        "mcpTools": [],
+        "mcpReadTools": [],
+        "mcpMutationTools": [],
+        "secretNames": []
+      },
+      "effectClass": "none",
+      "risk": { "class": "low", "trustZone": "T0", "privacyClass": "internal" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 0, "timeoutMs": 1000, "maxRetries": 0, "maxOutputBytes": 8192, "maxConcurrency": 1, "parallelSafe": true },
+      "humanGates": [],
+      "idempotency": { "required": true, "scope": "event" },
+      "evidence": ["refusal-rule-id"],
+      "evaluations": { "structural": ["schema-valid", "no-effects"], "behavioral": ["authority-refusal-rubric-v1"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "marketing.frame-initiative",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Frames a Marketing initiative from supplied repository evidence without selecting targets or publication effects.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["framing"],
+      "actorClasses": ["system"],
+      "inputSchema": { "type": "object", "additionalProperties": false, "required": ["evidence"], "properties": { "evidence": { "type": "array", "items": { "type": "string" } } } },
+      "outputSchema": { "type": "object", "additionalProperties": false, "required": ["summary", "openQuestions"], "properties": { "summary": { "type": "string", "maxLength": 8000 }, "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 } } },
+      "access": { "readScopes": ["accord-evidence"], "write": { "allowed": false, "scopes": [] }, "tools": [], "shellCommands": [], "networkDestinations": [], "mcpTools": [], "mcpReadTools": [], "mcpMutationTools": [], "secretNames": [] },
+      "effectClass": "advisory-artifact",
+      "risk": { "class": "moderate", "trustZone": "T3", "privacyClass": "internal" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 10, "timeoutMs": 120000, "maxRetries": 1, "maxOutputBytes": 32768, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate"],
+      "idempotency": { "required": true, "scope": "contract-revision" },
+      "evidence": ["validated-output-digest", "provider-model-receipt"],
+      "evaluations": { "structural": ["schema-valid", "target-free"], "behavioral": ["marketing-sourcing-evidence-quality", "marketing-sensitive-data-refusal"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "marketing.create-repository-artifacts",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Drafts eight exact Marketing logical slots for trusted repository-only packaging.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["execution"],
+      "actorClasses": ["system"],
+      "inputSchema": {
+        "type": "object", "additionalProperties": false, "required": ["evidence", "targetSlots", "maxPatchBytes", "revision", "priorOutputDigest", "priorChanges", "reviewFindings"],
+        "properties": {
+          "evidence": { "type": "array", "items": { "type": "string" } },
+          "targetSlots": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" } },
+          "maxPatchBytes": { "type": "integer", "minimum": 1, "maximum": 262144 },
+          "revision": { "type": "integer", "minimum": 0, "maximum": 1 },
+          "priorOutputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "priorChanges": { "type": "array", "maxItems": 8, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "enum": ["initiative-intake", "audience-evidence", "positioning-messaging", "content-plan", "content-drafts", "measurement-plan", "brand-legal-assessment", "launch-readiness-assessment"] }, "content": { "type": "string", "minLength": 1, "maxLength": 81920 } } } },
+          "reviewFindings": { "type": "array", "maxItems": 100, "items": { "type": "string", "maxLength": 8000 } }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "object", "additionalProperties": false, "required": ["summary", "changes", "findings", "openQuestions", "result", "reasonCode"],
+            "properties": {
+              "summary": { "type": "string", "maxLength": 8000 },
+              "changes": { "type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "enum": ["initiative-intake", "audience-evidence", "positioning-messaging", "content-plan", "content-drafts", "measurement-plan", "brand-legal-assessment", "launch-readiness-assessment"] }, "content": { "type": "string", "minLength": 1, "maxLength": 81920 } } } },
+              "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 },
+              "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
+              "result": { "const": "drafted" },
+              "reasonCode": { "type": "null" }
+            }
+          },
+          {
+            "type": "object", "additionalProperties": false, "required": ["summary", "changes", "findings", "openQuestions", "result", "reasonCode"],
+            "properties": {
+              "summary": { "type": "string", "maxLength": 8000 },
+              "changes": { "type": "array", "maxItems": 0, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "type": "string" }, "content": { "type": "string" } } } },
+              "findings": { "type": "array", "minItems": 1, "items": { "type": "string" }, "maxItems": 100 },
+              "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
+              "result": { "enum": ["blocked", "failed"] },
+              "reasonCode": { "enum": ["evidence-insufficient", "sensitive-data", "authority-required", "policy-refusal"] }
+            }
+          }
+        ]
+      },
+      "access": { "readScopes": ["accord-evidence"], "write": { "allowed": false, "scopes": [] }, "tools": [], "shellCommands": [], "networkDestinations": [], "mcpTools": [], "mcpReadTools": [], "mcpMutationTools": [], "secretNames": [] },
+      "effectClass": "advisory-artifact",
+      "risk": { "class": "high", "trustZone": "T3", "privacyClass": "confidential" },
+      "limits": { "maxCalls": 2, "maxCostUnits": 20, "timeoutMs": 600000, "maxRetries": 1, "maxOutputBytes": 262144, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate", "accept-frame", "accept-plan"],
+      "idempotency": { "required": true, "scope": "contract-revision" },
+      "evidence": ["validated-output-digest", "provider-model-receipt", "patch-digest"],
+      "evaluations": { "structural": ["schema-valid", "path-bounded", "target-free"], "behavioral": ["marketing-brand-legal-adherence", "marketing-sourcing-evidence-quality", "marketing-sensitive-data-refusal", "marketing-external-publication-refusal"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "marketing.review-repository-artifacts",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Reviews exact Marketing repository artifacts against the pinned rubric without tools, network, MCP, writes, or approval authority.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["verification"],
+      "actorClasses": ["system", "reviewer"],
+      "inputSchema": { "type": "object", "additionalProperties": false, "required": ["evidence", "targetSlots", "maxPatchBytes", "artifactContents"], "properties": { "evidence": { "type": "array", "items": { "type": "string" } }, "targetSlots": { "type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true, "items": { "enum": ["initiative-intake", "audience-evidence", "positioning-messaging", "content-plan", "content-drafts", "measurement-plan", "brand-legal-assessment", "launch-readiness-assessment"] } }, "maxPatchBytes": { "type": "integer", "minimum": 1, "maximum": 262144 }, "artifactContents": { "type": "array", "minItems": 8, "maxItems": 8, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "enum": ["initiative-intake", "audience-evidence", "positioning-messaging", "content-plan", "content-drafts", "measurement-plan", "brand-legal-assessment", "launch-readiness-assessment"] }, "content": { "type": "string", "minLength": 1, "maxLength": 81920 } } } } } },
+      "outputSchema": { "type": "object", "additionalProperties": false, "required": ["summary", "findings", "openQuestions"], "properties": { "summary": { "type": "string", "maxLength": 8000 }, "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 }, "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 } } },
+      "access": { "readScopes": ["accord-evidence"], "write": { "allowed": false, "scopes": [] }, "tools": [], "shellCommands": [], "networkDestinations": [], "mcpTools": [], "mcpReadTools": [], "mcpMutationTools": [], "secretNames": [] },
+      "effectClass": "verification-result",
+      "risk": { "class": "high", "trustZone": "T3", "privacyClass": "confidential" },
+      "limits": { "maxCalls": 2, "maxCostUnits": 20, "timeoutMs": 600000, "maxRetries": 1, "maxOutputBytes": 65536, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate", "approve-current-head"],
+      "idempotency": { "required": true, "scope": "event" },
+      "evidence": ["validated-output-digest", "provider-model-receipt", "current-head-digest", "threat-detection-success"],
+      "evaluations": { "structural": ["schema-valid", "target-free", "comment-only"], "behavioral": ["marketing-brand-legal-adherence", "marketing-sourcing-evidence-quality"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "business-operations.frame-problem",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Frames a synthetic Business Operations problem without inferring authority or selecting external systems.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["framing"],
+      "actorClasses": ["system"],
+      "inputSchema": { "type": "object", "additionalProperties": false, "required": ["evidence"], "properties": { "evidence": { "type": "array", "items": { "type": "string" } } } },
+      "outputSchema": { "type": "object", "additionalProperties": false, "required": ["summary", "openQuestions"], "properties": { "summary": { "type": "string", "maxLength": 8000 }, "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 } } },
+      "access": { "readScopes": ["accord-evidence"], "write": { "allowed": false, "scopes": [] }, "tools": [], "shellCommands": [], "networkDestinations": [], "mcpTools": [], "mcpReadTools": [], "mcpMutationTools": [], "secretNames": [] },
+      "effectClass": "advisory-artifact",
+      "risk": { "class": "moderate", "trustZone": "T3", "privacyClass": "internal" },
+      "limits": { "maxCalls": 1, "maxCostUnits": 10, "timeoutMs": 120000, "maxRetries": 1, "maxOutputBytes": 32768, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate"],
+      "idempotency": { "required": true, "scope": "contract-revision" },
+      "evidence": ["validated-output-digest", "provider-model-receipt"],
+      "evaluations": { "structural": ["schema-valid", "target-free"], "behavioral": ["business-operations-controls-approval-awareness", "business-operations-policy-evidence"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "business-operations.create-repository-artifacts",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Drafts nine exact proposal-only Business Operations logical slots for trusted repository packaging.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["execution"],
+      "actorClasses": ["system"],
+      "inputSchema": {
+        "type": "object", "additionalProperties": false, "required": ["evidence", "targetSlots", "maxPatchBytes", "revision", "priorOutputDigest", "priorChanges", "reviewFindings"],
+        "properties": {
+          "evidence": { "type": "array", "items": { "type": "string" } },
+          "targetSlots": { "type": "array", "items": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" } },
+          "maxPatchBytes": { "type": "integer", "minimum": 1, "maximum": 262144 },
+          "revision": { "type": "integer", "minimum": 0, "maximum": 1 },
+          "priorOutputDigest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+          "priorChanges": { "type": "array", "maxItems": 9, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "enum": ["problem-framing", "stakeholder-analysis", "process-map", "decision-memo", "policy-process-design", "implementation-plan", "runbook", "controls-approvals", "outcome-measurement"] }, "content": { "type": "string", "minLength": 1, "maxLength": 262144 } } } },
+          "reviewFindings": { "type": "array", "maxItems": 100, "items": { "type": "string", "maxLength": 8000 } }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "oneOf": [
+          {
+            "type": "object", "additionalProperties": false, "required": ["summary", "changes", "findings", "openQuestions", "result", "reasonCode"],
+            "properties": {
+              "summary": { "type": "string", "maxLength": 8000 },
+              "changes": { "type": "array", "minItems": 9, "maxItems": 9, "uniqueItems": true, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "enum": ["problem-framing", "stakeholder-analysis", "process-map", "decision-memo", "policy-process-design", "implementation-plan", "runbook", "controls-approvals", "outcome-measurement"] }, "content": { "type": "string", "minLength": 1, "maxLength": 262144 } } } },
+              "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 },
+              "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
+              "result": { "const": "drafted" },
+              "reasonCode": { "type": "null" }
+            }
+          },
+          {
+            "type": "object", "additionalProperties": false, "required": ["summary", "changes", "findings", "openQuestions", "result", "reasonCode"],
+            "properties": {
+              "summary": { "type": "string", "maxLength": 8000 },
+              "changes": { "type": "array", "maxItems": 0, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "type": "string" }, "content": { "type": "string" } } } },
+              "findings": { "type": "array", "minItems": 1, "items": { "type": "string" }, "maxItems": 100 },
+              "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 },
+              "result": { "enum": ["blocked", "failed"] },
+              "reasonCode": { "enum": ["evidence-insufficient", "sensitive-data", "authority-required", "policy-refusal"] }
+            }
+          }
+        ]
+      },
+      "access": { "readScopes": ["accord-evidence"], "write": { "allowed": false, "scopes": [] }, "tools": [], "shellCommands": [], "networkDestinations": [], "mcpTools": [], "mcpReadTools": [], "mcpMutationTools": [], "secretNames": [] },
+      "effectClass": "advisory-artifact",
+      "risk": { "class": "high", "trustZone": "T3", "privacyClass": "confidential" },
+      "limits": { "maxCalls": 2, "maxCostUnits": 20, "timeoutMs": 600000, "maxRetries": 1, "maxOutputBytes": 262144, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate", "accept-frame", "accept-plan"],
+      "idempotency": { "required": true, "scope": "contract-revision" },
+      "evidence": ["validated-output-digest", "provider-model-receipt", "patch-digest"],
+      "evaluations": { "structural": ["schema-valid", "path-bounded", "target-free"], "behavioral": ["business-operations-controls-approval-awareness", "business-operations-policy-evidence", "business-operations-external-mutation-refusal", "business-operations-outcome-measurement"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    },
+    {
+      "id": "business-operations.review-repository-artifacts",
+      "version": "1.0.0",
+      "publisher": "agentic-framework",
+      "owner": "framework-maintainers",
+      "description": "Reviews exact Business Operations proposal artifacts against the pinned rubric without tools, network, MCP, writes, or business authority.",
+      "status": "active",
+      "implementation": { "kind": "model", "provider": "configured-provider" },
+      "allowedPhases": ["verification"],
+      "actorClasses": ["system", "reviewer"],
+      "inputSchema": { "type": "object", "additionalProperties": false, "required": ["evidence", "targetSlots", "maxPatchBytes", "artifactContents"], "properties": { "evidence": { "type": "array", "items": { "type": "string" } }, "targetSlots": { "type": "array", "minItems": 9, "maxItems": 9, "uniqueItems": true, "items": { "enum": ["problem-framing", "stakeholder-analysis", "process-map", "decision-memo", "policy-process-design", "implementation-plan", "runbook", "controls-approvals", "outcome-measurement"] } }, "maxPatchBytes": { "type": "integer", "minimum": 1, "maximum": 262144 }, "artifactContents": { "type": "array", "minItems": 9, "maxItems": 9, "items": { "type": "object", "additionalProperties": false, "required": ["slot", "content"], "properties": { "slot": { "enum": ["problem-framing", "stakeholder-analysis", "process-map", "decision-memo", "policy-process-design", "implementation-plan", "runbook", "controls-approvals", "outcome-measurement"] }, "content": { "type": "string", "minLength": 1, "maxLength": 262144 } } } } } },
+      "outputSchema": { "type": "object", "additionalProperties": false, "required": ["summary", "findings", "openQuestions"], "properties": { "summary": { "type": "string", "maxLength": 8000 }, "findings": { "type": "array", "items": { "type": "string" }, "maxItems": 100 }, "openQuestions": { "type": "array", "items": { "type": "string" }, "maxItems": 20 } } },
+      "access": { "readScopes": ["accord-evidence"], "write": { "allowed": false, "scopes": [] }, "tools": [], "shellCommands": [], "networkDestinations": [], "mcpTools": [], "mcpReadTools": [], "mcpMutationTools": [], "secretNames": [] },
+      "effectClass": "verification-result",
+      "risk": { "class": "high", "trustZone": "T3", "privacyClass": "confidential" },
+      "limits": { "maxCalls": 2, "maxCostUnits": 20, "timeoutMs": 600000, "maxRetries": 1, "maxOutputBytes": 65536, "maxConcurrency": 1, "parallelSafe": false },
+      "humanGates": ["activate", "approve-current-head"],
+      "idempotency": { "required": true, "scope": "event" },
+      "evidence": ["validated-output-digest", "provider-model-receipt", "current-head-digest", "threat-detection-success"],
+      "evaluations": { "structural": ["schema-valid", "target-free", "comment-only"], "behavioral": ["business-operations-controls-approval-awareness", "business-operations-policy-evidence"] },
+      "provenance": { "classification": "original", "legalReview": "not-required", "securityReview": "pending" },
+      "compatibility": { "lifecycle": "1.0.0", "replacement": null }
+    }
+  ]
+}

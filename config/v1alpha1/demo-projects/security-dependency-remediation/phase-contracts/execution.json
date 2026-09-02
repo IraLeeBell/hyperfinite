@@ -1,0 +1,121 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "demo.security-dependency-remediation.execution",
+    "version": "1.0.0"
+  },
+  "phase": "execution",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "activation-lease-current",
+    "work-accord-current",
+    "accepted-patch-plan-current",
+    "trusted-target-slot-map-current",
+    "base-sha-current"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "activation-lease",
+    "accepted-patch-plan",
+    "target-slot-map"
+  ],
+  "allowedCapabilities": [
+    "demo.security-dependency-remediation.patch-implementation@1.0.0"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "planningArtifactDigest",
+      "targetSlots",
+      "maxPatchBytes"
+    ],
+    "properties": {
+      "planningArtifactDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "targetSlots": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4,
+        "items": {
+          "enum": [
+            "dependency-manifest",
+            "dependency-lock",
+            "cache-key-source",
+            "cache-key-regression"
+          ]
+        }
+      },
+      "maxPatchBytes": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 65536
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "summary",
+      "changes"
+    ],
+    "properties": {
+      "summary": {
+        "type": "string",
+        "maxLength": 8000
+      },
+      "changes": {
+        "type": "array",
+        "minItems": 1,
+        "maxItems": 4,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "slot",
+            "content"
+          ],
+          "properties": {
+            "slot": {
+              "enum": [
+                "dependency-manifest",
+                "dependency-lock",
+                "cache-key-source",
+                "cache-key-regression"
+              ]
+            },
+            "content": {
+              "type": "string",
+              "maxLength": 65536
+            }
+          }
+        }
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "target-free-patch-validated-and-draft-pr-observed",
+      "event": "work-submitted"
+    }
+  ],
+  "limits": {
+    "maxLoops": 2,
+    "maxCalls": 1,
+    "maxCostUnits": 20,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "activate",
+    "accept-plan"
+  ],
+  "privacy": {
+    "maximumClass": "confidential",
+    "retentionDays": 90
+  }
+}

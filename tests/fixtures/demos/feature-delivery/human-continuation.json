@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "demoProjectId": "feature-delivery",
+  "runId": "feature-delivery-hands-off-001",
+  "runAttempt": 1,
+  "sourceStageId": "human-review",
+  "destinationStageId": "completed",
+  "kernelRouteId": "review.accept",
+  "reviewedHeadSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "observedMergedSha": "cccccccccccccccccccccccccccccccccccccccc",
+  "humanActor": {
+    "numericId": 42,
+    "currentPermission": "maintain",
+    "independent": true,
+    "bot": false
+  },
+  "approvalBindsReviewedHead": true,
+  "mergeObservationAuthenticated": true,
+  "acceptanceCriteria": [
+    {
+      "id": "FD-AC-005",
+      "status": "passed",
+      "evidenceDigests": [
+        "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+      ]
+    }
+  ],
+  "projectConverged": true,
+  "issueClosed": true,
+  "modelCalls": 0,
+  "externalCalls": 0,
+  "status": "completed"
+}

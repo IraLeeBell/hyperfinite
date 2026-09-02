@@ -1,0 +1,27 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "FeatureDeliveryDraftPullRequestEvidence",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:1f4f355ab66b8bfbaab2a0fde3575db3d5eec2b237b30435aba658a33d61a392",
+  "spec": {
+    "repositoryBindingDigest": "sha256:a796e6af915e46c3f55371d4c6fb9dbd2dc6b36d436d0a0ffe3bde44645834af",
+    "patchDigest": "sha256:a891065c48252ba1d0b966acf1f31d2ed428272afc6972bc97bb044e76ca921f",
+    "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "pullRequest": {
+      "number": 9001,
+      "nodeId": "PR_synthetic_feature_delivery_9001",
+      "headSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "draft": true,
+      "state": "open"
+    },
+    "deliveryAuthority": "trusted-adapter",
+    "prohibitedAutomation": [
+      "mark-ready",
+      "approve",
+      "dismiss-review",
+      "merge",
+      "deploy",
+      "publish"
+    ]
+  }
+}

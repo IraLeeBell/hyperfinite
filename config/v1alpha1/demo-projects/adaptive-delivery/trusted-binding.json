@@ -1,0 +1,28 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AdaptiveDeliveryTrustedBinding",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "synthetic": true,
+    "demoProjectId": "adaptive-delivery",
+    "repository": {
+      "id": 987654321,
+      "nodeId": "R_synthetic_hyperfinite",
+      "fullName": "example-organization/hyperfinite",
+      "rootId": "sha256:9ba1f10bca75c0a6eb37a4eb25ae0676fc6483e39e1b42db613abe172e705264"
+    },
+    "workItem": {
+      "number": 1,
+      "nodeId": "I_synthetic_adaptive_delivery_1"
+    },
+    "defaultRef": "refs/heads/main",
+    "baseSha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "allowedEvidencePaths": [
+      "examples/demos/adaptive-delivery/sandbox/src/change.ts",
+      "examples/demos/adaptive-delivery/sandbox/tests/change.test.ts"
+    ],
+    "observedPathsAreEvidenceOnly": true,
+    "untrustedRepositoryHintsGrantAuthority": false
+  },
+  "contentDigest": "sha256:4a890a7057cee476f618dc38976c8b349487827c580ccbfe9f74d16685fdd0ff"
+}

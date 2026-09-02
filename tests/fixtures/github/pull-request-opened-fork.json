@@ -1,0 +1,54 @@
+{
+  "action": "opened",
+  "pull_request": {
+    "id": 601,
+    "node_id": "PR_kwDOPull",
+    "number": 3,
+    "created_at": "2026-08-26T20:00:00Z",
+    "updated_at": "2026-08-26T20:00:01Z",
+    "base": {
+      "ref": "main",
+      "sha": "1111111111111111111111111111111111111111",
+      "repo": {
+        "id": 1001,
+        "node_id": "R_kgDORepo",
+        "name": "hyperfinite",
+        "full_name": "example-organization/hyperfinite",
+        "owner": {
+          "login": "example-organization"
+        }
+      }
+    },
+    "head": {
+      "ref": "feature",
+      "sha": "2222222222222222222222222222222222222222",
+      "repo": {
+        "id": 1002,
+        "node_id": "R_kgDOFork",
+        "name": "hyperfinite",
+        "full_name": "octocat/hyperfinite",
+        "owner": {
+          "login": "octocat"
+        }
+      }
+    }
+  },
+  "repository": {
+    "id": 1001,
+    "node_id": "R_kgDORepo",
+    "name": "hyperfinite",
+    "full_name": "example-organization/hyperfinite",
+    "owner": {
+      "login": "example-organization"
+    }
+  },
+  "installation": {
+    "id": 2001
+  },
+  "sender": {
+    "id": 3001,
+    "node_id": "U_kgDOUser",
+    "login": "octocat",
+    "type": "User"
+  }
+}

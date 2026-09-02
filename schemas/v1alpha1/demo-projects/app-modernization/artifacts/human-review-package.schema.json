@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/human-review-package.schema.json",
+  "title": "App Modernization human-review package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationHumanReviewPackage" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verificationDigest", "headSha", "draftPullRequestNumber", "automatedReviewEvent", "humanActions", "automationCanApprove", "automationCanMerge", "externalCallCount"],
+      "properties": {
+        "verificationDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "draftPullRequestNumber": { "type": "integer", "minimum": 1 },
+        "automatedReviewEvent": { "const": "COMMENT" },
+        "humanActions": {
+          "const": [
+            "inspect-exact-head",
+            "decide-approval",
+            "decide-merge",
+            "record-merge-observation"
+          ]
+        },
+        "automationCanApprove": { "const": false },
+        "automationCanMerge": { "const": false },
+        "externalCallCount": { "const": 0 }
+      }
+    }
+  }
+}

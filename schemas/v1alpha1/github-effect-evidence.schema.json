@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-effect-evidence.schema.json",
+  "title": "Authenticated GitHub effect evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "nodeId",
+    "applicationId",
+    "authorId",
+    "evidence",
+    "signature"
+  ],
+  "properties": {
+    "nodeId": { "type": "string", "minLength": 1 },
+    "applicationId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "authorId": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "evidence": { "$ref": "#/$defs/evidenceState" },
+    "signature": { "$ref": "#/$defs/signature" }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nullableDigest": {
+      "anyOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    },
+    "signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "keyId", "value"],
+      "properties": {
+        "algorithm": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "keyId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "value": { "type": "string", "minLength": 1, "maxLength": 16384 }
+      }
+    },
+    "lastError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "status", "retryable", "outcomeAmbiguous"],
+      "properties": {
+        "code": {
+          "enum": [
+            "FORBIDDEN",
+            "NOT_FOUND",
+            "GONE",
+            "VALIDATION_FAILED",
+            "RATE_LIMITED",
+            "SERVER_ERROR",
+            "TIMEOUT",
+            "GRAPHQL_ERROR",
+            "RESPONSE_INVALID",
+            "READ_AFTER_WRITE_FAILED",
+            "UNOBSERVED_WRITE"
+          ]
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 100,
+              "maximum": 599
+            },
+            { "type": "null" }
+          ]
+        },
+        "retryable": { "type": "boolean" },
+        "outcomeAmbiguous": { "type": "boolean" }
+      }
+    },
+    "evidenceState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion",
+        "sequence",
+        "priorSequence",
+        "priorEvidenceDigest",
+        "bindingDigest",
+        "idempotencyKey",
+        "planDigest",
+        "claimantId",
+        "operationDigest",
+        "state",
+        "effectDigest",
+        "writeAttempts",
+        "retryAfterMs",
+        "retryNotBefore",
+        "lastError",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "schemaVersion": { "const": "v1alpha1" },
+        "sequence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "priorSequence": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            { "type": "null" }
+          ]
+        },
+        "priorEvidenceDigest": { "$ref": "#/$defs/nullableDigest" },
+        "bindingDigest": { "$ref": "#/$defs/digest" },
+        "idempotencyKey": { "$ref": "#/$defs/digest" },
+        "planDigest": { "$ref": "#/$defs/digest" },
+        "claimantId": { "$ref": "#/$defs/digest" },
+        "operationDigest": { "$ref": "#/$defs/digest" },
+        "state": {
+          "enum": ["pending", "retryable", "completed", "partial"]
+        },
+        "effectDigest": { "$ref": "#/$defs/nullableDigest" },
+        "writeAttempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 9007199254740991
+        },
+        "retryAfterMs": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            { "type": "null" }
+          ]
+        },
+        "retryNotBefore": {
+          "anyOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "null" }
+          ]
+        },
+        "lastError": {
+          "anyOf": [
+            { "$ref": "#/$defs/lastError" },
+            { "type": "null" }
+          ]
+        },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "state": { "const": "pending" },
+            "effectDigest": { "type": "null" },
+            "retryAfterMs": { "type": "null" },
+            "retryNotBefore": { "type": "null" },
+            "lastError": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "state": { "const": "retryable" },
+            "effectDigest": { "type": "null" },
+            "writeAttempts": { "type": "integer", "minimum": 1 },
+            "retryAfterMs": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "retryNotBefore": { "type": "string", "format": "date-time" },
+            "lastError": {
+              "allOf": [
+                { "$ref": "#/$defs/lastError" },
+                {
+                  "type": "object",
+                  "properties": {
+                    "retryable": { "const": true },
+                    "outcomeAmbiguous": { "const": false }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "state": { "const": "completed" },
+            "effectDigest": { "$ref": "#/$defs/digest" },
+            "writeAttempts": { "type": "integer", "minimum": 1 },
+            "retryAfterMs": { "type": "null" },
+            "retryNotBefore": { "type": "null" },
+            "lastError": { "type": "null" }
+          }
+        },
+        {
+          "properties": {
+            "state": { "const": "partial" },
+            "retryAfterMs": { "type": "null" },
+            "retryNotBefore": { "type": "null" },
+            "lastError": { "$ref": "#/$defs/lastError" }
+          }
+        }
+      ]
+    }
+  }
+}

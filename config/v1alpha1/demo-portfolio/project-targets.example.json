@@ -1,0 +1,67 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoProjectTargetManifest",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "owner": {
+      "type": "organization",
+      "login": "example-organization",
+      "nodeId": "O_synthetic_example_organization"
+    },
+    "repository": {
+      "fullName": "example-organization/hyperfinite",
+      "nodeId": "R_synthetic_hyperfinite"
+    },
+    "projects": [
+      {
+        "demoProjectId": "app-modernization",
+        "title": "App Modernization - Hyperfinite",
+        "number": 101,
+        "nodeId": "PVT_synthetic_app_modernization",
+        "viewNodeId": "PVTV_synthetic_app_modernization",
+        "visibility": "private",
+        "closed": false,
+        "initialItemCount": 0,
+        "initialViewName": "View 1",
+        "initialViewLayout": "BOARD_LAYOUT"
+      },
+      {
+        "demoProjectId": "feature-delivery",
+        "title": "Feature Delivery - Hyperfinite",
+        "number": 102,
+        "nodeId": "PVT_synthetic_feature_delivery",
+        "viewNodeId": "PVTV_synthetic_feature_delivery",
+        "visibility": "private",
+        "closed": false,
+        "initialItemCount": 0,
+        "initialViewName": "View 1",
+        "initialViewLayout": "BOARD_LAYOUT"
+      },
+      {
+        "demoProjectId": "security-dependency-remediation",
+        "title": "Security Dependency Remediation - Hyperfinite",
+        "number": 103,
+        "nodeId": "PVT_synthetic_security_dependency_remediation",
+        "viewNodeId": "PVTV_synthetic_security_dependency_remediation",
+        "visibility": "private",
+        "closed": false,
+        "initialItemCount": 0,
+        "initialViewName": "View 1",
+        "initialViewLayout": "BOARD_LAYOUT"
+      },
+      {
+        "demoProjectId": "adaptive-delivery",
+        "title": "Adaptive Delivery - Hyperfinite",
+        "number": 104,
+        "nodeId": "PVT_synthetic_adaptive_delivery",
+        "viewNodeId": "PVTV_synthetic_adaptive_delivery",
+        "visibility": "private",
+        "closed": false,
+        "initialItemCount": 0,
+        "initialViewName": "View 1",
+        "initialViewLayout": "BOARD_LAYOUT"
+      }
+    ]
+  },
+  "contentDigest": "sha256:60df92cc3d8de3b3b3c7db30560da75c06276f98f96ab79f455810ab7dfb4f76"
+}

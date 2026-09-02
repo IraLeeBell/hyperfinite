@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/artifacts/verification.schema.json",
+  "title": "App Modernization exact-head verification evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationVerification" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementationEvidenceDigest", "headSha", "commands", "security", "compatibility", "migration", "reviewEvent", "externalCallCount"],
+      "properties": {
+        "implementationEvidenceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "commands": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "status", "outputDigest"],
+            "properties": {
+              "id": {
+                "enum": [
+                  "typecheck",
+                  "build",
+                  "unit-tests",
+                  "security",
+                  "compatibility",
+                  "migration-dry-run"
+                ]
+              },
+              "status": { "const": "passed" },
+              "outputDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+            }
+          },
+          "allOf": [
+            { "contains": { "type": "object", "required": ["id"], "properties": { "id": { "const": "typecheck" } } }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "type": "object", "required": ["id"], "properties": { "id": { "const": "build" } } }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "type": "object", "required": ["id"], "properties": { "id": { "const": "unit-tests" } } }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "type": "object", "required": ["id"], "properties": { "id": { "const": "security" } } }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "type": "object", "required": ["id"], "properties": { "id": { "const": "compatibility" } } }, "minContains": 1, "maxContains": 1 },
+            { "contains": { "type": "object", "required": ["id"], "properties": { "id": { "const": "migration-dry-run" } } }, "minContains": 1, "maxContains": 1 }
+          ]
+        },
+        "security": { "enum": ["passed", "blocked"] },
+        "compatibility": { "enum": ["passed", "blocked"] },
+        "migration": { "enum": ["passed", "blocked"] },
+        "reviewEvent": { "const": "COMMENT" },
+        "externalCallCount": { "const": 0 }
+      }
+    }
+  }
+}

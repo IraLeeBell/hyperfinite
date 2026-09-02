@@ -1,0 +1,693 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoCapabilityRegistryShard",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "feature-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:69cd93cc47c615b2b2f6c495ff12b1e509ae2f7774a477bc64e4f7a69a3dfce1",
+    "capabilities": [
+      {
+        "id": "demo.feature-delivery.requirements-clarification",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces a bounded feature brief and stable acceptance criteria from authorized issue evidence.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 32768,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "feature-delivery-requirements-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.feature-delivery.codebase-discovery",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Analyzes bounded repository evidence already bound to the trusted target and exact base SHA.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 32768,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "exact-base-sha"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free",
+            "base-bound"
+          ],
+          "behavioral": [
+            "feature-delivery-discovery-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.feature-delivery.solution-design",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces a target-free solution decision traced to stable acceptance criteria.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 32768,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "feature-delivery-design-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.feature-delivery.build",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Drafts content for approved logical slots without selecting paths, commands, targets, or effects.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "execution"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence",
+            "targetSlots",
+            "maxPatchBytes"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "targetSlots": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]{0,62}$"
+              }
+            },
+            "maxPatchBytes": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "changes",
+            "findings",
+            "openQuestions",
+            "result"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "changes": {
+              "type": "array",
+              "maxItems": 2,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "slot",
+                  "content"
+                ],
+                "properties": {
+                  "slot": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9-]{0,62}$"
+                  },
+                  "content": {
+                    "type": "string",
+                    "maxLength": 32768
+                  }
+                }
+              }
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            },
+            "result": {
+              "enum": [
+                "drafted",
+                "blocked",
+                "failed"
+              ]
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [],
+          "mcpReadTools": [],
+          "mcpMutationTools": [],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "high",
+          "trustZone": "T3",
+          "privacyClass": "confidential"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 20,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "accept-frame",
+          "accept-plan"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "patch-digest"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "path-bounded",
+            "target-free"
+          ],
+          "behavioral": [
+            "feature-delivery-build-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.feature-delivery.test-and-verification",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces COMMENT-only findings for an exact current draft pull-request head after fixed verification.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "verification"
+        ],
+        "actorClasses": [
+          "system",
+          "reviewer"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "headSha",
+            "evidence"
+          ],
+          "properties": {
+            "headSha": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "authorized-review-evidence",
+            "trusted-review-profile",
+            "trusted-review-skills",
+            "trusted-gh-aw-runtime-control"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [
+            "read",
+            "search"
+          ],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "mcpReadTools": [],
+          "mcpMutationTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "verification-result",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "confidential"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 20,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "approve-current-head"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "event"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "current-head-digest",
+          "threat-detection-success"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free",
+            "comment-only"
+          ],
+          "behavioral": [
+            "feature-delivery-verification-rubric-v1",
+            "review-authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      }
+    ]
+  },
+  "contentDigest": "sha256:ff59e5ac001413526eb1cffc4dbb428ebec97e4ede7fcd0d304f41bb29c79857"
+}

@@ -1,0 +1,67 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationTrustedBinding",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "repository": {
+      "id": 7001,
+      "nodeId": "R_synthetic_security_remediation",
+      "fullName": "example/security-remediation-sandbox",
+      "defaultRef": "refs/heads/main",
+      "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362"
+    },
+    "workItem": {
+      "number": 1003,
+      "nodeId": "I_synthetic_security_dependency_1003"
+    },
+    "advisory": {
+      "id": "SDRA-2026-0001",
+      "dependency": "mist-lru",
+      "affectedVersion": "0.4.0",
+      "fixedVersion": "0.4.1",
+      "evidenceRef": "examples/demos/security-dependency-remediation/evidence/synthetic-advisory.json"
+    },
+    "targetSlots": [
+      {
+        "slot": "dependency-manifest",
+        "path": "vendor/mist-lru/package.json"
+      },
+      {
+        "slot": "dependency-lock",
+        "path": "vendor/mist-lru/package-lock.json"
+      },
+      {
+        "slot": "cache-key-source",
+        "path": "src/cache-key.ts"
+      },
+      {
+        "slot": "cache-key-regression",
+        "path": "tests/cache-key.test.ts"
+      }
+    ],
+    "fixedChecks": [
+      "hermetic-reproduction",
+      "fixed-regression",
+      "dependency-lock-consistency",
+      "threat-detection",
+      "dlp-scan",
+      "synthetic-security-scan"
+    ],
+    "externalCallBudget": 0,
+    "networkDestinations": [],
+    "secretNames": [],
+    "prohibitedEffects": [
+      "approve",
+      "merge",
+      "mark-ready",
+      "deploy",
+      "publish",
+      "dismiss-alert",
+      "dismiss-review",
+      "project-reconfigure",
+      "credential-reconfigure"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationImpactAssessment",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:6274277424618fe773ea56b06e9bebd9a0e74f19160552dcfb126d2f729bccce",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "stageId": "reproduction-and-impact-analysis",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "subjectDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7",
+    "headSha": null,
+    "status": "verified",
+    "assertions": [
+      {
+        "id": "local-cache-key-integrity-impact",
+        "status": "information",
+        "evidenceDigest": "sha256:2060ced283d15aa1b8ad6d216e7cada9e5061eff47cd6bb4b53129dc3dd62888"
+      },
+      {
+        "id": "no-code-execution-claim",
+        "status": "success",
+        "evidenceDigest": "sha256:f266bcbcebe432fa20e8823fe7f4e1b07796abd33ada87f57535678204db11f1"
+      }
+    ],
+    "constraints": [
+      "synthetic-repository-only",
+      "network-denied",
+      "credentials-denied",
+      "production-exploit-denied"
+    ],
+    "externalCallCount": 0
+  }
+}

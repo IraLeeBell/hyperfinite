@@ -1,0 +1,1117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/administrator-handoff.schema.json",
+  "title": "Administrator handoff plan, apply gate, confirmation, and readback contracts",
+  "description": "Closed, non-authoritative pre-App handoff documents. They can describe and validate exact human administrative work, but cannot perform an effect, mint or read a credential, choose a target, or satisfy a human gate by themselves.",
+  "oneOf": [
+    { "$ref": "#/$defs/handoffPlan" },
+    { "$ref": "#/$defs/handoffReadback" },
+    { "$ref": "#/$defs/applyPlan" },
+    { "$ref": "#/$defs/applyConfirmation" },
+    { "$ref": "#/$defs/applyReadback" },
+    { "$ref": "#/$defs/handoffReport" }
+  ],
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "id": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "opaqueId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "controlId": {
+      "enum": [
+        "app-registration",
+        "app-ownership-transfer",
+        "app-installation",
+        "app-permissions-and-events",
+        "webhook-and-oidc-identity",
+        "key-custody-and-rotation",
+        "four-store-topology",
+        "backup-restore-and-disabled-recovery",
+        "credential-broker",
+        "single-writer",
+        "isolated-runner",
+        "project-binding-and-projection",
+        "main-ruleset-and-required-checks",
+        "actions-policy",
+        "ghas-and-codeql",
+        "protected-environment",
+        "monitoring-health-and-alert-routing",
+        "logs-artifacts-and-data-retention",
+        "provider-billing-budgets-and-usage",
+        "kill-switch-and-revocation",
+        "recovery-drills",
+        "incident-response",
+        "customer-transfer",
+        "open-source-preflight",
+        "final-human-login-and-readback",
+        "app-backed-sandbox-canary",
+        "production-readiness"
+      ]
+    },
+    "bindingKind": {
+      "enum": [
+        "owner",
+        "repository",
+        "source-owner",
+        "project",
+        "environment",
+        "ruleset",
+        "app",
+        "installation",
+        "billing-account"
+      ]
+    },
+    "actionClass": {
+      "enum": [
+        "human-administrative-apply",
+        "human-decision",
+        "readback-only",
+        "drill"
+      ]
+    },
+    "responsibleOwner": {
+      "enum": [
+        "organization-administrator",
+        "repository-administrator",
+        "project-administrator",
+        "security-owner",
+        "platform-owner",
+        "billing-owner",
+        "incident-commander",
+        "legal-ospo-owner",
+        "customer-owner"
+      ]
+    },
+    "targetSource": {
+      "enum": [
+        "authenticated-owner-repository-read",
+        "authenticated-app-registration-read",
+        "authenticated-installation-read",
+        "authenticated-project-export",
+        "authenticated-repository-administration-read",
+        "protected-deployment-inventory",
+        "protected-billing-read",
+        "protected-operations-evidence",
+        "authorized-human-decision"
+      ]
+    },
+    "readbackProcedure": {
+      "enum": [
+        "exact-authenticated-api-readback",
+        "signed-service-health-and-store-readback",
+        "disabled-drill-evidence-readback",
+        "exact-head-security-readback",
+        "human-decision-record-readback",
+        "live-canary-current-head-readback"
+      ]
+    },
+    "prohibitedEffect": {
+      "enum": [
+        "automatic-approval",
+        "automatic-mark-ready",
+        "automatic-merge",
+        "automatic-issue-close",
+        "automatic-project-transition",
+        "automatic-deployment",
+        "automatic-publication",
+        "automatic-license-decision",
+        "automatic-visibility-change",
+        "pat-fallback",
+        "model-job-credential-fallback",
+        "blind-retry-after-ambiguous-acknowledgement"
+      ]
+    },
+    "prohibitedEffects": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/prohibitedEffect" }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "nodeId", "owner", "name", "fullName"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "nodeId": { "$ref": "#/$defs/opaqueId" },
+        "owner": { "$ref": "#/$defs/opaqueId" },
+        "name": { "$ref": "#/$defs/opaqueId" },
+        "fullName": { "$ref": "#/$defs/opaqueId" }
+      }
+    },
+    "exactTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceOwner",
+        "owner",
+        "repository",
+        "project",
+        "environment",
+        "ruleset",
+        "app",
+        "installation",
+        "billingAccountId"
+      ],
+      "properties": {
+        "sourceOwner": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "nodeId", "login"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "nodeId": { "$ref": "#/$defs/opaqueId" },
+                "login": { "$ref": "#/$defs/opaqueId" }
+              }
+            }
+          ]
+        },
+        "owner": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "nodeId", "login"],
+          "properties": {
+            "id": { "$ref": "#/$defs/id" },
+            "nodeId": { "$ref": "#/$defs/opaqueId" },
+            "login": { "$ref": "#/$defs/opaqueId" }
+          }
+        },
+        "repository": { "$ref": "#/$defs/repository" },
+        "project": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "number", "itemId", "fieldId"],
+              "properties": {
+                "id": { "$ref": "#/$defs/opaqueId" },
+                "number": { "type": "integer", "minimum": 1 },
+                "itemId": { "$ref": "#/$defs/opaqueId" },
+                "fieldId": { "$ref": "#/$defs/opaqueId" }
+              }
+            }
+          ]
+        },
+        "environment": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "nodeId", "name"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "nodeId": { "$ref": "#/$defs/opaqueId" },
+                "name": { "$ref": "#/$defs/opaqueId" }
+              }
+            }
+          ]
+        },
+        "ruleset": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "name", "target"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "name": { "$ref": "#/$defs/opaqueId" },
+                "target": { "enum": ["branch", "tag", "push"] }
+              }
+            }
+          ]
+        },
+        "app": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "nodeId"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "nodeId": { "$ref": "#/$defs/opaqueId" }
+              }
+            }
+          ]
+        },
+        "installation": {
+          "oneOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["id", "accountId", "accountNodeId"],
+              "properties": {
+                "id": { "$ref": "#/$defs/id" },
+                "accountId": { "$ref": "#/$defs/id" },
+                "accountNodeId": { "$ref": "#/$defs/opaqueId" }
+              }
+            }
+          ]
+        },
+        "billingAccountId": {
+          "oneOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "observedTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sourceOwner",
+        "owner",
+        "repository",
+        "project",
+        "environment",
+        "ruleset",
+        "app",
+        "installation",
+        "billingAccount"
+      ],
+      "properties": {
+        "sourceOwner": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "owner": { "$ref": "#/$defs/digest" },
+        "repository": { "$ref": "#/$defs/digest" },
+        "project": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "environment": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "ruleset": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "app": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "installation": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "billingAccount": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "stateKey": {
+      "enum": [
+        "app.owner",
+        "app.registration",
+        "app.installation",
+        "app.permissions",
+        "app.events",
+        "identity.webhook",
+        "identity.oidc",
+        "keys.custody",
+        "keys.rotation",
+        "stores.topology",
+        "stores.backup",
+        "stores.restore",
+        "stores.disabledRecovery",
+        "services.credentialBroker",
+        "services.singleWriter",
+        "runner.isolation",
+        "project.binding",
+        "project.projection",
+        "ruleset.main",
+        "checks.required",
+        "actions.allowlist",
+        "actions.shaPinning",
+        "actions.reviewPermission",
+        "security.ghas",
+        "security.codeql",
+        "security.dependencyReview",
+        "security.secretScanning",
+        "environment.protection",
+        "monitoring.health",
+        "monitoring.alertRouting",
+        "retention.logs",
+        "retention.artifacts",
+        "retention.data",
+        "provider.enabled",
+        "billing.enabled",
+        "budgets.enforced",
+        "usage.reconciliation",
+        "killSwitch.ready",
+        "revocation.ready",
+        "recovery.drills",
+        "incident.response",
+        "customer.transfer",
+        "openSource.decision",
+        "readback.complete",
+        "sandbox.canaryStage",
+        "production.decision"
+      ]
+    },
+    "stateSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["count", "values"],
+      "properties": {
+        "count": { "type": "integer", "minimum": 0, "maximum": 128 },
+        "values": {
+          "type": "array",
+          "maxItems": 128,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value"],
+            "properties": {
+              "key": { "$ref": "#/$defs/stateKey" },
+              "value": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "maxLength": 512
+                  },
+                  { "type": "integer" },
+                  { "type": "boolean" },
+                  { "type": "null" }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "applyProtocol": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exactTargetIdentifiersRequired",
+        "expectedCountsAndCurrentValuesRequired",
+        "closedDesiredValuesRequired",
+        "canonicalPlanDigestRequired",
+        "separateExplicitHumanConfirmationRequired",
+        "freshPreApplyReadbackRequired",
+        "maximumApplyAttempts",
+        "completePostApplyReadbackRequired",
+        "retryAfterAmbiguousAcknowledgement",
+        "trustedAdapterVerificationRequired",
+        "durableAttemptClaimRequired",
+        "attemptReceiptRequired"
+      ],
+      "properties": {
+        "exactTargetIdentifiersRequired": { "const": true },
+        "expectedCountsAndCurrentValuesRequired": { "const": true },
+        "closedDesiredValuesRequired": { "const": true },
+        "canonicalPlanDigestRequired": { "const": true },
+        "separateExplicitHumanConfirmationRequired": { "const": true },
+        "freshPreApplyReadbackRequired": { "const": true },
+        "maximumApplyAttempts": { "const": 1 },
+        "completePostApplyReadbackRequired": { "const": true },
+        "retryAfterAmbiguousAcknowledgement": { "const": false },
+        "trustedAdapterVerificationRequired": { "const": true },
+        "durableAttemptClaimRequired": { "const": true },
+        "attemptReceiptRequired": { "const": true }
+      }
+    },
+    "control": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controlId",
+        "sequence",
+        "actionClass",
+        "requiredBindings",
+        "prerequisites",
+        "applyPlanRequired",
+        "responsibleOwner",
+        "targetSource",
+        "readbackProcedure",
+        "rollbackMode",
+        "stateRequirements",
+        "prohibitedEffects"
+      ],
+      "properties": {
+        "controlId": { "$ref": "#/$defs/controlId" },
+        "sequence": { "type": "integer", "minimum": 1, "maximum": 27 },
+        "actionClass": { "$ref": "#/$defs/actionClass" },
+        "requiredBindings": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/bindingKind" }
+        },
+        "prerequisites": {
+          "type": "array",
+          "maxItems": 26,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/controlId" }
+        },
+        "applyPlanRequired": { "type": "boolean" },
+        "responsibleOwner": { "$ref": "#/$defs/responsibleOwner" },
+        "targetSource": { "$ref": "#/$defs/targetSource" },
+        "readbackProcedure": { "$ref": "#/$defs/readbackProcedure" },
+        "rollbackMode": {
+          "enum": [
+            "new-confirmed-reversal-plan",
+            "disable-writer-and-reconcile",
+            "restore-only-into-disabled-services",
+            "human-decision-no-automatic-rollback",
+            "not-applicable-readback-only"
+          ]
+        },
+        "stateRequirements": {
+          "type": "array",
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "valueType"],
+            "properties": {
+              "key": { "$ref": "#/$defs/stateKey" },
+              "valueType": { "enum": ["boolean", "integer", "string"] },
+              "requiredDesiredValue": {
+                "oneOf": [
+                  { "type": "string", "maxLength": 512 },
+                  { "type": "integer" },
+                  { "type": "boolean" }
+                ]
+              }
+            }
+          }
+        },
+        "prohibitedEffects": { "$ref": "#/$defs/prohibitedEffects" }
+      }
+    },
+    "sourceDigests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "deploymentTopologyPlan",
+        "githubAppRegistrationPlan",
+        "administratorConfigurationPlan",
+        "durableAdapterMapping",
+        "syntheticCanaryEvidence",
+        "customerStarterCoreSelection",
+        "customerStarterDemoSelection",
+        "openSourceReadiness",
+        "licenseBytes"
+      ],
+      "properties": {
+        "deploymentTopologyPlan": { "$ref": "#/$defs/digest" },
+        "githubAppRegistrationPlan": { "$ref": "#/$defs/digest" },
+        "administratorConfigurationPlan": { "$ref": "#/$defs/digest" },
+        "durableAdapterMapping": { "$ref": "#/$defs/digest" },
+        "syntheticCanaryEvidence": { "$ref": "#/$defs/digest" },
+        "customerStarterCoreSelection": { "$ref": "#/$defs/digest" },
+        "customerStarterDemoSelection": { "$ref": "#/$defs/digest" },
+        "openSourceReadiness": { "$ref": "#/$defs/digest" },
+        "licenseBytes": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "handoffPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "evidenceEpoch",
+        "authorityOrder",
+        "sourceDigests",
+        "durableAdapterPortCount",
+        "controls",
+        "applyProtocol",
+        "readiness",
+        "prohibitedEffects",
+        "nonAuthoritative"
+      ],
+      "properties": {
+        "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+        "kind": { "const": "AdministratorHandoffPlan" },
+        "schemaVersion": { "const": "1.0.0" },
+        "evidenceEpoch": { "type": "string", "format": "date-time" },
+        "authorityOrder": {
+          "type": "array",
+          "minItems": 7,
+          "maxItems": 7,
+          "uniqueItems": true,
+          "prefixItems": [
+            { "const": "lifecycle-graph" },
+            { "const": "work-accord-and-phase-contracts" },
+            { "const": "policy-compiler-and-capability-registry" },
+            { "const": "control-kernel" },
+            { "const": "trusted-adapter" },
+            { "const": "single-writer" },
+            { "const": "model-output-untrusted-advisory" }
+          ],
+          "items": false
+        },
+        "sourceDigests": { "$ref": "#/$defs/sourceDigests" },
+        "durableAdapterPortCount": { "const": 15 },
+        "controls": {
+          "type": "array",
+          "minItems": 27,
+          "maxItems": 27,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/control" }
+        },
+        "applyProtocol": { "$ref": "#/$defs/applyProtocol" },
+        "readiness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "credentiallessSyntheticSandbox",
+            "appBackedSandbox",
+            "production",
+            "liveCanaryStop"
+          ],
+          "properties": {
+            "repository": { "const": "requires-exact-head-validation" },
+            "credentiallessSyntheticSandbox": {
+              "const": "requires-synthetic-canary"
+            },
+            "appBackedSandbox": {
+              "const": "blocked-until-complete-administrator-readback-and-live-canary"
+            },
+            "production": { "const": "customer-approval-required" },
+            "liveCanaryStop": { "const": "human-review" }
+          }
+        },
+        "prohibitedEffects": { "$ref": "#/$defs/prohibitedEffects" },
+        "nonAuthoritative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "cannotApplyAdministration",
+            "cannotCreateTransferOrInstallApp",
+            "cannotCreateReadOrRotateKeys",
+            "cannotEnableBillingOrInference",
+            "cannotDeployPublishApproveMergeOrClose"
+          ],
+          "properties": {
+            "cannotApplyAdministration": { "const": true },
+            "cannotCreateTransferOrInstallApp": { "const": true },
+            "cannotCreateReadOrRotateKeys": { "const": true },
+            "cannotEnableBillingOrInference": { "const": true },
+            "cannotDeployPublishApproveMergeOrClose": { "const": true }
+          }
+        }
+      }
+    },
+    "applyPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "generatedAt",
+        "expiresAt",
+        "operationId",
+        "attemptId",
+        "idempotencyKey",
+        "handoffPlanDigest",
+        "target",
+        "expectedCurrent",
+        "desired",
+        "prohibitedEffects",
+        "protocol",
+        "nonAuthoritative"
+      ],
+      "properties": {
+        "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+        "kind": { "const": "AdministratorApplyPlan" },
+        "schemaVersion": { "const": "1.0.0" },
+        "generatedAt": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "operationId": { "$ref": "#/$defs/controlId" },
+        "attemptId": { "$ref": "#/$defs/digest" },
+        "idempotencyKey": { "$ref": "#/$defs/digest" },
+        "handoffPlanDigest": { "$ref": "#/$defs/digest" },
+        "target": { "$ref": "#/$defs/exactTarget" },
+        "expectedCurrent": { "$ref": "#/$defs/stateSet" },
+        "desired": { "$ref": "#/$defs/stateSet" },
+        "prohibitedEffects": { "$ref": "#/$defs/prohibitedEffects" },
+        "protocol": { "$ref": "#/$defs/applyProtocol" },
+        "nonAuthoritative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "planOnly",
+            "performsNoEffect",
+            "grantsNoCredentialOrAuthority"
+          ],
+          "properties": {
+            "planOnly": { "const": true },
+            "performsNoEffect": { "const": true },
+            "grantsNoCredentialOrAuthority": { "const": true }
+          }
+        }
+      }
+    },
+    "applyConfirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "planDigest",
+        "confirmationId",
+        "confirmedBy",
+        "confirmedAt",
+        "expiresAt",
+        "separateExplicitHumanConfirmation",
+        "confirmationEvidenceDigest",
+        "nonAuthoritative"
+      ],
+      "properties": {
+        "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+        "kind": { "const": "AdministratorApplyConfirmation" },
+        "schemaVersion": { "const": "1.0.0" },
+        "planDigest": { "$ref": "#/$defs/digest" },
+        "confirmationId": { "$ref": "#/$defs/opaqueId" },
+        "confirmedBy": { "$ref": "#/$defs/opaqueId" },
+        "confirmedAt": { "type": "string", "format": "date-time" },
+        "expiresAt": { "type": "string", "format": "date-time" },
+        "separateExplicitHumanConfirmation": { "const": true },
+        "confirmationEvidenceDigest": { "$ref": "#/$defs/digest" },
+        "nonAuthoritative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "requiresTrustedAdapterVerification",
+            "performsNoEffect"
+          ],
+          "properties": {
+            "requiresTrustedAdapterVerification": { "const": true },
+            "performsNoEffect": { "const": true }
+          }
+        }
+      }
+    },
+    "applyReadback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "phase",
+        "observedAt",
+        "planDigest",
+        "confirmationDigest",
+        "attemptId",
+        "target",
+        "actual",
+        "mutationAttemptCount",
+        "acknowledgement",
+        "preApplyReadbackDigest",
+        "attemptedAt",
+        "attemptReceiptDigest",
+        "completeReadback",
+        "nonAuthoritative"
+      ],
+      "properties": {
+        "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+        "kind": { "const": "AdministratorApplyReadback" },
+        "schemaVersion": { "const": "1.0.0" },
+        "phase": { "enum": ["pre-apply", "post-apply"] },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "planDigest": { "$ref": "#/$defs/digest" },
+        "confirmationDigest": { "$ref": "#/$defs/digest" },
+        "attemptId": { "$ref": "#/$defs/opaqueId" },
+        "target": { "$ref": "#/$defs/exactTarget" },
+        "actual": { "$ref": "#/$defs/stateSet" },
+        "mutationAttemptCount": { "enum": [0, 1] },
+        "acknowledgement": {
+          "enum": [
+            "not-attempted",
+            "unambiguous-applied",
+            "ambiguous"
+          ]
+        },
+        "preApplyReadbackDigest": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "attemptedAt": {
+          "oneOf": [
+            { "type": "string", "format": "date-time" },
+            { "type": "null" }
+          ]
+        },
+        "attemptReceiptDigest": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "completeReadback": { "const": true },
+        "nonAuthoritative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["evidenceOnly", "cannotRetryOrApply"],
+          "properties": {
+            "evidenceOnly": { "const": true },
+            "cannotRetryOrApply": { "const": true }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "phase": { "const": "pre-apply" } },
+            "required": ["phase"]
+          },
+          "then": {
+            "properties": {
+              "mutationAttemptCount": { "const": 0 },
+              "acknowledgement": { "const": "not-attempted" },
+              "preApplyReadbackDigest": { "type": "null" },
+              "attemptedAt": { "type": "null" },
+              "attemptReceiptDigest": { "type": "null" }
+            }
+          },
+          "else": {
+            "properties": {
+              "mutationAttemptCount": { "const": 1 },
+              "acknowledgement": {
+                "enum": ["unambiguous-applied", "ambiguous"]
+              },
+              "preApplyReadbackDigest": { "$ref": "#/$defs/digest" },
+              "attemptedAt": { "type": "string", "format": "date-time" },
+              "attemptReceiptDigest": { "$ref": "#/$defs/digest" }
+            }
+          }
+        }
+      ]
+    },
+    "handoffControlReadback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "controlId",
+        "status",
+        "reasonCode",
+        "observationDigest"
+      ],
+      "properties": {
+        "controlId": { "$ref": "#/$defs/controlId" },
+        "status": {
+          "enum": [
+            "satisfied",
+            "repository-evidence-only",
+            "blocked-human-action",
+            "unavailable"
+          ]
+        },
+        "reasonCode": {
+          "enum": [
+            "observed-compliant",
+            "synthetic-only",
+            "missing-identity",
+            "missing-protection",
+            "configuration-drift",
+            "human-decision-required",
+            "live-evidence-unavailable"
+          ]
+        },
+        "observationDigest": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "handoffReadback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "observedAt",
+        "planDigest",
+        "source",
+        "provenance",
+        "snapshotDigest",
+        "target",
+        "controls",
+        "satisfiedEvidence",
+        "readiness",
+        "nonAuthoritative"
+      ],
+      "properties": {
+        "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+        "kind": { "const": "AdministratorHandoffReadback" },
+        "schemaVersion": { "const": "1.0.0" },
+        "observedAt": { "type": "string", "format": "date-time" },
+        "planDigest": { "$ref": "#/$defs/digest" },
+        "source": {
+          "enum": [
+            "synthetic-fixture",
+            "authenticated-live-current"
+          ]
+        },
+        "provenance": {
+          "enum": [
+            "synthetic-fixture",
+            "trusted-adapter-authenticated"
+          ]
+        },
+        "snapshotDigest": { "$ref": "#/$defs/digest" },
+        "target": { "$ref": "#/$defs/observedTarget" },
+        "controls": {
+          "type": "array",
+          "minItems": 27,
+          "maxItems": 27,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/handoffControlReadback" }
+        },
+        "satisfiedEvidence": {
+          "type": "array",
+          "maxItems": 27,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "controlId",
+              "responsibleOwner",
+              "targetSource",
+              "readbackProcedure",
+              "observationDigest"
+            ],
+            "properties": {
+              "controlId": { "$ref": "#/$defs/controlId" },
+              "responsibleOwner": { "$ref": "#/$defs/responsibleOwner" },
+              "targetSource": { "$ref": "#/$defs/targetSource" },
+              "readbackProcedure": { "$ref": "#/$defs/readbackProcedure" },
+              "observationDigest": { "$ref": "#/$defs/digest" }
+            }
+          }
+        },
+        "readiness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "repository",
+            "credentiallessSyntheticSandbox",
+            "appBackedSandbox",
+            "production"
+          ],
+          "properties": {
+            "repository": { "const": "not-validated" },
+            "credentiallessSyntheticSandbox": { "const": "not-run" },
+            "appBackedSandbox": {
+              "enum": ["blocked", "human-review-reached"]
+            },
+            "production": { "const": "customer-approval-required" }
+          }
+        },
+        "nonAuthoritative": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "driftProneObservation",
+            "grantsNoAuthority",
+            "authorizesNoEffect",
+            "cannotSatisfyHumanGateByItself"
+          ],
+          "properties": {
+            "driftProneObservation": { "const": true },
+            "grantsNoAuthority": { "const": true },
+            "authorizesNoEffect": { "const": true },
+            "cannotSatisfyHumanGateByItself": { "const": true }
+          }
+        }
+      }
+    },
+    "handoffReport": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "apiVersion",
+          "kind",
+          "schemaVersion",
+          "evidenceEpoch",
+          "repositoryEvidence",
+          "plan",
+          "readback",
+          "planDigest",
+          "readbackDigest",
+          "gaps",
+          "gapCount",
+          "customerStarter",
+          "syntheticApplyContract",
+          "classification",
+          "evidenceDigest"
+        ],
+        "properties": {
+          "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+          "kind": { "const": "AdministratorHandoffReport" },
+          "schemaVersion": { "const": "1.0.0" },
+          "evidenceEpoch": { "type": "string", "format": "date-time" },
+          "repositoryEvidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["baseSha", "headSha", "worktreeClean"],
+            "properties": {
+              "baseSha": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "headSha": {
+                "type": "string",
+                "pattern": "^[0-9a-f]{40}$"
+              },
+              "worktreeClean": { "const": true }
+            }
+          },
+          "plan": { "$ref": "#/$defs/handoffPlan" },
+          "readback": { "$ref": "#/$defs/handoffReadback" },
+          "planDigest": { "$ref": "#/$defs/digest" },
+          "readbackDigest": { "$ref": "#/$defs/digest" },
+          "gaps": {
+            "type": "array",
+            "maxItems": 27,
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/handoffControlReadback" }
+          },
+          "gapCount": { "type": "integer", "minimum": 0, "maximum": 27 },
+          "customerStarter": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "controlPlaneCore",
+              "demoPortfolio",
+              "decision",
+              "liveSnapshotExported"
+            ],
+            "properties": {
+              "controlPlaneCore": { "$ref": "#/$defs/starterEvidence" },
+              "demoPortfolio": { "$ref": "#/$defs/starterEvidence" },
+              "decision": { "const": "no-go" },
+              "liveSnapshotExported": { "const": false }
+            }
+          },
+          "syntheticApplyContract": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "planDigest",
+              "confirmationDigest",
+              "preApplyReadbackDigest",
+              "postApplyReadbackDigest",
+              "plan",
+              "confirmation",
+              "preApplyReadback",
+              "postApplyReadback",
+              "gateValidated",
+              "postApplyReadbackValidated",
+              "performedLiveEffect"
+            ],
+            "properties": {
+              "plan": { "$ref": "#/$defs/applyPlan" },
+              "confirmation": { "$ref": "#/$defs/applyConfirmation" },
+              "preApplyReadback": { "$ref": "#/$defs/applyReadback" },
+              "postApplyReadback": { "$ref": "#/$defs/applyReadback" },
+              "planDigest": { "$ref": "#/$defs/digest" },
+              "confirmationDigest": { "$ref": "#/$defs/digest" },
+              "preApplyReadbackDigest": { "$ref": "#/$defs/digest" },
+              "postApplyReadbackDigest": { "$ref": "#/$defs/digest" },
+              "gateValidated": { "const": true },
+              "postApplyReadbackValidated": { "const": true },
+              "performedLiveEffect": { "const": false }
+            }
+          },
+          "classification": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "repository",
+              "credentiallessSyntheticSandbox",
+              "appBackedSandbox",
+              "administratorSnapshot",
+              "production"
+            ],
+            "properties": {
+              "repository": { "const": "exact-head-validation-required" },
+              "credentiallessSyntheticSandbox": { "const": "passed" },
+              "appBackedSandbox": { "const": "blocked" },
+              "administratorSnapshot": {
+                "const": "synthetic-unconfigured"
+              },
+              "production": { "const": "customer-approval-required" }
+            }
+          },
+          "evidenceDigest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "starterEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+          "selectionDigest",
+          "starterManifestDigest",
+          "sbomDigest",
+          "provenanceDigest",
+          "preflightReportDigest",
+          "archiveDigest"
+      ],
+      "properties": {
+          "selectionDigest": { "$ref": "#/$defs/digest" },
+          "starterManifestDigest": { "$ref": "#/$defs/digest" },
+          "sbomDigest": { "$ref": "#/$defs/digest" },
+          "provenanceDigest": { "$ref": "#/$defs/digest" },
+          "preflightReportDigest": { "$ref": "#/$defs/digest" },
+          "archiveDigest": { "$ref": "#/$defs/digest" }
+      }
+    }
+  }
+}

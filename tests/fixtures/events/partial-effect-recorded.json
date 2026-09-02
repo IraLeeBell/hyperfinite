@@ -1,0 +1,25 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "KernelEvent",
+  "id": "delivery-9:partial-effect",
+  "sequence": 9,
+  "occurredAt": "2026-08-26T12:09:00Z",
+  "expectedStateVersion": 8,
+  "type": "partial-effect-recorded",
+  "replacementAuthorityDigest": null,
+  "actor": {
+    "id": "kernel-1",
+    "class": "system",
+    "human": false,
+    "bot": false,
+    "roles": ["trusted-kernel"],
+    "authorizationDigest": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+  },
+  "provenance": {
+    "source": "test-fixture",
+    "deliveryId": "delivery-9",
+    "bindingDigest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+    "payloadDigest": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "cost": { "calls": 0, "tokens": 0, "costUnits": 0, "loops": 0 }
+}

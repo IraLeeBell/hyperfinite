@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/work-accord.schema.json",
+  "title": "Work Accord",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "identity", "binding", "objective", "policy", "budget", "deliverables", "evidence", "humanGates", "retention"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "WorkAccord" },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "revision", "supersedes", "createdAt", "createdBy"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+        "revision": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "supersedes": { "type": ["string", "null"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "binding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repositoryId", "repositoryNodeId", "repositoryFullName", "repositoryRootId", "workItemNodeId", "defaultRef", "proposalRef", "sourceDigest", "policyDigest", "lifecycleGraphDigest", "currentHead"],
+      "properties": {
+        "repositoryId": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "repositoryNodeId": { "type": "string", "pattern": "^R_[A-Za-z0-9_]+$" },
+        "repositoryFullName": { "type": "string", "pattern": "^[a-z0-9](?:[a-z0-9-]{0,38})/[a-z0-9._-]+$" },
+        "repositoryRootId": { "$ref": "#/$defs/digest" },
+        "workItemNodeId": { "type": "string", "minLength": 1, "maxLength": 256 },
+        "defaultRef": { "const": "refs/heads/main" },
+        "proposalRef": { "type": "string", "pattern": "^refs/heads/agentic-domain/[a-z0-9][a-z0-9._/-]*$" },
+        "sourceDigest": { "$ref": "#/$defs/digest" },
+        "policyDigest": { "$ref": "#/$defs/digest" },
+        "lifecycleGraphDigest": { "$ref": "#/$defs/digest" },
+        "currentHead": { "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }] }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "inScope", "outOfScope", "assumptions", "dependencies"],
+      "properties": {
+        "outcome": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "inScope": { "$ref": "#/$defs/nonEmptyStrings" },
+        "outOfScope": { "$ref": "#/$defs/strings" },
+        "assumptions": { "$ref": "#/$defs/strings" },
+        "dependencies": { "$ref": "#/$defs/strings" }
+      }
+    },
+    "policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["domainPack", "domainPackDigest", "capabilityRegistryDigest", "depthProfile", "riskClass", "privacyClass", "phaseContracts", "requestedCapabilities", "allowedPaths", "prohibitedEffects", "tools", "shellCommands", "network", "mcpTools", "secretAccess"],
+      "properties": {
+        "domainPack": { "type": "string", "minLength": 1 },
+        "domainPackDigest": { "$ref": "#/$defs/digest" },
+        "capabilityRegistryDigest": { "$ref": "#/$defs/digest" },
+        "depthProfile": { "enum": ["D0", "D1", "D2", "D3"] },
+        "riskClass": { "enum": ["low", "moderate", "high", "critical"] },
+        "privacyClass": { "enum": ["public", "internal", "confidential", "restricted"] },
+        "phaseContracts": {
+          "type": "object",
+          "propertyNames": { "$ref": "#/$defs/activePhase" },
+          "additionalProperties": { "$ref": "#/$defs/phaseContractBinding" }
+        },
+        "requestedCapabilities": { "$ref": "#/$defs/strings" },
+        "allowedPaths": { "$ref": "#/$defs/nonEmptyStrings" },
+        "prohibitedEffects": { "$ref": "#/$defs/nonEmptyStrings" },
+        "tools": { "$ref": "#/$defs/strings" },
+        "shellCommands": { "$ref": "#/$defs/strings" },
+        "network": { "$ref": "#/$defs/strings" },
+        "mcpTools": { "$ref": "#/$defs/strings" },
+        "secretAccess": { "const": false }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["maxCalls", "maxTokens", "maxCostUnits", "maxDurationMs", "maxRetries", "maxLoops", "maxParallel", "maxPatchBytes", "expiresAt"],
+      "properties": {
+        "maxCalls": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "maxTokens": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "maxCostUnits": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "maxDurationMs": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "maxRetries": { "type": "integer", "minimum": 0, "maximum": 20 },
+        "maxLoops": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "maxParallel": { "type": "integer", "minimum": 1, "maximum": 32 },
+        "maxPatchBytes": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "expiresAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "deliverables": { "$ref": "#/$defs/nonEmptyStrings" },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "verificationCommands", "approverPolicy"],
+      "properties": {
+        "required": { "$ref": "#/$defs/nonEmptyStrings" },
+        "verificationCommands": { "$ref": "#/$defs/strings" },
+        "approverPolicy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "humanGates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["receiptDays", "artifactDays", "cancelOnExpiry"],
+      "properties": {
+        "receiptDays": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "artifactDays": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+        "cancelOnExpiry": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "activePhase": {
+      "enum": ["framing", "planning", "execution", "verification", "human-review"]
+    },
+    "phaseContractBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reference", "digest"],
+      "properties": {
+        "reference": { "type": "string", "minLength": 1 },
+        "digest": { "$ref": "#/$defs/digest" }
+      }
+    },
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "strings": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

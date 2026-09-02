@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/authority-rebind.schema.json",
+  "title": "Authority rebind bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "bindingDigest", "graph", "workAccord", "policy", "registry", "domainPack", "phaseContracts"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AuthorityRebind" },
+    "schemaVersion": { "const": "1.0.0" },
+    "bindingDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "graph": { "type": "object" },
+    "workAccord": { "type": "object" },
+    "policy": { "type": "object" },
+    "registry": { "type": "object" },
+    "domainPack": { "type": "object" },
+    "phaseContracts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "object" }
+    }
+  }
+}

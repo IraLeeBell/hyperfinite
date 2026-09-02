@@ -1,0 +1,152 @@
+{
+  "synthetic": true,
+  "demoProjectId": "feature-delivery",
+  "runId": "feature-delivery-hands-off-001",
+  "runAttempt": 1,
+  "authorityEpoch": 1,
+  "generation": 0,
+  "repositoryBindingDigest": "sha256:a796e6af915e46c3f55371d4c6fb9dbd2dc6b36d436d0a0ffe3bde44645834af",
+  "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+  "headSha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "stageExecutions": [
+    {
+      "stageId": "intake",
+      "ordinal": 1,
+      "coreState": "ACTIVATION_PENDING",
+      "executionKind": "deterministic",
+      "modelCalls": 0
+    },
+    {
+      "stageId": "requirements-clarification",
+      "ordinal": 2,
+      "coreState": "FRAMING",
+      "executionKind": "model",
+      "modelCalls": 1
+    },
+    {
+      "stageId": "codebase-discovery",
+      "ordinal": 3,
+      "coreState": "FRAMING",
+      "executionKind": "model",
+      "modelCalls": 1
+    },
+    {
+      "stageId": "solution-design",
+      "ordinal": 4,
+      "coreState": "FRAMING",
+      "executionKind": "model",
+      "modelCalls": 1
+    },
+    {
+      "stageId": "implementation-plan",
+      "ordinal": 5,
+      "coreState": "PLANNED",
+      "executionKind": "planning",
+      "modelCalls": 0
+    },
+    {
+      "stageId": "build",
+      "ordinal": 6,
+      "coreState": "EXECUTING",
+      "executionKind": "model",
+      "modelCalls": 1
+    },
+    {
+      "stageId": "test-and-verification",
+      "ordinal": 7,
+      "coreState": "VERIFYING",
+      "executionKind": "model",
+      "modelCalls": 1
+    },
+    {
+      "stageId": "human-review",
+      "ordinal": 8,
+      "coreState": "HUMAN_REVIEW",
+      "executionKind": "human",
+      "modelCalls": 0
+    }
+  ],
+  "stageReceipts": [
+    {
+      "stageId": "intake",
+      "nextStageId": "requirements-clarification",
+      "sameCoreState": false,
+      "kernelRouteId": "activation.begin-framing",
+      "previousReceiptDigest": null,
+      "receiptDigest": "sha256:0101010101010101010101010101010101010101010101010101010101010101"
+    },
+    {
+      "stageId": "requirements-clarification",
+      "nextStageId": "codebase-discovery",
+      "sameCoreState": true,
+      "kernelRouteId": null,
+      "previousReceiptDigest": "sha256:0101010101010101010101010101010101010101010101010101010101010101",
+      "receiptDigest": "sha256:0202020202020202020202020202020202020202020202020202020202020202"
+    },
+    {
+      "stageId": "codebase-discovery",
+      "nextStageId": "solution-design",
+      "sameCoreState": true,
+      "kernelRouteId": null,
+      "previousReceiptDigest": "sha256:0202020202020202020202020202020202020202020202020202020202020202",
+      "receiptDigest": "sha256:0303030303030303030303030303030303030303030303030303030303030303"
+    },
+    {
+      "stageId": "solution-design",
+      "nextStageId": "implementation-plan",
+      "sameCoreState": false,
+      "kernelRouteId": "framing.accept",
+      "previousReceiptDigest": "sha256:0303030303030303030303030303030303030303030303030303030303030303",
+      "receiptDigest": "sha256:0404040404040404040404040404040404040404040404040404040404040404"
+    },
+    {
+      "stageId": "implementation-plan",
+      "nextStageId": "build",
+      "sameCoreState": false,
+      "kernelRouteId": "planning.execute",
+      "previousReceiptDigest": "sha256:0404040404040404040404040404040404040404040404040404040404040404",
+      "receiptDigest": "sha256:0505050505050505050505050505050505050505050505050505050505050505"
+    },
+    {
+      "stageId": "build",
+      "nextStageId": "test-and-verification",
+      "sameCoreState": false,
+      "kernelRouteId": "execution.verify",
+      "previousReceiptDigest": "sha256:0505050505050505050505050505050505050505050505050505050505050505",
+      "receiptDigest": "sha256:0606060606060606060606060606060606060606060606060606060606060606"
+    },
+    {
+      "stageId": "test-and-verification",
+      "nextStageId": "human-review",
+      "sameCoreState": false,
+      "kernelRouteId": "verification.request-review",
+      "previousReceiptDigest": "sha256:0606060606060606060606060606060606060606060606060606060606060606",
+      "receiptDigest": "sha256:0707070707070707070707070707070707070707070707070707070707070707"
+    }
+  ],
+  "artifacts": [
+    "sha256:34e2aad90d31c148c45374b5992e762b8a0621cfd8a22616d2cab1af9575afcc",
+    "sha256:c37e8c94f3f05810e87ba3683113ee4bfe315b9e463710fff006826e515b4001",
+    "sha256:a36b226e49d27dae2d5c1e1b1685d694e97722cb99f1e9c38f34b72972e333c2",
+    "sha256:171ce245eb71a21a97e00d57b8305aec4dc3df5b529e1ff971875dedc245a4dc",
+    "sha256:a891065c48252ba1d0b966acf1f31d2ed428272afc6972bc97bb044e76ca921f",
+    "sha256:1f4f355ab66b8bfbaab2a0fde3575db3d5eec2b237b30435aba658a33d61a392",
+    "sha256:cbf19948b5d212dfad198359b680f4493b5678a793a51b4ee70f77a497d40ab7",
+    "sha256:95a2dab9ed2d6e93425f5b62f513e62d58eef479ea0bec7a36c95c20c1967565"
+  ],
+  "trustedEffects": [
+    "create-draft-pull-request",
+    "submit-comment-review"
+  ],
+  "verificationCommandIds": [
+    "fd-acceptance-tests",
+    "fd-regression-tests",
+    "fd-typecheck",
+    "git-diff-check"
+  ],
+  "automatedReviewEvent": "COMMENT",
+  "externalCalls": 0,
+  "status": "waiting-human",
+  "currentStageId": "human-review",
+  "automationCanComplete": false
+}

@@ -1,0 +1,1127 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoCapabilityRegistryShard",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4",
+    "capabilities": [
+      {
+        "id": "demo.adaptive-delivery.context-inventory",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-context-inventory advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-context-inventory-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.customer-value-explorer",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-customer-value-explorer advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-customer-value-explorer-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.technical-options-explorer",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-technical-options-explorer advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-technical-options-explorer-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.delivery-risk-challenger",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-delivery-risk-challenger advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-delivery-risk-challenger-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.guided-synthesis",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-guided-synthesis advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "framing"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 120000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-guided-synthesis-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.minimal-slice-builder",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-minimal-slice-builder advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "execution"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "changes",
+            "findings",
+            "openQuestions",
+            "result"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "changes": {
+              "type": "array",
+              "maxItems": 32,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "slot",
+                  "content"
+                ],
+                "properties": {
+                  "slot": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9-]{0,62}$"
+                  },
+                  "content": {
+                    "type": "string",
+                    "maxLength": 131072
+                  }
+                }
+              }
+            },
+            "result": {
+              "enum": [
+                "drafted",
+                "blocked",
+                "failed"
+              ]
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [],
+          "mcpReadTools": [],
+          "mcpMutationTools": [],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "high",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 20,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 131072,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "accept-frame",
+          "accept-plan"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-minimal-slice-builder-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.resilience-first-builder",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-resilience-first-builder advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "execution"
+        ],
+        "actorClasses": [
+          "system"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "evidence"
+          ],
+          "properties": {
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "changes",
+            "findings",
+            "openQuestions",
+            "result"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "changes": {
+              "type": "array",
+              "maxItems": 32,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "slot",
+                  "content"
+                ],
+                "properties": {
+                  "slot": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9-]{0,62}$"
+                  },
+                  "content": {
+                    "type": "string",
+                    "maxLength": 131072
+                  }
+                }
+              }
+            },
+            "result": {
+              "enum": [
+                "drafted",
+                "blocked",
+                "failed"
+              ]
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [],
+          "mcpReadTools": [],
+          "mcpMutationTools": [],
+          "secretNames": []
+        },
+        "effectClass": "advisory-artifact",
+        "risk": {
+          "class": "high",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 20,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 131072,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "accept-frame",
+          "accept-plan"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ],
+          "behavioral": [
+            "adaptive-delivery-resilience-first-builder-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      },
+      {
+        "id": "demo.adaptive-delivery.test-and-verification",
+        "version": "1.0.0",
+        "publisher": "agentic-framework",
+        "owner": "framework-maintainers",
+        "description": "Produces bounded adaptive-delivery-test-and-verification advisory output for one governed Adaptive Delivery stage.",
+        "status": "active",
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "allowedPhases": [
+          "verification"
+        ],
+        "actorClasses": [
+          "system",
+          "reviewer"
+        ],
+        "inputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "headSha",
+            "evidence"
+          ],
+          "properties": {
+            "headSha": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{40}$"
+            },
+            "evidence": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64
+            }
+          }
+        },
+        "outputSchema": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "properties": {
+            "summary": {
+              "type": "string",
+              "maxLength": 8000
+            },
+            "findings": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100
+            },
+            "openQuestions": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20
+            }
+          }
+        },
+        "access": {
+          "readScopes": [
+            "authorized-review-evidence",
+            "trusted-review-profile",
+            "trusted-review-skills",
+            "trusted-gh-aw-runtime-control"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          },
+          "tools": [
+            "read",
+            "search"
+          ],
+          "shellCommands": [],
+          "networkDestinations": [],
+          "mcpTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "mcpReadTools": [],
+          "mcpMutationTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "secretNames": []
+        },
+        "effectClass": "verification-result",
+        "risk": {
+          "class": "moderate",
+          "trustZone": "T3",
+          "privacyClass": "internal"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxCostUnits": 10,
+          "timeoutMs": 600000,
+          "maxRetries": 1,
+          "maxOutputBytes": 65536,
+          "maxConcurrency": 1,
+          "parallelSafe": false
+        },
+        "humanGates": [
+          "activate",
+          "approve-current-head"
+        ],
+        "idempotency": {
+          "required": true,
+          "scope": "event"
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "current-head-digest",
+          "threat-detection-success"
+        ],
+        "evaluations": {
+          "structural": [
+            "schema-valid",
+            "target-free",
+            "comment-only"
+          ],
+          "behavioral": [
+            "adaptive-delivery-test-and-verification-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ]
+        },
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        }
+      }
+    ]
+  },
+  "contentDigest": "sha256:0e9be6cd85c4cc4e0964d6ab585e495010e50686dcb1d5655192d83ef60801bd"
+}

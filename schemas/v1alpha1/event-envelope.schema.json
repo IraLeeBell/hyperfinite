@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/event-envelope.schema.json",
+  "title": "Kernel event envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "id", "sequence", "occurredAt", "expectedStateVersion", "type", "replacementAuthorityDigest", "actor", "provenance", "cost"],
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "binding-revalidated" } },
+        "required": ["type"]
+      },
+      "then": {
+        "properties": {
+          "replacementAuthorityDigest": { "$ref": "#/$defs/digest" }
+        }
+      },
+      "else": {
+        "properties": {
+          "replacementAuthorityDigest": { "type": "null" }
+        }
+      }
+    }
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "KernelEvent" },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9._:-]+$" },
+    "sequence": { "type": "integer", "minimum": 1, "maximum": 9007199254740991 },
+    "occurredAt": { "type": "string", "format": "date-time" },
+    "expectedStateVersion": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "type": {
+      "enum": [
+        "activation-requested",
+        "activation-approved",
+        "clarification-recorded",
+        "frame-accepted",
+        "scope-repair-requested",
+        "execution-authorized",
+        "work-submitted",
+        "repair-requested",
+        "replan-requested",
+        "verification-passed",
+        "revision-requested",
+        "outcome-accepted",
+        "pause-requested",
+        "resume-requested",
+        "dependency-blocked",
+        "partial-effect-recorded",
+        "retry-requested",
+        "recovery-approved",
+        "cancel-requested",
+        "authorization-invalidated",
+        "binding-revalidated"
+      ]
+    },
+    "replacementAuthorityDigest": { "$ref": "#/$defs/nullableDigest" },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "class", "human", "bot", "roles", "authorizationDigest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "class": { "enum": ["requester", "reviewer", "maintainer", "administrator", "system", "policy"] },
+        "human": { "type": "boolean" },
+        "bot": { "type": "boolean" },
+        "roles": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "authorizationDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "deliveryId", "bindingDigest", "payloadDigest"],
+      "properties": {
+        "source": { "enum": ["trusted-adapter", "policy-engine", "kernel-recovery", "test-fixture"] },
+        "deliveryId": { "type": "string", "minLength": 1 },
+        "bindingDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "payloadDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["calls", "tokens", "costUnits", "loops"],
+      "properties": {
+        "calls": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "tokens": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "costUnits": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "loops": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+      }
+    }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "nullableDigest": {
+      "anyOf": [
+        { "$ref": "#/$defs/digest" },
+        { "type": "null" }
+      ]
+    }
+  }
+}

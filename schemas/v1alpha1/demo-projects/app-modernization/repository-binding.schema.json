@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/app-modernization/repository-binding.schema.json",
+  "title": "Trusted App Modernization repository binding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["apiVersion", "kind", "schemaVersion", "contentDigest", "spec"],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "AppModernizationRepositoryBinding" },
+    "schemaVersion": { "const": "1.0.0" },
+    "contentDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repositoryId",
+        "repositoryNodeId",
+        "repositoryFullName",
+        "repositoryRootId",
+        "defaultRef",
+        "exactSha",
+        "source",
+        "allowlisted",
+        "repositoryHintsAuthoritative",
+        "observedPathsAuthoritative",
+        "networkDestinations",
+        "credentials",
+        "deniedOperations"
+      ],
+      "properties": {
+        "repositoryId": { "type": "integer", "minimum": 1 },
+        "repositoryNodeId": { "type": "string", "pattern": "^R_[A-Za-z0-9_]+$" },
+        "repositoryFullName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "repositoryRootId": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+        "defaultRef": { "const": "refs/heads/main" },
+        "exactSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+        "source": { "const": "trusted-adapter" },
+        "allowlisted": { "const": true },
+        "repositoryHintsAuthoritative": { "const": false },
+        "observedPathsAuthoritative": { "const": false },
+        "networkDestinations": { "type": "array", "maxItems": 0 },
+        "credentials": { "type": "array", "maxItems": 0 },
+        "deniedOperations": {
+          "const": [
+            "arbitrary-clone",
+            "arbitrary-fetch",
+            "remote-add",
+            "submodule",
+            "package-install",
+            "lifecycle-script",
+            "credential-access",
+            "network",
+            "model-selected-path"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": { "id": "core.execution", "version": "1.0.0" },
+  "phase": "execution",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": ["activation-lease-current", "work-accord-current"],
+  "requiredEvidence": ["trusted-binding", "activation-lease", "accepted-plan"],
+  "allowedCapabilities": ["core.execute-bounded-change@1.0.0"],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["planningDigest", "targetSlots"],
+    "properties": {
+      "planningDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+      "targetSlots": { "type": "array", "items": { "type": "string" } }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["summary", "changes"],
+    "properties": {
+      "summary": { "type": "string" },
+      "changes": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["slot", "content"],
+          "properties": {
+            "slot": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
+            "content": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "exitRules": [
+    { "predicate": "work-submitted-for-verification", "event": "work-submitted" }
+  ],
+  "limits": { "maxLoops": 2, "maxCalls": 1, "maxCostUnits": 20, "maxParallel": 1 },
+  "humanGates": ["activate", "accept-plan"],
+  "privacy": { "maximumClass": "confidential", "retentionDays": 90 }
+}

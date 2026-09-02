@@ -1,0 +1,27 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationRiskCompatibilityReport",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:f210053631e216d467d1f321c67812c560c5b93dda1b624573c64d1b9b480806",
+  "spec": {
+    "assessmentDigest": "sha256:ef91de7f24eda4b834c2180acc3f026ff89cce7103e1c325c53f5877fe1d73d1",
+    "risks": [
+      {
+        "id": "behavior-drift",
+        "category": "architecture",
+        "likelihood": "moderate",
+        "impact": "high",
+        "mitigation": "Introduce a compatibility adapter and lock behavior with tests.",
+        "evidenceDigest": "sha256:395d8d8a5a3a2ac55f2d70a022df33916f27d616b769b3ab2048e2e8d1c5b4f9"
+      }
+    ],
+    "compatibility": [
+      {
+        "target": "Node.js 24",
+        "status": "compatible",
+        "evidenceDigest": "sha256:6297fe344632163ceb944fafb905ca45c54cf0cc9c7e5ad44d73988602896d3f"
+      }
+    ],
+    "productionChangeAuthorized": false
+  }
+}

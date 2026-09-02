@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/domain-packs/business-operations/implementation-plan.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schemaVersion", "artifactType", "proposalOnly", "sourceDigests", "upstreamArtifactDigests", "data"],
+  "properties": {
+    "schemaVersion": { "const": "1.0.0" }, "artifactType": { "const": "implementation-plan" }, "proposalOnly": { "const": true },
+    "sourceDigests": { "$ref": "#/$defs/digests" }, "upstreamArtifactDigests": { "$ref": "#/$defs/digests" },
+    "data": { "type": "object", "additionalProperties": false, "required": ["tasks", "liveExecutionDeferred"], "properties": {
+      "tasks": { "type": "array", "minItems": 1, "items": { "type": "object", "additionalProperties": false, "required": ["taskId", "ownerRole", "action", "status"], "properties": {
+        "taskId": { "type": "string", "pattern": "^task:[a-z0-9-]+$" }, "ownerRole": { "type": "string", "pattern": "^role:[a-z0-9-]+$" }, "action": { "type": "string", "minLength": 1 }, "status": { "const": "deferred" }
+      } } },
+      "liveExecutionDeferred": { "const": true }
+    } }
+  },
+  "$defs": { "digests": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" } } }
+}

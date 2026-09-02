@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/durable-store-journal-record.schema.json",
+  "title": "Durable store journal record",
+  "description": "One hash-chained entry exported from a local reference durable store. Non-authoritative: it proves what was stored, never that the stored value was authorized.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "storeId",
+    "namespace",
+    "key",
+    "sequence",
+    "previousHead",
+    "head",
+    "bodyDigest",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+    "kind": { "const": "DurableStoreJournalRecord" },
+    "schemaVersion": { "const": "1.0.0" },
+    "storeId": { "$ref": "#/$defs/logicalName" },
+    "namespace": { "$ref": "#/$defs/logicalName" },
+    "key": { "$ref": "#/$defs/logicalName" },
+    "sequence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "previousHead": {
+      "anyOf": [{ "$ref": "#/$defs/digest" }, { "type": "null" }]
+    },
+    "head": { "$ref": "#/$defs/digest" },
+    "bodyDigest": { "$ref": "#/$defs/digest" },
+    "nonAuthoritative": { "const": true }
+  },
+  "$defs": {
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "logicalName": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._:-][a-z0-9]+)*$",
+      "maxLength": 128
+    }
+  }
+}

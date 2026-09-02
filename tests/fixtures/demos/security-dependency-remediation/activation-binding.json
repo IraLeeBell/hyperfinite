@@ -1,0 +1,26 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationActivationBinding",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:c7767bf26a797dc357ed56553fe70732e8cc2913655285885fd76d17f46aec1a",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "profileDigest": "sha256:b224bfd181cf2feccb1c04a8323f8fcd2df19187c3841670477264fd60a86e8e",
+    "trustedBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
+    "workAccordDigest": "sha256:8e13d2a697a8ef70784ee0d27c4adc294bcc408e22023ef36db1684f5794c551",
+    "advisoryDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7",
+    "baseSha": "8f594d53db291f6bb2803f26d421a70ced556362",
+    "targetSlotDigest": "sha256:206a959da34e02858563f57cec283b39a28a9dc6916f0869781b626d00956dde",
+    "fixedCheckDigest": "sha256:3dd9564e72c0e30148f45d764977014c69cb6ef3b076d04b84d4bfc1c57e18d5",
+    "budget": {
+      "calls": 5,
+      "tokens": 25000,
+      "costUnits": 70,
+      "retries": 1,
+      "parallel": 1,
+      "patchBytes": 65536
+    },
+    "enabled": false,
+    "externalCallCount": 0
+  }
+}

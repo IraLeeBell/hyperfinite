@@ -1,0 +1,102 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": {
+    "id": "adaptive-delivery.framing",
+    "version": "1.0.0"
+  },
+  "phase": "framing",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": [
+    "activation-lease-current",
+    "work-accord-current",
+    "trusted-repository-base-current"
+  ],
+  "requiredEvidence": [
+    "trusted-binding",
+    "activation-lease",
+    "exact-base-sha"
+  ],
+  "allowedCapabilities": [
+    "demo.adaptive-delivery.context-inventory@1.0.0",
+    "demo.adaptive-delivery.customer-value-explorer@1.0.0",
+    "demo.adaptive-delivery.technical-options-explorer@1.0.0",
+    "demo.adaptive-delivery.delivery-risk-challenger@1.0.0",
+    "demo.adaptive-delivery.guided-synthesis@1.0.0"
+  ],
+  "inputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "evidenceDigests",
+      "repositoryBindingDigest",
+      "baseSha"
+    ],
+    "properties": {
+      "evidenceDigests": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "repositoryBindingDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "baseSha": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{40}$"
+      }
+    }
+  },
+  "outputSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "artifactDigest",
+      "acceptanceCriterionIds",
+      "openQuestions"
+    ],
+    "properties": {
+      "artifactDigest": {
+        "type": "string",
+        "pattern": "^sha256:[0-9a-f]{64}$"
+      },
+      "acceptanceCriterionIds": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "pattern": "^FD-AC-[0-9]{3}$"
+        }
+      },
+      "openQuestions": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "exitRules": [
+    {
+      "predicate": "eligible-human-accepts-frame",
+      "event": "frame-accepted"
+    }
+  ],
+  "limits": {
+    "maxLoops": 3,
+    "maxCalls": 3,
+    "maxCostUnits": 30,
+    "maxParallel": 1
+  },
+  "humanGates": [
+    "activate",
+    "accept-frame"
+  ],
+  "privacy": {
+    "maximumClass": "internal",
+    "retentionDays": 90
+  }
+}

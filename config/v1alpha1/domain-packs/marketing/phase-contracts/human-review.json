@@ -1,0 +1,17 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "PhaseContract",
+  "identity": { "id": "marketing.human-review", "version": "1.0.0" },
+  "phase": "human-review",
+  "compatibleLifecycle": "1.0.0",
+  "compatibleLifecycleDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+  "entryPredicates": ["work-accord-current"],
+  "requiredEvidence": ["trusted-binding", "comment-only-review"],
+  "allowedCapabilities": [],
+  "inputSchema": { "type": "object", "additionalProperties": false, "required": ["reviewDigest", "headSha"], "properties": { "reviewDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }, "headSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" } } },
+  "outputSchema": { "type": "object", "additionalProperties": false, "required": ["mergedSha", "deliveryEvidenceDigest", "operationsReceiptDigest"], "properties": { "mergedSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" }, "deliveryEvidenceDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }, "operationsReceiptDigest": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" } } },
+  "exitRules": [{ "predicate": "eligible-human-accepts-outcome", "event": "outcome-accepted" }],
+  "limits": { "maxLoops": 0, "maxCalls": 0, "maxCostUnits": 0, "maxParallel": 1 },
+  "humanGates": ["approve-current-head"],
+  "privacy": { "maximumClass": "internal", "retentionDays": 90 }
+}

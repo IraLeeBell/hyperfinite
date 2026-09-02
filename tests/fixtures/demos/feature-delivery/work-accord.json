@@ -1,0 +1,150 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "WorkAccord",
+  "identity": {
+    "id": "feature-delivery-demo-r1",
+    "revision": 1,
+    "supersedes": null,
+    "createdAt": "2026-08-29T12:00:00Z",
+    "createdBy": "synthetic-human-42"
+  },
+  "binding": {
+    "repositoryId": 1,
+    "repositoryNodeId": "R_synthetic_hyperfinite",
+    "repositoryFullName": "example-organization/hyperfinite",
+    "repositoryRootId": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "workItemNodeId": "I_synthetic_feature_delivery_27",
+    "defaultRef": "refs/heads/main",
+    "proposalRef": "refs/heads/agentic-domain/feature-delivery-demo",
+    "sourceDigest": "sha256:a796e6af915e46c3f55371d4c6fb9dbd2dc6b36d436d0a0ffe3bde44645834af",
+    "policyDigest": "sha256:3cb2533916185729601b9cd83e6e5d2b3207b45c7b0a75c2bce0f2e1f4983829",
+    "lifecycleGraphDigest": "sha256:a0e9a837deebca4a58058edc98d447b9d8295a65a55091fd79fe7c4e8e7ec78d",
+    "currentHead": "sha256:2555b206740bf46d96dc40939b0c02fe0eed7bac4a59c0060485a4dbd99db540"
+  },
+  "objective": {
+    "outcome": "Demonstrate deterministic feature delivery through a draft pull request, exact-head COMMENT review, and independent human merge observation.",
+    "inScope": [
+      "examples/demos/feature-delivery/sandbox/src/export.ts",
+      "examples/demos/feature-delivery/sandbox/tests/export.test.ts"
+    ],
+    "outOfScope": [
+      "Autonomous approval or merge",
+      "Deployment or publication",
+      "Live GitHub Project or App administration"
+    ],
+    "assumptions": [
+      "All repository and GitHub effects use hermetic synthetic adapters.",
+      "The trusted binding fixes the repository and exact base SHA."
+    ],
+    "dependencies": []
+  },
+  "policy": {
+    "domainPack": "feature-delivery@1.0.0",
+    "domainPackDigest": "sha256:8f02d6d5f4a5ad7ff4e1b7c106f8a8c130bcfedc7082377879fc07d94fa066b5",
+    "capabilityRegistryDigest": "sha256:4005dc63e8494bb4284b5cda63a6e8a4666f44f4f9d515684800c619142c3bfc",
+    "depthProfile": "D2",
+    "riskClass": "moderate",
+    "privacyClass": "internal",
+    "phaseContracts": {
+      "framing": {
+        "reference": "feature-delivery.framing@1.0.0",
+        "digest": "sha256:d75af0366544591579cba8eb2ddc6ba8da1ee9c99a6f328e770dfbb830332adc"
+      },
+      "planning": {
+        "reference": "feature-delivery.planning@1.0.0",
+        "digest": "sha256:c395792cca902152416d173effb314c5442e8c46fda614aa56fc0b3d88969a5a"
+      },
+      "execution": {
+        "reference": "feature-delivery.execution@1.0.0",
+        "digest": "sha256:96e82021b410ec799889f9ca8ad931efda510aa953512d4d192bff5263501f47"
+      },
+      "verification": {
+        "reference": "feature-delivery.verification@1.0.0",
+        "digest": "sha256:30b6854c263bf30f7c203a7c7cfb092c421483b85b7f99e35ba16e1ed7ee2a64"
+      },
+      "human-review": {
+        "reference": "feature-delivery.human-review@1.0.0",
+        "digest": "sha256:03281847a1f161ca6c16ea3e2bfb7dcb970aee3056eceb0b0188927b73552ef3"
+      }
+    },
+    "requestedCapabilities": [
+      "demo.feature-delivery.requirements-clarification@1.0.0",
+      "demo.feature-delivery.codebase-discovery@1.0.0",
+      "demo.feature-delivery.solution-design@1.0.0",
+      "demo.feature-delivery.build@1.0.0",
+      "demo.feature-delivery.test-and-verification@1.0.0"
+    ],
+    "allowedPaths": [
+      "examples/demos/feature-delivery/sandbox/src/export.ts",
+      "examples/demos/feature-delivery/sandbox/tests/export.test.ts"
+    ],
+    "prohibitedEffects": [
+      "mark-ready",
+      "approve",
+      "dismiss-review",
+      "merge",
+      "deploy",
+      "publish",
+      "production-mutation",
+      "project-administration",
+      "app-administration",
+      "credential-administration"
+    ],
+    "tools": [
+      "read",
+      "search"
+    ],
+    "shellCommands": [],
+    "network": [],
+    "mcpTools": [
+      "github.issue_read",
+      "safeoutputs.add_comment",
+      "safeoutputs.submit_pull_request_review"
+    ],
+    "secretAccess": false
+  },
+  "budget": {
+    "maxCalls": 5,
+    "maxTokens": 25000,
+    "maxCostUnits": 70,
+    "maxDurationMs": 1800000,
+    "maxRetries": 1,
+    "maxLoops": 3,
+    "maxParallel": 1,
+    "maxPatchBytes": 65536,
+    "expiresAt": "2027-08-29T00:00:00Z"
+  },
+  "deliverables": [
+    "Feature brief with stable acceptance criteria",
+    "Base-bound codebase impact analysis",
+    "Solution design and deterministic implementation-plan DAG",
+    "Target-free bounded patch and trusted draft pull-request evidence",
+    "Exact-head verification report and human-review package"
+  ],
+  "evidence": {
+    "required": [
+      "acceptance-trace-complete",
+      "tests-pass",
+      "comment-only-review",
+      "independent-human-merge-observed"
+    ],
+    "verificationCommands": [
+      "fd-acceptance-tests",
+      "fd-regression-tests",
+      "fd-typecheck",
+      "git-diff-check"
+    ],
+    "approverPolicy": "eligible-independent-human-current-head"
+  },
+  "humanGates": [
+    "activate",
+    "accept-frame",
+    "accept-plan",
+    "approve-current-head"
+  ],
+  "retention": {
+    "receiptDays": 365,
+    "artifactDays": 90,
+    "cancelOnExpiry": false
+  }
+}

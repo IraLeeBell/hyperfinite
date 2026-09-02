@@ -1,0 +1,26 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoProjectProfile",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "demoProjectId": "adaptive-delivery",
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "title": "Adaptive Delivery",
+    "description": "Disabled-by-default guided delivery journey with fixed and prescribed user-selectable agents.",
+    "defaultDepthProfile": "D2",
+    "allowedDepthProfiles": [
+      "D1",
+      "D2"
+    ],
+    "repositoryBindingDigest": "sha256:4a890a7057cee476f618dc38976c8b349487827c580ccbfe9f74d16685fdd0ff",
+    "projectBindingDigest": "sha256:957f85da46cae787f38adf79378828f2f6a78230d9abab6b150573b9535d9187",
+    "workAccordTemplateDigest": "sha256:d08e154579ebb3c59be95e3f5be4050a205c341098c0f3839f8af85b1b1d3386",
+    "journeyDefinitionRef": "config/v1alpha1/demo-projects/adaptive-delivery/journey.json",
+    "stageAgentBindingsRef": "config/v1alpha1/demo-projects/adaptive-delivery/runtime-bindings.json",
+    "capabilityShardRef": "config/v1alpha1/demo-projects/adaptive-delivery/capabilities.json",
+    "activationProfileRef": "config/v1alpha1/demo-projects/adaptive-delivery/activation-profile.json",
+    "projectionMappingRef": "config/v1alpha1/demo-projects/adaptive-delivery/projection-mapping.json"
+  },
+  "contentDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4"
+}

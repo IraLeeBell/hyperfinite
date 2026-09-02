@@ -1,0 +1,84 @@
+{
+  "schemaVersion": "1.0.0",
+  "demoProjectId": "feature-delivery",
+  "cases": [
+    {
+      "id": "clarification",
+      "route": "framing.clarify",
+      "expected": "same-stage-receipt",
+      "generationChange": 0,
+      "fullVerificationRequired": false
+    },
+    {
+      "id": "pause",
+      "route": "execution.pause",
+      "expected": "preserve-cursor",
+      "generationChange": 0,
+      "fullVerificationRequired": false
+    },
+    {
+      "id": "block",
+      "route": "verification.block",
+      "expected": "typed-blocked",
+      "generationChange": 0,
+      "fullVerificationRequired": false
+    },
+    {
+      "id": "cancel",
+      "route": "blocked.cancel",
+      "expected": "terminal-cancelled",
+      "generationChange": 0,
+      "fullVerificationRequired": false
+    },
+    {
+      "id": "repair",
+      "route": "verification.repair",
+      "expected": "truncate-build-suffix",
+      "generationChange": 1,
+      "fullVerificationRequired": true
+    },
+    {
+      "id": "replan",
+      "route": "verification.replan",
+      "expected": "truncate-plan-suffix",
+      "generationChange": 1,
+      "fullVerificationRequired": true
+    },
+    {
+      "id": "revision",
+      "route": "review.request-revision",
+      "expected": "successor-head-required",
+      "generationChange": 1,
+      "fullVerificationRequired": true
+    },
+    {
+      "id": "retry",
+      "route": "blocked.retry-execution",
+      "expected": "budgeted-explicit-retry",
+      "generationChange": 1,
+      "fullVerificationRequired": true
+    },
+    {
+      "id": "partial-effect",
+      "route": "execution.partial-effect",
+      "expected": "reconcile-without-blind-retry",
+      "generationChange": 0,
+      "fullVerificationRequired": false
+    },
+    {
+      "id": "lost-ack",
+      "route": "projection-reconcile",
+      "expected": "two-stable-exact-reads",
+      "generationChange": 0,
+      "fullVerificationRequired": false
+    },
+    {
+      "id": "reauthorization",
+      "route": "framing.reauthorize",
+      "expected": "fresh-lease-and-binding",
+      "generationChange": 1,
+      "fullVerificationRequired": true
+    }
+  ],
+  "externalCalls": 0
+}

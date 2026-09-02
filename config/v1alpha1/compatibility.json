@@ -1,0 +1,39 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "CompatibilityMatrix",
+  "schemaVersion": "1.0.0",
+  "packageVersion": "0.1.0",
+  "nodeMajors": [
+    24,
+    26
+  ],
+  "npmMajors": [
+    11
+  ],
+  "ghCliVersion": "2.96.0",
+  "gitMinimumVersion": "2.46.0",
+  "ghAwVersion": "v0.86.2",
+  "copilotCliVersion": "1.0.79",
+  "actions": {
+    "runner": "ubuntu-slim",
+    "setupNodeMajor": 24
+  },
+  "platforms": {
+    "ghec": "supported",
+    "ghes": "unsupported-unverified"
+  },
+  "contractVersions": {
+    "packaging": "1.0.0",
+    "control": "1.0.0",
+    "project": "1.0.0",
+    "runtime": "1.0.0",
+    "demoProject": "2.0.0",
+    "stageAgentBinding": "2.0.0",
+    "agentSelection": "1.0.0",
+    "deploymentTopology": "1.0.0",
+    "githubAppRegistration": "1.0.0",
+    "administratorPlan": "1.0.0",
+    "administratorHandoff": "1.0.0",
+    "durableStore": "1.0.0"
+  }
+}

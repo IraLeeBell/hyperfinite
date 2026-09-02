@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "demoProjectId": "feature-delivery",
+  "issue": {
+    "number": 1002,
+    "nodeId": "I_synthetic_feature_delivery_1002",
+    "title": "Add a synthetic export option behind the existing review gates"
+  },
+  "formSubmission": {
+    "desiredOutcome": "Produce a bounded implementation and tests for a synthetic export option.",
+    "repositoryHint": "example/feature-delivery-sandbox",
+    "constraints": "Preserve existing API behavior and keep all delivery in a draft pull request.",
+    "acceptanceEvidence": "Targeted tests pass and an independent human reviews the exact draft pull-request head.",
+    "depthProfile": "D2",
+    "consent": true
+  },
+  "projection": {
+    "Stage": "Framing",
+    "Journey Stage": "Solution design",
+    "Demo Project Profile": "feature-delivery@1.0.0",
+    "Depth Profile": "D2",
+    "Gate Status": "Satisfied",
+    "Contract Revision": 1,
+    "Last Receipt": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "Attention": "None",
+    "Target Repository": "example/feature-delivery-sandbox",
+    "Run / Attempt": "synthetic-run-1002 / 1",
+    "Current Draft PR": "none",
+    "Current Stage Agent": "feature-delivery-solution-design",
+    "Stage Interaction": "deterministic",
+    "Agent Selection Status": "not-applicable"
+  }
+}

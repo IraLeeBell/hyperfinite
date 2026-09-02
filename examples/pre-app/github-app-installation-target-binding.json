@@ -1,0 +1,28 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubAppInstallationTargetBinding",
+  "schemaVersion": "1.0.0",
+  "approvedAt": "2026-08-28T00:00:00Z",
+  "approvedBy": "synthetic-human-admin",
+  "expiresAt": "2026-09-28T00:00:00Z",
+  "owner": {
+    "id": 987654001,
+    "nodeId": "O_synthetic0001",
+    "login": "example-organization",
+    "accountType": "organization"
+  },
+  "app": {
+    "id": 987654002,
+    "nodeId": "A_synthetic0002"
+  },
+  "installationId": 987654321,
+  "selectedRepositories": [
+    {
+      "id": 987654003,
+      "nodeId": "R_synthetic0003",
+      "owner": "example-organization",
+      "name": "example-repository",
+      "fullName": "example-organization/example-repository"
+    }
+  ]
+}

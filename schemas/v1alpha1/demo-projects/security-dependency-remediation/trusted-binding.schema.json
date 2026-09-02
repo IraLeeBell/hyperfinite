@@ -1,0 +1,187 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/demo-projects/security-dependency-remediation/trusted-binding.schema.json",
+  "title": "Security and Dependency Remediation trusted binding",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "contentDigest",
+    "spec"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "SecurityRemediationTrustedBinding"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "contentDigest": {
+      "$ref": "#/$defs/digest"
+    },
+    "spec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "repository",
+        "workItem",
+        "advisory",
+        "targetSlots",
+        "fixedChecks",
+        "externalCallBudget",
+        "networkDestinations",
+        "secretNames",
+        "prohibitedEffects"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "const": "security-dependency-remediation"
+        },
+        "repository": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "nodeId",
+            "fullName",
+            "defaultRef",
+            "baseSha"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "nodeId": {
+              "type": "string",
+              "pattern": "^R_[A-Za-z0-9_]+$"
+            },
+            "fullName": {
+              "const": "example/security-remediation-sandbox"
+            },
+            "defaultRef": {
+              "const": "refs/heads/main"
+            },
+            "baseSha": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{40}$"
+            }
+          }
+        },
+        "workItem": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "number",
+            "nodeId"
+          ],
+          "properties": {
+            "number": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "nodeId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            }
+          }
+        },
+        "advisory": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "dependency",
+            "affectedVersion",
+            "fixedVersion",
+            "evidenceRef"
+          ],
+          "properties": {
+            "id": {
+              "const": "SDRA-2026-0001"
+            },
+            "dependency": {
+              "const": "mist-lru"
+            },
+            "affectedVersion": {
+              "const": "0.4.0"
+            },
+            "fixedVersion": {
+              "const": "0.4.1"
+            },
+            "evidenceRef": {
+              "const": "examples/demos/security-dependency-remediation/evidence/synthetic-advisory.json"
+            }
+          }
+        },
+        "targetSlots": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slot",
+              "path"
+            ],
+            "properties": {
+              "slot": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9-]+$"
+              },
+              "path": {
+                "type": "string",
+                "pattern": "^(?:vendor/mist-lru|src|tests)/[a-z0-9._/-]+$"
+              }
+            }
+          }
+        },
+        "fixedChecks": {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]+$"
+          }
+        },
+        "externalCallBudget": {
+          "const": 0
+        },
+        "networkDestinations": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "secretNames": {
+          "type": "array",
+          "maxItems": 0
+        },
+        "prohibitedEffects": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]+$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    }
+  }
+}

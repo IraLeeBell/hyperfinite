@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/durable-store-backup-manifest.schema.json",
+  "title": "Durable store backup manifest",
+  "description": "Evidence describing one consistent backup of a local reference durable store, read back from the completed backup copy. Non-authoritative: it records observed chain state, and grants no capability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "storeId",
+    "storeNamespace",
+    "formatVersion",
+    "namespaces",
+    "entryCount",
+    "nonAuthoritative"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "DurableStoreBackupManifest"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "storeId": {
+      "$ref": "#/$defs/logicalName"
+    },
+    "storeNamespace": {
+      "$ref": "#/$defs/logicalName"
+    },
+    "formatVersion": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "namespaces": {
+      "type": "array",
+      "minItems": 0,
+      "maxItems": 512,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "namespace",
+          "sequence",
+          "head",
+          "entryCount"
+        ],
+        "properties": {
+          "namespace": {
+            "$ref": "#/$defs/logicalName"
+          },
+          "sequence": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "head": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/digest"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "entryCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 512
+          }
+        }
+      },
+      "description": "One entry per logical namespace present in the backup. Bounded by the store-wide journal ceiling, since the degenerate case is one single-entry namespace per record."
+    },
+    "entryCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 512
+    },
+    "nonAuthoritative": {
+      "const": true
+    }
+  },
+  "$defs": {
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "logicalName": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._:-][a-z0-9]+)*$",
+      "maxLength": 128
+    }
+  }
+}

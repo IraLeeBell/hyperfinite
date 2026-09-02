@@ -1,0 +1,47 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "AppModernizationVerification",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:cfcf99905864b9864bf2408f0d66650f3fdf4b2148d4e7c6afc34c297ae32336",
+  "spec": {
+    "implementationEvidenceDigest": "sha256:cbfa45730fc9802e2ef6350e13613e705137956db555ba1844da9ffe41ca98c2",
+    "headSha": "2222222222222222222222222222222222222222",
+    "commands": [
+      {
+        "id": "typecheck",
+        "status": "passed",
+        "outputDigest": "sha256:407d7b7f22e9fe45678701c8385714589b4df52bfa703bb900e9b5d19e785d48"
+      },
+      {
+        "id": "build",
+        "status": "passed",
+        "outputDigest": "sha256:b4ee970d6a6720a2aee0555699ff1175c41cee4ff9e51952000c3d83b1c44329"
+      },
+      {
+        "id": "unit-tests",
+        "status": "passed",
+        "outputDigest": "sha256:bfceba610e70baa7d5ae6bb7cbe3b3b88315d25cff4c95984223a2e5ab46b8ae"
+      },
+      {
+        "id": "security",
+        "status": "passed",
+        "outputDigest": "sha256:6100bf72f8fea623c80820dbcc2323d0cce0ad74bbc11041daac84b488a5dca3"
+      },
+      {
+        "id": "compatibility",
+        "status": "passed",
+        "outputDigest": "sha256:77485bc4b75bca286ed771da5fd9d4fb333b85221d7977b309a4cce9e621c30b"
+      },
+      {
+        "id": "migration-dry-run",
+        "status": "passed",
+        "outputDigest": "sha256:d49356246948394049ef97ee8005546a5ad6d19e4c99cae2404491c647948f7d"
+      }
+    ],
+    "security": "passed",
+    "compatibility": "passed",
+    "migration": "passed",
+    "reviewEvent": "COMMENT",
+    "externalCallCount": 0
+  }
+}

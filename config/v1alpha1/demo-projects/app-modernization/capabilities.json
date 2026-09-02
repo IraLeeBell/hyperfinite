@@ -1,0 +1,691 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "DemoCapabilityRegistryShard",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "capabilities": [
+      {
+        "access": {
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "networkDestinations": [],
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "secretNames": [],
+          "shellCommands": [],
+          "tools": [],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          }
+        },
+        "actorClasses": [
+          "system"
+        ],
+        "allowedPhases": [
+          "framing"
+        ],
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        },
+        "description": "Produces only the closed, target-free current-state inventory advisory artifact for the reserved App Modernization stage.",
+        "effectClass": "advisory-artifact",
+        "evaluations": {
+          "behavioral": [
+            "framing-rubric-v1"
+          ],
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ]
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "humanGates": [
+          "activate"
+        ],
+        "id": "demo.app-modernization.current-state-inventory",
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "evidence"
+          ],
+          "type": "object"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxConcurrency": 1,
+          "maxCostUnits": 10,
+          "maxOutputBytes": 32768,
+          "maxRetries": 1,
+          "parallelSafe": false,
+          "timeoutMs": 120000
+        },
+        "outputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "openQuestions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20,
+              "type": "array"
+            },
+            "summary": {
+              "maxLength": 8000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "type": "object"
+        },
+        "owner": "framework-maintainers",
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "publisher": "agentic-framework",
+        "risk": {
+          "class": "moderate",
+          "privacyClass": "internal",
+          "trustZone": "T3"
+        },
+        "status": "active",
+        "version": "1.0.0"
+      },
+      {
+        "access": {
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "networkDestinations": [],
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "secretNames": [],
+          "shellCommands": [],
+          "tools": [],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          }
+        },
+        "actorClasses": [
+          "system"
+        ],
+        "allowedPhases": [
+          "framing"
+        ],
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        },
+        "description": "Produces only the closed, target-free modernization assessment advisory artifact for the reserved App Modernization stage.",
+        "effectClass": "advisory-artifact",
+        "evaluations": {
+          "behavioral": [
+            "framing-rubric-v1"
+          ],
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ]
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "humanGates": [
+          "activate"
+        ],
+        "id": "demo.app-modernization.modernization-assessment",
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "evidence"
+          ],
+          "type": "object"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxConcurrency": 1,
+          "maxCostUnits": 10,
+          "maxOutputBytes": 32768,
+          "maxRetries": 1,
+          "parallelSafe": false,
+          "timeoutMs": 120000
+        },
+        "outputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "openQuestions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20,
+              "type": "array"
+            },
+            "summary": {
+              "maxLength": 8000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "type": "object"
+        },
+        "owner": "framework-maintainers",
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "publisher": "agentic-framework",
+        "risk": {
+          "class": "moderate",
+          "privacyClass": "internal",
+          "trustZone": "T3"
+        },
+        "status": "active",
+        "version": "1.0.0"
+      },
+      {
+        "access": {
+          "mcpMutationTools": [
+            "safeoutputs.add_comment"
+          ],
+          "mcpReadTools": [
+            "github.issue_read"
+          ],
+          "mcpTools": [
+            "github.issue_read",
+            "safeoutputs.add_comment"
+          ],
+          "networkDestinations": [],
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "secretNames": [],
+          "shellCommands": [],
+          "tools": [],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          }
+        },
+        "actorClasses": [
+          "system"
+        ],
+        "allowedPhases": [
+          "framing"
+        ],
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        },
+        "description": "Produces only the closed, target-free target architecture advisory artifact for the reserved App Modernization stage.",
+        "effectClass": "advisory-artifact",
+        "evaluations": {
+          "behavioral": [
+            "framing-rubric-v1"
+          ],
+          "structural": [
+            "schema-valid",
+            "target-free"
+          ]
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt"
+        ],
+        "humanGates": [
+          "activate"
+        ],
+        "id": "demo.app-modernization.target-architecture",
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "evidence"
+          ],
+          "type": "object"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxConcurrency": 1,
+          "maxCostUnits": 10,
+          "maxOutputBytes": 32768,
+          "maxRetries": 1,
+          "parallelSafe": false,
+          "timeoutMs": 120000
+        },
+        "outputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "openQuestions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20,
+              "type": "array"
+            },
+            "summary": {
+              "maxLength": 8000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "openQuestions"
+          ],
+          "type": "object"
+        },
+        "owner": "framework-maintainers",
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "publisher": "agentic-framework",
+        "risk": {
+          "class": "moderate",
+          "privacyClass": "internal",
+          "trustZone": "T3"
+        },
+        "status": "active",
+        "version": "1.0.0"
+      },
+      {
+        "access": {
+          "mcpMutationTools": [],
+          "mcpReadTools": [],
+          "mcpTools": [],
+          "networkDestinations": [],
+          "readScopes": [
+            "accord-evidence"
+          ],
+          "secretNames": [],
+          "shellCommands": [],
+          "tools": [],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          }
+        },
+        "actorClasses": [
+          "system"
+        ],
+        "allowedPhases": [
+          "execution"
+        ],
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        },
+        "description": "Produces only the closed, target-free implementation advisory artifact for the reserved App Modernization stage.",
+        "effectClass": "advisory-artifact",
+        "evaluations": {
+          "behavioral": [
+            "execution-role-rubric-v1",
+            "authority-refusal-rubric-v1"
+          ],
+          "structural": [
+            "schema-valid",
+            "path-bounded",
+            "target-free"
+          ]
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "patch-digest"
+        ],
+        "humanGates": [
+          "activate",
+          "accept-frame",
+          "accept-plan"
+        ],
+        "id": "demo.app-modernization.implementation",
+        "idempotency": {
+          "required": true,
+          "scope": "contract-revision"
+        },
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "maxPatchBytes": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "targetSlots": {
+              "items": {
+                "pattern": "^[a-z][a-z0-9-]{0,62}$",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "evidence",
+            "targetSlots",
+            "maxPatchBytes"
+          ],
+          "type": "object"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxConcurrency": 1,
+          "maxCostUnits": 20,
+          "maxOutputBytes": 262144,
+          "maxRetries": 1,
+          "parallelSafe": false,
+          "timeoutMs": 600000
+        },
+        "outputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "changes": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "content": {
+                    "maxLength": 262144,
+                    "type": "string"
+                  },
+                  "slot": {
+                    "pattern": "^[a-z][a-z0-9-]{0,62}$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "slot",
+                  "content"
+                ],
+                "type": "object"
+              },
+              "maxItems": 100,
+              "type": "array"
+            },
+            "findings": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100,
+              "type": "array"
+            },
+            "openQuestions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20,
+              "type": "array"
+            },
+            "result": {
+              "enum": [
+                "drafted",
+                "blocked",
+                "failed"
+              ]
+            },
+            "summary": {
+              "maxLength": 8000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "changes",
+            "findings",
+            "openQuestions",
+            "result"
+          ],
+          "type": "object"
+        },
+        "owner": "framework-maintainers",
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "publisher": "agentic-framework",
+        "risk": {
+          "class": "high",
+          "privacyClass": "confidential",
+          "trustZone": "T3"
+        },
+        "status": "active",
+        "version": "1.0.0"
+      },
+      {
+        "access": {
+          "mcpMutationTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "mcpReadTools": [],
+          "mcpTools": [
+            "safeoutputs.submit_pull_request_review"
+          ],
+          "networkDestinations": [],
+          "readScopes": [
+            "authorized-review-evidence",
+            "trusted-review-profile",
+            "trusted-review-skills",
+            "trusted-gh-aw-runtime-control"
+          ],
+          "secretNames": [],
+          "shellCommands": [],
+          "tools": [
+            "read",
+            "search"
+          ],
+          "write": {
+            "allowed": false,
+            "scopes": []
+          }
+        },
+        "actorClasses": [
+          "system",
+          "reviewer"
+        ],
+        "allowedPhases": [
+          "verification"
+        ],
+        "compatibility": {
+          "lifecycle": "1.0.0",
+          "replacement": null
+        },
+        "description": "Produces only the closed, target-free verification advisory artifact for the reserved App Modernization stage.",
+        "effectClass": "verification-result",
+        "evaluations": {
+          "behavioral": [
+            "evidence-quality-rubric-v1",
+            "review-authority-refusal-rubric-v1"
+          ],
+          "structural": [
+            "schema-valid",
+            "target-free",
+            "comment-only"
+          ]
+        },
+        "evidence": [
+          "validated-output-digest",
+          "provider-model-receipt",
+          "current-head-digest",
+          "threat-detection-success"
+        ],
+        "humanGates": [
+          "activate",
+          "approve-current-head"
+        ],
+        "id": "demo.app-modernization.verification",
+        "idempotency": {
+          "required": true,
+          "scope": "event"
+        },
+        "implementation": {
+          "kind": "model",
+          "provider": "configured-provider"
+        },
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "evidence": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "headSha": {
+              "pattern": "^[a-f0-9]{40}$",
+              "type": "string"
+            }
+          },
+          "required": [
+            "headSha",
+            "evidence"
+          ],
+          "type": "object"
+        },
+        "limits": {
+          "maxCalls": 1,
+          "maxConcurrency": 1,
+          "maxCostUnits": 20,
+          "maxOutputBytes": 65536,
+          "maxRetries": 1,
+          "parallelSafe": false,
+          "timeoutMs": 600000
+        },
+        "outputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "findings": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 100,
+              "type": "array"
+            },
+            "openQuestions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 20,
+              "type": "array"
+            },
+            "summary": {
+              "maxLength": 8000,
+              "type": "string"
+            }
+          },
+          "required": [
+            "summary",
+            "findings",
+            "openQuestions"
+          ],
+          "type": "object"
+        },
+        "owner": "framework-maintainers",
+        "provenance": {
+          "classification": "original",
+          "legalReview": "not-required",
+          "securityReview": "pending"
+        },
+        "publisher": "agentic-framework",
+        "risk": {
+          "class": "moderate",
+          "privacyClass": "confidential",
+          "trustZone": "T3"
+        },
+        "status": "active",
+        "version": "1.0.0"
+      }
+    ],
+    "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
+    "demoProjectId": "app-modernization",
+    "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
+    "projectProfileDigest": "sha256:0fa5790690aa483d2de2c5e9635120a737a7bb62ba6a529a877d6c9ab2748ccd"
+  },
+  "contentDigest": "sha256:dbffa57045f77122d8e115b91f2696f398230137075013412aec74d5c0d8cfda"
+}

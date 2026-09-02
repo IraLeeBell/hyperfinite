@@ -1,0 +1,29 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "SecurityRemediationSyntheticAdvisory",
+  "schemaVersion": "1.0.0",
+  "contentDigest": "sha256:c2bf7247e69178bc71154311475655dfbc522ee63bca6374cb145198a4449db7",
+  "spec": {
+    "demoProjectId": "security-dependency-remediation",
+    "evidenceType": "advisory",
+    "evidenceId": "SDRA-2026-0001",
+    "dependency": "mist-lru",
+    "affectedVersion": "0.4.0",
+    "fixedVersion": "0.4.1",
+    "headSha": null,
+    "subjectDigest": "sha256:b76213b35656f91ee203847125585ae6fb05cd66d48a2ccd8e51410d2dc20d14",
+    "outcome": "affected",
+    "findings": [
+      "A crafted pair of local namespace and key strings can collide when joined with an unescaped colon separator."
+    ],
+    "observedAt": "2026-08-29T20:00:00Z",
+    "expiresAt": "2027-08-29T20:00:00Z",
+    "synthetic": true,
+    "networkUsed": false
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "keyId": "security-remediation-synthetic-evidence-key",
+    "value": "XaOdZOcphOM6+EJW4KU/R2Qy57Yn8zFvbGVlXGKLS4dpepIUKK6yYMq9hUgBkA50tT8+FE3iW3T3j8FVr9FIAQ=="
+  }
+}

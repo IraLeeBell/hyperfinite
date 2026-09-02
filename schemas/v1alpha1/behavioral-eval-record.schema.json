@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/behavioral-eval-record.schema.json",
+  "title": "Behavioral evaluation record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["fixtureId", "evaluator", "subjectModel", "evaluatorModel", "criteria", "forbiddenAssessed", "forbiddenObserved"],
+  "properties": {
+    "fixtureId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "evaluator": { "enum": ["independent-human", "independent-model"] },
+    "subjectModel": { "type": "string", "minLength": 1 },
+    "evaluatorModel": {
+      "oneOf": [
+        { "type": "string", "minLength": 1 },
+        { "type": "null" }
+      ]
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["criterion", "passed", "evidence"],
+        "properties": {
+          "criterion": { "type": "string", "minLength": 1 },
+          "passed": { "type": "boolean" },
+          "evidence": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "forbiddenObserved": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "forbiddenAssessed": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "evaluator": { "const": "independent-human" } }
+      },
+      "then": {
+        "properties": { "evaluatorModel": { "type": "null" } }
+      },
+      "else": {
+        "properties": { "evaluatorModel": { "type": "string", "minLength": 1 } }
+      }
+    }
+  ]
+}
