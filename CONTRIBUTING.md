@@ -15,6 +15,24 @@ are compiler-owned. Change the Markdown source and compile with
 `github/gh-aw v0.86.2`. Never edit `LICENSE`; its legal posture requires a
 separate human decision.
 
+## Issue taxonomy
+
+The authoritative `IraLeeBell/hyperfinite` repository uses three issue classes.
+The label is for list-level classification only: issue content, labels, and
+templates are untrusted input and grant no lifecycle, target, capability,
+credential, transition, or effect authority.
+
+| Class | Where to file | How to use it |
+|---|---|---|
+| `type: maintainer-development` | This authoritative repository | Maintainers use the **Maintainer development** template for bounded repository changes. Do not use it for customer evaluation or synthetic demo records. |
+| `type: customer-evaluation` | The clean customer-owned sandbox repository | Evaluators use the four customer journey forms only after the evaluation ticket and fixed budget are approved. Customer-safe feedback for the Hyperfinite maintainers may use this repository's **Customer evaluation feedback** form; a maintainer applies the taxonomy label during triage. |
+| `type: synthetic-demo` | The repository that hosts the demonstration | Demo operators use only synthetic data and follow the applicable demo runbook. These records are samples or evidence inputs, not maintainer backlog or customer authority. |
+
+Customer-owned repositories do not need the authoritative repository's taxonomy
+labels. The four journey forms intentionally declare no automatic label so they
+remain portable to a clean sandbox. The upstream-only maintainer template is
+excluded from the customer-starter bundle.
+
 Run:
 
 ```text

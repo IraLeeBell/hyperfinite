@@ -62,6 +62,7 @@
     "excludedPaths": [
         ".github/AUTOMATION.md",
         ".github/CODEOWNERS",
+        ".github/ISSUE_TEMPLATE/maintainer-development.yml",
         ".github/workflows/agentic-execution.md",
         ".github/workflows/agentic-framing.md",
         ".github/workflows/agentic-review.md",
