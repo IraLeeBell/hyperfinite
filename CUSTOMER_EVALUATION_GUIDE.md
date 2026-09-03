@@ -82,9 +82,9 @@ review.
    a verified [customer-starter archive](docs/release/customer-starter-preflight.md)
    and use the customer-starter path in Phase 2. The resulting files are the
    customer sandbox's own reviewed file snapshot. No published or unpublished
-   upstream pull-request, issue, commit, or coordination history is required; do
-   not carry that history or use an npm registry install or source-history fork
-   as the customer distribution.
+   upstream pull-request, issue, commit, or coordination history is required. Do
+   not carry that history, and do not use an npm registry install or a
+   source-history fork as the customer distribution.
 3. Leave `example-organization` fixtures synthetic. Put live customer identities
    only in protected customer configuration and generated target manifests
    outside the repository.
