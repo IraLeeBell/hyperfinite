@@ -202,6 +202,16 @@ test("Hyperfinite distribution is repository and customer-starter source only", 
       ]),
     /implicit binding\.gyp install entry point/
   );
+  for (const implicitEntryVariant of ["Server.js", "BINDING.gyp"]) {
+    assert.throws(
+      () =>
+        assertRepositoryPackageBoundary(packageDocument, [
+          ...rootEntries,
+          implicitEntryVariant
+        ]),
+      /implicit (?:server\.js start|binding\.gyp install) entry point/
+    );
+  }
   assert.throws(
     () =>
       assertRepositoryPackageBoundary(
@@ -222,6 +232,10 @@ test("Hyperfinite distribution is repository and customer-starter source only", 
     extractionValidator,
     /"ci",\s*"--ignore-scripts",\s*"--no-audit",\s*"--no-fund"/u
   );
+  assert.match(extractionValidator, /readonly exitStatus: number/u);
+  assert.match(extractionValidator, /readonly signal: NodeJS\.Signals \| null/u);
+  assert.match(extractionValidator, /outcome: "expected-failure"/u);
+  assert.doesNotMatch(extractionValidator, /durationMs:\s*0/u);
 
   const durableStoreAdr = readFileSync(
     path.join(

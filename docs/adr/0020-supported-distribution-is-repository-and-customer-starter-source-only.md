@@ -44,9 +44,10 @@ SDK entry metadata, direct or `directories.bin` binary entry points, implicit
 `server.js` start behavior, implicit `binding.gyp` native builds, and
 install/prepare/dependencies/package/publication/deployment/service lifecycle
 scripts remain absent. Dependency installation always disables lifecycle
-scripts. Future SDK, CLI, hosted, deployable, release, or production-support
-distributions require separate product, compatibility, security, and operational
-work.
+scripts, and implicit filenames are compared with ASCII case folding so a
+case-insensitive filesystem cannot reintroduce them. Future SDK, CLI, hosted,
+deployable, release, or production-support distributions require separate
+product, compatibility, security, and operational work.
 
 This decision supersedes ADR 0014's earlier description of ADR 0013 TypeScript
 exports as a "supported public API" only where that phrase implies a package or

@@ -33,6 +33,10 @@ function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function asciiCaseFold(value: string): string {
+  return value.replace(/[A-Z]/gu, (character) => character.toLowerCase());
+}
+
 export function assertProductBoundary(
   value: unknown
 ): CompatibilityMatrix["productBoundary"] {
@@ -100,12 +104,13 @@ export function assertRepositoryPackageBoundary(
   ) {
     throw new TypeError("repository package must not enable gypfile");
   }
-  if (rootEntries.includes("binding.gyp")) {
+  const caseFoldedRootEntries = rootEntries.map(asciiCaseFold);
+  if (caseFoldedRootEntries.includes("binding.gyp")) {
     throw new TypeError(
       "repository package must not expose npm's implicit binding.gyp install entry point"
     );
   }
-  if (rootEntries.includes("server.js")) {
+  if (caseFoldedRootEntries.includes("server.js")) {
     throw new TypeError(
       "repository package must not expose npm's implicit server.js start entry point"
     );

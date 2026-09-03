@@ -34,6 +34,9 @@ const ROOT = process.cwd();
 interface StepEvidence {
   readonly command: string;
   readonly cwd: string;
+  readonly outcome: "success" | "expected-failure";
+  readonly exitStatus: number;
+  readonly signal: NodeJS.Signals | null;
   readonly durationMs: number;
 }
 
@@ -62,7 +65,14 @@ function runStep(cwd: string, command: string, args: readonly string[]): StepEvi
   if (result.status !== 0 || result.error !== undefined) {
     throw new Error(`clean-extraction step failed: ${label} (cwd=${cwd})`);
   }
-  return { command: label, cwd, durationMs };
+  return {
+    command: label,
+    cwd,
+    outcome: "success",
+    exitStatus: result.status,
+    signal: result.signal,
+    durationMs
+  };
 }
 
 function validateProfile(
@@ -137,6 +147,7 @@ function validateProfile(
     // it proves the "exports" restriction this profile ships is itself
     // load-bearing inside a real, extracted, dependency-installed bundle -- not just
     // present in source and untested.
+    const deepImportProbeStartedAt = Date.now();
     const deepImportProbe = spawnSync(
       process.execPath,
       [
@@ -146,9 +157,20 @@ function validateProfile(
       ],
       { cwd: extractRoot, stdio: "pipe", shell: false, encoding: "utf8" }
     );
+    const deepImportProbeDurationMs = Date.now() - deepImportProbeStartedAt;
+    if (deepImportProbe.error !== undefined) {
+      throw new Error(
+        `clean-extraction deep-import probe failed to execute: ${deepImportProbe.error.message}`
+      );
+    }
     if (deepImportProbe.status === 0) {
       throw new Error(
         "clean-extraction deep-import probe unexpectedly succeeded: the extracted bundle's package.json \"exports\" restriction did not block a deep import by package name"
+      );
+    }
+    if (deepImportProbe.status === null || deepImportProbe.signal !== null) {
+      throw new Error(
+        `clean-extraction deep-import probe did not exit normally: signal=${deepImportProbe.signal ?? "none"}`
       );
     }
     if (!/ERR_PACKAGE_PATH_NOT_EXPORTED/u.test(deepImportProbe.stderr)) {
@@ -159,7 +181,10 @@ function validateProfile(
     steps.push({
       command: "node --input-type=module -e \"await import('agentic-framework/dist/src/customer-starter-catalog.js')\" (expected to fail with ERR_PACKAGE_PATH_NOT_EXPORTED)",
       cwd: extractRoot,
-      durationMs: 0
+      outcome: "expected-failure",
+      exitStatus: deepImportProbe.status,
+      signal: deepImportProbe.signal,
+      durationMs: deepImportProbeDurationMs
     });
     for (const scriptName of profile.advertisedScripts) {
       steps.push(runStep(extractRoot, "npm", ["run", scriptName]));

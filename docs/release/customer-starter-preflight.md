@@ -141,3 +141,7 @@ script inside the extraction, writing a retained JSON evidence record. It
 reaches the network, so it is kept outside `npm test`/`validate:packaging`;
 the hermetic unit tests in `tests/customer-starter.test.ts` still prove
 package/script/link/import/schema/workflow closure statically.
+Every evidence step records its actual outcome, exit status, signal, and measured
+duration. The deep-import refusal is retained as an expected nonzero exit with
+`ERR_PACKAGE_PATH_NOT_EXPORTED`, never as a success-shaped or zero-duration
+placeholder.

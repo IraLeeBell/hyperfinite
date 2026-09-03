@@ -391,7 +391,8 @@ async function main(): Promise<void> {
       "neither profile supports the",
       "complete `npm run validate`",
       "`binding.gyp` install path",
-      "npm ci --ignore-scripts --no-audit --no-fund"
+      "npm ci --ignore-scripts --no-audit --no-fund",
+      "ASCII case folding"
     ],
     "product boundary documentation"
   );
@@ -445,7 +446,9 @@ async function main(): Promise<void> {
       "npm run validate:technical-identity:core",
       "npm run validate:technical-identity:demo",
       "are not supported customer-starter commands",
-      "npm ci --ignore-scripts --no-audit --no-fund"
+      "npm ci --ignore-scripts --no-audit --no-fund",
+      "actual outcome, exit status, signal",
+      "deep-import refusal is retained as an expected nonzero exit"
     ],
     "customer-starter documentation"
   );
@@ -457,7 +460,8 @@ async function main(): Promise<void> {
       "repository contracts, but there is no supported TypeScript package API",
       "no supported TypeScript package API",
       "`binding.gyp` native builds",
-      "Dependency installation always disables lifecycle"
+      "Dependency installation always disables lifecycle",
+      "case-insensitive filesystem"
     ],
     "distribution ADR"
   );
