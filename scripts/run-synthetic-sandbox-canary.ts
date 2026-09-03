@@ -533,7 +533,7 @@ function createSyntheticEphemeralKeyPair(): {
   readonly publicKey: ReturnType<typeof createPublicKey>;
 } {
   const seed = createHash("sha256")
-    .update("hyperfinite credentialless synthetic sandbox canary v1", "utf8")
+    .update("agentic-framework credentialless synthetic sandbox canary v1", "utf8")
     .digest();
   const privateKey = createPrivateKey({
     key: Buffer.concat([

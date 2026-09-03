@@ -241,6 +241,56 @@ if (
   );
 }
 
+const canarySource = sources.find(
+  (source) => source.path === "scripts/run-synthetic-sandbox-canary.ts"
+);
+if (
+  canarySource !== undefined &&
+  canarySource.content.split(identity.syntheticCanarySeed).length !== 2
+) {
+  throw new TypeError(
+    "synthetic canary seed drifted from the retained cryptographic domain"
+  );
+}
+const taxonomySource = sources.find(
+  (source) => source.path === "scripts/reconcile-issue-taxonomy.ts"
+);
+if (
+  taxonomySource !== undefined &&
+  taxonomySource.content.split(identity.issueTaxonomyUserAgent).length !== 2
+) {
+  throw new TypeError(
+    "issue taxonomy User-Agent drifted from the retained tool identity"
+  );
+}
+const deploymentTopology = parseStrictJson(
+  requiredSource(sources, "examples/pre-app/deployment-topology.json")
+);
+if (
+  !isRecord(deploymentTopology) ||
+  !Array.isArray(deploymentTopology["services"]) ||
+  deploymentTopology["services"].length !== 8
+) {
+  throw new TypeError("deployment topology must declare eight trust services");
+}
+for (const service of deploymentTopology["services"]) {
+  if (!isRecord(service) || !isRecord(service["identity"])) {
+    throw new TypeError("deployment topology service identity is malformed");
+  }
+  const serviceId = stringProperty(service, "serviceId", "deployment service");
+  if (
+    stringProperty(
+      service["identity"],
+      "oidcAudience",
+      `deployment service ${serviceId} identity`
+    ) !== `${identity.syntheticOidcAudiencePrefix}${serviceId}`
+  ) {
+    throw new TypeError(
+      "synthetic OIDC audience drifted from the retained protocol identity"
+    );
+  }
+}
+
 const publishers: string[] = [];
 for (const source of sources) {
   const baseRegistry =

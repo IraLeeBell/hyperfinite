@@ -23,7 +23,7 @@ validation.
 | API group and schema origin | `agentic-framework.github.com/v1alpha1`; `https://agentic-framework.github.com/schemas/` |
 | Reusable logical Project schema | `agentic-framework-control-plane`; display title `Hyperfinite Control Plane` |
 | Capability Registry publisher | `agentic-framework` |
-| Signature, digest, evidence-marker, builder, User-Agent, and format domains | Values derived from the lower-case `agentic-framework` stem and closed by their existing schemas or validators |
+| Signature, digest, OIDC audience, evidence-marker, builder, User-Agent, and format domains | Values derived from the lower-case `agentic-framework` stem and closed by their existing schemas or validators |
 
 There is no alias, dual-read, dual-write, or automatic evidence rewrite.
 Existing exact-head release/customer-starter evidence remains evidence for its
@@ -31,6 +31,11 @@ original head. New evidence is regenerated for the new head while retaining the
 same technical identifiers. Content digests therefore change only when their
 bound content or head changes; old digests are never re-signed or silently
 migrated.
+
+The credentialless canary seed, synthetic topology OIDC audiences, and
+upstream taxonomy User-Agent previously used the product slug. They are
+pre-release synthetic/tooling values, now normalized into the retained epoch;
+there is no deployed credential or live evidence migration.
 
 Only the exact protected compatibility field declares `identifierEpoch`, and
 its exact closed-schema property accepts one constant value. Validation decodes

@@ -18,6 +18,10 @@ test("synthetic canary signatures are deterministic, ephemeral, and tamper-evide
   assert.deepEqual(first, second);
   assert.equal(first.algorithm, "ed25519");
   assert.equal(first.keyId, "synthetic-canary:ephemeral:v1");
+  assert.match(
+    readFileSync("scripts/run-synthetic-sandbox-canary.ts", "utf8"),
+    /agentic-framework credentialless synthetic sandbox canary v1/u
+  );
   assert.equal(
     verify(
       null,

@@ -9,7 +9,7 @@
       "kind": "webhook-ingress",
       "identity": {
         "principalId": "principal:webhook-verifier",
-        "oidcAudience": "synthetic://hyperfinite/webhook-verifier",
+        "oidcAudience": "synthetic://agentic-framework/webhook-verifier",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -40,7 +40,7 @@
       "kind": "state-publisher",
       "identity": {
         "principalId": "principal:runtime-state-publisher",
-        "oidcAudience": "synthetic://hyperfinite/runtime-state-publisher",
+        "oidcAudience": "synthetic://agentic-framework/runtime-state-publisher",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -71,7 +71,7 @@
       "kind": "oidc-redeemer",
       "identity": {
         "principalId": "principal:authorization-redeemer",
-        "oidcAudience": "synthetic://hyperfinite/authorization-redeemer",
+        "oidcAudience": "synthetic://agentic-framework/authorization-redeemer",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -102,7 +102,7 @@
       "kind": "evidence-signer",
       "identity": {
         "principalId": "principal:evidence-signer",
-        "oidcAudience": "synthetic://hyperfinite/evidence-signer",
+        "oidcAudience": "synthetic://agentic-framework/evidence-signer",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -134,7 +134,7 @@
       "kind": "durable-store-service",
       "identity": {
         "principalId": "principal:evidence-and-grant-store-broker",
-        "oidcAudience": "synthetic://hyperfinite/evidence-and-grant-store-broker",
+        "oidcAudience": "synthetic://agentic-framework/evidence-and-grant-store-broker",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -165,7 +165,7 @@
       "kind": "credential-broker",
       "identity": {
         "principalId": "principal:github-token-broker",
-        "oidcAudience": "synthetic://hyperfinite/github-token-broker",
+        "oidcAudience": "synthetic://agentic-framework/github-token-broker",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -198,7 +198,7 @@
       "kind": "single-writer",
       "identity": {
         "principalId": "principal:single-writer-reconciler",
-        "oidcAudience": "synthetic://hyperfinite/single-writer-reconciler",
+        "oidcAudience": "synthetic://agentic-framework/single-writer-reconciler",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],
@@ -231,7 +231,7 @@
       "kind": "installation-adapter",
       "identity": {
         "principalId": "principal:installation-and-release-adapter",
-        "oidcAudience": "synthetic://hyperfinite/installation-and-release-adapter",
+        "oidcAudience": "synthetic://agentic-framework/installation-and-release-adapter",
         "allowedRepositories": [
           "synthetic-org/hyperfinite"
         ],

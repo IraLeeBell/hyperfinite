@@ -12,21 +12,25 @@ export const RETAINED_TECHNICAL_IDENTITY = Object.freeze({
   projectSchemaName: "agentic-framework-control-plane",
   capabilityPublisher: "agentic-framework",
   domainStem: "agentic-framework",
-  inventoryFiles: 366,
-  inventoryMatchingLines: 977,
-  inventoryOccurrences: 986,
+  issueTaxonomyUserAgent: "agentic-framework-issue-taxonomy/1.0",
+  syntheticCanarySeed:
+    "agentic-framework credentialless synthetic sandbox canary v1",
+  syntheticOidcAudiencePrefix: "synthetic://agentic-framework/",
+  inventoryFiles: 367,
+  inventoryMatchingLines: 1000,
+  inventoryOccurrences: 1009,
   inventoryDigest:
-    "sha256:917673849d2459230236f2837995dacc36d72faa9164e96c2867c014d94d3bb4",
+    "sha256:ac46014cd014fa13b5d8a258cfbda09931e676f8ff39c8969932ac50e688bb29",
   coreInventoryFiles: 206,
-  coreInventoryMatchingLines: 674,
-  coreInventoryOccurrences: 681,
+  coreInventoryMatchingLines: 694,
+  coreInventoryOccurrences: 701,
   coreInventoryDigest:
-    "sha256:d21820ada2f0dd74576f0bea1949498d6c94f330bdbf4f4d0dacf348ff4a88c1",
-  demoInventoryFiles: 354,
-  demoInventoryMatchingLines: 920,
-  demoInventoryOccurrences: 927,
+    "sha256:7a28f5c73ce22ac59beb3308b3653b4f607fa7e3742c20101a4a6d6ac18c4b5b",
+  demoInventoryFiles: 355,
+  demoInventoryMatchingLines: 942,
+  demoInventoryOccurrences: 949,
   demoInventoryDigest:
-    "sha256:654aa751eacb8dafd778cb2a01ab5e34cb41cfaf94b3776ef57a2d32df058090"
+    "sha256:94fd1fc3c34f0025e5bbff723ba75bd6da49888c197435d200f79cfd3bbddb34"
 } as const);
 
 export const HYPERFINITE_PACKAGE_DESCRIPTION =
@@ -574,7 +578,7 @@ function classifyOccurrence(
     /^(?:package(?:-lock)?\.json|src\/(?:release|release-support|packaging-types|customer-starter|customer-starter-catalog)\.ts|scripts\/(?:validate-packaging|validate-customer-starter-extraction)\.ts)/u.test(
       path
     ) ||
-    /packageName|releaseArchiveName|\.tar|release-tool|customer-starter-tool|github-adapter\/|spdx\/|attestations\/|require\(["']agentic-framework\//iu.test(
+    /packageName|releaseArchiveName|issueTaxonomyUserAgent|\.tar|release-tool|customer-starter-tool|issue-taxonomy\/|github-adapter\/|spdx\/|attestations\/|require\(["']agentic-framework\//iu.test(
       line
     )
   ) {
@@ -622,6 +626,12 @@ export function inventoryTechnicalIdentity(
     new RegExp(`${productStem}\\.(?:runtime|demo)`, "iu"),
     new RegExp(
       `${productStem}-(?:release-tool|customer-starter-tool|github-adapter)`,
+      "iu"
+    ),
+    new RegExp(`synthetic://${productStem}/`, "iu"),
+    new RegExp(`${productStem}-issue-taxonomy/`, "iu"),
+    new RegExp(
+      `${productStem}\\s+credentialless synthetic sandbox canary`,
       "iu"
     )
   ];

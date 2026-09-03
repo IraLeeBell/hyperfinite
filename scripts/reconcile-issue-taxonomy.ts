@@ -523,7 +523,7 @@ class GitHubRestRepository implements TaxonomyRepository {
       headers: {
         Accept: "application/vnd.github+json",
         Authorization: `Bearer ${this.#token}`,
-        "User-Agent": "hyperfinite-issue-taxonomy/1.0",
+        "User-Agent": "agentic-framework-issue-taxonomy/1.0",
         "X-GitHub-Api-Version": API_VERSION,
         ...(body === undefined ? {} : { "Content-Type": "application/json" })
       },

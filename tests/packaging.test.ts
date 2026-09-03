@@ -222,6 +222,22 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
       ]),
     /unsupported Hyperfinite technical identifier/
   );
+  for (const forbiddenTechnicalIdentity of [
+    `synthetic://${migratedStem}/authorization-redeemer`,
+    `${migratedStem}-issue-taxonomy/1.0`,
+    `${migratedStem} credentialless synthetic sandbox canary v1`
+  ]) {
+    assert.throws(
+      () =>
+        inventoryTechnicalIdentity([
+          {
+            path: "src/migrated-domain.ts",
+            content: forbiddenTechnicalIdentity
+          }
+        ]),
+      /unsupported Hyperfinite technical identifier/
+    );
+  }
 
   assert.throws(
     () =>

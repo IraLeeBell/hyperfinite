@@ -41,9 +41,9 @@ uses constants for every field.
 The package remains `agentic-framework`; wire contracts remain
 `agentic-framework.github.com/v1alpha1`; schema URIs remain below
 `https://agentic-framework.github.com/schemas/`; Hyperfinite-owned capabilities
-remain published by `agentic-framework`; and existing marker, builder, format,
-User-Agent, signature, digest, and evidence domains retain their lower-case
-stem. The reusable logical Project schema name remains
+remain published by `agentic-framework`; and all marker, builder, format,
+User-Agent, synthetic OIDC audience, signature, digest, and evidence domains
+use their lower-case stem. The reusable logical Project schema name remains
 `agentic-framework-control-plane`, while its human-visible title is
 `Hyperfinite Control Plane`.
 
@@ -74,6 +74,12 @@ or request a migration.
 
 - This is an identity retention, not a wire, package, publisher, signature, or
   stored-evidence migration. No compatibility alias or dual epoch is added.
+- Three pre-release outliers that used the product slug as a technical value
+  are normalized into the retained epoch: the credentialless canary seed, the
+  synthetic deployment OIDC audience prefix, and the upstream taxonomy
+  User-Agent. This changes synthetic canary signatures and topology examples at
+  the new exact head, but no live credential, deployment, or customer evidence
+  exists to migrate.
 - Existing exact-head release and customer-starter artifacts remain
   independently verifiable against their original source head. They are not
   rewritten, re-signed, or interpreted as evidence for a newer head.
