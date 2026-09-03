@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { auditCustomerShareability } from "../src/customer-readiness.js";
+import {
+  AUTHORITY_WALKTHROUGH_RECORDING_PATH,
+  acceptBoundedCustomerShareabilityBinary,
+  auditCustomerShareability
+} from "../src/customer-readiness.js";
 
 const CASES = [
   {
@@ -134,4 +138,38 @@ test("customer shareability audit rejects unsafe or duplicate paths", () => {
       ]),
     /unique safe paths/u
   );
+});
+
+test("customer shareability permits only the bounded generated recording binary", () => {
+  const recording = Buffer.alloc(14);
+  recording.write("GIF89a", 0, "ascii");
+  recording.writeUInt16LE(640, 6);
+  recording.writeUInt16LE(450, 8);
+  recording[13] = 0x3b;
+  assert.equal(
+    acceptBoundedCustomerShareabilityBinary(
+      AUTHORITY_WALKTHROUGH_RECORDING_PATH,
+      recording
+    ),
+    true
+  );
+  assert.equal(
+    acceptBoundedCustomerShareabilityBinary("docs/other.gif", recording),
+    false
+  );
+  for (const invalid of [
+    Buffer.from(recording.subarray(0, 13)),
+    Buffer.from(recording).fill(0, 0, 6),
+    Buffer.from(recording).fill(0, 6, 10),
+    Buffer.concat([recording.subarray(0, -1), Buffer.from([0x21, 0xfe, 0x3b])])
+  ]) {
+    assert.throws(
+      () =>
+        acceptBoundedCustomerShareabilityBinary(
+          AUTHORITY_WALKTHROUGH_RECORDING_PATH,
+          invalid
+        ),
+      /malformed bounded recording/u
+    );
+  }
 });

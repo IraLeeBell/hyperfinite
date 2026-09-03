@@ -27,6 +27,8 @@ and is not included in customer-starter profiles.
 | `npm run validate:demos` | Validate the exact four-demo portfolio and hybrid bindings |
 | `npm run simulate:demos` | Run deterministic all-demo hermetic simulation |
 | `npm run validate:hardening` | Execute the closed adversarial/fault matrix and emit canonical evidence |
+| `npm run demo:authority` | Run the five-minute synthetic offline authority-boundary walkthrough |
+| `npm run demo:authority:recording` | Regenerate the walkthrough's static transcript and self-hosted GIF from the same canonical result |
 | `npm run canary:synthetic` | Run the credentialless restart-safe synthetic Human Review canary |
 | `npm run handoff:administrator` | Emit the canonical pre-App plan/readback and synthetic-unconfigured customer gap report |
 | `npm run validate:review-agent-runtime` | Run the separately controlled review-runtime probe |

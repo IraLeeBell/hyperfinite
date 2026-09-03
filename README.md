@@ -12,6 +12,17 @@
 [Architecture](docs/architecture/overview.md) ·
 [Security](docs/security/README.md)
 
+## Five-minute authority boundary
+
+![Animated terminal recording of the synthetic offline authority walkthrough, from target rejection through the Human Review stop](docs/authority-boundary-walkthrough.gif)
+
+From an exact reviewed source checkout after installing locked dependencies, run
+`npm run demo:authority`. The command exercises the closed model-output schema,
+runtime pre-activation, Control Kernel, trusted binding and adapter, Effect Plan,
+and Single Writer with an injected fake provider and zero live effects. See the
+[complete accessible transcript and reproducible recording command](docs/authority-boundary-walkthrough.md).
+This is hermetic repository evidence, not live deployment or readiness evidence.
+
 ## Executive summary
 
 Organizations want the speed of model-assisted software work without making a

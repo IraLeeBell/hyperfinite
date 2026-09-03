@@ -356,6 +356,31 @@ function samePullRequest(
   );
 }
 
+function sameBindingExceptPullRequestHeads(
+  expected: TrustedGitHubBinding,
+  actual: TrustedGitHubBinding
+): boolean {
+  if (
+    expected.workItem.kind !== "pull-request" ||
+    actual.workItem.kind !== "pull-request"
+  ) {
+    return false;
+  }
+  const normalized = (binding: TrustedGitHubBinding) => {
+    const workItem = binding.workItem;
+    if (workItem.kind !== "pull-request") return binding;
+    return {
+      ...binding,
+      workItem: {
+        ...workItem,
+        base: { ...workItem.base, sha: "<current-base-sha>" },
+        head: { ...workItem.head, sha: "<current-head-sha>" }
+      }
+    };
+  };
+  return digest(normalized(expected)) === digest(normalized(actual));
+}
+
 function sameRepositoryIdentity(
   left: TrustedGitHubBinding["repository"],
   right: TrustedGitHubBinding["repository"]
@@ -475,10 +500,22 @@ function assertFreshState(
   expectedBinding: TrustedGitHubBinding,
   state: GitHubExecutionState
 ): void {
-  if (
-    digest(state.binding) !== digest(expectedBinding) ||
-    plan.bindingDigest !== digest(expectedBinding)
-  ) {
+  const expectedBindingDigest = digest(expectedBinding);
+  if (plan.bindingDigest !== expectedBindingDigest) {
+    throw new GitHubExecutionError(
+      "BINDING_STALE",
+      "effect plan no longer matches Trusted Binding",
+      false
+    );
+  }
+  if (digest(state.binding) !== expectedBindingDigest) {
+    if (sameBindingExceptPullRequestHeads(expectedBinding, state.binding)) {
+      throw new GitHubExecutionError(
+        "CURRENT_HEAD_STALE",
+        "pull request base or head changed before the effect",
+        false
+      );
+    }
     throw new GitHubExecutionError(
       "BINDING_STALE",
       "fresh GitHub identities no longer match Trusted Binding",

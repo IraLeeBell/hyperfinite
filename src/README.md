@@ -11,6 +11,7 @@ package export, or compatibility promise.
 | Lifecycle and authority | `lifecycle.ts`, `policy.ts`, `registry.ts`, `authorization.ts`, `kernel.ts`, `receipts.ts`, `migrations.ts` |
 | GitHub binding and effects | `github-events.ts`, `github-projects.ts`, `github-safe-output.ts`, `github-adapter.ts`, `github-auth.ts`, `github-http.ts` |
 | Runtime | `copilot-runtime.ts`, `runtime-workflow-validation.ts`, `execution-bridge.ts`, `execution-delivery.ts` |
+| Executable authority walkthrough | `authority-walkthrough.ts`, `authority-walkthrough-recording.ts` |
 | Autonomous demos | `demo-portfolio.ts`, `demo-portfolio-validation.ts`, `demo-activation.ts`, `demo-runtime-state.ts`, `demo-dispatcher.ts`, `demo-scheduler.ts`, `demo-runtime.ts`, `demo-projection.ts`, `demo-review-evidence.ts`, `demo-observability.ts` |
 | Bounded engineering | `bounded-worktree.ts`, `engineering-slice.ts` |
 | Domain Packs | `domain-packs.ts`, `domain-artifact-schemas.ts`, `domain-git-packager.ts` |

@@ -2536,7 +2536,7 @@ test("stale contract, schema, receipt, and pull head are rejected before writes"
     pullWriter.execute(pullBinding, pullPlan, CLAIMANT),
     (error: unknown) =>
       error instanceof GitHubExecutionError &&
-      (error.code === "BINDING_STALE" || error.code === "CURRENT_HEAD_STALE")
+      error.code === "CURRENT_HEAD_STALE"
   );
   assert.equal(api.applyCount, 0);
 });
@@ -2562,7 +2562,7 @@ test("COMMENT effects recheck the exact head immediately before mutation", async
     writer.execute(binding, plan, CLAIMANT),
     (error: unknown) =>
       error instanceof GitHubExecutionError &&
-      (error.code === "BINDING_STALE" || error.code === "CURRENT_HEAD_STALE")
+      error.code === "CURRENT_HEAD_STALE"
   );
   assert.equal(api.executionStateReads, 3);
   assert.equal(api.applyCount, 0);
