@@ -42,8 +42,8 @@ applied the About state.
 The reviewed merge is the source authorization for the declared state. A human
 administrator still confirms the fresh plan and performs the Settings change.
 The direct post-apply read and zero-drift plan are the acceptance test. The plan
-does not persist a GitHub snapshot or create the separate provenance mechanism
-tracked for future work.
+does not persist a GitHub snapshot or establish project-history provenance; the
+[public-history boundary](../provenance/README.md) is documented separately.
 
 ## Product and authority boundaries
 

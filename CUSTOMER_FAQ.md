@@ -156,13 +156,19 @@ rather than a fork that inherits source-network assumptions.
 
 ### 19. Why copy the repository without history?
 
-The customer source copy is intended to stand on its own without source issue,
-pull request, or commit history. This limits the transfer to reviewed files and
-avoids carrying coordination comments, source-tenant identifiers, and obsolete
-delivery records.
+Public project history begins with a curated open-source snapshot. Earlier
+private development history is intentionally not published.
 
-The customer creates a new initial commit, which becomes the root of its own
-evidence chain.
+That public upstream boundary is separate from a customer copy. A customer-owned
+sandbox starts from its own reviewed file snapshot. No published or unpublished
+upstream issue, pull-request, commit, or coordination history is required; this
+limits the transfer to reviewed files and avoids carrying coordination comments,
+source-tenant identifiers, and obsolete delivery records.
+
+The customer creates a new initial commit as its new evidence-chain root.
+Exact-head release and customer-starter provenance remain evidence about the
+reviewed source artifact; they do not transfer upstream history or replace the
+customer's root.
 
 ### 20. What must be changed immediately after copying?
 

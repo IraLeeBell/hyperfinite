@@ -3,6 +3,11 @@
 Human maintainers own policy, administration, cost activation, release,
 licensing, and merge decisions.
 
+Public governance applies to this authoritative upstream from its curated
+open-source snapshot forward. Unpublished issues, pull requests, commits, or
+coordination records are not required for governance or review, and the snapshot
+makes no claim about earlier private development history.
+
 ## Decision rights
 
 | Decision | Required authority |

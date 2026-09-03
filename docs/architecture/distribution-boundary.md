@@ -11,6 +11,13 @@ Hyperfinite is a reviewed source distribution with two supported forms:
 | Customer-starter profile evaluator | Verified `control-plane-core` or `demo-portfolio` archive | Extract into a new private customer-owned Git repository, configure and repin it, and run only the documented commands for that profile |
 | Complete customer sandbox operator | Reviewed full file-only copy of an exact head | Populate a new private customer-owned Git repository and follow the complete evaluation guide |
 
+The authoritative repository is the upstream for public development beginning
+at its curated open-source snapshot; it makes no claim about earlier unpublished
+history. Exact-head release and customer-starter evidence bind only the reviewed
+public source artifact. A customer-owned sandbox begins from its own reviewed
+file snapshot and new evidence-chain root without requiring upstream delivery
+records.
+
 Repository scripts are supported only in those documented repository contexts.
 For a clean extracted customer-starter profile, the fixed profile catalog names
 the independently validated commands. Its supported scope ends with
