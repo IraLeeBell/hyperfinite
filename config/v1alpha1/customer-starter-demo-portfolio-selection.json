@@ -4,8 +4,8 @@
     "schemaVersion": "1.0.0",
     "profileId": "demo-portfolio",
     "extendsProfileId": "control-plane-core",
-    "baseSelectionDigest": "sha256:3c0c630b6fab6e9977900d4201cf3da400112034a7cf38b7bf77ec97205471f9",
-    "sourceHeadSha": "3dc23666b1f60445f3a59f476e2d498fcb1f87a6",
+    "baseSelectionDigest": "sha256:3f22d7fe17f50d4f4e059e77bc5ea90bad0af4b447ac98bbbce0410991ef1e44",
+    "sourceHeadSha": "8a409c67301f88233ff2b979f16cce4d9bd2764b",
     "includedPaths": [
         ".github",
         "config/v1alpha1/demo-portfolio",
