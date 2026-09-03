@@ -4,8 +4,8 @@
     "schemaVersion": "1.0.0",
     "profileId": "demo-portfolio",
     "extendsProfileId": "control-plane-core",
-    "baseSelectionDigest": "sha256:79308456755e0cc915c649baa837c4fc2c1f01a9b1f7a0a8e2a9497e2a694063",
-    "sourceHeadSha": "7a44f64b00f52bf018cc0461750cfda8c6a72d93",
+    "baseSelectionDigest": "sha256:0779e332d7541b607bbe73a63d873148fa077733138cefd427cdca72e1fcc4c9",
+    "sourceHeadSha": "c4c4d9d0132a380a680a0d80530fb51d3b8b6fc4",
     "includedPaths": [
         ".github",
         "config/v1alpha1/demo-portfolio",
@@ -69,5 +69,5 @@
         ".github/workflows/reconcile-issue-taxonomy.yml",
         "config/v1alpha1/demo-projects/adaptive-delivery/project-binding.json"
     ],
-    "resolvedClosureDigest": "sha256:b009cd4027495c8410fe77d520a3650071f74f4924c77098b96f4df09c38fda5"
+    "resolvedClosureDigest": "sha256:ebcd66c3ee8cd50e8937441a66461d96bdb992f1d29c701623aad0d9d3513457"
 }
