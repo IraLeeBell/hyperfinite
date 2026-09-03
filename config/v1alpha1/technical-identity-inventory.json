@@ -16,9 +16,9 @@
     },
     "demo-portfolio": {
       "inventoryFiles": 361,
-      "inventoryMatchingLines": 951,
-      "inventoryOccurrences": 958,
-      "inventoryDigest": "sha256:12e224e498953cf406ae4cf2818896018c0af8f2237f36c36e377feb2fa426b9"
+      "inventoryMatchingLines": 952,
+      "inventoryOccurrences": 959,
+      "inventoryDigest": "sha256:92c77959d3a24f519dc922811a754f1bc365e417a6943650379d060b20ccdde0"
     }
   }
 }
