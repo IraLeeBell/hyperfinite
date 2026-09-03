@@ -21,9 +21,10 @@ prerequisites in
 [the activation checklist](docs/demos/portfolio/activation-and-readiness.md)
 and [deployment runbook](docs/runbooks/deployment-prerequisites.md) are met.
 
-The packaging CLI is plan/`offline-validate`-only. Authenticated live validation
-requires the separately deployed read-only trusted adapter and current human
-authorization. Local release output is unsigned
+The repository packaging command is plan/`offline-validate`-only; no packaged
+CLI is distributed. Authenticated live validation requires the separately
+deployed read-only trusted adapter and current human authorization. Local release
+output is unsigned
 evidence and is not a trusted release. Customer apply, protected signing,
 publication, and deployment require separate human-owned trusted services and
 remain unavailable in this repository.

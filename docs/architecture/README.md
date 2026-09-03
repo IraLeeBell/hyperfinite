@@ -5,29 +5,32 @@ computation. Read the pages in this order for a complete system view:
 
 1. [Overview](overview.md) — product/technical identity, trust zones, two-plane
    model, durable evidence, replay, and current implementation boundary.
-2. [Lifecycle](lifecycle.md) — domain-neutral states, routes, gates, and failure
+2. [Distribution boundary](distribution-boundary.md) — supported repository and
+   customer-starter entry points plus unsupported package, SDK, CLI, hosted,
+   deployment, and live-effect paths.
+3. [Lifecycle](lifecycle.md) — domain-neutral states, routes, gates, and failure
    behavior.
-3. [Work Accord and Phase Contract](work-contract.md) — versioned work scope,
+4. [Work Accord and Phase Contract](work-contract.md) — versioned work scope,
    policy bindings, leases, evidence, and active-phase contracts.
-4. [Capability Registry](capability-registry.md) — deny-by-default capability
+5. [Capability Registry](capability-registry.md) — deny-by-default capability
    declarations and monotone policy narrowing.
-5. [Control Kernel](control-kernel.md) — pure transition evaluation, receipts,
+6. [Control Kernel](control-kernel.md) — pure transition evaluation, receipts,
    refusals, reauthorization, and unsupported effects.
-6. [GitHub adapter](github-adapter.md) — event verification, Trusted Binding,
+7. [GitHub adapter](github-adapter.md) — event verification, Trusted Binding,
    target translation, credentials, and Single Writer.
-7. [Autonomous demo portfolio](autonomous-demo-portfolio.md) — exact catalog,
+8. [Autonomous demo portfolio](autonomous-demo-portfolio.md) — exact catalog,
    journey overlay, stage identities, registration, and simulation.
-8. [Domain Packs](domain-packs.md) — repository-only Engineering, Marketing, and
+9. [Domain Packs](domain-packs.md) — repository-only Engineering, Marketing, and
    Business Operations specialization.
-9. [Engineering reference slice](thin-slice-plan.md) — complete hermetic
+10. [Engineering reference slice](thin-slice-plan.md) — complete hermetic
    issue-to-human-review and closure path.
-10. [Packaging and replication](packaging-and-replication.md) — target-bound
+11. [Packaging and replication](packaging-and-replication.md) — target-bound
     installation planning, migration, rollback, and release evidence.
-11. [Durable stores](durable-stores.md) — the nonproduction local trust-store
+12. [Durable stores](durable-stores.md) — the nonproduction local trust-store
     substrate, its cross-process guarantees, and its refusal behaviour.
-12. [Synthetic sandbox canary](../runbooks/synthetic-sandbox-canary.md) — the
+13. [Synthetic sandbox canary](../runbooks/synthetic-sandbox-canary.md) — the
     credentialless composition proof and its Human Review stop.
-13. [Administrator handoff](administrator-handoff.md) — digest-bound source
+14. [Administrator handoff](administrator-handoff.md) — digest-bound source
     contracts, exact per-operation human gates, drift-prone readback, and
     readiness separation.
 

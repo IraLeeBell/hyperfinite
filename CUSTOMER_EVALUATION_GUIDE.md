@@ -3,6 +3,11 @@
 This guide is the shortest supported path from a clean copy of Hyperfinite to a
 customer-owned GitHub Enterprise Cloud evaluation. It stops at every point where
 an authorized human must approve or perform an administrative action.
+The supported artifact is reviewed repository source in a customer-owned Git
+repository. It is not an npm package, SDK, packaged CLI, hosted service, or
+deployable service. The complete Phase 0-8 sandbox path requires a reviewed full
+file-only copy. A verified customer-starter archive supports only the bounded
+profile path in Phase 2 and then stops at repository/hermetic evidence.
 
 Use these companion documents:
 
@@ -16,6 +21,18 @@ Use these companion documents:
   demonstration Projects.
 - [Runtime activation runbook](docs/runbooks/copilot-runtime-activation.md) for
   the disabled-by-default Agentic Workflow runtime.
+
+## Supported artifact scopes
+
+| Artifact | Supported outcome |
+|---|---|
+| Reviewed full file-only copy | Complete customer sandbox evaluation through the full validation, administration, and canary phases below |
+| Verified `control-plane-core` customer-starter | Core repository/hermetic validation using only the documented core-profile commands |
+| Verified `demo-portfolio` customer-starter | Core plus demo repository/hermetic validation and simulation using only the documented demo-profile commands |
+
+Neither customer-starter profile contains or advertises the complete validation,
+synthetic-canary, and administrator-handoff command set. Do not use a starter
+profile to continue into Phase 3 or claim a complete sandbox evaluation.
 
 ## Evaluation outcome
 
@@ -60,8 +77,12 @@ review.
 1. Create a new private repository in the customer organization with `main` as
    the default branch. Current release, handoff, Work Accord, and ruleset
    contracts bind `refs/heads/main`.
-2. Copy the repository contents without source pull-request, issue, or commit
-   history.
+2. For a complete sandbox evaluation, populate it from a reviewed full file-only
+   copy of one exact Hyperfinite head. For a bounded profile evaluation, extract
+   a verified [customer-starter archive](docs/release/customer-starter-preflight.md)
+   and use the customer-starter path in Phase 2. Do not carry source pull-request,
+   issue, or commit history, and do not use an npm registry install or a
+   source-history fork as the customer distribution.
 3. Leave `example-organization` fixtures synthetic. Put live customer identities
    only in protected customer configuration and generated target manifests
    outside the repository.
@@ -111,7 +132,7 @@ review.
    git fetch origin main
    ```
 
-10. Run the complete matrix in Phase 2.
+10. Run the applicable full-copy or customer-starter path in Phase 2.
 
 `validate:customer-readiness` scans every tracked or newly added repository file
 for source-organization bindings, private network
@@ -136,7 +157,9 @@ Record ticket IDs in protected customer change-management evidence. Do not put
 credentials, private keys, tokens, customer data, or confidential attachments in
 repository issues.
 
-## Phase 2: validate the repository package
+## Phase 2: validate the repository artifact
+
+### Reviewed full-copy path
 
 Run the complete matrix from the exact customer commit:
 
@@ -169,10 +192,26 @@ npm run validate:hardening
 npm run canary:synthetic
 ```
 
+### Customer-starter profile path
+
+After completing the common Phase 0 customer-repository setup, run only the
+commands documented for the exact profile in
+[customer-starter preflight](docs/release/customer-starter-preflight.md). The
+upstream clean-extraction evidence must show that each command passed for the
+same archive digest.
+
+`npm run validate`, `npm run canary:synthetic`, and
+`npm run handoff:administrator` are outside both starter profiles' supported
+command surface. The starter path stops here with repository/hermetic evidence.
+Use a reviewed full file-only copy if the evaluation must continue into
+Projects, independently deployed trust services, or a bounded live canary.
+
 Retain the exact commit SHA, command versions, exit status, and generated
 evidence. A changed head requires a fresh run.
 
 ## Phase 3: prepare the four Projects
+
+Phase 3 and every later phase require the reviewed full-copy path.
 
 1. Have an organization owner create four empty private Projects using Board
    layout and the exact titles documented in the

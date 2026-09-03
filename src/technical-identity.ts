@@ -19,7 +19,7 @@ export const RETAINED_TECHNICAL_IDENTITY = Object.freeze({
 } as const);
 
 export const HYPERFINITE_PACKAGE_DESCRIPTION =
-  "Hyperfinite deterministic control kernel and validation tooling; technical artifacts retain the agentic-framework compatibility identity.";
+  "Private Hyperfinite repository and customer-starter tooling under the agentic-framework compatibility identity; not a published SDK or packaged CLI.";
 
 const IDENTIFIER_EPOCH_FIELD = "identifierEpoch";
 const IDENTITY_EPOCH_ALIAS = "identityEpoch";

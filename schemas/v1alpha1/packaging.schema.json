@@ -425,7 +425,7 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "technicalIdentity", "nodeMajors", "npmMajors", "ghCliVersion", "gitMinimumVersion", "ghAwVersion", "copilotCliVersion", "actions", "platforms", "contractVersions"],
+          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "technicalIdentity", "productBoundary", "nodeMajors", "npmMajors", "ghCliVersion", "gitMinimumVersion", "ghAwVersion", "copilotCliVersion", "actions", "platforms", "contractVersions"],
           "properties": {
             "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
             "kind": { "const": "CompatibilityMatrix" },
@@ -463,6 +463,44 @@
                 "issueTaxonomyUserAgent": { "const": "agentic-framework-issue-taxonomy/1.0" },
                 "syntheticCanarySeed": { "const": "agentic-framework credentialless synthetic sandbox canary v1" },
                 "syntheticOidcAudiencePrefix": { "const": "synthetic://agentic-framework/" }
+              }
+            },
+            "productBoundary": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "decision",
+                "maintainerEntryPoint",
+                "localEvaluatorEntryPoint",
+                "customerStarterEntryPoint",
+                "customerStarterScope",
+                "customerSandboxEntryPoint",
+                "repositoryScripts",
+                "typescriptApi",
+                "npmRegistryPackage",
+                "packagedCli",
+                "hostedService",
+                "deployableService",
+                "liveAdministration",
+                "liveEffects",
+                "futureDistribution"
+              ],
+              "properties": {
+                "decision": { "const": "repository-and-customer-starter-only" },
+                "maintainerEntryPoint": { "const": "authoritative-repository-clone" },
+                "localEvaluatorEntryPoint": { "const": "authoritative-repository-clone" },
+                "customerStarterEntryPoint": { "const": "verified-profile-source-extraction" },
+                "customerStarterScope": { "const": "profile-documented-scripts-only" },
+                "customerSandboxEntryPoint": { "const": "reviewed-full-source-file-copy" },
+                "repositoryScripts": { "const": "supported-in-repository-context" },
+                "typescriptApi": { "const": "unsupported-internal-only" },
+                "npmRegistryPackage": { "const": "unsupported-private-metadata-only" },
+                "packagedCli": { "const": "unsupported-absent" },
+                "hostedService": { "const": "unsupported-absent" },
+                "deployableService": { "const": "unsupported-absent" },
+                "liveAdministration": { "const": "external-human-prerequisite" },
+                "liveEffects": { "const": "external-trust-service-prerequisite" },
+                "futureDistribution": { "const": "separate-product-work-required" }
               }
             },
             "nodeMajors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [24, 26] } },

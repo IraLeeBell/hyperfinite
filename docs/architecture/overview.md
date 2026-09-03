@@ -40,10 +40,12 @@ values remain in that one fixed epoch. See
 [ADR 0019](../adr/0019-hyperfinite-retains-agentic-framework-technical-identity.md)
 and the [compatibility matrix](../compatibility.md).
 
-The repository implementation is GitHub Actions and CLI based. It introduces no
-deployed daemon, database, queue, webhook service, or cloud broker. Live use
-requires separately reviewed trust services; repository validation does not
-pretend those services exist.
+The repository implementation uses GitHub Actions and repository-invoked `npm`
+scripts. It provides no packaged CLI and introduces no deployed daemon,
+database, queue, webhook service, or cloud broker. Live use requires separately
+reviewed trust services; repository validation does not pretend those services
+exist. The supported consumption model is defined in the
+[distribution boundary](distribution-boundary.md).
 
 ## Authority invariants
 

@@ -14,8 +14,8 @@ numeric/node values are inert placeholders. An administrator must replace every
 binding from authenticated GitHub reads, replace the synthetic closed backup
 evidence, retain `apply.enabled: false` during planning, review the canonical
 plan and precondition digests, and use a separately deployed trusted adapter for
-any authorized apply. This CLI cannot apply, install an App, create a Project,
-alter a ruleset, enable billing, or mutate GitHub.
+any authorized apply. This repository command cannot apply, install an App,
+create a Project, alter a ruleset, enable billing, or mutate GitHub.
 `offline-validate` only rechecks these local files. Authenticated live validation
 requires the separately deployed read-only trusted adapter API and current
 human authorization.

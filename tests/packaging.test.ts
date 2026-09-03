@@ -56,6 +56,11 @@ import {
   type TrustedInstallationAdapter
 } from "../src/index.js";
 import {
+  assertProductBoundary,
+  assertRepositoryPackageBoundary,
+  PRODUCT_BOUNDARY
+} from "../src/product-boundary.js";
+import {
   assertSafeOutputRoot,
   canonicalDirectory,
   githubRepositoryFromRemote,
@@ -75,6 +80,184 @@ import {
 } from "../src/technical-identity.js";
 
 const ROOT = process.cwd();
+
+test("Hyperfinite distribution is repository and customer-starter source only", () => {
+  const compatibility = agenticFramework.assertDocument(
+    "PackagingDocument",
+    json("config/v1alpha1/compatibility.json")
+  );
+  assert.equal(compatibility.kind, "CompatibilityMatrix");
+  if (compatibility.kind !== "CompatibilityMatrix") {
+    assert.fail("expected CompatibilityMatrix");
+  }
+  assert.deepEqual(
+    assertProductBoundary(compatibility.productBoundary),
+    PRODUCT_BOUNDARY
+  );
+  assert.equal(
+    validateDocument("PackagingDocument", {
+      ...compatibility,
+      productBoundary: {
+        ...compatibility.productBoundary,
+        typescriptApi: "supported"
+      }
+    }).valid,
+    false
+  );
+  assert.equal(
+    validateDocument("PackagingDocument", {
+      ...compatibility,
+      productBoundary: {
+        ...compatibility.productBoundary,
+        registryFallback: "supported"
+      }
+    }).valid,
+    false
+  );
+
+  const packageDocument = json<Record<string, unknown>>("package.json");
+  const rootEntries = readdirSync(ROOT);
+  assert.doesNotThrow(() =>
+    assertRepositoryPackageBoundary(packageDocument, rootEntries)
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        { ...packageDocument, directories: { bin: "cli" } },
+        rootEntries
+      ),
+    /directories\.bin/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        { ...packageDocument, bin: "dist/cli.js" },
+        rootEntries
+      ),
+    /must not expose bin/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        {
+          ...packageDocument,
+          exports: {
+            "./package.json": "./package.json",
+            ".": "./dist/src/index.js"
+          }
+        },
+        rootEntries
+      ),
+    /export package\.json metadata only/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(packageDocument, [
+        ...rootEntries,
+        "server.js"
+      ]),
+    /implicit server\.js start entry point/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        {
+          ...packageDocument,
+          scripts: {
+            ...(packageDocument["scripts"] as Record<string, unknown>),
+            prepare: "node build.js"
+          }
+        },
+        rootEntries
+      ),
+    /lifecycle script prepare/
+  );
+  for (const installHook of [
+    "preprepare",
+    "postprepare",
+    "predependencies",
+    "dependencies",
+    "postdependencies"
+  ]) {
+    assert.throws(
+      () =>
+        assertRepositoryPackageBoundary(
+          {
+            ...packageDocument,
+            scripts: {
+              ...(packageDocument["scripts"] as Record<string, unknown>),
+              [installHook]: "node hook.js"
+            }
+          },
+          rootEntries
+        ),
+      new RegExp(`lifecycle script ${installHook}`)
+    );
+  }
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(packageDocument, [
+        ...rootEntries,
+        "binding.gyp"
+      ]),
+    /implicit binding\.gyp install entry point/
+  );
+  for (const implicitEntryVariant of ["Server.js", "BINDING.gyp"]) {
+    assert.throws(
+      () =>
+        assertRepositoryPackageBoundary(packageDocument, [
+          ...rootEntries,
+          implicitEntryVariant
+        ]),
+      /implicit (?:server\.js start|binding\.gyp install) entry point/
+    );
+  }
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        { ...packageDocument, gypfile: true },
+        rootEntries
+      ),
+    /must not enable gypfile/
+  );
+  assert.equal(
+    Object.hasOwn(agenticFramework, "assertRepositoryPackageBoundary"),
+    false
+  );
+  const extractionValidator = readFileSync(
+    path.join(ROOT, "scripts/validate-customer-starter-extraction.ts"),
+    "utf8"
+  );
+  assert.match(
+    extractionValidator,
+    /"ci",\s*"--ignore-scripts",\s*"--no-audit",\s*"--no-fund"/u
+  );
+  assert.match(extractionValidator, /readonly exitStatus: number/u);
+  assert.match(extractionValidator, /readonly signal: NodeJS\.Signals \| null/u);
+  assert.match(extractionValidator, /outcome: "expected-failure"/u);
+  assert.doesNotMatch(extractionValidator, /durationMs:\s*0/u);
+
+  const durableStoreAdr = readFileSync(
+    path.join(
+      ROOT,
+      "docs/adr/0014-durable-local-trust-substrate-is-nonproduction.md"
+    ),
+    "utf8"
+  );
+  const distributionAdr = readFileSync(
+    path.join(
+      ROOT,
+      "docs/adr/0020-supported-distribution-is-repository-and-customer-starter-source-only.md"
+    ),
+    "utf8"
+  );
+  assert.match(durableStoreAdr, /contracts are supported public API/);
+  assert.match(
+    distributionAdr,
+    /supersedes ADR 0014's earlier description/
+  );
+  assert.match(distributionAdr, /no supported TypeScript package API/);
+});
 
 test("Hyperfinite retains one closed technical compatibility identity", () => {
   const compatibility = agenticFramework.assertDocument(

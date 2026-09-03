@@ -2,7 +2,7 @@
 
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -19,6 +19,10 @@ import type {
   PackagingDocument,
   ReleaseManifest
 } from "../src/packaging-types.js";
+import {
+  assertProductBoundary,
+  assertRepositoryPackageBoundary
+} from "../src/product-boundary.js";
 import { validateOpenSourceAssessment } from "../src/release.js";
 import {
   assertRetainedTechnicalIdentity,
@@ -30,7 +34,6 @@ const EXPECTED_LICENSE_SHA256 =
   "60eb5d7deb8d13876be870afae1481c3b8a9446f062f0d99fdef38ac0945646a";
 const EXPECTED_NOTICES_SHA256 =
   "1e5eabc4458bd403ae53bc1a602ab69d75e0c46cffe83b705e66077bda07bc0d";
-
 async function source(relativePath: string): Promise<string> {
   return readFile(path.resolve(relativePath), "utf8");
 }
@@ -135,6 +138,14 @@ async function main(): Promise<void> {
     backupValue,
     payload,
     compatibilityDoc,
+    productBoundaryDoc,
+    repositoryReadme,
+    evaluationGuide,
+    sourceMap,
+    toolingDoc,
+    customerStarterDoc,
+    distributionAdr,
+    durableStoreAdr,
     administratorRunbook,
     releaseDoc,
     readinessDoc,
@@ -154,6 +165,14 @@ async function main(): Promise<void> {
     json("examples/customer-installation/backup-evidence.json"),
     source("examples/customer-installation/payload/example.txt"),
     source("docs/compatibility.md"),
+    source("docs/architecture/distribution-boundary.md"),
+    source("README.md"),
+    source("CUSTOMER_EVALUATION_GUIDE.md"),
+    source("src/README.md"),
+    source("scripts/README.md"),
+    source("docs/release/customer-starter-preflight.md"),
+    source("docs/adr/0020-supported-distribution-is-repository-and-customer-starter-source-only.md"),
+    source("docs/adr/0014-durable-local-trust-substrate-is-nonproduction.md"),
     source("docs/runbooks/customer-administrator.md"),
     source("docs/release/local-release-evidence.md"),
     source("docs/governance/open-source-readiness.md"),
@@ -166,6 +185,13 @@ async function main(): Promise<void> {
   const packageDocument = JSON.parse(packageSource) as {
     readonly name?: unknown;
     readonly description?: unknown;
+    readonly private?: unknown;
+    readonly exports?: unknown;
+    readonly bin?: unknown;
+    readonly main?: unknown;
+    readonly module?: unknown;
+    readonly types?: unknown;
+    readonly typings?: unknown;
     readonly version?: unknown;
     readonly engines?: { readonly node?: unknown };
     readonly scripts?: Readonly<Record<string, string>>;
@@ -189,6 +215,8 @@ async function main(): Promise<void> {
     compatibility.technicalIdentity
   );
   assertTechnicalIdentityPackageMetadata(packageDocument, technicalIdentity);
+  assertProductBoundary(compatibility.productBoundary);
+  assertRepositoryPackageBoundary(packageDocument, await readdir(path.resolve(".")));
   const migrations = validateMigrationManifest(migrationValue);
   const readiness = validateOpenSourceAssessment(readinessValue, "0.1.0");
   const config = packaging<InstallationConfig>(
@@ -227,7 +255,13 @@ async function main(): Promise<void> {
       throw new TypeError(`package script ${requiredScript} is missing`);
     }
   }
-  for (const prohibitedScript of ["publish", "release", "deploy"]) {
+  for (const prohibitedScript of [
+    "publish",
+    "release",
+    "deploy",
+    "start",
+    "serve"
+  ]) {
     if (packageDocument.scripts?.[prohibitedScript] !== undefined) {
       throw new TypeError(`prohibited autonomous package script ${prohibitedScript}`);
     }
@@ -335,14 +369,115 @@ async function main(): Promise<void> {
       "There is no alias, dual-read, dual-write, or automatic evidence rewrite.",
       "`github/gh-aw v0.86.2`",
       "`1.0.79`",
-      "GitHub Enterprise Server | Unsupported and unverified"
+      "GitHub Enterprise Server | Unsupported and unverified",
+      "Repository and customer-starter source are the only supported distribution",
+      "TypeScript API / deep import | Unsupported",
+      "Packaged or general-purpose CLI | Unsupported",
+      "Hosted or deployable service | Unsupported"
     ],
     "compatibility documentation"
   );
   assertContains(
+    productBoundaryDoc,
+    [
+      "Hyperfinite is a reviewed source distribution with two supported forms",
+      "npm registry install | Unsupported",
+      "TypeScript SDK or deep imports | Unsupported",
+      "Packaged or general-purpose CLI | Unsupported",
+      "Hosted service or SaaS | Unsupported",
+      "Deployable production service, image, or chart | Unsupported",
+      "Independent trust services",
+      "requires separate future product work",
+      "neither profile supports the",
+      "complete `npm run validate`",
+      "`binding.gyp` install path",
+      "npm ci --ignore-scripts --no-audit --no-fund",
+      "ASCII case folding"
+    ],
+    "product boundary documentation"
+  );
+  assertContains(
+    repositoryReadme,
+    [
+      "## Supported distribution",
+      "provides no supported TypeScript SDK",
+      "Hyperfinite is not a hosted service",
+      "verified customer-starter",
+      "reviewed full file-only copy",
+      "does not imply support for the full sandbox matrix"
+    ],
+    "repository README"
+  );
+  assertContains(
+    evaluationGuide,
+    [
+      "The supported artifact is reviewed repository source",
+      "It is not an npm package, SDK, packaged CLI, hosted service",
+      "do not use an npm registry",
+      "complete Phase 0-8 sandbox path requires",
+      "outside both starter profiles' supported"
+    ],
+    "customer evaluation guide"
+  );
+  assertContains(
+    sourceMap,
+    [
+      "`src/index.ts` is an internal",
+      "it is not a supported TypeScript SDK",
+      "direct TypeScript API consumption are unsupported"
+    ],
+    "source map"
+  );
+  assertContains(
+    toolingDoc,
+    [
+      "invoked through `npm run`",
+      "private package has no `bin` entry",
+      "grants live authority"
+    ],
+    "tooling documentation"
+  );
+  assertContains(
+    customerStarterDoc,
+    [
+      "source distribution for extraction into a new customer-owned",
+      "It is not an npm package, TypeScript SDK, packaged CLI, hosted",
+      "does not decide license, publication, visibility, or release",
+      "npm run validate:technical-identity:core",
+      "npm run validate:technical-identity:demo",
+      "are not supported customer-starter commands",
+      "npm ci --ignore-scripts --no-audit --no-fund",
+      "actual outcome, exit status, signal",
+      "deep-import refusal is retained as an expected nonzero exit"
+    ],
+    "customer-starter documentation"
+  );
+  assertContains(
+    distributionAdr,
+    [
+      "supersedes ADR 0014's earlier description",
+      "Persisted JSON documents and schemas remain versioned",
+      "repository contracts, but there is no supported TypeScript package API",
+      "no supported TypeScript package API",
+      "`binding.gyp` native builds",
+      "Dependency installation always disables lifecycle",
+      "case-insensitive filesystem"
+    ],
+    "distribution ADR"
+  );
+  assertContains(
+    durableStoreAdr,
+    [
+      "ADR 0013's",
+      "contracts are supported public API",
+      "Tests reach it by deep import"
+    ],
+    "historical durable-store ADR"
+  );
+  assertContains(
     administratorRunbook,
     [
-      "checked-in CLI cannot apply",
+      "checked-in repository command cannot apply",
       "no PAT",
       "offline-validate",
       "Receipt journals are capped at 512",

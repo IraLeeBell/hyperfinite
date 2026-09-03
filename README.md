@@ -46,6 +46,26 @@ approve or merge pull requests, or publish artifacts. Those actions require the
 customer owners and evidence listed in the
 [evaluation guide](CUSTOMER_EVALUATION_GUIDE.md).
 
+## Supported distribution
+
+Hyperfinite is distributed today as reviewed source, not as an installed
+product. Maintainers and local evaluators clone the authoritative repository and
+run its documented `npm` scripts. A verified customer-starter archive supports
+the bounded profile commands documented for that archive. A complete customer
+sandbox evaluation uses a reviewed full file-only copy in a new private
+customer-owned repository, then follows the
+[customer evaluation guide](CUSTOMER_EVALUATION_GUIDE.md). A starter profile
+does not imply support for the full sandbox matrix.
+
+The private `agentic-framework` package metadata preserves the technical
+compatibility identity used by repository tooling. It exposes only
+`package.json`, has no `bin` entry, and provides no supported TypeScript SDK or
+packaged general-purpose CLI. Hyperfinite is not a hosted service or a
+deployable production service, and the repository does not bundle live
+administration, credentials, trust services, or effect authority. Any future
+SDK, CLI package, hosted offering, or production distribution requires separate
+product work. See the [complete product boundary](docs/architecture/distribution-boundary.md).
+
 ## Who this is for
 
 | Reader | Start here | Decision or responsibility |
@@ -179,8 +199,8 @@ npm run github:setup -- bootstrap-plan \
   --output path/to/reviewed-bootstrap-plan.json
 ```
 
-The CLI performs no mutation. A human applies only the confirmed operations,
-exports fresh readback, and follows the two manual view steps in the
+The repository command performs no mutation. A human applies only the confirmed
+operations, exports fresh readback, and follows the two manual view steps in the
 [Project setup runbook](docs/runbooks/github-project-setup.md).
 
 ### 4. Register the customer-owned GitHub App

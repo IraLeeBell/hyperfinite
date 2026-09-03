@@ -95,9 +95,9 @@ not perform or infer those steps.
    exact migration-manifest digest, directional step checksum, and digest for
    every enforced migration precondition.
    A non-empty receipt journal additionally requires a trusted
-   `InstallationReceiptVerifier`; the generic CLI intentionally refuses to
-   self-assert signature validity. Invoke the library from the trusted
-   administrator service that owns the pinned verification key.
+   `InstallationReceiptVerifier`; the generic repository command intentionally
+   refuses to self-assert signature validity. Invoke the library from the
+   trusted administrator service that owns the pinned verification key.
    `npm run installer -- offline-validate` is only an offline repeat over those
    files; it is not a live target read. For live validation, the trusted
    administrator service must call `validateLiveInstallationPlan` with current
@@ -118,15 +118,16 @@ not perform or infer those steps.
    and re-derive actions, preconditions, and the current-operation evidence path
    before consulting authorization or the trusted adapter.
 7. After provisional review, set `apply.enabled: true` and the approved human
-   change ID, then generate one final plan. The CLI still performs no mutation.
-   Review and sign that exact final plan digest, idempotency key, expected result
-   head/state, actions, and evidence paths. Do not sign an earlier
-   apply-disabled plan and do not change configuration after signing.
+   change ID, then generate one final plan. The repository command still
+   performs no mutation. Review and sign that exact final plan digest,
+   idempotency key, expected result head/state, actions, and evidence paths. Do
+   not sign an earlier apply-disabled plan and do not change configuration after
+   signing.
 
 ## Human-authorized apply
 
-The checked-in CLI cannot apply. A deployment team must first implement and
-independently review the `TrustedInstallationAdapter` with:
+The checked-in repository command cannot apply. A deployment team must first
+implement and independently review the `TrustedInstallationAdapter` with:
 
 - GitHub App installation credentials held only in the trusted adapter;
 - no PAT, model-job credential, environment-token, or network fallback;
@@ -196,8 +197,8 @@ from that recovery base, never from partially applied version claims.
 
 Installer input/output arguments must be canonical repository-relative paths.
 Absolute, backslash, empty, `.`, `..`, and exact `.git` segments are refused
-before resolution. The CLI also resolves Git's actual directory and common
-directory, so separate metadata locations cannot be entered.
+before resolution. The repository command also resolves Git's actual directory
+and common directory, so separate metadata locations cannot be entered.
 
 ## Uninstall
 

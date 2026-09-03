@@ -3,6 +3,9 @@
 The customer-starter tool builds a configurable, mechanically-closed subset
 of the exact reviewed Git tree ("profile") plus deterministic evidence. It
 does not decide license, publication, visibility, or release.
+The archive is a source distribution for extraction into a new customer-owned
+Git repository. It is not an npm package, TypeScript SDK, packaged CLI, hosted
+service, deployable service, or bundle of live trust services.
 
 ## Build and verify
 
@@ -24,6 +27,46 @@ npm run starter:local -- verify \
 
 See [`examples/customer-starter/README.md`](../../examples/customer-starter/README.md)
 for the full walkthrough, including the `demo-portfolio` extension profile.
+
+## Supported profile commands
+
+After extraction into a new customer-owned Git repository, complete Phase 0 of
+the [customer evaluation guide](../../CUSTOMER_EVALUATION_GUIDE.md). Then run
+only the applicable profile commands below. The fixed profile catalog is
+authoritative for these lists, and
+`npm run validate:customer-starter-extraction` independently exercises every
+listed command against a clean extraction.
+
+For `control-plane-core`:
+
+```bash
+npm run build
+npm run typecheck
+npm test
+npm run validate:packaging
+npm run validate:provenance
+npm run validate:technical-identity:core
+```
+
+For `demo-portfolio`:
+
+```bash
+npm run build
+npm run typecheck
+npm test
+npm run validate:packaging
+npm run validate:provenance
+npm run validate:technical-identity:demo
+npm run validate:schemas
+npm run validate:runtime
+npm run validate:eval-fixtures
+npm run simulate:demos
+```
+
+`npm run validate`, `npm run canary:synthetic`, and
+`npm run handoff:administrator` are not supported customer-starter commands.
+They require the reviewed full file-only copy used by the complete sandbox
+evaluation. A starter profile stops at repository/hermetic profile evidence.
 
 ## Output
 
@@ -92,8 +135,13 @@ publication; open-source readiness remains `not-ready`.
 ## Clean-extraction validation
 
 `npm run validate:customer-starter-extraction` builds each profile,
-extracts it with no Git history, runs `npm ci`, and runs every advertised
+extracts it with no Git history, runs
+`npm ci --ignore-scripts --no-audit --no-fund`, and runs every advertised
 script inside the extraction, writing a retained JSON evidence record. It
 reaches the network, so it is kept outside `npm test`/`validate:packaging`;
 the hermetic unit tests in `tests/customer-starter.test.ts` still prove
 package/script/link/import/schema/workflow closure statically.
+Every evidence step records its actual outcome, exit status, signal, and measured
+duration. The deep-import refusal is retained as an expected nonzero exit with
+`ERR_PACKAGE_PATH_NOT_EXPORTED`, never as a success-shaped or zero-duration
+placeholder.

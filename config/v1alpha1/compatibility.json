@@ -18,6 +18,23 @@
     "syntheticCanarySeed": "agentic-framework credentialless synthetic sandbox canary v1",
     "syntheticOidcAudiencePrefix": "synthetic://agentic-framework/"
   },
+  "productBoundary": {
+    "decision": "repository-and-customer-starter-only",
+    "maintainerEntryPoint": "authoritative-repository-clone",
+    "localEvaluatorEntryPoint": "authoritative-repository-clone",
+    "customerStarterEntryPoint": "verified-profile-source-extraction",
+    "customerStarterScope": "profile-documented-scripts-only",
+    "customerSandboxEntryPoint": "reviewed-full-source-file-copy",
+    "repositoryScripts": "supported-in-repository-context",
+    "typescriptApi": "unsupported-internal-only",
+    "npmRegistryPackage": "unsupported-private-metadata-only",
+    "packagedCli": "unsupported-absent",
+    "hostedService": "unsupported-absent",
+    "deployableService": "unsupported-absent",
+    "liveAdministration": "external-human-prerequisite",
+    "liveEffects": "external-trust-service-prerequisite",
+    "futureDistribution": "separate-product-work-required"
+  },
   "nodeMajors": [
     24,
     26
