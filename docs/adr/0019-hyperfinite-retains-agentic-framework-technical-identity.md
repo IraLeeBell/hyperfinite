@@ -105,4 +105,4 @@ corrected without that contract break.
 - [Threat model](../security/threat-model.md)
 - [Control matrix](../security/control-matrix.md)
 - [`PackagingDocument` schema](../../schemas/v1alpha1/packaging.schema.json)
-- [Packaging deterministic tests](../../tests/packaging.test.ts)
+- [Packaging deterministic tests](../../tests/packaging.test.ts "non-bundle")
