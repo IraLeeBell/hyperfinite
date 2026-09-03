@@ -52,6 +52,7 @@
         "scripts/validate-customer-readiness.ts",
         "scripts/validate-packaging.ts",
         "scripts/validate-provenance.mjs",
+        "scripts/validate-technical-identity.ts",
         "src",
         "tests/README.md",
         "tests/administrator-handoff.test.ts",

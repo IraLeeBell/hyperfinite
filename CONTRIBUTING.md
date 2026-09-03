@@ -45,6 +45,7 @@ Run:
 ```text
 npm ci --ignore-scripts --no-audit --no-fund
 npm run validate:customer-readiness
+npm run validate:technical-identity
 npm run typecheck
 npm run build
 npm test

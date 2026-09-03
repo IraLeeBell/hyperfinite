@@ -13,6 +13,7 @@ and is not included in customer-starter profiles.
 |---|---|
 | `npm run validate` | Run the complete repository validation, workflow, packaging, demo, simulation, and hardening matrix |
 | `npm run validate:customer-readiness` | Scan every repository file for source-specific, private, or non-portable material |
+| `npm run validate:technical-identity` | Verify Hyperfinite product wording and classify the retained package/API/publisher/domain compatibility identity |
 | `npm run validate:schemas` | Validate closed schemas, configuration, examples, and hardening metadata |
 | `npm run validate:runtime` | Validate runtime policy and exact core/demo bindings |
 | `npm run validate:eval-fixtures` | Validate behavioral evaluation fixtures |

@@ -12,6 +12,12 @@ and GitHub writes remain disabled.
 
 The Capability Registry is a declarative, reviewed, deny-by-default allowlist. A model cannot create, select, install, broaden, or authorize a capability.
 
+Hyperfinite-owned entries retain the lower-case `agentic-framework` publisher
+value as part of the fixed technical compatibility identity. The product name
+does not create a second publisher or identifier epoch; repository validation
+checks the base registry, every demo shard, and their deterministic generator
+against [`compatibility.json`](../../config/v1alpha1/compatibility.json).
+
 ## Entry fields
 
 Each immutable version defines:

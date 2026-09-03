@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agentic-framework.github.com/schemas/reference-inventory.schema.json",
-  "title": "agentic-framework reference inventory",
+  "title": "Hyperfinite reference inventory",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "references"],

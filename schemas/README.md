@@ -19,6 +19,11 @@ Major groups include:
   administrator handoff/apply/readback, and durable grant-store contracts.
 - the upstream-only, repository-bound issue-taxonomy reconciliation contract.
 
+Hyperfinite retains `agentic-framework.github.com/v1alpha1` and the
+`https://agentic-framework.github.com/schemas/` origin as its technical
+compatibility identity. Product display wording does not create a second API
+group or schema epoch.
+
 Per-demo artifact schemas live under `v1alpha1/demo-projects/`. Domain Pack
 artifact schemas live under `v1alpha1/domain-packs/`.
 

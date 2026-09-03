@@ -14,7 +14,7 @@ authority; it does not activate a service or authorize a mutation by itself.
 | `demo-projects/` | Per-demo profile, journey, capability, binding, activation, projection, artifact, and verification configuration |
 | `domain-packs/` | Marketing and Business Operations definitions, policies, contracts, and templates |
 | `github-project.json` | Reusable logical Project schema |
-| `compatibility.json` | Tested toolchain and platform versions |
+| `compatibility.json` | Tested toolchain/platform versions and the fixed Hyperfinite product versus retained technical identity boundary |
 | `migrations.json` | Supported deterministic migration graph |
 | `open-source-readiness.json` | Current gated release-readiness decision |
 | `issue-taxonomy.json` | Upstream-only repository identity, display labels, historical issue mappings, title prefixes, and reconciliation limits |
@@ -32,6 +32,9 @@ authority; it does not activate a service or authorize a mutation by itself.
   gate is satisfied.
 - Project configuration is declarative and dry-run only; Projects remain
   non-authoritative projections.
+- Hyperfinite is the product/display name. Lower-case `agentic-framework`
+  package, API/schema, publisher, and domain values are the retained
+  compatibility identity fixed by `compatibility.json`.
 
 Run `npm run validate:schemas`, `npm run validate:runtime`, and
 `npm run validate:demos` after configuration changes. Contract behavior changes

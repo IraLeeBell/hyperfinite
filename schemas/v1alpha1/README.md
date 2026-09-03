@@ -10,3 +10,8 @@ shared lifecycle, runtime, GitHub, evidence, packaging, and portfolio contracts.
 Schema validity is necessary but not sufficient: semantic validators also
 enforce canonical order, content digests, cross-document identity, target-free
 output, lifecycle authority, and fail-closed security constraints.
+
+The `agentic-framework.github.com/v1alpha1` API value and
+`https://agentic-framework.github.com/schemas/` URI origin are retained
+Hyperfinite compatibility identifiers. `compatibility.json` fixes the single
+identifier epoch; runtime, model, and migration inputs cannot select another.

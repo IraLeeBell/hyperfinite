@@ -1049,3 +1049,23 @@ the route.
 Residual: a compromised runner, administrator, dependency, repository
 protection, or GitHub API remains able to alter issue metadata. The labels grant
 no lifecycle, target, capability, credential, transition, or effect authority.
+
+### T36 Product and technical identifier epoch confusion
+
+Product-facing text can be mistaken for a package, API, Capability Registry,
+format, evidence-marker, or cryptographic identity. A broad rename can silently
+change domain separation or make stored evidence unverifiable; a partial rename
+can create two incompatible epochs. A model, runtime job, or migration document
+that can supply an epoch can redirect validation toward an attacker-selected
+identity while appearing to perform a branding update.
+
+Control C37 fixes Hyperfinite as the product name and one retained
+`agentic-framework/v1alpha1` technical epoch in closed protected
+configuration. Package metadata, schemas, publishers, domains, fixtures, and
+generated evidence remain mechanically inventoried, while model/runtime/
+migration inputs expose no epoch selector.
+
+Residual: a future intentional identifier migration still requires a new
+reviewed contract epoch, migration/evidence design, exact-head regeneration,
+and human approval. A compromised protected branch or release tool can still
+mislabel artifacts.

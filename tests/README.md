@@ -13,7 +13,7 @@ deterministic boundaries.
 | Hybrid selection and exact Project bootstrap | `hybrid-agent-selection.test.ts`, `github-project-bootstrap.test.ts` |
 | Bounded execution and end-to-end engineering | `bounded-worktree.test.ts`, `engineering-slice.test.ts` |
 | Domain Packs | `domain-packs.test.ts` |
-| Packaging and release | `packaging.test.ts` |
+| Packaging, release, and technical identity compatibility | `packaging.test.ts` |
 | Administrator handoff and exact apply/readback gate | `administrator-handoff.test.ts`, `administrator-handoff-live-snapshot.test.ts`, `pre-app-api-surface.test.ts` |
 | Project UX | `project-ux.test.ts` |
 | Upstream issue taxonomy | `issue-taxonomy.test.ts` |

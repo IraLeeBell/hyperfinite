@@ -24,6 +24,7 @@ the named human authority; repository code or model output cannot accept it.
 | [0016](0016-engineering-cost-holds-own-the-attempt-lifecycle.md) | Accepted | Engineering cost holds own the attempt lifecycle |
 | [0017](0017-restart-safe-synthetic-canary-is-evidence-only.md) | Accepted | The restart-safe synthetic sandbox canary is credentialless evidence only |
 | [0018](0018-administrator-handoff-is-plan-confirm-readback-only.md) | Accepted | The administrator handoff is plan, confirm, and readback only |
+| [0019](0019-hyperfinite-retains-agentic-framework-technical-identity.md) | Accepted | Hyperfinite retains the `agentic-framework` technical compatibility identity |
 
 Do not rewrite accepted history to describe a new decision. Add a superseding
 ADR when authority, security posture, or a durable contract changes.

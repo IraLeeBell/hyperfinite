@@ -250,7 +250,8 @@ export function createCustomerStarterProfileCatalogSeed(): CustomerStarterProfil
           "typecheck",
           "test",
           "validate:packaging",
-          "validate:provenance"
+          "validate:provenance",
+          "validate:technical-identity"
           // "github:setup" is intentionally not advertised: bare (with no
           // extra CLI arguments) its default "plan" command always throws
           // ("plan requires --live with an exported fresh Project read"),
@@ -272,6 +273,7 @@ export function createCustomerStarterProfileCatalogSeed(): CustomerStarterProfil
           "test",
           "validate:packaging",
           "validate:provenance",
+          "validate:technical-identity",
           "validate:schemas",
           "validate:runtime",
           // "validate:workflows" and "validate:gh-aw" are intentionally not

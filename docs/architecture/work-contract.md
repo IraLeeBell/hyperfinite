@@ -32,6 +32,10 @@ Material changes produce a new revision, invalidate stale outputs, and require a
 
 The repository includes a validated JSON example at `examples/v1alpha1/work-accord.json`. The following YAML remains illustrative:
 
+The `agentic-framework.github.com/v1alpha1` value below is Hyperfinite's
+retained wire compatibility identity; it is not the product display name and
+cannot be selected by a model or migration input.
+
 ```yaml
 apiVersion: agentic-framework.github.com/v1alpha1
 kind: WorkAccord
