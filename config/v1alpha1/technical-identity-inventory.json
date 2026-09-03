@@ -4,9 +4,9 @@
   "scopes": {
     "authoritative-repository": {
       "inventoryFiles": 376,
-      "inventoryMatchingLines": 1014,
-      "inventoryOccurrences": 1023,
-      "inventoryDigest": "sha256:7b17981d1b0b27239fd646041b4f3f151cd5e5647489e4bf8a9a6e4f9f527598"
+      "inventoryMatchingLines": 1015,
+      "inventoryOccurrences": 1024,
+      "inventoryDigest": "sha256:7ad8ab4ff882a6dfb4eced62998799ebc06601de28efe7f349af8493c3415a15"
     },
     "control-plane-core": {
       "inventoryFiles": 212,
