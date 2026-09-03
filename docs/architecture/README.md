@@ -33,6 +33,9 @@ computation. Read the pages in this order for a complete system view:
 14. [Administrator handoff](administrator-handoff.md) — digest-bound source
     contracts, exact per-operation human gates, drift-prone readback, and
     readiness separation.
+15. [Authoritative repository metadata](repository-metadata.md) — exact
+    display/discovery state, read-only drift planning, and human-admin
+    application/readback.
 
 The lifecycle graph remains the top mechanical authority. Demo journeys,
 Projects, model outputs, and generated artifacts cannot select or replace a

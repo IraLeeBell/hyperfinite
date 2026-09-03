@@ -72,12 +72,14 @@
         "config/v1alpha1/demo-portfolio",
         "config/v1alpha1/demo-projects",
         "config/v1alpha1/issue-taxonomy.json",
+        "config/v1alpha1/repository-metadata.json",
         "schemas/v1alpha1/behavioral-eval-fixture.schema.json",
         "schemas/v1alpha1/behavioral-eval-record.schema.json",
         "schemas/v1alpha1/demo-external-call-assertions.schema.json",
         "schemas/v1alpha1/demo-portfolio-hardening-plan.schema.json",
         "schemas/v1alpha1/demo-projects",
         "schemas/v1alpha1/issue-taxonomy.schema.json",
+        "schemas/v1alpha1/repository-metadata.schema.json",
         "tests/fixtures/project-ux/live"
     ],
     "resolvedClosureDigest": "sha256:f0e568d6a404d38dab6d136d6aef0d6a9a992760c925e833c5cafaa5a273389b"

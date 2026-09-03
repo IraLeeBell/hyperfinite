@@ -1,0 +1,49 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "RepositoryMetadataContract",
+  "schemaVersion": "1.0.0",
+  "repository": {
+    "owner": "IraLeeBell",
+    "name": "hyperfinite",
+    "fullName": "IraLeeBell/hyperfinite",
+    "databaseId": 1354883228,
+    "nodeId": "R_kgDOUMHgnA",
+    "defaultBranch": "main"
+  },
+  "desired": {
+    "description": "GitHub-native control plane that keeps model output advisory and execution authority deterministic.",
+    "homepage": null,
+    "topics": [
+      "agentic-ai",
+      "agentic-workflows",
+      "ai-governance",
+      "deterministic-systems",
+      "github-actions",
+      "human-in-the-loop",
+      "llm-security",
+      "policy-as-code"
+    ]
+  },
+  "administration": {
+    "applyMode": "human-admin-plan-confirm-readback",
+    "requiredRepositoryRole": "ADMIN",
+    "requiredApiPermission": "Administration: write",
+    "builtInGithubTokenCanApply": false,
+    "mergeAppliesMetadata": false,
+    "requiresSeparateHumanConfirmation": true,
+    "requiresFreshPreApplyRead": true,
+    "requiresFreshPostApplyReadback": true
+  },
+  "authorityBoundary": {
+    "surface": "display-and-discovery-only",
+    "grantsLifecycleAuthority": false,
+    "grantsRepositoryAuthority": false,
+    "grantsTargetAuthority": false,
+    "grantsProjectAuthority": false,
+    "grantsCapabilityAuthority": false,
+    "grantsCredentialAuthority": false,
+    "grantsTransitionAuthority": false,
+    "grantsReleaseAuthority": false,
+    "grantsEffectAuthority": false
+  }
+}
