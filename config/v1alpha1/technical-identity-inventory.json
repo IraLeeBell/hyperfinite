@@ -10,9 +10,9 @@
     },
     "control-plane-core": {
       "inventoryFiles": 212,
-      "inventoryMatchingLines": 703,
-      "inventoryOccurrences": 710,
-      "inventoryDigest": "sha256:6871458e2da4012bd6e2eeddfbab8ee2f757a3e9fb8f080f31710eb178df9216"
+      "inventoryMatchingLines": 704,
+      "inventoryOccurrences": 711,
+      "inventoryDigest": "sha256:f3cc9cc466b87c95d6548d5a45291e447925153f50884405647a4c8ddc4edd27"
     },
     "demo-portfolio": {
       "inventoryFiles": 361,
