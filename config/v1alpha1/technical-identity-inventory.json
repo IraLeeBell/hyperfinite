@@ -6,7 +6,7 @@
       "inventoryFiles": 376,
       "inventoryMatchingLines": 1014,
       "inventoryOccurrences": 1023,
-      "inventoryDigest": "sha256:bf855e2d5c0dc9ac948b79382f227ae13937f096cd68c5f66c62abfa3f439c5d"
+      "inventoryDigest": "sha256:d48159f28f84669965c1b935574a66e9d34d8a01ab669d1c544cae6f0ddee895"
     },
     "control-plane-core": {
       "inventoryFiles": 212,

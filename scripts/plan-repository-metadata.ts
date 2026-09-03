@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { execFileSync } from "node:child_process";
 import { readFileSync, realpathSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -304,11 +303,11 @@ export function planRepositoryMetadataReconciliation(
     readback.viewerCanAdminister &&
     readback.viewerPermission ===
       contract.administration.requiredRepositoryRole;
-  const status = !driftFound
-    ? "in-sync"
-    : adminEligible
+  const status = !adminEligible
+    ? "blocked-insufficient-admin"
+    : driftFound
       ? "human-admin-apply-required"
-      : "blocked-insufficient-admin";
+      : "in-sync";
 
   return deepFreeze({
     apiVersion: "agentic-framework.github.com/v1alpha1",
@@ -343,9 +342,7 @@ function main(): void {
     throw new TypeError("repository metadata planner is optionless");
   }
   const root = realpathSync(
-    execFileSync("git", ["rev-parse", "--show-toplevel"], {
-      encoding: "utf8"
-    }).trim()
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..")
   );
   const input = readFileSync(0, "utf8");
   if (input.trim() === "") {

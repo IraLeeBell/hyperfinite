@@ -165,6 +165,18 @@ test("matching readback is accepted only for the exact identity and complete top
   assert.equal(plan.drift.found, false);
   assert.deepEqual(plan.drift.topics, { add: [], remove: [] });
 
+  const nonAdminPlan = planRepositoryMetadataReconciliation(
+    CONTRACT,
+    parseRepositoryMetadataReadback(CONTRACT, {
+      ...(matchingReadback() as Readonly<Record<string, unknown>>),
+      viewerCanAdminister: false,
+      viewerPermission: "READ"
+    })
+  );
+  assert.equal(nonAdminPlan.drift.found, false);
+  assert.equal(nonAdminPlan.status, "blocked-insufficient-admin");
+  assert.equal(nonAdminPlan.administration.adminEligible, false);
+
   assert.throws(
     () =>
       parseRepositoryMetadataReadback(CONTRACT, {
@@ -270,11 +282,29 @@ test("planner CLI accepts only strict gh repo view JSON on stdin and exposes no 
     "scripts/plan-repository-metadata.ts",
     "utf8"
   );
+  const imports = [
+    ...source.matchAll(/^import(?: type)? .* from "([^"]+)";$/gmu)
+  ]
+    .map((match) => match[1])
+    .sort();
+  assert.deepEqual(imports, [
+    "../src/canonical.js",
+    "../src/strict-json.js",
+    "ajv",
+    "ajv/dist/2020.js",
+    "node:fs",
+    "node:path",
+    "node:url"
+  ]);
   assert.doesNotMatch(
     source,
-    /\b(?:fetch|PATCH|PUT|GITHUB_TOKEN|GH_TOKEN)\b/u
+    /\b(?:fetch|require|XMLHttpRequest|WebSocket)\s*\(/u
   );
-  assert.doesNotMatch(source, /\bgh\s+(?:api|repo\s+edit)\b/u);
+  assert.doesNotMatch(source, /\bimport\s*\(/u);
+  assert.doesNotMatch(
+    source,
+    /\b(?:appendFile|chmod|chown|copyFile|link|mkdir|open|rename|rm|symlink|truncate|unlink|writeFile)(?:Sync)?\s*\(/u
+  );
 });
 
 test("repository administration mechanism is absent from customer-starter profiles", () => {
