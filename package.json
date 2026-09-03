@@ -40,7 +40,9 @@
     "customer:repin": "npm run build && node dist/scripts/repin-customer-starter.js",
     "handoff:administrator": "npm run build && node dist/scripts/run-administrator-handoff.js",
     "eval:behavioral": "npm run build && node dist/scripts/run-behavioral-evals.js",
-    "generate:hybrid-demo-contracts": "node scripts/generate-hybrid-demo-contracts.mjs"
+    "generate:hybrid-demo-contracts": "node scripts/generate-hybrid-demo-contracts.mjs",
+    "demo:authority": "npm run build && node dist/scripts/run-authority-walkthrough.js",
+    "demo:authority:recording": "npm run build && node dist/scripts/generate-authority-walkthrough-recording.js"
   },
   "devDependencies": {
     "@types/node": "26.2.0",

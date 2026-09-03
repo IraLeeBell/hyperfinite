@@ -1,6 +1,46 @@
+import { createHash } from "node:crypto";
+
 export interface CustomerShareabilityFile {
   readonly path: string;
   readonly content: string;
+}
+
+export const AUTHORITY_WALKTHROUGH_RECORDING_PATH =
+  "docs/authority-boundary-walkthrough.gif";
+const AUTHORITY_WALKTHROUGH_RECORDING_DIGEST =
+  "sha256:ac56ea1ef2a3f3b65caa3e8286a0833a3227fb1ee00737fba89a42a53729eb2b";
+
+export function acceptBoundedCustomerShareabilityBinary(
+  filePath: string,
+  content: Uint8Array
+): boolean {
+  if (filePath !== AUTHORITY_WALKTHROUGH_RECORDING_PATH) return false;
+  const header = Buffer.from(content.subarray(0, 6)).toString("ascii");
+  const width = content.length >= 10 ? content[6]! | (content[7]! << 8) : 0;
+  const height = content.length >= 10 ? content[8]! | (content[9]! << 8) : 0;
+  const hasCommentExtension = content.some(
+    (byte, index) =>
+      byte === 0x21 &&
+      content[index + 1] === 0xfe
+  );
+  const contentDigest = `sha256:${createHash("sha256")
+    .update(content)
+    .digest("hex")}`;
+  if (
+    content.byteLength < 14 ||
+    content.byteLength >= 512 * 1024 ||
+    header !== "GIF89a" ||
+    width !== 640 ||
+    height !== 450 ||
+    content.at(-1) !== 0x3b ||
+    hasCommentExtension ||
+    contentDigest !== AUTHORITY_WALKTHROUGH_RECORDING_DIGEST
+  ) {
+    throw new TypeError(
+      `customer shareability audit rejects malformed bounded recording ${filePath}`
+    );
+  }
+  return true;
 }
 
 export interface CustomerShareabilityFinding {

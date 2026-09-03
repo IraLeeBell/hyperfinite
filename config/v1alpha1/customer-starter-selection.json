@@ -5,7 +5,7 @@
     "profileId": "control-plane-core",
     "extendsProfileId": null,
     "baseSelectionDigest": null,
-    "sourceHeadSha": "63607c8ddaa5eb70e91de71d4ea4ff59c627d96c",
+    "sourceHeadSha": "3dc23666b1f60445f3a59f476e2d498fcb1f87a6",
     "includedPaths": [
         ".github/AUTOMATION.md",
         ".github/CODEOWNERS",
@@ -31,6 +31,8 @@
         "docs/README.md",
         "docs/adr",
         "docs/architecture",
+        "docs/authority-boundary-walkthrough.gif",
+        "docs/authority-boundary-walkthrough.md",
         "docs/compatibility.md",
         "docs/demos",
         "docs/governance",
@@ -46,9 +48,11 @@
         "scripts/README.md",
         "scripts/configure-customer-repository.ts",
         "scripts/customer-starter-local.ts",
+        "scripts/generate-authority-walkthrough-recording.ts",
         "scripts/github-setup.ts",
         "scripts/release-local.ts",
         "scripts/repin-customer-starter.ts",
+        "scripts/run-authority-walkthrough.ts",
         "scripts/validate-customer-readiness.ts",
         "scripts/validate-packaging.ts",
         "scripts/validate-provenance.mjs",
@@ -57,6 +61,7 @@
         "src",
         "tests/README.md",
         "tests/administrator-handoff.test.ts",
+        "tests/authority-walkthrough.test.ts",
         "tests/control-kernel.test.ts",
         "tests/fixtures",
         "tests/github-adapter.test.ts",
@@ -75,5 +80,5 @@
         "schemas/v1alpha1/issue-taxonomy.schema.json",
         "tests/fixtures/project-ux/live"
     ],
-    "resolvedClosureDigest": "sha256:1f56a875d41cc1462aa342e3499a5a332a81df7b7e3ee3beed0d83796b8628fb"
+    "resolvedClosureDigest": "sha256:5111d456a863a105217967894d172d32b40b89bef308afe1515c89590fbb3b0a"
 }

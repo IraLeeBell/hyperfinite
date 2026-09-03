@@ -9,6 +9,7 @@ import {
 import path from "node:path";
 
 import {
+  acceptBoundedCustomerShareabilityBinary,
   auditCustomerShareability,
   type CustomerShareabilityFile
 } from "../src/customer-readiness.js";
@@ -27,6 +28,7 @@ const listed = execFileSync(
 ).toString("utf8");
 const decoder = new TextDecoder("utf-8", { fatal: true });
 const files: CustomerShareabilityFile[] = [];
+let validatedFileCount = 0;
 const source = githubRepositoryFromRemote(
   execFileSync("git", ["remote", "get-url", "origin"], {
     cwd: root,
@@ -55,15 +57,21 @@ for (const relativePath of [...new Set(listed.split("\0").filter(Boolean))].sort
       `customer shareability audit refuses non-regular file ${relativePath}`
     );
   }
+  const bytes = readFileSync(absolutePath);
+  if (acceptBoundedCustomerShareabilityBinary(relativePath, bytes)) {
+    validatedFileCount += 1;
+    continue;
+  }
   let content: string;
   try {
-    content = decoder.decode(readFileSync(absolutePath));
+    content = decoder.decode(bytes);
   } catch {
     throw new TypeError(
       `customer shareability audit requires UTF-8 text at ${relativePath}`
     );
   }
   files.push({ path: relativePath, content });
+  validatedFileCount += 1;
 }
 
 const findings = auditCustomerShareability(files, {
@@ -85,6 +93,6 @@ if (findings.length > 0) {
   process.exitCode = 1;
 } else {
   process.stdout.write(
-    `Validated ${files.length} files for customer sharing.\n`
+    `Validated ${validatedFileCount} files for customer sharing.\n`
   );
 }

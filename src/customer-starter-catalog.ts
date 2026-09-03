@@ -249,6 +249,7 @@ export function createCustomerStarterProfileCatalogSeed(): CustomerStarterProfil
           "build",
           "typecheck",
           "test",
+          "demo:authority",
           "validate:packaging",
           "validate:provenance",
           "validate:technical-identity:core"
