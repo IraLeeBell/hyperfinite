@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/repository-metadata.schema.json",
+  "title": "Authoritative Hyperfinite repository metadata contract",
+  "description": "The closed display-and-discovery metadata desired for the authoritative public repository. This contract is plan-only, selects no arbitrary repository or credential, and grants no lifecycle, repository, target, Project, capability, credential, transition, release, or effect authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "apiVersion",
+    "kind",
+    "schemaVersion",
+    "repository",
+    "desired",
+    "administration",
+    "authorityBoundary"
+  ],
+  "properties": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "kind": {
+      "const": "RepositoryMetadataContract"
+    },
+    "schemaVersion": {
+      "const": "1.0.0"
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "owner",
+        "name",
+        "fullName",
+        "databaseId",
+        "nodeId",
+        "defaultBranch"
+      ],
+      "properties": {
+        "owner": {
+          "const": "IraLeeBell"
+        },
+        "name": {
+          "const": "hyperfinite"
+        },
+        "fullName": {
+          "const": "IraLeeBell/hyperfinite"
+        },
+        "databaseId": {
+          "const": 1354883228
+        },
+        "nodeId": {
+          "const": "R_kgDOUMHgnA"
+        },
+        "defaultBranch": {
+          "const": "main"
+        }
+      }
+    },
+    "desired": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "homepage",
+        "topics"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "const": "GitHub-native control plane that keeps model output advisory and execution authority deterministic.",
+          "maxLength": 350
+        },
+        "homepage": {
+          "type": "null"
+        },
+        "topics": {
+          "type": "array",
+          "minItems": 8,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "prefixItems": [
+            {
+              "const": "agentic-ai"
+            },
+            {
+              "const": "agentic-workflows"
+            },
+            {
+              "const": "ai-governance"
+            },
+            {
+              "const": "deterministic-systems"
+            },
+            {
+              "const": "github-actions"
+            },
+            {
+              "const": "human-in-the-loop"
+            },
+            {
+              "const": "llm-security"
+            },
+            {
+              "const": "policy-as-code"
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "administration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "applyMode",
+        "requiredRepositoryRole",
+        "requiredApiPermission",
+        "builtInGithubTokenCanApply",
+        "mergeAppliesMetadata",
+        "requiresSeparateHumanConfirmation",
+        "requiresFreshPreApplyRead",
+        "requiresFreshPostApplyReadback"
+      ],
+      "properties": {
+        "applyMode": {
+          "const": "human-admin-plan-confirm-readback"
+        },
+        "requiredRepositoryRole": {
+          "const": "ADMIN"
+        },
+        "requiredApiPermission": {
+          "const": "Administration: write"
+        },
+        "builtInGithubTokenCanApply": {
+          "const": false
+        },
+        "mergeAppliesMetadata": {
+          "const": false
+        },
+        "requiresSeparateHumanConfirmation": {
+          "const": true
+        },
+        "requiresFreshPreApplyRead": {
+          "const": true
+        },
+        "requiresFreshPostApplyReadback": {
+          "const": true
+        }
+      }
+    },
+    "authorityBoundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "surface",
+        "grantsLifecycleAuthority",
+        "grantsRepositoryAuthority",
+        "grantsTargetAuthority",
+        "grantsProjectAuthority",
+        "grantsCapabilityAuthority",
+        "grantsCredentialAuthority",
+        "grantsTransitionAuthority",
+        "grantsReleaseAuthority",
+        "grantsEffectAuthority"
+      ],
+      "properties": {
+        "surface": {
+          "const": "display-and-discovery-only"
+        },
+        "grantsLifecycleAuthority": {
+          "const": false
+        },
+        "grantsRepositoryAuthority": {
+          "const": false
+        },
+        "grantsTargetAuthority": {
+          "const": false
+        },
+        "grantsProjectAuthority": {
+          "const": false
+        },
+        "grantsCapabilityAuthority": {
+          "const": false
+        },
+        "grantsCredentialAuthority": {
+          "const": false
+        },
+        "grantsTransitionAuthority": {
+          "const": false
+        },
+        "grantsReleaseAuthority": {
+          "const": false
+        },
+        "grantsEffectAuthority": {
+          "const": false
+        }
+      }
+    }
+  }
+}

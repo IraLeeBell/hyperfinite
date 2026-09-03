@@ -1090,3 +1090,28 @@ validation detect contradictory distribution claims.
 Residual: source is inspectable and can be used outside the supported model.
 A future SDK, CLI, hosted, deployable, or production distribution requires a
 separate reviewed compatibility, security, release, and support design.
+
+### T38 Repository About metadata drift or authority confusion
+
+The public description, homepage, and topics live outside the Git tree and can
+drift from reviewed product wording. Autonomous-team language, a misleading
+homepage, or broad topics can imply a hosted product, bundled trust services,
+or model authority that Hyperfinite does not provide. A repository or model job
+that chooses its own repository, credential, desired state, or success result
+could redirect an administrative write or turn an unverified merge into
+success-shaped acceptance evidence.
+
+Control C39 fixes one immutable repository identity and exact display state in
+a closed upstream-only contract. An optionless read-only planner accepts only
+the bounded exact-repository `gh repo view` shape, computes complete drift, and
+has no network, credential, or apply path. The built-in Actions token cannot be
+granted repository Administration write permission, and no PAT or App
+credential fallback is added. A human administrator must confirm a fresh plan,
+apply through GitHub settings after merge, and obtain a second exact readback;
+only complete zero drift is acceptance.
+
+Residual: a repository administrator or compromised GitHub account/platform can
+still alter display metadata after acceptance. Readback is point-in-time,
+drift-prone evidence. About fields remain display/discovery only and grant no
+lifecycle, repository, target, Project, capability, credential, transition,
+release, or effect authority.

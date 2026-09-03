@@ -53,6 +53,12 @@ a weaker inventory scope with an argument or mutable repository marker.
   repository command cannot apply changes.
 - `npm run installer -- plan|offline-validate` validates target-bound customer
   installation plans. It cannot perform a live apply.
+- After `npm run build`, `gh repo view IraLeeBell/hyperfinite` can pipe the
+  exact closed fields documented in the
+  [repository metadata checklist](../docs/release/repository-metadata-checklist.md)
+  to `node dist/scripts/plan-repository-metadata.js`. The optionless planner is
+  upstream-only, reads no credential, performs no network request or mutation,
+  and cannot apply About metadata.
 - `npm run release:local -- build <required flags>` and
   `npm run release:local -- verify <required flags>` produce and verify
   deterministic unsigned local evidence. Use the complete commands in

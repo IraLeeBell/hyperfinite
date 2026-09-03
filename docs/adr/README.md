@@ -26,6 +26,7 @@ the named human authority; repository code or model output cannot accept it.
 | [0018](0018-administrator-handoff-is-plan-confirm-readback-only.md) | Accepted | The administrator handoff is plan, confirm, and readback only |
 | [0019](0019-hyperfinite-retains-agentic-framework-technical-identity.md) | Accepted | Hyperfinite retains the `agentic-framework` technical compatibility identity |
 | [0020](0020-supported-distribution-is-repository-and-customer-starter-source-only.md) | Accepted | Supported distribution is repository and customer-starter source only |
+| [0021](0021-repository-about-metadata-is-human-administered-display-state.md) | Accepted | Repository About metadata is human-administered display state |
 
 Do not rewrite accepted history to describe a new decision. Add a superseding
 ADR when authority, security posture, or a durable contract changes.
