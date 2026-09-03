@@ -49,30 +49,35 @@ const ADAPTIVE_OPTIONS = [
   {
     key: "discovery-customer-value-explorer",
     name: "Discovery - Customer Value Explorer",
+    color: "BLUE",
     stageId: "discovery-studio",
     agentId: "adaptive-delivery-customer-value-explorer"
   },
   {
     key: "discovery-technical-options-explorer",
     name: "Discovery - Technical Options Explorer",
+    color: "BLUE",
     stageId: "discovery-studio",
     agentId: "adaptive-delivery-technical-options-explorer"
   },
   {
     key: "discovery-delivery-risk-challenger",
     name: "Discovery - Delivery Risk Challenger",
+    color: "BLUE",
     stageId: "discovery-studio",
     agentId: "adaptive-delivery-delivery-risk-challenger"
   },
   {
     key: "implementation-minimal-slice-builder",
     name: "Implementation - Minimal Slice Builder",
+    color: "PURPLE",
     stageId: "implementation-studio",
     agentId: "adaptive-delivery-minimal-slice-builder"
   },
   {
     key: "implementation-resilience-first-builder",
     name: "Implementation - Resilience-First Builder",
+    color: "PURPLE",
     stageId: "implementation-studio",
     agentId: "adaptive-delivery-resilience-first-builder"
   }
@@ -318,6 +323,78 @@ const ADAPTIVE_STAGES = [
   stage("completed", "Completed", 9, "COMPLETED", "terminal")
 ];
 
+const JOURNEY_STAGE_COLORS = {
+  "app-modernization": {
+    intake: "GRAY",
+    "repository-discovery": "BLUE",
+    "current-state-inventory": "BLUE",
+    "modernization-assessment": "PURPLE",
+    "target-architecture": "PURPLE",
+    "migration-plan": "PURPLE",
+    implementation: "PINK",
+    verification: "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "feature-delivery": {
+    intake: "GRAY",
+    "requirements-clarification": "BLUE",
+    "codebase-discovery": "BLUE",
+    "solution-design": "PURPLE",
+    "implementation-plan": "PURPLE",
+    build: "PINK",
+    "test-and-verification": "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "security-dependency-remediation": {
+    intake: "GRAY",
+    triage: "BLUE",
+    "reproduction-and-impact-analysis": "PURPLE",
+    "remediation-design": "PURPLE",
+    "patch-planning": "PURPLE",
+    "patch-implementation": "PINK",
+    "security-verification": "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "adaptive-delivery": {
+    intake: "GRAY",
+    "context-inventory": "BLUE",
+    "discovery-studio": "BLUE",
+    "guided-synthesis": "PURPLE",
+    "implementation-plan": "PURPLE",
+    "implementation-studio": "PINK",
+    "test-and-verification": "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  }
+};
+
+function journeyStageColor(demoProjectId, stageId) {
+  const color = JOURNEY_STAGE_COLORS[demoProjectId]?.[stageId];
+  if (color === undefined) {
+    throw new TypeError(`Project color is not declared for ${demoProjectId}/${stageId}`);
+  }
+  return color;
+}
+
 function projectSchema(coreSchema, demoProjectId, reservation) {
   const coreStage = coreSchema.fields.find((field) => field.key === "stage");
   if (coreStage === undefined) throw new TypeError("core Stage field missing");
@@ -341,7 +418,11 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
         dataType: "SINGLE_SELECT",
         required: true,
         options: [...reservation.journeyStages, ...reservation.controlStages].map(
-          (item) => ({ key: item.stageId, name: item.displayName })
+          (item) => ({
+            key: item.stageId,
+            name: item.displayName,
+            color: journeyStageColor(demoProjectId, item.stageId)
+          })
         )
       },
       {
@@ -358,7 +439,13 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
         required: true,
         options: ["D0", "D1", "D2", "D3"].map((name) => ({
           key: name.toLowerCase(),
-          name
+          name,
+          color: {
+            D0: "GRAY",
+            D1: "BLUE",
+            D2: "PURPLE",
+            D3: "PINK"
+          }[name]
         }))
       },
       {
@@ -367,9 +454,9 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
         dataType: "SINGLE_SELECT",
         required: true,
         options: [
-          { key: "pending", name: "Pending" },
-          { key: "satisfied", name: "Satisfied" },
-          { key: "blocked", name: "Blocked" }
+          { key: "pending", name: "Pending", color: "YELLOW" },
+          { key: "satisfied", name: "Satisfied", color: "GREEN" },
+          { key: "blocked", name: "Blocked", color: "RED" }
         ]
       },
       {
@@ -392,9 +479,9 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
         dataType: "SINGLE_SELECT",
         required: true,
         options: [
-          { key: "none", name: "None" },
-          { key: "human-action", name: "Human action" },
-          { key: "reconciliation", name: "Reconciliation" }
+          { key: "none", name: "None", color: "GRAY" },
+          { key: "human-action", name: "Human action", color: "YELLOW" },
+          { key: "reconciliation", name: "Reconciliation", color: "ORANGE" }
         ]
       },
       {
@@ -431,12 +518,16 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
         dataType: "SINGLE_SELECT",
         required: true,
         options: [
-          { key: "backend-autonomous", name: "Backend autonomous" },
-          { key: "user-selectable", name: "User-selectable agent" },
-          { key: "human-gate", name: "Human gate" },
-          { key: "deterministic", name: "Deterministic" },
-          { key: "kernel-control", name: "Kernel control" },
-          { key: "terminal", name: "Terminal" }
+          { key: "backend-autonomous", name: "Backend autonomous", color: "BLUE" },
+          {
+            key: "user-selectable",
+            name: "User-selectable agent",
+            color: "PURPLE"
+          },
+          { key: "human-gate", name: "Human gate", color: "YELLOW" },
+          { key: "deterministic", name: "Deterministic", color: "GREEN" },
+          { key: "kernel-control", name: "Kernel control", color: "ORANGE" },
+          { key: "terminal", name: "Terminal", color: "GRAY" }
         ]
       },
       {
@@ -446,11 +537,16 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
         required: false,
         options:
           demoProjectId === "adaptive-delivery"
-            ? ADAPTIVE_OPTIONS.map(({ key, name }) => ({ key, name }))
+            ? ADAPTIVE_OPTIONS.map(({ key, name, color }) => ({
+                key,
+                name,
+                color
+              }))
             : [
                 {
                   key: "selection-unavailable-locked",
-                  name: "User selection unavailable - locked project"
+                  name: "User selection unavailable - locked project",
+                  color: "GRAY"
                 }
               ]
       },
@@ -466,7 +562,18 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
           "invalid",
           "stale",
           "reconciliation-required"
-        ].map((name) => ({ key: name, name }))
+        ].map((name) => ({
+          key: name,
+          name,
+          color: {
+            "not-applicable": "GRAY",
+            "awaiting-selection": "YELLOW",
+            accepted: "GREEN",
+            invalid: "RED",
+            stale: "ORANGE",
+            "reconciliation-required": "PURPLE"
+          }[name]
+        }))
       }
     ],
     projections: PROJECTION_FIELDS.map(([slot, _name, source], index) => ({
@@ -810,6 +917,7 @@ const participationPolicy = contract("AgentParticipationPolicy", {
   ]
 });
 
+const coreSchema = await readJson("config/v1alpha1/github-project.json");
 const targetManifest = contract("DemoProjectTargetManifest", {
   owner: {
     type: "organization",
@@ -822,6 +930,15 @@ const targetManifest = contract("DemoProjectTargetManifest", {
   },
   projects: DEMOS.map((demoProjectId) => ({
     demoProjectId,
+    projectSchemaDigest: digest(
+      projectSchema(
+        coreSchema,
+        demoProjectId,
+        reservations.spec.projects.find(
+          (project) => project.demoProjectId === demoProjectId
+        )
+      )
+    ),
     ...EXAMPLE_PROJECTS[demoProjectId],
     visibility: "private",
     closed: false,
@@ -845,7 +962,6 @@ await writeJson(
   targetManifest
 );
 
-const coreSchema = await readJson("config/v1alpha1/github-project.json");
 const lifecycle = await readJson("config/v1alpha1/lifecycle.json");
 const baseRegistry = await readJson("config/v1alpha1/capability-registry.json");
 const generated = new Map();
@@ -879,7 +995,40 @@ for (const demoProjectId of DEMOS.slice(0, 3)) {
     const projectBinding = await readJson(fixturePath);
     const nextProjectBinding = {
       ...projectBinding,
-      projectSchemaDigest: digest(schema)
+      projectSchemaDigest: digest(schema),
+      project: {
+        ...projectBinding.project,
+        title: schema.project.title
+      },
+      fields: projectBinding.fields.map((field) => {
+        const expectedField = schema.fields.find(
+          (candidate) => candidate.key === field.key
+        );
+        if (expectedField === undefined) {
+          throw new TypeError(`unknown Project binding field ${field.key}`);
+        }
+        return {
+          ...field,
+          options: field.options.map((option) => {
+            const expectedOption = expectedField.options.find(
+              (candidate) => candidate.key === option.key
+            );
+            if (
+              expectedOption === undefined ||
+              expectedOption.name !== option.name
+            ) {
+              throw new TypeError(
+                `unknown Project binding option ${field.key}/${option.key}`
+              );
+            }
+            return {
+              ...option,
+              color: expectedOption.color,
+              description: expectedOption.description ?? ""
+            };
+          })
+        };
+      })
     };
     projectBindingDigest = digest(nextProjectBinding);
     await writeJson(fixturePath, nextProjectBinding);
@@ -1589,7 +1738,9 @@ for (const demoProjectId of DEMOS) {
       dataType: field.dataType,
       options: field.options.map((option, optionIndex) => ({
         nodeId: `PVTO_synthetic_${demoProjectId.replaceAll("-", "_")}_${fieldIndex + 1}_${optionIndex + 1}`,
-        name: option.name
+        name: option.name,
+        color: option.color,
+        description: option.description ?? ""
       }))
     }))
   });

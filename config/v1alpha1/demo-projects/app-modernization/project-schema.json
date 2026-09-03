@@ -22,47 +22,58 @@
       "options": [
         {
           "key": "captured",
-          "name": "Captured"
+          "name": "Captured",
+          "color": "GRAY"
         },
         {
           "key": "activation-pending",
-          "name": "Activation pending"
+          "name": "Activation pending",
+          "color": "YELLOW"
         },
         {
           "key": "framing",
-          "name": "Framing"
+          "name": "Framing",
+          "color": "BLUE"
         },
         {
           "key": "planned",
-          "name": "Planned"
+          "name": "Planned",
+          "color": "PURPLE"
         },
         {
           "key": "executing",
-          "name": "Executing"
+          "name": "Executing",
+          "color": "PINK"
         },
         {
           "key": "verifying",
-          "name": "Verifying"
+          "name": "Verifying",
+          "color": "ORANGE"
         },
         {
           "key": "human-review",
-          "name": "Human review"
+          "name": "Human review",
+          "color": "YELLOW"
         },
         {
           "key": "completed",
-          "name": "Completed"
+          "name": "Completed",
+          "color": "GREEN"
         },
         {
           "key": "paused",
-          "name": "Paused"
+          "name": "Paused",
+          "color": "ORANGE"
         },
         {
           "key": "blocked",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED"
         },
         {
           "key": "cancelled",
-          "name": "Cancelled"
+          "name": "Cancelled",
+          "color": "GRAY"
         }
       ]
     },
@@ -74,59 +85,73 @@
       "options": [
         {
           "key": "intake",
-          "name": "Intake"
+          "name": "Intake",
+          "color": "GRAY"
         },
         {
           "key": "repository-discovery",
-          "name": "Repository discovery"
+          "name": "Repository discovery",
+          "color": "BLUE"
         },
         {
           "key": "current-state-inventory",
-          "name": "Current-state inventory"
+          "name": "Current-state inventory",
+          "color": "BLUE"
         },
         {
           "key": "modernization-assessment",
-          "name": "Modernization assessment"
+          "name": "Modernization assessment",
+          "color": "PURPLE"
         },
         {
           "key": "target-architecture",
-          "name": "Target architecture"
+          "name": "Target architecture",
+          "color": "PURPLE"
         },
         {
           "key": "migration-plan",
-          "name": "Migration plan"
+          "name": "Migration plan",
+          "color": "PURPLE"
         },
         {
           "key": "implementation",
-          "name": "Implementation"
+          "name": "Implementation",
+          "color": "PINK"
         },
         {
           "key": "verification",
-          "name": "Verification"
+          "name": "Verification",
+          "color": "ORANGE"
         },
         {
           "key": "human-review",
-          "name": "Human review"
+          "name": "Human review",
+          "color": "YELLOW"
         },
         {
           "key": "completed",
-          "name": "Completed"
+          "name": "Completed",
+          "color": "GREEN"
         },
         {
           "key": "activation-pending",
-          "name": "Activation Pending"
+          "name": "Activation Pending",
+          "color": "YELLOW"
         },
         {
           "key": "paused",
-          "name": "Paused"
+          "name": "Paused",
+          "color": "ORANGE"
         },
         {
           "key": "blocked",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED"
         },
         {
           "key": "cancelled",
-          "name": "Cancelled"
+          "name": "Cancelled",
+          "color": "GRAY"
         }
       ]
     },
@@ -145,19 +170,23 @@
       "options": [
         {
           "key": "d0",
-          "name": "D0"
+          "name": "D0",
+          "color": "GRAY"
         },
         {
           "key": "d1",
-          "name": "D1"
+          "name": "D1",
+          "color": "BLUE"
         },
         {
           "key": "d2",
-          "name": "D2"
+          "name": "D2",
+          "color": "PURPLE"
         },
         {
           "key": "d3",
-          "name": "D3"
+          "name": "D3",
+          "color": "PINK"
         }
       ]
     },
@@ -169,15 +198,18 @@
       "options": [
         {
           "key": "pending",
-          "name": "Pending"
+          "name": "Pending",
+          "color": "YELLOW"
         },
         {
           "key": "satisfied",
-          "name": "Satisfied"
+          "name": "Satisfied",
+          "color": "GREEN"
         },
         {
           "key": "blocked",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED"
         }
       ]
     },
@@ -203,15 +235,18 @@
       "options": [
         {
           "key": "none",
-          "name": "None"
+          "name": "None",
+          "color": "GRAY"
         },
         {
           "key": "human-action",
-          "name": "Human action"
+          "name": "Human action",
+          "color": "YELLOW"
         },
         {
           "key": "reconciliation",
-          "name": "Reconciliation"
+          "name": "Reconciliation",
+          "color": "ORANGE"
         }
       ]
     },
@@ -251,27 +286,33 @@
       "options": [
         {
           "key": "backend-autonomous",
-          "name": "Backend autonomous"
+          "name": "Backend autonomous",
+          "color": "BLUE"
         },
         {
           "key": "user-selectable",
-          "name": "User-selectable agent"
+          "name": "User-selectable agent",
+          "color": "PURPLE"
         },
         {
           "key": "human-gate",
-          "name": "Human gate"
+          "name": "Human gate",
+          "color": "YELLOW"
         },
         {
           "key": "deterministic",
-          "name": "Deterministic"
+          "name": "Deterministic",
+          "color": "GREEN"
         },
         {
           "key": "kernel-control",
-          "name": "Kernel control"
+          "name": "Kernel control",
+          "color": "ORANGE"
         },
         {
           "key": "terminal",
-          "name": "Terminal"
+          "name": "Terminal",
+          "color": "GRAY"
         }
       ]
     },
@@ -283,7 +324,8 @@
       "options": [
         {
           "key": "selection-unavailable-locked",
-          "name": "User selection unavailable - locked project"
+          "name": "User selection unavailable - locked project",
+          "color": "GRAY"
         }
       ]
     },
@@ -295,27 +337,33 @@
       "options": [
         {
           "key": "not-applicable",
-          "name": "not-applicable"
+          "name": "not-applicable",
+          "color": "GRAY"
         },
         {
           "key": "awaiting-selection",
-          "name": "awaiting-selection"
+          "name": "awaiting-selection",
+          "color": "YELLOW"
         },
         {
           "key": "accepted",
-          "name": "accepted"
+          "name": "accepted",
+          "color": "GREEN"
         },
         {
           "key": "invalid",
-          "name": "invalid"
+          "name": "invalid",
+          "color": "RED"
         },
         {
           "key": "stale",
-          "name": "stale"
+          "name": "stale",
+          "color": "ORANGE"
         },
         {
           "key": "reconciliation-required",
-          "name": "reconciliation-required"
+          "name": "reconciliation-required",
+          "color": "PURPLE"
         }
       ]
     }

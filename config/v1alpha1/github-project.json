@@ -20,17 +20,17 @@
       "dataType": "SINGLE_SELECT",
       "required": true,
       "options": [
-        { "key": "captured", "name": "Captured" },
-        { "key": "activation-pending", "name": "Activation pending" },
-        { "key": "framing", "name": "Framing" },
-        { "key": "planned", "name": "Planned" },
-        { "key": "executing", "name": "Executing" },
-        { "key": "verifying", "name": "Verifying" },
-        { "key": "human-review", "name": "Human review" },
-        { "key": "completed", "name": "Completed" },
-        { "key": "paused", "name": "Paused" },
-        { "key": "blocked", "name": "Blocked" },
-        { "key": "cancelled", "name": "Cancelled" }
+        { "key": "captured", "name": "Captured", "color": "GRAY" },
+        { "key": "activation-pending", "name": "Activation pending", "color": "YELLOW" },
+        { "key": "framing", "name": "Framing", "color": "BLUE" },
+        { "key": "planned", "name": "Planned", "color": "PURPLE" },
+        { "key": "executing", "name": "Executing", "color": "PINK" },
+        { "key": "verifying", "name": "Verifying", "color": "ORANGE" },
+        { "key": "human-review", "name": "Human review", "color": "YELLOW" },
+        { "key": "completed", "name": "Completed", "color": "GREEN" },
+        { "key": "paused", "name": "Paused", "color": "ORANGE" },
+        { "key": "blocked", "name": "Blocked", "color": "RED" },
+        { "key": "cancelled", "name": "Cancelled", "color": "GRAY" }
       ]
     },
     {
@@ -39,10 +39,10 @@
       "dataType": "SINGLE_SELECT",
       "required": true,
       "options": [
-        { "key": "d0", "name": "D0" },
-        { "key": "d1", "name": "D1" },
-        { "key": "d2", "name": "D2" },
-        { "key": "d3", "name": "D3" }
+        { "key": "d0", "name": "D0", "color": "GRAY" },
+        { "key": "d1", "name": "D1", "color": "BLUE" },
+        { "key": "d2", "name": "D2", "color": "PURPLE" },
+        { "key": "d3", "name": "D3", "color": "PINK" }
       ]
     },
     {
@@ -58,9 +58,9 @@
       "dataType": "SINGLE_SELECT",
       "required": true,
       "options": [
-        { "key": "pending", "name": "Pending" },
-        { "key": "satisfied", "name": "Satisfied" },
-        { "key": "blocked", "name": "Blocked" }
+        { "key": "pending", "name": "Pending", "color": "YELLOW" },
+        { "key": "satisfied", "name": "Satisfied", "color": "GREEN" },
+        { "key": "blocked", "name": "Blocked", "color": "RED" }
       ]
     },
     {
@@ -83,9 +83,9 @@
       "dataType": "SINGLE_SELECT",
       "required": true,
       "options": [
-        { "key": "none", "name": "None" },
-        { "key": "human-action", "name": "Human action" },
-        { "key": "reconciliation", "name": "Reconciliation" }
+        { "key": "none", "name": "None", "color": "GRAY" },
+        { "key": "human-action", "name": "Human action", "color": "YELLOW" },
+        { "key": "reconciliation", "name": "Reconciliation", "color": "ORANGE" }
       ]
     }
   ],

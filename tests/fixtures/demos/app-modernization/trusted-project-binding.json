@@ -2,7 +2,7 @@
   "apiVersion": "agentic-framework.github.com/v1alpha1",
   "kind": "GitHubProjectBinding",
   "schemaVersion": "1.0.0",
-  "projectSchemaDigest": "sha256:30f83cfb909298ec8bbeb408cd2e27f415b8a8599ec357a3b8f5fbf0df20c402",
+  "projectSchemaDigest": "sha256:3f15f9c9a3060e3fe049cf227c588e3d0fe985cb90fa27f6d617ae4b00310a6a",
   "owner": {
     "type": "organization",
     "login": "OWNER",
@@ -15,7 +15,7 @@
   "project": {
     "number": 101,
     "nodeId": "PVT_synthetic_app_modernization",
-    "title": "App Modernization"
+    "title": "App Modernization - Hyperfinite"
   },
   "fields": [
     {
@@ -27,57 +27,79 @@
         {
           "key": "captured",
           "nodeId": "PVTO_app_stage_captured",
-          "name": "Captured"
+          "name": "Captured",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "key": "activation-pending",
           "nodeId": "PVTO_app_stage_activation",
-          "name": "Activation pending"
+          "name": "Activation pending",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "key": "framing",
           "nodeId": "PVTO_app_stage_framing",
-          "name": "Framing"
+          "name": "Framing",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "key": "planned",
           "nodeId": "PVTO_app_stage_planned",
-          "name": "Planned"
+          "name": "Planned",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "key": "executing",
           "nodeId": "PVTO_app_stage_executing",
-          "name": "Executing"
+          "name": "Executing",
+          "color": "PINK",
+          "description": ""
         },
         {
           "key": "verifying",
           "nodeId": "PVTO_app_stage_verifying",
-          "name": "Verifying"
+          "name": "Verifying",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "key": "human-review",
           "nodeId": "PVTO_app_stage_human",
-          "name": "Human review"
+          "name": "Human review",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "key": "completed",
           "nodeId": "PVTO_app_stage_completed",
-          "name": "Completed"
+          "name": "Completed",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "key": "paused",
           "nodeId": "PVTO_app_stage_paused",
-          "name": "Paused"
+          "name": "Paused",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "key": "blocked",
           "nodeId": "PVTO_app_stage_blocked",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": ""
         },
         {
           "key": "cancelled",
           "nodeId": "PVTO_app_stage_cancelled",
-          "name": "Cancelled"
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -90,72 +112,100 @@
         {
           "key": "intake",
           "nodeId": "PVTO_app_journey_intake",
-          "name": "Intake"
+          "name": "Intake",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "key": "repository-discovery",
           "nodeId": "PVTO_app_journey_repository",
-          "name": "Repository discovery"
+          "name": "Repository discovery",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "key": "current-state-inventory",
           "nodeId": "PVTO_app_journey_inventory",
-          "name": "Current-state inventory"
+          "name": "Current-state inventory",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "key": "modernization-assessment",
           "nodeId": "PVTO_app_journey_assessment",
-          "name": "Modernization assessment"
+          "name": "Modernization assessment",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "key": "target-architecture",
           "nodeId": "PVTO_app_journey_architecture",
-          "name": "Target architecture"
+          "name": "Target architecture",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "key": "migration-plan",
           "nodeId": "PVTO_app_journey_plan",
-          "name": "Migration plan"
+          "name": "Migration plan",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "key": "implementation",
           "nodeId": "PVTO_app_journey_implementation",
-          "name": "Implementation"
+          "name": "Implementation",
+          "color": "PINK",
+          "description": ""
         },
         {
           "key": "verification",
           "nodeId": "PVTO_app_journey_verification",
-          "name": "Verification"
+          "name": "Verification",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "key": "human-review",
           "nodeId": "PVTO_app_journey_review",
-          "name": "Human review"
+          "name": "Human review",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "key": "completed",
           "nodeId": "PVTO_app_journey_completed",
-          "name": "Completed"
+          "name": "Completed",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "key": "activation-pending",
           "nodeId": "PVTO_app_journey_activation",
-          "name": "Activation Pending"
+          "name": "Activation Pending",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "key": "paused",
           "nodeId": "PVTO_app_journey_paused",
-          "name": "Paused"
+          "name": "Paused",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "key": "blocked",
           "nodeId": "PVTO_app_journey_blocked",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": ""
         },
         {
           "key": "cancelled",
           "nodeId": "PVTO_app_journey_cancelled",
-          "name": "Cancelled"
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -175,22 +225,30 @@
         {
           "key": "d0",
           "nodeId": "PVTO_app_d0",
-          "name": "D0"
+          "name": "D0",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "key": "d1",
           "nodeId": "PVTO_app_d1",
-          "name": "D1"
+          "name": "D1",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "key": "d2",
           "nodeId": "PVTO_app_d2",
-          "name": "D2"
+          "name": "D2",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "key": "d3",
           "nodeId": "PVTO_app_d3",
-          "name": "D3"
+          "name": "D3",
+          "color": "PINK",
+          "description": ""
         }
       ]
     },
@@ -203,17 +261,23 @@
         {
           "key": "pending",
           "nodeId": "PVTO_app_pending",
-          "name": "Pending"
+          "name": "Pending",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "key": "satisfied",
           "nodeId": "PVTO_app_satisfied",
-          "name": "Satisfied"
+          "name": "Satisfied",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "key": "blocked",
           "nodeId": "PVTO_app_gate_blocked",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": ""
         }
       ]
     },
@@ -240,17 +304,23 @@
         {
           "key": "none",
           "nodeId": "PVTO_app_none",
-          "name": "None"
+          "name": "None",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "key": "human-action",
           "nodeId": "PVTO_app_human",
-          "name": "Human action"
+          "name": "Human action",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "key": "reconciliation",
           "nodeId": "PVTO_app_reconciliation",
-          "name": "Reconciliation"
+          "name": "Reconciliation",
+          "color": "ORANGE",
+          "description": ""
         }
       ]
     },

@@ -19,17 +19,17 @@
       "name": "Stage",
       "dataType": "SINGLE_SELECT",
       "options": [
-        { "nodeId": "OPT_captured", "name": "Captured" },
-        { "nodeId": "OPT_activation", "name": "Activation pending" },
-        { "nodeId": "OPT_framing", "name": "Framing" },
-        { "nodeId": "OPT_planned", "name": "Planned" },
-        { "nodeId": "OPT_executing", "name": "Executing" },
-        { "nodeId": "OPT_verifying", "name": "Verifying" },
-        { "nodeId": "OPT_human", "name": "Human review" },
-        { "nodeId": "OPT_completed", "name": "Completed" },
-        { "nodeId": "OPT_paused", "name": "Paused" },
-        { "nodeId": "OPT_blocked", "name": "Blocked" },
-        { "nodeId": "OPT_cancelled", "name": "Cancelled" }
+        { "nodeId": "OPT_captured", "name": "Captured", "color": "GRAY", "description": "" },
+        { "nodeId": "OPT_activation", "name": "Activation pending", "color": "YELLOW", "description": "" },
+        { "nodeId": "OPT_framing", "name": "Framing", "color": "BLUE", "description": "" },
+        { "nodeId": "OPT_planned", "name": "Planned", "color": "PURPLE", "description": "" },
+        { "nodeId": "OPT_executing", "name": "Executing", "color": "PINK", "description": "" },
+        { "nodeId": "OPT_verifying", "name": "Verifying", "color": "ORANGE", "description": "" },
+        { "nodeId": "OPT_human", "name": "Human review", "color": "YELLOW", "description": "" },
+        { "nodeId": "OPT_completed", "name": "Completed", "color": "GREEN", "description": "" },
+        { "nodeId": "OPT_paused", "name": "Paused", "color": "ORANGE", "description": "" },
+        { "nodeId": "OPT_blocked", "name": "Blocked", "color": "RED", "description": "" },
+        { "nodeId": "OPT_cancelled", "name": "Cancelled", "color": "GRAY", "description": "" }
       ]
     },
     {
@@ -37,10 +37,10 @@
       "name": "Depth Profile",
       "dataType": "SINGLE_SELECT",
       "options": [
-        { "nodeId": "OPT_d0", "name": "D0" },
-        { "nodeId": "OPT_d1", "name": "D1" },
-        { "nodeId": "OPT_d2", "name": "D2" },
-        { "nodeId": "OPT_d3", "name": "D3" }
+        { "nodeId": "OPT_d0", "name": "D0", "color": "GRAY", "description": "" },
+        { "nodeId": "OPT_d1", "name": "D1", "color": "BLUE", "description": "" },
+        { "nodeId": "OPT_d2", "name": "D2", "color": "PURPLE", "description": "" },
+        { "nodeId": "OPT_d3", "name": "D3", "color": "PINK", "description": "" }
       ]
     },
     {
@@ -54,9 +54,9 @@
       "name": "Gate Status",
       "dataType": "SINGLE_SELECT",
       "options": [
-        { "nodeId": "OPT_pending", "name": "Pending" },
-        { "nodeId": "OPT_satisfied", "name": "Satisfied" },
-        { "nodeId": "OPT_gate_blocked", "name": "Blocked" }
+        { "nodeId": "OPT_pending", "name": "Pending", "color": "YELLOW", "description": "" },
+        { "nodeId": "OPT_satisfied", "name": "Satisfied", "color": "GREEN", "description": "" },
+        { "nodeId": "OPT_gate_blocked", "name": "Blocked", "color": "RED", "description": "" }
       ]
     },
     {
@@ -76,9 +76,9 @@
       "name": "Attention",
       "dataType": "SINGLE_SELECT",
       "options": [
-        { "nodeId": "OPT_none", "name": "None" },
-        { "nodeId": "OPT_human_action", "name": "Human action" },
-        { "nodeId": "OPT_reconcile", "name": "Reconciliation" }
+        { "nodeId": "OPT_none", "name": "None", "color": "GRAY", "description": "" },
+        { "nodeId": "OPT_human_action", "name": "Human action", "color": "YELLOW", "description": "" },
+        { "nodeId": "OPT_reconcile", "name": "Reconciliation", "color": "ORANGE", "description": "" }
       ]
     }
   ]

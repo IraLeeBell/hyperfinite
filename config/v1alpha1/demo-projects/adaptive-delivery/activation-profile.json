@@ -5,9 +5,9 @@
   "spec": {
     "demoProjectId": "adaptive-delivery",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
-    "projectProfileDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4",
-    "stageAgentBindingsDigest": "sha256:f0093a372b2ac87dae57708557dd127ae1a9be7bf9dac508b83da4d64e2b763a",
-    "capabilityShardDigest": "sha256:0e9be6cd85c4cc4e0964d6ab585e495010e50686dcb1d5655192d83ef60801bd",
+    "projectProfileDigest": "sha256:4c1d81288c341a95474c05d45f89b16de84c5a6ad217cf4a3ec33e73bb2bce75",
+    "stageAgentBindingsDigest": "sha256:a9990bdc53c6eca09f7daa6dd02d61c19f2c261ad0f50d16c1d62c5cc167eb00",
+    "capabilityShardDigest": "sha256:54b183d0d5562bb1ad9148e0b04d42b69aacf19b0800a34b6a470736fe7304ba",
     "enabled": false,
     "authorityEpoch": 1,
     "revocationGeneration": 0,
@@ -29,5 +29,5 @@
     "expiresAt": "2027-08-30T00:00:00Z",
     "signingKeyId": "adaptive-delivery:synthetic-activation-key"
   },
-  "contentDigest": "sha256:c6ff4d7a0e75ce57969e9b8be8632c5a2f4e05b9f5f752a335f397a1342a12b0"
+  "contentDigest": "sha256:d8374241a63192dbd5e535b06a508e11e04aaaab11e42c53eb773f2299c7c495"
 }

@@ -5,9 +5,9 @@
   "spec": {
     "demoProjectId": "security-dependency-remediation",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
-    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
-    "stageAgentBindingsDigest": "sha256:b9623fd1dc7d12cb1b5888005493007a8bb7a92aca4516c3e118741d1102d094",
-    "capabilityShardDigest": "sha256:b3fb06d53a7c5c6e446ec4902287f715b0342707d89714768494e2a0609ae1fa",
+    "projectProfileDigest": "sha256:3bfd5991beec9a24546096d62b2ba11de85d3bb70119f683d56d822027f71a8f",
+    "stageAgentBindingsDigest": "sha256:bb9d1816b9611f9dd52453dde4f7ee2ba49c4a70693ea5224124268122e472a3",
+    "capabilityShardDigest": "sha256:841b0e2c4be9ab589da470898ed42a2ee9e47805c00e56fa5a75f7f8f8c83fa5",
     "enabled": false,
     "authorityEpoch": 1,
     "revocationGeneration": 0,
@@ -29,5 +29,5 @@
     "expiresAt": "2027-08-29T20:00:00Z",
     "signingKeyId": "synthetic-security-remediation-activation-key"
   },
-  "contentDigest": "sha256:e4258471bb6aab1f91fd6303a6c8072e657e1131a640f9ec00f3c53c37347463"
+  "contentDigest": "sha256:f150e3e07d6104e1300fa0c6ec47b06f058a4b3caf30a79164e38e647e4b1f42"
 }

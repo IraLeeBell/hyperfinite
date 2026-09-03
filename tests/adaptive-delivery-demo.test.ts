@@ -143,13 +143,7 @@ test("Adaptive Project schema separates intent from fourteen trusted projections
   const requested = projectSchema.fields.find(
     (field) => field.key === "requested-stage-agent"
   );
-  assert.deepEqual(
-    requested?.options.map((option) => ({
-      key: option.key,
-      name: option.name
-    })),
-    ADAPTIVE_DELIVERY_AGENT_OPTIONS
-  );
+  assert.deepEqual(requested?.options, ADAPTIVE_DELIVERY_AGENT_OPTIONS);
 });
 
 test("all Adaptive agents, skills, and static workflow locks are complete", async () => {

@@ -4,9 +4,9 @@
   "schemaVersion": "1.0.0",
   "spec": {
     "demoProjectId": "adaptive-delivery",
-    "projectProfileDigest": "sha256:daf32a2b249878c75d2a4a76db2e77ed37d9724539217d5b570931dfa3f401e4",
-    "journeyDefinitionDigest": "sha256:894bd983fb5e714459399a81d30384722a10e76e00d1aa198aae441d1297167c",
-    "stageAgentBindingsDigest": "sha256:f0093a372b2ac87dae57708557dd127ae1a9be7bf9dac508b83da4d64e2b763a",
+    "projectProfileDigest": "sha256:4c1d81288c341a95474c05d45f89b16de84c5a6ad217cf4a3ec33e73bb2bce75",
+    "journeyDefinitionDigest": "sha256:209b59791e7e63900d092841ccacc846cc73eef365130e64d5660dbd96a350d1",
+    "stageAgentBindingsDigest": "sha256:a9990bdc53c6eca09f7daa6dd02d61c19f2c261ad0f50d16c1d62c5cc167eb00",
     "fields": [
       {
         "key": "stage",
@@ -108,5 +108,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:a7b173f87fa49aefdd72fff19e94321660078261c48f6bb895a0065b5db06d9d"
+  "contentDigest": "sha256:ff4af6a9bd2c0479a425c6d65a9e59485eef9b1ed84be1f0de301fb46df72d03"
 }

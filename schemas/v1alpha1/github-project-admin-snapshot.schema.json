@@ -151,8 +151,8 @@
               "properties": {
                 "nodeId": { "type": "string", "minLength": 1 },
                 "name": { "type": "string", "minLength": 1 },
-                "color": { "type": "string", "minLength": 1 },
-                "description": { "type": "string" }
+                "color": { "enum": ["GRAY", "BLUE", "GREEN", "YELLOW", "ORANGE", "RED", "PINK", "PURPLE"] },
+                "description": { "type": "string", "maxLength": 256 }
               }
             }
           }

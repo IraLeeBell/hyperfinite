@@ -13,6 +13,7 @@ import coreProjectSchemaDocument from "../config/v1alpha1/github-project.json" w
 import {
   DEMO_PROJECT_FIELD_VOCABULARY,
   DEMO_PROJECTION_VOCABULARY,
+  assertDocument,
   createDemoContract,
   createDemoIssueFormBindings,
   digest,
@@ -29,6 +30,7 @@ import {
   type DemoIssueIntakeDecision,
   type DemoProjectId,
   type GitHubProjectBinding,
+  type GitHubProjectOptionColor,
   type GitHubProjectSchema,
   type LiveGitHubProject,
   type ValidatedDemoProjectSchemaCatalog
@@ -37,6 +39,137 @@ import {
 const ROOT = process.cwd();
 const BINDING_TIME = "2026-08-29T17:50:00.000Z";
 const EVALUATED_AT = "2026-08-29T18:00:00.000Z";
+const SUPPORTED_PROJECT_COLORS = new Set<GitHubProjectOptionColor>([
+  "GRAY",
+  "BLUE",
+  "GREEN",
+  "YELLOW",
+  "ORANGE",
+  "RED",
+  "PINK",
+  "PURPLE"
+]);
+const SHARED_FIELD_COLORS = {
+  stage: {
+    captured: "GRAY",
+    "activation-pending": "YELLOW",
+    framing: "BLUE",
+    planned: "PURPLE",
+    executing: "PINK",
+    verifying: "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "depth-profile": {
+    d0: "GRAY",
+    d1: "BLUE",
+    d2: "PURPLE",
+    d3: "PINK"
+  },
+  "gate-status": {
+    pending: "YELLOW",
+    satisfied: "GREEN",
+    blocked: "RED"
+  },
+  attention: {
+    none: "GRAY",
+    "human-action": "YELLOW",
+    reconciliation: "ORANGE"
+  },
+  "stage-interaction": {
+    "backend-autonomous": "BLUE",
+    "user-selectable": "PURPLE",
+    "human-gate": "YELLOW",
+    deterministic: "GREEN",
+    "kernel-control": "ORANGE",
+    terminal: "GRAY"
+  },
+  "agent-selection-status": {
+    "not-applicable": "GRAY",
+    "awaiting-selection": "YELLOW",
+    accepted: "GREEN",
+    invalid: "RED",
+    stale: "ORANGE",
+    "reconciliation-required": "PURPLE"
+  }
+} as const;
+const JOURNEY_STAGE_COLORS = {
+  "app-modernization": {
+    intake: "GRAY",
+    "repository-discovery": "BLUE",
+    "current-state-inventory": "BLUE",
+    "modernization-assessment": "PURPLE",
+    "target-architecture": "PURPLE",
+    "migration-plan": "PURPLE",
+    implementation: "PINK",
+    verification: "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "feature-delivery": {
+    intake: "GRAY",
+    "requirements-clarification": "BLUE",
+    "codebase-discovery": "BLUE",
+    "solution-design": "PURPLE",
+    "implementation-plan": "PURPLE",
+    build: "PINK",
+    "test-and-verification": "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "security-dependency-remediation": {
+    intake: "GRAY",
+    triage: "BLUE",
+    "reproduction-and-impact-analysis": "PURPLE",
+    "remediation-design": "PURPLE",
+    "patch-planning": "PURPLE",
+    "patch-implementation": "PINK",
+    "security-verification": "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  },
+  "adaptive-delivery": {
+    intake: "GRAY",
+    "context-inventory": "BLUE",
+    "discovery-studio": "BLUE",
+    "guided-synthesis": "PURPLE",
+    "implementation-plan": "PURPLE",
+    "implementation-studio": "PINK",
+    "test-and-verification": "ORANGE",
+    "human-review": "YELLOW",
+    completed: "GREEN",
+    "activation-pending": "YELLOW",
+    paused: "ORANGE",
+    blocked: "RED",
+    cancelled: "GRAY"
+  }
+} as const;
+
+function optionColors(
+  schema: GitHubProjectSchema,
+  fieldKey: string
+): Readonly<Record<string, GitHubProjectOptionColor>> {
+  const field = schema.fields.find((candidate) => candidate.key === fieldKey);
+  assert.notEqual(field, undefined);
+  return Object.fromEntries(
+    field!.options.map((option) => [option.key, option.color])
+  );
+}
 
 async function readJson(relativePath: string): Promise<unknown> {
   return JSON.parse(
@@ -235,6 +368,109 @@ test("the Project UX catalog is exactly the four Foundation schemas", async () =
   }
 });
 
+test("every single-select option has the exact supported semantic color", async () => {
+  const schemas = await projectSchemas();
+  const coreSchema = coreProjectSchemaDocument as GitHubProjectSchema;
+  for (const fieldKey of [
+    "stage",
+    "depth-profile",
+    "gate-status",
+    "attention"
+  ] as const) {
+    assert.deepEqual(
+      optionColors(coreSchema, fieldKey),
+      SHARED_FIELD_COLORS[fieldKey]
+    );
+  }
+  for (const entry of schemas.entries) {
+    for (const field of entry.schema.fields) {
+      if (field.dataType === "SINGLE_SELECT") {
+        assert.ok(field.options.length > 0);
+        assert.ok(
+          field.options.every((option) =>
+            SUPPORTED_PROJECT_COLORS.has(option.color)
+          )
+        );
+      } else {
+        assert.deepEqual(field.options, []);
+      }
+    }
+    for (const [fieldKey, expected] of Object.entries(SHARED_FIELD_COLORS)) {
+      assert.deepEqual(optionColors(entry.schema, fieldKey), expected);
+    }
+    assert.deepEqual(
+      optionColors(entry.schema, "journey-stage"),
+      JOURNEY_STAGE_COLORS[entry.demoProjectId]
+    );
+    assert.deepEqual(
+      optionColors(entry.schema, "requested-stage-agent"),
+      entry.demoProjectId === "adaptive-delivery"
+        ? {
+            "discovery-customer-value-explorer": "BLUE",
+            "discovery-technical-options-explorer": "BLUE",
+            "discovery-delivery-risk-challenger": "BLUE",
+            "implementation-minimal-slice-builder": "PURPLE",
+            "implementation-resilience-first-builder": "PURPLE"
+          }
+        : { "selection-unavailable-locked": "GRAY" }
+    );
+  }
+});
+
+test("Project schema colors are required, supported, and Foundation-exact", async () => {
+  const missingColor = structuredClone(coreProjectSchemaDocument) as {
+    fields: { key: string; options: { color?: string }[] }[];
+  };
+  delete missingColor.fields[0]!.options[0]!.color;
+  assert.throws(
+    () => assertDocument("GitHubProjectSchema", missingColor),
+    /GitHubProjectSchema validation failed/u
+  );
+
+  const unsupportedColor = structuredClone(coreProjectSchemaDocument) as {
+    fields: { key: string; options: { color: string }[] }[];
+  };
+  unsupportedColor.fields[0]!.options[0]!.color = "BLACK";
+  assert.throws(
+    () => assertDocument("GitHubProjectSchema", unsupportedColor),
+    /GitHubProjectSchema validation failed/u
+  );
+
+  const schemas = await projectSchemas();
+  const mismatchedEntries = schemas.entries.map((entry) =>
+    entry.demoProjectId === "feature-delivery"
+      ? {
+          ...entry,
+          schema: {
+            ...entry.schema,
+            fields: entry.schema.fields.map((field) =>
+              field.key === "journey-stage"
+                ? {
+                    ...field,
+                    options: field.options.map((option) =>
+                      option.key === "build"
+                        ? { ...option, color: "BLUE" as const }
+                        : option
+                    )
+                  }
+                : field
+            )
+          }
+        }
+      : entry
+  );
+  assert.throws(
+    () =>
+      validateDemoProjectSchemaCatalog({
+        catalog: catalogDocument,
+        reservations: reservationsDocument,
+        coreSchema: coreProjectSchemaDocument,
+        entries: mismatchedEntries
+      }),
+    /exact Foundation projection/u
+  );
+});
+
 test("Journey Stage options match every reserved stage and control presentation", async () => {
   const schemas = await projectSchemas();
   for (const entry of schemas.entries) {
@@ -381,6 +617,63 @@ test("catalog setup, export, and import stay deterministic and dry-run", async (
   });
   assert.equal(imported.demoCatalogDigest, catalogDocument.contentDigest);
   assert.equal(imported.entries.length, 4);
+  assert.equal(
+    exportDemoProjectCatalogConfiguration({
+      projectSchemas: schemas,
+      bindings: plan.entries.map((entry) => ({
+        demoProjectId: entry.demoProjectId,
+        binding: entry.plan.binding
+      }))
+    }),
+    serialized
+  );
+  assert.ok(
+    imported.entries.every((entry) =>
+      entry.binding?.fields.every((field) =>
+        field.options.every(
+          (option) =>
+            SUPPORTED_PROJECT_COLORS.has(option.color) &&
+            typeof option.description === "string"
+        )
+      )
+    )
+  );
+
+  const colorTampered = {
+    ...imported,
+    entries: imported.entries.map((entry, index) =>
+      index !== 0 || entry.binding === null
+        ? entry
+        : {
+            ...entry,
+            binding: {
+              ...entry.binding,
+              fields: entry.binding.fields.map((field, fieldIndex) =>
+                fieldIndex !== 0
+                  ? field
+                  : {
+                      ...field,
+                      options: field.options.map((option, optionIndex) =>
+                        optionIndex === 0
+                          ? { ...option, color: "BLUE" as const }
+                          : option
+                      )
+                    }
+              )
+            }
+          }
+    )
+  };
+  assert.throws(
+    () =>
+      importDemoProjectCatalogConfiguration({
+        serialized: JSON.stringify(colorTampered),
+        catalog: catalogDocument,
+        reservations: reservationsDocument,
+        coreSchema: coreProjectSchemaDocument
+      }),
+    /binding does not match/u
+  );
 
   const driftedLive = (await liveProjects()).map((entry) =>
     entry.demoProjectId === "app-modernization"
@@ -404,6 +697,57 @@ test("catalog setup, export, and import stay deterministic and dry-run", async (
   assert.equal(actions.length, 1);
   assert.ok(actions.every((action) => action.requiresHumanAdmin));
 
+  for (const changedOption of [
+    { color: "GRAY" as const, description: "" },
+    { color: "PINK" as const, description: "drifted description" }
+  ]) {
+    const colorDrift = (await liveProjects()).map((entry) =>
+      entry.demoProjectId === "feature-delivery"
+        ? {
+            ...entry,
+            live: {
+              ...entry.live,
+              fields: entry.live.fields.map((field) =>
+                field.name === "Journey Stage"
+                  ? {
+                      ...field,
+                      options: field.options.map((option) =>
+                        option.name === "Build"
+                          ? { ...option, ...changedOption }
+                          : option
+                      )
+                    }
+                  : field
+              )
+            }
+          }
+        : entry
+    );
+    const featurePlan = planDemoProjectCatalogSetup({
+      projectSchemas: schemas,
+      liveProjects: colorDrift,
+      evaluatedAt: BINDING_TIME
+    }).entries.find(
+      (entry) => entry.demoProjectId === "feature-delivery"
+    )!.plan;
+    assert.equal(featurePlan.binding, null);
+    assert.deepEqual(
+      featurePlan.actions.map((action) =>
+        action.type === "reconcile-drift" ? action.path : action.type
+      ),
+      ["/fields/journey-stage/options/build"]
+    );
+    assert.ok(featurePlan.actions.every((action) => action.requiresHumanAdmin));
+    assert.deepEqual(
+      schemas.entries.find(
+        (entry) => entry.demoProjectId === "feature-delivery"
+      )!.schema.projections,
+      imported.entries.find(
+        (entry) => entry.demoProjectId === "feature-delivery"
+      )!.schema.projections
+    );
+  }
+
   for (const options of [
     [...driftedLive[1]!.live.fields
       .find((field) => field.name === "Journey Stage")!
@@ -412,7 +756,12 @@ test("catalog setup, export, and import stay deterministic and dry-run", async (
       ...driftedLive[1]!.live.fields.find(
         (field) => field.name === "Journey Stage"
       )!.options,
-      { nodeId: "PVTO_feature_unauthorized", name: "Unauthorized Stage" }
+      {
+        nodeId: "PVTO_feature_unauthorized",
+        name: "Unauthorized Stage",
+        color: "RED" as const,
+        description: ""
+      }
     ]
   ]) {
     const optionDrift = (await liveProjects()).map((entry) =>
@@ -466,7 +815,9 @@ test("catalog setup, export, and import stay deterministic and dry-run", async (
                       ),
                       {
                         nodeId: "PVTO_feature_unauthorized",
-                        name: "Unauthorized Stage"
+                        name: "Unauthorized Stage",
+                        color: "RED" as const,
+                        description: ""
                       }
                     ]
                   }

@@ -4,9 +4,9 @@
   "schemaVersion": "1.0.0",
   "spec": {
     "demoProjectId": "security-dependency-remediation",
-    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
-    "journeyDefinitionDigest": "sha256:3b74dd36f041d19ce588b80746971eebe0b3d3e6a594eed89331151886f16aab",
-    "stageAgentBindingsDigest": "sha256:b9623fd1dc7d12cb1b5888005493007a8bb7a92aca4516c3e118741d1102d094",
+    "projectProfileDigest": "sha256:3bfd5991beec9a24546096d62b2ba11de85d3bb70119f683d56d822027f71a8f",
+    "journeyDefinitionDigest": "sha256:d43957634b3841c5d6861d35b7b76d1a58ecc39c4931dcb9e46ebc598d4cfbdc",
+    "stageAgentBindingsDigest": "sha256:bb9d1816b9611f9dd52453dde4f7ee2ba49c4a70693ea5224124268122e472a3",
     "fields": [
       {
         "key": "stage",
@@ -108,5 +108,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:4288c6fb1068080d27a50c594f8990e008bd3a9d22243fd19117d4dd403bcc2c"
+  "contentDigest": "sha256:f86ec36fbd5892c956724104e2f55a9a386f1ed6858d727cf401a35ddf451c2a"
 }

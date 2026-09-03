@@ -4,9 +4,9 @@
   "schemaVersion": "1.0.0",
   "spec": {
     "demoProjectId": "feature-delivery",
-    "projectProfileDigest": "sha256:69cd93cc47c615b2b2f6c495ff12b1e509ae2f7774a477bc64e4f7a69a3dfce1",
-    "journeyDefinitionDigest": "sha256:50e713f9b726b130007ef8a3e8dd0be3dafadd40991fb937040044065102d048",
-    "stageAgentBindingsDigest": "sha256:b7dcf70c930465b7dc6d32fa251d1f761478845d8f4f22da00aae09031a7c53f",
+    "projectProfileDigest": "sha256:df8e446236b00ef4a5af1078007ad7f19fd9ebdd85dea2f444ee9acb490c6219",
+    "journeyDefinitionDigest": "sha256:baa5109014aff6f8fef366177da92e969121d99700f89ce55a01e5d1d73fc29f",
+    "stageAgentBindingsDigest": "sha256:a46b1995a1bc57c2fa7682a45eb576458f2979890a73356b456ee561f267a74f",
     "fields": [
       {
         "key": "stage",
@@ -108,5 +108,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:d8827521d7e19dc0a6ca4f564d7985c4a8fc355c69835e320ca152dac4725528"
+  "contentDigest": "sha256:73c1d7c996717e9d871effa91fc6b723c8b55668f09b4a5a130865bfbdb5ec2b"
 }

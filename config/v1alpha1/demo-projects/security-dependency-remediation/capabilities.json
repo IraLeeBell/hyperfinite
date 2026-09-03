@@ -6,7 +6,7 @@
     "demoProjectId": "security-dependency-remediation",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
     "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
-    "projectProfileDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952",
+    "projectProfileDigest": "sha256:3bfd5991beec9a24546096d62b2ba11de85d3bb70119f683d56d822027f71a8f",
     "capabilities": [
       {
         "id": "demo.security-dependency-remediation.triage",
@@ -687,5 +687,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:b3fb06d53a7c5c6e446ec4902287f715b0342707d89714768494e2a0609ae1fa"
+  "contentDigest": "sha256:841b0e2c4be9ab589da470898ed42a2ee9e47805c00e56fa5a75f7f8f8c83fa5"
 }

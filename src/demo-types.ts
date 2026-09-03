@@ -316,6 +316,7 @@ export type DemoProjectTargetManifest = ContentAddressedDemoContract<
     };
     readonly projects: readonly {
       readonly demoProjectId: DemoProjectId;
+      readonly projectSchemaDigest: Digest;
       readonly title: string;
       readonly number: number;
       readonly nodeId: string;

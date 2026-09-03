@@ -216,8 +216,10 @@ repository hint as a target, bypass consent, request an unauthorized depth, or
 smuggle oversized content toward inference. A disabled or expired activation
 profile, unauthorized submitter, missing fixed budget, unresolved repository
 binding, or stale Project binding can be overlooked. Project card movement,
-dashboard state, or a free-form clarification heuristic can then be mistaken for
-Kernel authority or trigger an untracked recovery issue.
+dashboard state, option color, or a free-form clarification heuristic can then
+be mistaken for Kernel authority or trigger an untracked recovery issue. An
+omitted or drifted color can also conceal a stale Project configuration if a
+reader silently defaults it to gray.
 
 ### T28 Hybrid agent selection and live Project bootstrap confusion
 
@@ -229,7 +231,9 @@ during inference to retarget an in-flight run. Candidate-catalog or policy drift
 can create a confused deputy. Separately, an administrator can apply a Project
 plan to a renamed, transferred, public, closed, unlinked, or substituted
 Project, infer success from mutation responses, or seed cards that appear to be
-runtime evidence.
+runtime evidence. A target manifest that does not bind the exact Project-schema
+digest, or readback that ignores option color, description, or node identity,
+can accept a different display contract than the one a human reviewed.
 
 ### T29 Deployment topology, App registration, and administrator plan confusion
 
@@ -826,11 +830,14 @@ global runtime identity injectivity, per-demo shard closure, generic-agent and
 cross-demo substitution, model control fields, same-state overlay misuse, and
 applied Kernel receipt mismatch. Project UX tests cover the exact fifteen-field
 schema, fourteen-field projection, Requested Stage Agent input separation, and
-Journey Stage catalogs, static form/profile bindings, content bounds, consent,
-submitter, depth, fixed-budget, activation-window, repository/Project freshness,
-no-authority success, typed single-field clarification, dry-run catalog planning,
-human-admin-only drift, exact-target bootstrap planning/readback, and
-export/import substitution. Hybrid-selection tests cover policy intersection,
+Journey Stage catalogs; complete supported color coverage and cross-demo
+semantic consistency; omitted, unsupported, and mismatched color refusal;
+static form/profile bindings, content bounds, consent, submitter, depth,
+fixed-budget, activation-window, repository/Project freshness, no-authority
+success, typed single-field clarification, dry-run catalog planning,
+human-admin-only color and description drift, exact-target bootstrap
+planning/readback with field and option identities, and export/import
+substitution. Hybrid-selection tests cover policy intersection,
 actor eligibility, fixed and selectable candidates, no fallback, wrong-stage
 options, stale heads and generations, exact duplicate idempotency, conflicting
 replay, and immutable selected dispatch.
