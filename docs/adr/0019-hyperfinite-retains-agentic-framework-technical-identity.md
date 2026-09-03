@@ -58,6 +58,14 @@ verifies package/lock metadata, schema/API identity, registry publishers, and
 the Project display boundary, and rejects Hyperfinite-shaped package, API,
 publisher, or domain identifiers.
 
+The two customer-starter selection files normalize only `sourceHeadSha`,
+`baseSelectionDigest`, and `resolvedClosureDigest` before this full-file hash.
+Those values are necessarily rewritten by the separate clean-commit repin
+protocol and are independently recomputed at the reviewed and build heads.
+Every selection path, relationship, inclusion, exclusion, schema field, and
+other byte remains represented; changing selection semantics still changes the
+identity inventory.
+
 The compatibility contract binds distinct reviewed inventories for the
 authoritative repository, `control-plane-core`, and `demo-portfolio`. Validation
 accepts only an exact evidence match; deleting a marker file cannot select a

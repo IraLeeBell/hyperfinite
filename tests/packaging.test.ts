@@ -205,6 +205,59 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
   ]);
   assert.equal(enabledDomain.occurrences, disabledDomain.occurrences);
   assert.notEqual(enabledDomain.inventoryDigest, disabledDomain.inventoryDigest);
+  const selectionEvidence = {
+    apiVersion: RETAINED_TECHNICAL_IDENTITY.apiVersion,
+    kind: "CustomerStarterSelection",
+    schemaVersion: "1.0.0",
+    profileId: "control-plane-core",
+    extendsProfileId: null,
+    baseSelectionDigest: null,
+    sourceHeadSha: "1".repeat(40),
+    includedPaths: ["src"],
+    excludedPaths: [],
+    resolvedClosureDigest: `sha256:${"2".repeat(64)}`
+  };
+  const firstSelectionInventory = inventoryTechnicalIdentity([
+    {
+      path: "config/v1alpha1/customer-starter-selection.json",
+      content: JSON.stringify(selectionEvidence, null, 2)
+    }
+  ]);
+  const repinnedSelectionInventory = inventoryTechnicalIdentity([
+    {
+      path: "config/v1alpha1/customer-starter-selection.json",
+      content: JSON.stringify(
+        {
+          ...selectionEvidence,
+          sourceHeadSha: "3".repeat(40),
+          resolvedClosureDigest: `sha256:${"4".repeat(64)}`
+        },
+        null,
+        2
+      )
+    }
+  ]);
+  assert.equal(
+    firstSelectionInventory.inventoryDigest,
+    repinnedSelectionInventory.inventoryDigest
+  );
+  const widenedSelectionInventory = inventoryTechnicalIdentity([
+    {
+      path: "config/v1alpha1/customer-starter-selection.json",
+      content: JSON.stringify(
+        {
+          ...selectionEvidence,
+          includedPaths: ["src", "scripts"]
+        },
+        null,
+        2
+      )
+    }
+  ]);
+  assert.notEqual(
+    firstSelectionInventory.inventoryDigest,
+    widenedSelectionInventory.inventoryDigest
+  );
   assert.doesNotThrow(() =>
     assertTechnicalIdentityInventoryEvidence(inventory, {
       inventoryFiles: inventory.filesWithOccurrences,

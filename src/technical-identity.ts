@@ -641,6 +641,40 @@ function newCategoryCounts(): Record<
   };
 }
 
+function identityBearingFileDigest(
+  source: TechnicalIdentitySource
+): `sha256:${string}` {
+  if (
+    source.path !== "config/v1alpha1/customer-starter-selection.json" &&
+    source.path !==
+      "config/v1alpha1/customer-starter-demo-portfolio-selection.json"
+  ) {
+    return digest(source.content);
+  }
+  const selection = parseStrictJson(source.content);
+  if (
+    !isRecord(selection) ||
+    selection["kind"] !== "CustomerStarterSelection" ||
+    typeof selection["sourceHeadSha"] !== "string" ||
+    typeof selection["resolvedClosureDigest"] !== "string" ||
+    (selection["baseSelectionDigest"] !== null &&
+      typeof selection["baseSelectionDigest"] !== "string")
+  ) {
+    throw new TypeError(
+      `${source.path} is not a valid customer-starter selection`
+    );
+  }
+  const digestPlaceholder =
+    "sha256:0000000000000000000000000000000000000000000000000000000000000000";
+  return digest({
+    ...selection,
+    sourceHeadSha: "0000000000000000000000000000000000000000",
+    baseSelectionDigest:
+      selection["baseSelectionDigest"] === null ? null : digestPlaceholder,
+    resolvedClosureDigest: digestPlaceholder
+  });
+}
+
 export function inventoryTechnicalIdentity(
   sources: readonly TechnicalIdentitySource[],
   identity: TechnicalIdentity = RETAINED_TECHNICAL_IDENTITY
@@ -735,7 +769,7 @@ export function inventoryTechnicalIdentity(
     if (reviewedLines.length > 0) {
       reviewedFiles.push({
         path: source.path,
-        contentDigest: digest(source.content),
+        contentDigest: identityBearingFileDigest(source),
         lines: reviewedLines
       });
     }
