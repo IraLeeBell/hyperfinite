@@ -27,8 +27,8 @@ Run `npm run demo:authority -- --format=json` for the canonical structured
 result. The
 [complete accessible transcript and reproducible recording command](docs/authority-boundary-walkthrough.md)
 uses the same executable scenario. The command is available in an authoritative
-repository clone, the verified `control-plane-core` and `demo-portfolio`
-customer-starter profiles, and a reviewed full file-only customer copy.
+repository clone, the verified `control-plane-core` customer-starter profile,
+and a reviewed full file-only customer copy.
 
 This walkthrough uses fixed synthetic inputs and an injected fake provider. It
 performs no live inference, credential read, network call, GitHub mutation,
@@ -247,7 +247,7 @@ Deploy separate identities for:
 4. threat, DLP, policy, and evidence signing;
 5. conditional evidence and operation-grant storage;
 6. operation-scoped GitHub App token brokerage;
-7. the Single Writer (the sole target-bound effect executor) and
+7. the Single Writer (the serialized workflow Effect Plan executor) and
    reconciliation; and
 8. the isolated verification runner and installation/release adapter.
 
@@ -297,12 +297,16 @@ adopt.
 
 ## Authority model
 
-The **Work Accord** is the human-reviewed work policy and phase contract. The
-**Control Kernel** is the pure deterministic state-transition and authorization
-engine. **Trusted Binding** derives the exact repository, work item, revision,
-and head from current authenticated facts rather than model output. The
-**Single Writer** is the only component permitted to execute an authorized,
-target-bound effect after one final fresh read.
+The **Work Accord** is the versioned, non-authoritative contract for one work
+item: requested outcomes, constraints, exact bindings, and applicable Phase
+Contract digests. A **Phase Contract** separately defines one approved active
+phase's entry, output, evidence, budget, and deterministic exit rules. Neither
+contract grants authority by itself. The **Control Kernel** is the pure
+deterministic state-transition and authorization engine. **Trusted Binding**
+derives the exact repository, work item, revision, and head from current
+authenticated facts rather than model output. The **Single Writer** is the only
+component permitted to execute an authorized workflow Effect Plan after one
+final fresh read.
 
 Authority is ordered and non-interchangeable:
 
@@ -419,11 +423,12 @@ workflow Markdown. Never hand-edit `.lock.yml` files or
 
 ## Documentation
 
-Use the [documentation index](docs/README.md) for the complete audience map,
-architecture decisions, demos, runtime, security, runbooks, governance,
-provenance, release evidence, configuration, schemas, source, tooling, and test
-documentation. The role table above keeps each first reader's next document one
-click away without duplicating that index.
+Use the [documentation index](docs/README.md) for the complete audience and
+narrative map. Repository reference documentation not repeated there:
+[Examples](examples/README.md) · [Configuration](config/README.md) ·
+[Schemas](schemas/README.md) · [Source map](src/README.md) ·
+[Tooling](scripts/README.md) · [Tests and evidence](tests/README.md).
+The role table above keeps each first reader's next document one click away.
 
 ## Repository layout
 
