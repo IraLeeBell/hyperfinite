@@ -815,6 +815,31 @@ test("trusted bindings, slots, and commands deny target substitution", () => {
   );
   assert.equal(projectBinding.projectSchemaDigest, digest(projectSchema));
   assert.equal(profile.spec.projectBindingDigest, digest(projectBinding));
+  assert.equal(projectBinding.fields.length, projectSchema.fields.length);
+  assert.deepEqual(
+    projectBinding.fields.map((field) => ({
+      key: field.key,
+      name: field.name,
+      dataType: field.dataType,
+      options: field.options.map((option) => ({
+        key: option.key,
+        name: option.name,
+        color: option.color,
+        description: option.description
+      }))
+    })),
+    projectSchema.fields.map((field) => ({
+      key: field.key,
+      name: field.name,
+      dataType: field.dataType,
+      options: field.options.map((option) => ({
+        key: option.key,
+        name: option.name,
+        color: option.color,
+        description: option.description ?? ""
+      }))
+    }))
+  );
 
   const workAccordTemplate = readJson<{
     readonly apiVersion: string;

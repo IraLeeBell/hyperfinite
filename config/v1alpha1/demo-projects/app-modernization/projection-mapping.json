@@ -4,9 +4,9 @@
   "schemaVersion": "1.0.0",
   "spec": {
     "demoProjectId": "app-modernization",
-    "projectProfileDigest": "sha256:eeabe1ce56ceb3204aaa3d25a03772f4c024d4ca8148a45d0fb6bdd1df600f67",
-    "journeyDefinitionDigest": "sha256:50a04d869dd72f2f5e2fbf60d8102330f7a071b0400a4e07edef62048523ff3e",
-    "stageAgentBindingsDigest": "sha256:49ba292ab11140359ad9385718ae0a5d0b1838716120c8ef579c34651bfb941d",
+    "projectProfileDigest": "sha256:c282f48da8f22d74a39556705051f888efac4c3995ade23f8a3672c424127035",
+    "journeyDefinitionDigest": "sha256:fa168e774a508e6e58a2461ae6919c2df37c1b24167be36fd6d899cc18be71a4",
+    "stageAgentBindingsDigest": "sha256:a4e8a5be7e36058affea21ce669e88933d94cd9bc0b6ac32284e96a42c56fae5",
     "fields": [
       {
         "key": "stage",
@@ -108,5 +108,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:3cf93f45e4e0973cfa9b7db35e11e823d87e3f58c242e33fa2bc8b8d2b0bf455"
+  "contentDigest": "sha256:e79997ff473c3d3ee7d3af2765fe2d0ee38da54d1d170e1135cba627afef401d"
 }

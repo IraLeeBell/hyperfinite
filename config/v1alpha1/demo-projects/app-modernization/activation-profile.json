@@ -8,7 +8,7 @@
       101
     ],
     "authorityEpoch": 1,
-    "capabilityShardDigest": "sha256:33493d88e4376260530b2bb2dba3cb9cc0e2071dd3543b8f3af7140cdccf368f",
+    "capabilityShardDigest": "sha256:eb295bbbfae644d7d4301a35a56a0b44332a8b4602fec835e13bc085aa58d546",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
     "consentField": "demo-consent",
     "consentRequired": true,
@@ -23,11 +23,11 @@
       "maxRetries": 1,
       "maxTokens": 50000
     },
-    "projectProfileDigest": "sha256:eeabe1ce56ceb3204aaa3d25a03772f4c024d4ca8148a45d0fb6bdd1df600f67",
+    "projectProfileDigest": "sha256:c282f48da8f22d74a39556705051f888efac4c3995ade23f8a3672c424127035",
     "revocationGeneration": 0,
     "signingKeyId": "app-modernization:activation-key-1",
-    "stageAgentBindingsDigest": "sha256:49ba292ab11140359ad9385718ae0a5d0b1838716120c8ef579c34651bfb941d",
+    "stageAgentBindingsDigest": "sha256:a4e8a5be7e36058affea21ce669e88933d94cd9bc0b6ac32284e96a42c56fae5",
     "validFrom": "2026-08-29T12:00:00Z"
   },
-  "contentDigest": "sha256:0745626da825594101be1623a67f39a23e165d635b3c8b1afc19def36876bdd6"
+  "contentDigest": "sha256:b101d45f0fd9367fa6ef8134aa2b29712f626df230c7c2717869df0a0e5cceb0"
 }

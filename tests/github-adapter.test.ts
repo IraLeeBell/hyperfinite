@@ -376,6 +376,19 @@ test("Project export/import binds schema and live IDs", async () => {
     () => exportProjectConfiguration(schema, colorTampered),
     /does not match/
   );
+  const duplicateIds = JSON.parse(serialized) as {
+    binding: {
+      fields: {
+        options: { nodeId: string }[];
+      }[];
+    };
+  };
+  duplicateIds.binding.fields[0]!.options[1]!.nodeId =
+    duplicateIds.binding.fields[0]!.options[0]!.nodeId;
+  assert.throws(
+    () => importProjectConfiguration(JSON.stringify(duplicateIds)),
+    /does not match/
+  );
 });
 
 test("Project migrations are dry-run and deterministic", async () => {

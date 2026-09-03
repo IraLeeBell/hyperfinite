@@ -586,6 +586,87 @@ function projectSchema(coreSchema, demoProjectId, reservation) {
   };
 }
 
+function projectLiveSnapshot(schema, demoProjectId) {
+  const project = EXAMPLE_PROJECTS[demoProjectId];
+  return {
+    owner: {
+      type: "organization",
+      login: "example-organization",
+      nodeId: "O_synthetic_example_organization"
+    },
+    installation: {
+      id: 2402,
+      accountNodeId: "O_synthetic_example_organization"
+    },
+    project: {
+      number: project.number,
+      nodeId: project.nodeId,
+      title: project.title
+    },
+    fields: schema.fields.map((field, fieldIndex) => ({
+      nodeId: `PVTF_synthetic_${demoProjectId.replaceAll("-", "_")}_${fieldIndex + 1}`,
+      name: field.name,
+      dataType: field.dataType,
+      options: field.options.map((option, optionIndex) => ({
+        nodeId: `PVTO_synthetic_${demoProjectId.replaceAll("-", "_")}_${fieldIndex + 1}_${optionIndex + 1}`,
+        name: option.name,
+        color: option.color,
+        description: option.description ?? ""
+      }))
+    }))
+  };
+}
+
+function projectBindingFromSnapshot(schema, snapshot, validatedAt) {
+  return {
+    apiVersion: API_VERSION,
+    kind: "GitHubProjectBinding",
+    schemaVersion: "1.0.0",
+    projectSchemaDigest: digest(schema),
+    owner: snapshot.owner,
+    installation: snapshot.installation,
+    project: snapshot.project,
+    fields: schema.fields.map((field, fieldIndex) => {
+      const observed = snapshot.fields[fieldIndex];
+      if (
+        observed === undefined ||
+        observed.name !== field.name ||
+        observed.dataType !== field.dataType ||
+        observed.options.length !== field.options.length
+      ) {
+        throw new TypeError(`incomplete Project readback field ${field.key}`);
+      }
+      return {
+        key: field.key,
+        nodeId: observed.nodeId,
+        name: observed.name,
+        dataType: observed.dataType,
+        options: field.options.map((option, optionIndex) => {
+          const observedOption = observed.options[optionIndex];
+          if (
+            observedOption === undefined ||
+            observedOption.name !== option.name ||
+            observedOption.color !== option.color ||
+            observedOption.description !== (option.description ?? "")
+          ) {
+            throw new TypeError(
+              `incomplete Project readback option ${field.key}/${option.key}`
+            );
+          }
+          return {
+            key: option.key,
+            nodeId: observedOption.nodeId,
+            name: observedOption.name,
+            color: observedOption.color,
+            description: observedOption.description
+          };
+        })
+      };
+    }),
+    validatedAt
+  };
+}
+
 function participationEntry(stageValue, demoProjectId) {
   const model = stageValue.executionKind === "model";
   const selectable =
@@ -992,44 +1073,11 @@ for (const demoProjectId of DEMOS.slice(0, 3)) {
     );
     const fixturePath =
       "tests/fixtures/demos/app-modernization/trusted-project-binding.json";
-    const projectBinding = await readJson(fixturePath);
-    const nextProjectBinding = {
-      ...projectBinding,
-      projectSchemaDigest: digest(schema),
-      project: {
-        ...projectBinding.project,
-        title: schema.project.title
-      },
-      fields: projectBinding.fields.map((field) => {
-        const expectedField = schema.fields.find(
-          (candidate) => candidate.key === field.key
-        );
-        if (expectedField === undefined) {
-          throw new TypeError(`unknown Project binding field ${field.key}`);
-        }
-        return {
-          ...field,
-          options: field.options.map((option) => {
-            const expectedOption = expectedField.options.find(
-              (candidate) => candidate.key === option.key
-            );
-            if (
-              expectedOption === undefined ||
-              expectedOption.name !== option.name
-            ) {
-              throw new TypeError(
-                `unknown Project binding option ${field.key}/${option.key}`
-              );
-            }
-            return {
-              ...option,
-              color: expectedOption.color,
-              description: expectedOption.description ?? ""
-            };
-          })
-        };
-      })
-    };
+    const nextProjectBinding = projectBindingFromSnapshot(
+      schema,
+      projectLiveSnapshot(schema, demoProjectId),
+      "2026-08-29T18:00:00.000Z"
+    );
     projectBindingDigest = digest(nextProjectBinding);
     await writeJson(fixturePath, nextProjectBinding);
   } else if (demoProjectId === "feature-delivery") {
@@ -1716,34 +1764,10 @@ await writeJson(
 
 for (const demoProjectId of DEMOS) {
   const schema = generated.get(demoProjectId).schema;
-  const live = EXAMPLE_PROJECTS[demoProjectId];
-  await writeJson(`tests/fixtures/project-ux/live/${demoProjectId}.json`, {
-    owner: {
-      type: "organization",
-      login: "example-organization",
-      nodeId: "O_synthetic_example_organization"
-    },
-    installation: {
-      id: 2402,
-      accountNodeId: "O_synthetic_example_organization"
-    },
-    project: {
-      number: live.number,
-      nodeId: live.nodeId,
-      title: live.title
-    },
-    fields: schema.fields.map((field, fieldIndex) => ({
-      nodeId: `PVTF_synthetic_${demoProjectId.replaceAll("-", "_")}_${fieldIndex + 1}`,
-      name: field.name,
-      dataType: field.dataType,
-      options: field.options.map((option, optionIndex) => ({
-        nodeId: `PVTO_synthetic_${demoProjectId.replaceAll("-", "_")}_${fieldIndex + 1}_${optionIndex + 1}`,
-        name: option.name,
-        color: option.color,
-        description: option.description ?? ""
-      }))
-    }))
-  });
+  await writeJson(
+    `tests/fixtures/project-ux/live/${demoProjectId}.json`,
+    projectLiveSnapshot(schema, demoProjectId)
+  );
 
   const seedPath = `examples/demo-projects/${demoProjectId}/seeded-issue.json`;
   let seed;

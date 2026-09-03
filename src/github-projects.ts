@@ -487,7 +487,12 @@ function projectBindingMatchesSchema(
   binding: GitHubProjectBinding,
   schema: GitHubProjectSchema
 ): boolean {
+  const nodeIds = binding.fields.flatMap((field) => [
+    field.nodeId,
+    ...field.options.map((option) => option.nodeId)
+  ]);
   return (
+    new Set(nodeIds).size === nodeIds.length &&
     binding.projectSchemaDigest === digest(schema) &&
     binding.project.title === schema.project.title &&
     canonicalJson(

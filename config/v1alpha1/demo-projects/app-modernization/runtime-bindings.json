@@ -6,9 +6,9 @@
     "demoProjectId": "app-modernization",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
     "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
-    "projectProfileDigest": "sha256:eeabe1ce56ceb3204aaa3d25a03772f4c024d4ca8148a45d0fb6bdd1df600f67",
-    "journeyDefinitionDigest": "sha256:50a04d869dd72f2f5e2fbf60d8102330f7a071b0400a4e07edef62048523ff3e",
-    "capabilityShardDigest": "sha256:33493d88e4376260530b2bb2dba3cb9cc0e2071dd3543b8f3af7140cdccf368f",
+    "projectProfileDigest": "sha256:c282f48da8f22d74a39556705051f888efac4c3995ade23f8a3672c424127035",
+    "journeyDefinitionDigest": "sha256:fa168e774a508e6e58a2461ae6919c2df37c1b24167be36fd6d899cc18be71a4",
+    "capabilityShardDigest": "sha256:eb295bbbfae644d7d4301a35a56a0b44332a8b4602fec835e13bc085aa58d546",
     "participationPolicyDigest": "sha256:f7c8ef2282725040cc6586231005efc73f23cf3e7fe7faf233d7dae1aa8f4746",
     "stageBindings": [
       {
@@ -347,5 +347,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:49ba292ab11140359ad9385718ae0a5d0b1838716120c8ef579c34651bfb941d"
+  "contentDigest": "sha256:a4e8a5be7e36058affea21ce669e88933d94cd9bc0b6ac32284e96a42c56fae5"
 }

@@ -685,7 +685,7 @@
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
     "demoProjectId": "app-modernization",
     "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
-    "projectProfileDigest": "sha256:eeabe1ce56ceb3204aaa3d25a03772f4c024d4ca8148a45d0fb6bdd1df600f67"
+    "projectProfileDigest": "sha256:c282f48da8f22d74a39556705051f888efac4c3995ade23f8a3672c424127035"
   },
-  "contentDigest": "sha256:33493d88e4376260530b2bb2dba3cb9cc0e2071dd3543b8f3af7140cdccf368f"
+  "contentDigest": "sha256:eb295bbbfae644d7d4301a35a56a0b44332a8b4602fec835e13bc085aa58d546"
 }
