@@ -80,8 +80,10 @@ review.
 2. For a complete sandbox evaluation, populate it from a reviewed full file-only
    copy of one exact Hyperfinite head. For a bounded profile evaluation, extract
    a verified [customer-starter archive](docs/release/customer-starter-preflight.md)
-   and use the customer-starter path in Phase 2. Do not carry source pull-request,
-   issue, or commit history, and do not use an npm registry install or a
+   and use the customer-starter path in Phase 2. The resulting files are the
+   customer sandbox's own reviewed file snapshot. No published or unpublished
+   upstream pull-request, issue, commit, or coordination history is required. Do
+   not carry that history, and do not use an npm registry install or a
    source-history fork as the customer distribution.
 3. Leave `example-organization` fixtures synthetic. Put live customer identities
    only in protected customer configuration and generated target manifests
@@ -112,7 +114,7 @@ review.
    npm test
    ```
 
-7. Create the initial customer import commit.
+7. Create the initial customer import commit as the new evidence-chain root.
 8. Run `npm run customer:repin`. Review the generated changes to exactly:
 
    ```text

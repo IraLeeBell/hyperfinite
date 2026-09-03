@@ -85,6 +85,12 @@ customer owners and evidence listed in the
 
 ## Supported distribution
 
+Public project history begins with a curated open-source snapshot. Earlier private
+development history is intentionally not published. This repository is the
+authoritative upstream for public development from that snapshot forward.
+Unpublished issues, pull requests, commits, or coordination records are not
+required to review, contribute to, or copy the public source.
+
 Hyperfinite is distributed today as reviewed source, not as an installed
 product. Maintainers and local evaluators clone the authoritative repository and
 run its documented `npm` scripts. A verified customer-starter archive supports
