@@ -20,17 +20,17 @@ export const RETAINED_TECHNICAL_IDENTITY = Object.freeze({
   inventoryMatchingLines: 1000,
   inventoryOccurrences: 1009,
   inventoryDigest:
-    "sha256:ac46014cd014fa13b5d8a258cfbda09931e676f8ff39c8969932ac50e688bb29",
+    "sha256:20b169d7612d3077ce40f576e6badf7a74b2526313d1bf3572f973651a1938c3",
   coreInventoryFiles: 206,
   coreInventoryMatchingLines: 694,
   coreInventoryOccurrences: 701,
   coreInventoryDigest:
-    "sha256:7a28f5c73ce22ac59beb3308b3653b4f607fa7e3742c20101a4a6d6ac18c4b5b",
+    "sha256:9446f2f550aba51ca633e5f9bfee348488d124782cea7dde3c7e4c6fa89dca15",
   demoInventoryFiles: 355,
   demoInventoryMatchingLines: 942,
   demoInventoryOccurrences: 949,
   demoInventoryDigest:
-    "sha256:94fd1fc3c34f0025e5bbff723ba75bd6da49888c197435d200f79cfd3bbddb34"
+    "sha256:ca9893dda7819e04c4c44fd449b7226fa82caade9790139fc0587dfe91b1d57c"
 } as const);
 
 export const HYPERFINITE_PACKAGE_DESCRIPTION =
@@ -271,6 +271,18 @@ function displayJsonPath(path: JsonPath): string {
     .join("/");
 }
 
+function isRetainedSchemaUrl(
+  value: string,
+  schemaBaseUri: string
+): boolean {
+  try {
+    const canonical = new URL(value).href;
+    return canonical === value && canonical.startsWith(schemaBaseUri);
+  } catch {
+    return false;
+  }
+}
+
 function normalizeAsciiUnicodeEscapes(value: string): string {
   return value
     .replace(
@@ -357,6 +369,49 @@ function assertNoEpochPatternProperties(
       }
     }
     assertNoEpochPatternProperties(entry, sourcePath, nextPath);
+  }
+}
+
+function braceDepth(value: string): number {
+  let depth = 0;
+  for (const character of value) {
+    if (character === "{") depth += 1;
+    if (character === "}") depth -= 1;
+  }
+  return depth;
+}
+
+function assertCompatibilityTypeEpochLocation(
+  source: string,
+  identity: TechnicalIdentity
+): void {
+  const interfaceMarker = "export interface CompatibilityMatrix {";
+  const technicalIdentityMarker = "readonly technicalIdentity: {";
+  const epochMarker = `readonly ${IDENTIFIER_EPOCH_FIELD}: "${identity[IDENTIFIER_EPOCH_FIELD]}";`;
+  const interfaceStart = source.indexOf(interfaceMarker);
+  const interfaceBrace = source.indexOf("{", interfaceStart);
+  const technicalIdentityStart = source.indexOf(
+    technicalIdentityMarker,
+    interfaceBrace + 1
+  );
+  const technicalIdentityBrace = source.indexOf(
+    "{",
+    technicalIdentityStart
+  );
+  const epochStart = source.indexOf(epochMarker, technicalIdentityBrace + 1);
+  if (
+    interfaceStart === -1 ||
+    interfaceBrace === -1 ||
+    technicalIdentityStart === -1 ||
+    technicalIdentityBrace === -1 ||
+    epochStart === -1 ||
+    source.indexOf(epochMarker, epochStart + epochMarker.length) !== -1 ||
+    braceDepth(source.slice(interfaceBrace, technicalIdentityStart)) !== 1 ||
+    braceDepth(source.slice(technicalIdentityBrace, epochStart)) !== 1
+  ) {
+    throw new TypeError(
+      "CompatibilityMatrix must own the exact technical identity epoch declaration"
+    );
   }
 }
 
@@ -456,7 +511,7 @@ export function assertIdentifierEpochBoundaries(
           const schemaId = jsonPathValue(document, schemaIdPath);
           if (
             typeof schemaId !== "string" ||
-            !schemaId.startsWith(identity.schemaBaseUri)
+            !isRetainedSchemaUrl(schemaId, identity.schemaBaseUri)
           ) {
             throw new TypeError(
               `${source.path} declares a schema ID outside the retained origin at ${displayJsonPath(schemaIdPath)}`
@@ -478,7 +533,7 @@ export function assertIdentifierEpochBoundaries(
               typeof reference === "string" &&
               (reference.startsWith("#") ||
                 (absoluteReference &&
-                  reference.startsWith(identity.schemaBaseUri)));
+                  isRetainedSchemaUrl(reference, identity.schemaBaseUri)));
             if (
               typeof reference !== "string" ||
               !retainedReference
@@ -550,6 +605,9 @@ export function assertIdentifierEpochBoundaries(
           `${source.path}:${index + 1} exposes a technical identity epoch outside the exact compatibility type`
         );
       }
+    }
+    if (source.path === "src/packaging-types.ts") {
+      assertCompatibilityTypeEpochLocation(source.content, identity);
     }
   }
 }
@@ -643,6 +701,8 @@ export function inventoryTechnicalIdentity(
     readonly path: string;
     readonly ordinal: number;
     readonly content: string;
+    readonly previousContent: string | null;
+    readonly nextContent: string | null;
     readonly category: TechnicalIdentityOccurrenceCategory;
     readonly occurrences: number;
   }[] = [];
@@ -690,6 +750,8 @@ export function inventoryTechnicalIdentity(
         path: source.path,
         ordinal: identityLineOrdinal,
         content: line,
+        previousContent: lines[index - 1] ?? null,
+        nextContent: lines[index + 1] ?? null,
         category,
         occurrences: matches.length
       });

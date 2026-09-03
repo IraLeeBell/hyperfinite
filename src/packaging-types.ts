@@ -280,15 +280,15 @@ export interface CompatibilityMatrix {
     readonly inventoryFiles: 367;
     readonly inventoryMatchingLines: 1000;
     readonly inventoryOccurrences: 1009;
-    readonly inventoryDigest: "sha256:ac46014cd014fa13b5d8a258cfbda09931e676f8ff39c8969932ac50e688bb29";
+    readonly inventoryDigest: "sha256:20b169d7612d3077ce40f576e6badf7a74b2526313d1bf3572f973651a1938c3";
     readonly coreInventoryFiles: 206;
     readonly coreInventoryMatchingLines: 694;
     readonly coreInventoryOccurrences: 701;
-    readonly coreInventoryDigest: "sha256:7a28f5c73ce22ac59beb3308b3653b4f607fa7e3742c20101a4a6d6ac18c4b5b";
+    readonly coreInventoryDigest: "sha256:9446f2f550aba51ca633e5f9bfee348488d124782cea7dde3c7e4c6fa89dca15";
     readonly demoInventoryFiles: 355;
     readonly demoInventoryMatchingLines: 942;
     readonly demoInventoryOccurrences: 949;
-    readonly demoInventoryDigest: "sha256:94fd1fc3c34f0025e5bbff723ba75bd6da49888c197435d200f79cfd3bbddb34";
+    readonly demoInventoryDigest: "sha256:ca9893dda7819e04c4c44fd449b7226fa82caade9790139fc0587dfe91b1d57c";
   };
   readonly nodeMajors: readonly number[];
   readonly npmMajors: readonly number[];
