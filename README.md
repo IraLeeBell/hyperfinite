@@ -2,26 +2,51 @@
 
 **Unbounded capability. Finite control.**
 
-> Hyperfinite is a GitHub-native control plane for governed, model-assisted
-> work. This repository is prepared for customer-owned evaluation in GitHub
-> Enterprise Cloud.
+Hyperfinite is a GitHub-native control plane for governed, model-assisted work.
+Models may propose bounded work; deterministic systems authorize it, bind every
+target, and execute only allowed effects. Independent humans retain
+administration, activation, approval, merge, release, and adoption authority.
 
-**Start here:** [Customer evaluation guide](CUSTOMER_EVALUATION_GUIDE.md) ·
-[70-question customer FAQ](CUSTOMER_FAQ.md) ·
-[Copy-ready approval tickets](docs/runbooks/customer-approval-tickets.md) ·
-[Architecture](docs/architecture/overview.md) ·
-[Security](docs/security/README.md)
+## See the authority boundary in five minutes
 
-## Five-minute authority boundary
+From an exact reviewed source checkout with locked dependencies installed, run:
 
-![Animated terminal recording of the synthetic offline authority walkthrough, from target rejection through the Human Review stop](docs/authority-boundary-walkthrough.gif)
+```bash
+npm run demo:authority
+```
 
-From an exact reviewed source checkout after installing locked dependencies, run
-`npm run demo:authority`. The command exercises the closed model-output schema,
-runtime pre-activation, Control Kernel, trusted binding and adapter, Effect Plan,
-and Single Writer with an injected fake provider and zero live effects. See the
-[complete accessible transcript and reproducible recording command](docs/authority-boundary-walkthrough.md).
-This is hermetic repository evidence, not live deployment or readiness evidence.
+![Finite animated terminal recording of the deterministic offline authority walkthrough: target-bearing model output is rejected, stale-head execution is refused, one fresh fake-provider comment is applied, and automation stops at Human Review](docs/authority-boundary-walkthrough.gif)
+
+In one deterministic offline scenario, you will see target-bearing model output
+rejected, disabled and unleased work refused, current human evidence bind
+route and target, stale-head execution fail closed, one fresh fake-provider
+`COMMENT` applied, and automation stop at Human Review. The final counters remain
+zero for model calls, network calls, credential reads, and live effects.
+
+Run `npm run demo:authority -- --format=json` for the canonical structured
+result. The
+[complete accessible transcript and reproducible recording command](docs/authority-boundary-walkthrough.md)
+uses the same executable scenario. The command is available in an authoritative
+repository clone, the verified `control-plane-core` customer-starter profile,
+and a reviewed full file-only customer copy.
+
+This walkthrough uses fixed synthetic inputs and an injected fake provider. It
+performs no live inference, credential read, network call, GitHub mutation,
+approval, or merge. It is hermetic repository evidence, not live deployment or
+readiness evidence.
+
+## Who this is for
+
+| Reader | Next document | Decision or responsibility |
+|---|---|---|
+| Executive sponsor | [Customer FAQ](CUSTOMER_FAQ.md) | Evaluation scope, outcome, funding, and stop/go decision |
+| Evaluator or evaluation lead | [Customer evaluation guide](CUSTOMER_EVALUATION_GUIDE.md) | Coordinate owners, tickets, timeline, evidence, and feedback |
+| Architecture reviewer | [Architecture overview](docs/architecture/overview.md) | Review the control, trust, identity, and distribution boundaries |
+| Security or identity owner | [Security index](docs/security/README.md) | Review threats, OIDC, key custody, App permissions, monitoring, and incident controls |
+| GitHub administrator or platform owner | [Customer administrator runbook](docs/runbooks/customer-administrator.md) | Prepare the repository, Projects, App, rulesets, environments, services, and stores |
+| Operator | [Portfolio operator runbook](docs/demos/portfolio/operator-runbook.md) | Validate, dry-run, canary, read back, pause, and recover |
+| Legal or provenance reviewer | [Governance](GOVERNANCE.md) and [provenance policy](docs/provenance/README.md) | Review license, data use, retention, feedback, and evaluation terms |
+| Contributor or reviewer | [Contributing](CONTRIBUTING.md) | Make contract-safe changes and independently review the exact head |
 
 ## Executive summary
 
@@ -44,11 +69,12 @@ The customer evaluation is designed to answer five questions:
 4. Can operators understand cost, evidence, recovery, and human gates?
 5. Can the customer stop, recover, remove, or extend the evaluation safely?
 
-The repository includes the deterministic Control Kernel, policy compiler,
-Capability Registry, GitHub adapter boundaries, disabled-by-default Agentic
-Workflow runtime, four governed demonstrations, durable local reference
-adapters, simulation and adversarial tests, packaging, customer-starter
-generation, Project planning, and administrator handoff evidence.
+The repository includes the deterministic authorization and lifecycle engine,
+policy compiler, capability catalog, GitHub adapter boundaries,
+disabled-by-default Agentic Workflow runtime, four governed demonstrations,
+durable local reference adapters, simulation and adversarial tests, packaging,
+customer-starter generation, Project planning, and administrator handoff
+evidence.
 
 The repository intentionally stops before customer administrative effects. It
 does not create Projects, install a GitHub App, hold customer credentials,
@@ -77,19 +103,6 @@ administration, credentials, trust services, or effect authority. Any future
 SDK, CLI package, hosted offering, or production distribution requires separate
 product work. See the [complete product boundary](docs/architecture/distribution-boundary.md).
 
-## Who this is for
-
-| Reader | Start here | Decision or responsibility |
-|---|---|---|
-| Executive sponsor | This README and [FAQ](CUSTOMER_FAQ.md) | Evaluation scope, outcome, funding, and stop/go decision |
-| Evaluation lead | [Evaluation guide](CUSTOMER_EVALUATION_GUIDE.md) | Coordinate owners, tickets, timeline, evidence, and feedback |
-| GitHub administrator | [Customer administrator runbook](docs/runbooks/customer-administrator.md) | Repository, Projects, App, Actions, rulesets, and environments |
-| Security/identity owner | [Security index](docs/security/README.md) and [App permissions](docs/security/github-app-permissions.md) | Threat model, OIDC, key custody, permissions, monitoring, and incident controls |
-| Platform engineer | [Deployment prerequisites](docs/runbooks/deployment-prerequisites.md) | Trust services, stores, runner, health, backup, and recovery |
-| Operator | [Portfolio operator runbook](docs/demos/portfolio/operator-runbook.md) | Validation, dry runs, canary, readback, pause, and recovery |
-| Legal/privacy reviewer | [Governance](GOVERNANCE.md) and [provenance policy](docs/provenance/README.md) | License, data use, retention, feedback, and evaluation terms |
-| Developer/reviewer | [Contributing](CONTRIBUTING.md) and [source map](src/README.md) | Contract-safe changes and independent exact-head review |
-
 ## Evaluation maturity
 
 | Layer | Included state | Customer action |
@@ -103,7 +116,7 @@ product work. See the [complete product boundary](docs/architecture/distribution
 | Customer canary | Synthetic inputs, stop-at-Human-Review contract, and evidence model | Run one approved canary and evaluate the evidence |
 | Broader adoption | No automatic decision | Customer governance decides scope, SLOs, support, and residual risk |
 
-## The first 30 minutes
+## First 30 minutes in a customer-owned sandbox copy
 
 After copying the files into a new private customer repository:
 
@@ -234,7 +247,8 @@ Deploy separate identities for:
 4. threat, DLP, policy, and evidence signing;
 5. conditional evidence and operation-grant storage;
 6. operation-scoped GitHub App token brokerage;
-7. Single Writer and reconciliation; and
+7. the Single Writer (the serialized workflow Effect Plan executor) and
+   reconciliation; and
 8. the isolated verification runner and installation/release adapter.
 
 See the [deployment prerequisite matrix](docs/runbooks/deployment-prerequisites.md)
@@ -282,6 +296,17 @@ feedback. Customer governance decides whether to stop, extend, redesign, or
 adopt.
 
 ## Authority model
+
+The **Work Accord** is the versioned, non-authoritative contract for one work
+item: requested outcomes, constraints, exact bindings, and applicable Phase
+Contract digests. A **Phase Contract** separately defines one approved active
+phase's entry, output, evidence, budget, and deterministic exit rules. Neither
+contract grants authority by itself. The **Control Kernel** is the pure
+deterministic state-transition and authorization engine. **Trusted Binding**
+derives the exact repository, work item, revision, and head from current
+authenticated facts rather than model output. The **Single Writer** is the only
+component permitted to execute an authorized workflow Effect Plan after one
+final fresh read.
 
 Authority is ordered and non-interchangeable:
 
@@ -398,25 +423,12 @@ workflow Markdown. Never hand-edit `.lock.yml` files or
 
 ## Documentation
 
-- [Customer evaluation guide](CUSTOMER_EVALUATION_GUIDE.md)
-- [Customer FAQ](CUSTOMER_FAQ.md)
-- [Approval ticket templates](docs/runbooks/customer-approval-tickets.md)
-- [Documentation index](docs/README.md)
-- [Architecture](docs/architecture/README.md)
-- [Architecture decisions](docs/adr/README.md)
-- [Demo portfolio](docs/demos/README.md)
-- [Runtime](docs/runtime/README.md)
-- [Security](docs/security/README.md)
-- [Runbooks](docs/runbooks/README.md)
-- [Governance](GOVERNANCE.md)
-- [Release evidence](docs/release/README.md)
-- [Provenance policy](docs/provenance/README.md)
-- [Examples](examples/README.md)
-- [Configuration](config/README.md)
-- [Schemas](schemas/README.md)
-- [Source map](src/README.md)
-- [Tooling](scripts/README.md)
-- [Tests and evidence](tests/README.md)
+Use the [documentation index](docs/README.md) for the complete audience and
+narrative map. Repository reference documentation not repeated there:
+[Examples](examples/README.md) · [Configuration](config/README.md) ·
+[Schemas](schemas/README.md) · [Source map](src/README.md) ·
+[Tooling](scripts/README.md) · [Tests and evidence](tests/README.md).
+The role table above keeps each first reader's next document one click away.
 
 ## Repository layout
 
