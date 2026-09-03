@@ -5,7 +5,7 @@
     "profileId": "control-plane-core",
     "extendsProfileId": null,
     "baseSelectionDigest": null,
-    "sourceHeadSha": "33078e0817bea4793ae05a63446331237d9bc690",
+    "sourceHeadSha": "3b70ddfb999560dd1b50cca4529fc9a989917efc",
     "includedPaths": [
         ".github/AUTOMATION.md",
         ".github/CODEOWNERS",
@@ -75,5 +75,5 @@
         "schemas/v1alpha1/issue-taxonomy.schema.json",
         "tests/fixtures/project-ux/live"
     ],
-    "resolvedClosureDigest": "sha256:059a785462ca36f022ae41a55738f9c90c1285da611fdcd8e1a35a5cadf4d4de"
+    "resolvedClosureDigest": "sha256:10686c062f5ad33c57ba5b9be44d5c2d99d0bc852ce7efecce6ca09598e7c0be"
 }
