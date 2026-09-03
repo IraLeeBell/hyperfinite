@@ -5,7 +5,7 @@
     "profileId": "control-plane-core",
     "extendsProfileId": null,
     "baseSelectionDigest": null,
-    "sourceHeadSha": "51be2e140b7d48bcfd1e56c58692d52fc53bc7ac",
+    "sourceHeadSha": "aa9c445c7380890db3daf9f0f06374d960b82cb1",
     "includedPaths": [
         ".github/AUTOMATION.md",
         ".github/CODEOWNERS",
