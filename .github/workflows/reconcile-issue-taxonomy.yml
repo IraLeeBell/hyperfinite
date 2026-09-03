@@ -1,0 +1,57 @@
+name: Reconcile issue taxonomy
+
+on:
+  push:
+    branches:
+      - main
+  issues:
+    types:
+      - opened
+
+permissions: {}
+
+concurrency:
+  group: issue-taxonomy-${{ github.repository_id }}
+  cancel-in-progress: false
+
+jobs:
+  reconcile:
+    if: >-
+      github.repository == 'IraLeeBell/hyperfinite' &&
+      github.event.repository.id == 1354883228 &&
+      (
+        (github.event_name == 'push' && github.ref == 'refs/heads/main') ||
+        (github.event_name == 'issues' && github.event.action == 'opened')
+      )
+    runs-on: ubuntu-slim
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Check out the exact event revision
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Install reviewed dependencies
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build the reconciler
+        run: npm run build
+      - name: Reconcile exact issue taxonomy
+        run: node dist/scripts/reconcile-issue-taxonomy.js
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          EVENT_ACTION: ${{ github.event.action }}
+          EVENT_AFTER: ${{ github.event.after }}
+          EVENT_ISSUE_ID: ${{ github.event.issue.id }}
+          EVENT_ISSUE_NODE_ID: ${{ github.event.issue.node_id }}
+          EVENT_ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EVENT_ISSUE_REPOSITORY_URL: ${{ github.event.issue.repository_url }}
+          EVENT_ISSUE_TITLE: ${{ github.event.issue.title }}

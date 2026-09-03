@@ -15,7 +15,8 @@ import {
 import {
   isExactReviewHeadScript,
   isExactReviewWorkspaceScript,
-  PINNED_WORKFLOW_ACTIONS
+  PINNED_WORKFLOW_ACTIONS,
+  REVIEWED_NON_AGENTIC_WORKFLOW_FILES
 } from "../src/runtime-workflow-validation.js";
 import { assertDocument } from "../src/validation.js";
 
@@ -95,11 +96,17 @@ for (const binding of runtimeMetadata.bindings) {
 const expectedLocks = new Set(
   sources.map((source) => source.replace(/\.md$/u, ".lock.yml"))
 );
+const reviewedNonAgenticWorkflows = new Set<string>(
+  REVIEWED_NON_AGENTIC_WORKFLOW_FILES
+);
 const executableWorkflows = entries.filter(
   (entry) => entry.endsWith(".yml") || entry.endsWith(".yaml")
 );
 for (const workflow of executableWorkflows) {
-  if (!expectedLocks.has(workflow)) {
+  if (
+    !expectedLocks.has(workflow) &&
+    !reviewedNonAgenticWorkflows.has(workflow)
+  ) {
     throw new TypeError(
       `executable workflow ${path.join(workflowDirectory, workflow)} has no Agentic Workflow Markdown source`
     );

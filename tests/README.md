@@ -16,6 +16,7 @@ deterministic boundaries.
 | Packaging and release | `packaging.test.ts` |
 | Administrator handoff and exact apply/readback gate | `administrator-handoff.test.ts`, `administrator-handoff-live-snapshot.test.ts`, `pre-app-api-surface.test.ts` |
 | Project UX | `project-ux.test.ts` |
+| Upstream issue taxonomy | `issue-taxonomy.test.ts` |
 | Security, observability, and hardening | `security-regression.test.ts`, `observability.test.ts`, `portfolio-hardening.test.ts` |
 
 `fixtures/` contains closed synthetic events, GitHub observations, Project

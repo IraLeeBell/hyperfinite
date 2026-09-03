@@ -33,6 +33,13 @@ labels. The four journey forms intentionally declare no automatic label so they
 remain portable to a clean sandbox. The upstream-only maintainer template is
 excluded from the customer-starter bundle.
 
+The authoritative repository's reviewed issue-taxonomy workflow reconciles only
+these three labels. A merge to `main` is the initial effect authorization; later
+`issues.opened` events apply only the exact repository-local title-prefix rules.
+Unknown prefixes fail closed, conflicting taxonomy labels are removed, and
+unrelated labels are preserved. The workflow, mapping, schema, and reconciler are
+upstream-only and excluded from customer-starter bundles.
+
 Run:
 
 ```text

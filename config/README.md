@@ -17,6 +17,7 @@ authority; it does not activate a service or authorize a mutation by itself.
 | `compatibility.json` | Tested toolchain and platform versions |
 | `migrations.json` | Supported deterministic migration graph |
 | `open-source-readiness.json` | Current gated release-readiness decision |
+| `issue-taxonomy.json` | Upstream-only repository identity, display labels, historical issue mappings, title prefixes, and reconciliation limits |
 
 ## Rules
 

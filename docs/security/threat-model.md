@@ -1027,3 +1027,25 @@ Residual: a compromised administrator, trusted adapter, identity provider, or
 platform can still falsify or bypass live controls. This repository implements no
 administrative apply, credential custody, production service, billing decision,
 or live canary and cannot validate those external systems.
+
+### T35 Issue-taxonomy target and metadata-authority confusion
+
+A metadata workflow can run from unmerged pull-request code, accept an
+attacker-selected repository or issue, infer a label from arbitrary issue text,
+erase unrelated labels, close an issue, use a broad or fallback credential, or
+report success after a partial write. A copied upstream workflow can also mutate
+a customer repository unexpectedly, while display labels may be mistaken for
+Control Kernel authority.
+
+Control C36 fixes one upstream repository identity, exact historical mappings and
+title prefixes, three display-only labels, closed issue/page bounds, and two
+events: merged pushes to `main` and future issue openings. The optionless
+reconciler fresh-reads exact issue identity, plans all classifications before the
+first write, mutates only the three taxonomy labels, preserves unrelated labels,
+and verifies readback. Wrong or ambiguous inputs fail closed. The workflow and
+contract are excluded from customer-starter selections and no model or PAT is in
+the route.
+
+Residual: a compromised runner, administrator, dependency, repository
+protection, or GitHub API remains able to alter issue metadata. The labels grant
+no lifecycle, target, capability, credential, transition, or effect authority.

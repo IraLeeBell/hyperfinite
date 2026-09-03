@@ -1,0 +1,150 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "IssueTaxonomy",
+  "schemaVersion": "1.0.0",
+  "repository": {
+    "fullName": "IraLeeBell/hyperfinite",
+    "repositoryId": 1354883228,
+    "defaultBranch": "main"
+  },
+  "limits": {
+    "maxOpenIssues": 256,
+    "maxPages": 3
+  },
+  "labels": [
+    {
+      "class": "customer-evaluation",
+      "name": "type: customer-evaluation",
+      "color": "0E8A16",
+      "description": "Customer evaluation or setup work in a customer-owned sandbox"
+    },
+    {
+      "class": "maintainer-development",
+      "name": "type: maintainer-development",
+      "color": "5319E7",
+      "description": "Maintainer work in the authoritative Hyperfinite repository"
+    },
+    {
+      "class": "synthetic-demo",
+      "name": "type: synthetic-demo",
+      "color": "1D76DB",
+      "description": "Synthetic demonstration or sample record; not customer work"
+    }
+  ],
+  "historicalIssues": [
+    {
+      "issueNumber": 1,
+      "class": "customer-evaluation"
+    },
+    {
+      "issueNumber": 2,
+      "class": "customer-evaluation"
+    },
+    {
+      "issueNumber": 3,
+      "class": "customer-evaluation"
+    },
+    {
+      "issueNumber": 4,
+      "class": "customer-evaluation"
+    },
+    {
+      "issueNumber": 5,
+      "class": "customer-evaluation"
+    },
+    {
+      "issueNumber": 6,
+      "class": "customer-evaluation"
+    },
+    {
+      "issueNumber": 7,
+      "class": "synthetic-demo"
+    },
+    {
+      "issueNumber": 8,
+      "class": "synthetic-demo"
+    },
+    {
+      "issueNumber": 9,
+      "class": "synthetic-demo"
+    },
+    {
+      "issueNumber": 10,
+      "class": "synthetic-demo"
+    },
+    {
+      "issueNumber": 11,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 12,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 13,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 14,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 15,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 16,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 17,
+      "class": "maintainer-development"
+    },
+    {
+      "issueNumber": 18,
+      "class": "maintainer-development"
+    }
+  ],
+  "recognizedTitlePrefixes": [
+    {
+      "prefix": "[Adaptive Delivery] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[App Modernization] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[Customer Evaluation] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[Customer Feedback] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[Customer Setup] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[Customer Verification] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[Demo] ",
+      "class": "synthetic-demo"
+    },
+    {
+      "prefix": "[Development] ",
+      "class": "maintainer-development"
+    },
+    {
+      "prefix": "[Feature Delivery] ",
+      "class": "customer-evaluation"
+    },
+    {
+      "prefix": "[Security and Dependency Remediation] ",
+      "class": "customer-evaluation"
+    }
+  ]
+}
