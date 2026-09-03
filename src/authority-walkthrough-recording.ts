@@ -8,6 +8,11 @@ const GLYPH_HEIGHT = 7;
 const CHARACTER_ADVANCE = 6 * SCALE;
 const LINE_HEIGHT = 9 * SCALE;
 const FRAME_PADDING = 4 * SCALE;
+const ORDINARY_FRAME_DELAY = 40;
+const FINAL_FRAME_DELAY = 150;
+
+export const AUTHORITY_WALKTHROUGH_RECORDING_DURATION_MS =
+  (8 * ORDINARY_FRAME_DELAY + FINAL_FRAME_DELAY) * 10;
 
 const glyphs: Readonly<Record<string, readonly string[]>> = {
   " ": ["00000", "00000", "00000", "00000", "00000", "00000", "00000"],
@@ -175,16 +180,7 @@ export function renderAuthorityBoundaryGif(
     243,
     248,
     81,
-    73,
-    0x21,
-    0xff,
-    0x0b,
-    ...Buffer.from("NETSCAPE2.0", "ascii"),
-    0x03,
-    0x01,
-    0x00,
-    0x00,
-    0x00
+    73
   ];
   let top = 0;
   groups.forEach((lines, groupIndex) => {
@@ -193,7 +189,10 @@ export function renderAuthorityBoundaryGif(
       throw new TypeError("recording frame height is missing");
     }
     const colors = lines.map((line, lineIndex) => frameColor(line, lineIndex));
-    const delay = groupIndex === groups.length - 1 ? 300 : 90;
+    const delay =
+      groupIndex === groups.length - 1
+        ? FINAL_FRAME_DELAY
+        : ORDINARY_FRAME_DELAY;
     bytes.push(
       0x21,
       0xf9,

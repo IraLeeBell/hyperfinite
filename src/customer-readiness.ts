@@ -1,3 +1,5 @@
+import { createHash } from "node:crypto";
+
 export interface CustomerShareabilityFile {
   readonly path: string;
   readonly content: string;
@@ -5,6 +7,8 @@ export interface CustomerShareabilityFile {
 
 export const AUTHORITY_WALKTHROUGH_RECORDING_PATH =
   "docs/authority-boundary-walkthrough.gif";
+const AUTHORITY_WALKTHROUGH_RECORDING_DIGEST =
+  "sha256:ac56ea1ef2a3f3b65caa3e8286a0833a3227fb1ee00737fba89a42a53729eb2b";
 
 export function acceptBoundedCustomerShareabilityBinary(
   filePath: string,
@@ -19,6 +23,9 @@ export function acceptBoundedCustomerShareabilityBinary(
       byte === 0x21 &&
       content[index + 1] === 0xfe
   );
+  const contentDigest = `sha256:${createHash("sha256")
+    .update(content)
+    .digest("hex")}`;
   if (
     content.byteLength < 14 ||
     content.byteLength >= 512 * 1024 ||
@@ -26,7 +33,8 @@ export function acceptBoundedCustomerShareabilityBinary(
     width !== 640 ||
     height !== 450 ||
     content.at(-1) !== 0x3b ||
-    hasCommentExtension
+    hasCommentExtension ||
+    contentDigest !== AUTHORITY_WALKTHROUGH_RECORDING_DIGEST
   ) {
     throw new TypeError(
       `customer shareability audit rejects malformed bounded recording ${filePath}`

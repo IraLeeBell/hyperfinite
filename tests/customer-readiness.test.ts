@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
@@ -140,12 +141,8 @@ test("customer shareability audit rejects unsafe or duplicate paths", () => {
   );
 });
 
-test("customer shareability permits only the bounded generated recording binary", () => {
-  const recording = Buffer.alloc(14);
-  recording.write("GIF89a", 0, "ascii");
-  recording.writeUInt16LE(640, 6);
-  recording.writeUInt16LE(450, 8);
-  recording[13] = 0x3b;
+test("customer shareability permits only the exact generated recording binary", async () => {
+  const recording = await readFile(AUTHORITY_WALKTHROUGH_RECORDING_PATH);
   assert.equal(
     acceptBoundedCustomerShareabilityBinary(
       AUTHORITY_WALKTHROUGH_RECORDING_PATH,
@@ -157,12 +154,11 @@ test("customer shareability permits only the bounded generated recording binary"
     acceptBoundedCustomerShareabilityBinary("docs/other.gif", recording),
     false
   );
-  for (const invalid of [
-    Buffer.from(recording.subarray(0, 13)),
-    Buffer.from(recording).fill(0, 0, 6),
-    Buffer.from(recording).fill(0, 6, 10),
-    Buffer.concat([recording.subarray(0, -1), Buffer.from([0x21, 0xfe, 0x3b])])
-  ]) {
+  for (const invalid of [0, 100, recording.length - 2].map((index) => {
+    const changed = Buffer.from(recording);
+    changed[index] = (changed[index] ?? 0) ^ 0xff;
+    return changed;
+  })) {
     assert.throws(
       () =>
         acceptBoundedCustomerShareabilityBinary(
@@ -172,4 +168,20 @@ test("customer shareability permits only the bounded generated recording binary"
       /malformed bounded recording/u
     );
   }
+  const injected = Buffer.concat([
+    recording.subarray(0, -1),
+    Buffer.from(
+      ["https://github", "sharepoint.com/sites/private"].join("."),
+      "utf8"
+    ),
+    Buffer.from([0x3b])
+  ]);
+  assert.throws(
+    () =>
+      acceptBoundedCustomerShareabilityBinary(
+        AUTHORITY_WALKTHROUGH_RECORDING_PATH,
+        injected
+      ),
+    /malformed bounded recording/u
+  );
 });

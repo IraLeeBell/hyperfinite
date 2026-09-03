@@ -9,7 +9,10 @@ import {
   renderAuthorityBoundaryTranscript,
   runAuthorityBoundaryWalkthrough
 } from "../src/authority-walkthrough.js";
-import { renderAuthorityBoundaryGif } from "../src/authority-walkthrough-recording.js";
+import {
+  AUTHORITY_WALKTHROUGH_RECORDING_DURATION_MS,
+  renderAuthorityBoundaryGif
+} from "../src/authority-walkthrough-recording.js";
 import { canonicalJson } from "../src/canonical.js";
 
 test("walkthrough exercises the authority sequence with no live boundary", async () => {
@@ -88,6 +91,8 @@ test("recording and accessible transcript are exact generated projections", asyn
   assert.equal(gif.subarray(0, 6).toString("ascii"), "GIF89a");
   assert.equal(gif.at(-1), 0x3b);
   assert.ok(gif.byteLength < 512 * 1024);
+  assert.equal(gif.includes(Buffer.from("NETSCAPE2.0", "ascii")), false);
+  assert.ok(AUTHORITY_WALKTHROUGH_RECORDING_DURATION_MS <= 5_000);
   assert.equal(renderAuthorityBoundaryRecordingFrames(result).length, 9);
   assert.match(document, /Complete static transcript/u);
   assert.match(document, /not live deployment or readiness evidence/u);
