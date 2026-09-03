@@ -12,10 +12,8 @@ format markers, cryptographic domain separators, fixtures, and deterministic
 expectations. Treating those values as stale branding would conflate display
 prose with persisted technical identity.
 
-The accepted issue #11 base
-`cbdc056e99885916def48a00217813fa74f4a62c` contained 918 literal occurrences
-on 914 lines in 358 tracked files. Every occurrence was classified before this
-decision:
+The pre-decision tracked inventory contained 918 literal occurrences on 914
+lines in 358 files. Every occurrence was classified before this decision:
 
 | Classification | Occurrences | Matching lines | Base surfaces |
 |---|---:|---:|---|
