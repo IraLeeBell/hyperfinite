@@ -2,7 +2,7 @@
 
 import { createHash } from "node:crypto";
 import { spawnSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
 
@@ -19,6 +19,10 @@ import type {
   PackagingDocument,
   ReleaseManifest
 } from "../src/packaging-types.js";
+import {
+  assertProductBoundary,
+  assertRepositoryPackageBoundary
+} from "../src/product-boundary.js";
 import { validateOpenSourceAssessment } from "../src/release.js";
 import {
   assertRetainedTechnicalIdentity,
@@ -30,22 +34,6 @@ const EXPECTED_LICENSE_SHA256 =
   "60eb5d7deb8d13876be870afae1481c3b8a9446f062f0d99fdef38ac0945646a";
 const EXPECTED_NOTICES_SHA256 =
   "1e5eabc4458bd403ae53bc1a602ab69d75e0c46cffe83b705e66077bda07bc0d";
-const EXPECTED_PRODUCT_BOUNDARY: CompatibilityMatrix["productBoundary"] = {
-  decision: "repository-and-customer-starter-only",
-  maintainerEntryPoint: "authoritative-repository-clone",
-  localEvaluatorEntryPoint: "authoritative-repository-clone",
-  customerSandboxEntryPoint: "customer-starter-or-reviewed-file-copy",
-  repositoryScripts: "supported-in-repository-context",
-  typescriptApi: "unsupported-internal-only",
-  npmRegistryPackage: "unsupported-private-metadata-only",
-  packagedCli: "unsupported-absent",
-  hostedService: "unsupported-absent",
-  deployableService: "unsupported-absent",
-  liveAdministration: "external-human-prerequisite",
-  liveEffects: "external-trust-service-prerequisite",
-  futureDistribution: "separate-product-work-required"
-};
-
 async function source(relativePath: string): Promise<string> {
   return readFile(path.resolve(relativePath), "utf8");
 }
@@ -156,6 +144,8 @@ async function main(): Promise<void> {
     sourceMap,
     toolingDoc,
     customerStarterDoc,
+    distributionAdr,
+    durableStoreAdr,
     administratorRunbook,
     releaseDoc,
     readinessDoc,
@@ -181,6 +171,8 @@ async function main(): Promise<void> {
     source("src/README.md"),
     source("scripts/README.md"),
     source("docs/release/customer-starter-preflight.md"),
+    source("docs/adr/0020-supported-distribution-is-repository-and-customer-starter-source-only.md"),
+    source("docs/adr/0014-durable-local-trust-substrate-is-nonproduction.md"),
     source("docs/runbooks/customer-administrator.md"),
     source("docs/release/local-release-evidence.md"),
     source("docs/governance/open-source-readiness.md"),
@@ -223,24 +215,8 @@ async function main(): Promise<void> {
     compatibility.technicalIdentity
   );
   assertTechnicalIdentityPackageMetadata(packageDocument, technicalIdentity);
-  if (
-    canonicalJson(compatibility.productBoundary) !==
-    canonicalJson(EXPECTED_PRODUCT_BOUNDARY)
-  ) {
-    throw new TypeError("compatibility product boundary drifted");
-  }
-  if (
-    packageDocument.private !== true ||
-    JSON.stringify(packageDocument.exports) !==
-      '{"./package.json":"./package.json"}' ||
-    ["bin", "main", "module", "types", "typings"].some((entryPoint) =>
-      Object.hasOwn(packageDocument, entryPoint)
-    )
-  ) {
-    throw new TypeError(
-      "private package must expose metadata only and no SDK or CLI entry point"
-    );
-  }
+  assertProductBoundary(compatibility.productBoundary);
+  assertRepositoryPackageBoundary(packageDocument, await readdir(path.resolve(".")));
   const migrations = validateMigrationManifest(migrationValue);
   const readiness = validateOpenSourceAssessment(readinessValue, "0.1.0");
   const config = packaging<InstallationConfig>(
@@ -411,7 +387,9 @@ async function main(): Promise<void> {
       "Hosted service or SaaS | Unsupported",
       "Deployable production service, image, or chart | Unsupported",
       "Independent trust services",
-      "requires separate future product work"
+      "requires separate future product work",
+      "neither profile supports the",
+      "complete `npm run validate`"
     ],
     "product boundary documentation"
   );
@@ -422,7 +400,8 @@ async function main(): Promise<void> {
       "provides no supported TypeScript SDK",
       "Hyperfinite is not a hosted service",
       "verified customer-starter",
-      "reviewed file-only copy"
+      "reviewed full file-only copy",
+      "does not imply support for the full sandbox matrix"
     ],
     "repository README"
   );
@@ -431,7 +410,9 @@ async function main(): Promise<void> {
     [
       "The supported artifact is reviewed repository source",
       "It is not an npm package, SDK, packaged CLI, hosted service",
-      "do not use an npm registry"
+      "do not use an npm registry",
+      "complete Phase 0-8 sandbox path requires",
+      "outside both starter profiles' supported"
     ],
     "customer evaluation guide"
   );
@@ -458,9 +439,31 @@ async function main(): Promise<void> {
     [
       "source distribution for extraction into a new customer-owned",
       "It is not an npm package, TypeScript SDK, packaged CLI, hosted",
-      "does not decide license, publication, visibility, or release"
+      "does not decide license, publication, visibility, or release",
+      "npm run validate:technical-identity:core",
+      "npm run validate:technical-identity:demo",
+      "are not supported customer-starter commands"
     ],
     "customer-starter documentation"
+  );
+  assertContains(
+    distributionAdr,
+    [
+      "supersedes ADR 0014's earlier description",
+      "Persisted JSON documents and schemas remain versioned",
+      "repository contracts, but there is no supported TypeScript package API",
+      "no supported TypeScript package API"
+    ],
+    "distribution ADR"
+  );
+  assertContains(
+    durableStoreAdr,
+    [
+      "ADR 0013's",
+      "contracts are supported public API",
+      "Tests reach it by deep import"
+    ],
+    "historical durable-store ADR"
   );
   assertContains(
     administratorRunbook,

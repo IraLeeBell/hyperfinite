@@ -28,6 +28,46 @@ npm run starter:local -- verify \
 See [`examples/customer-starter/README.md`](../../examples/customer-starter/README.md)
 for the full walkthrough, including the `demo-portfolio` extension profile.
 
+## Supported profile commands
+
+After extraction into a new customer-owned Git repository, complete Phase 0 of
+the [customer evaluation guide](../../CUSTOMER_EVALUATION_GUIDE.md). Then run
+only the applicable profile commands below. The fixed profile catalog is
+authoritative for these lists, and
+`npm run validate:customer-starter-extraction` independently exercises every
+listed command against a clean extraction.
+
+For `control-plane-core`:
+
+```bash
+npm run build
+npm run typecheck
+npm test
+npm run validate:packaging
+npm run validate:provenance
+npm run validate:technical-identity:core
+```
+
+For `demo-portfolio`:
+
+```bash
+npm run build
+npm run typecheck
+npm test
+npm run validate:packaging
+npm run validate:provenance
+npm run validate:technical-identity:demo
+npm run validate:schemas
+npm run validate:runtime
+npm run validate:eval-fixtures
+npm run simulate:demos
+```
+
+`npm run validate`, `npm run canary:synthetic`, and
+`npm run handoff:administrator` are not supported customer-starter commands.
+They require the reviewed full file-only copy used by the complete sandbox
+evaluation. A starter profile stops at repository/hermetic profile evidence.
+
 ## Output
 
 | File | Meaning |

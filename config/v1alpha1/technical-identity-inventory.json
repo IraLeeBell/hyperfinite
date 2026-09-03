@@ -6,19 +6,19 @@
       "inventoryFiles": 371,
       "inventoryMatchingLines": 1006,
       "inventoryOccurrences": 1015,
-      "inventoryDigest": "sha256:b1c983a15e25a02259bf0068a336c3a5f1a40f0af86fd57ca887852e9117b4eb"
+      "inventoryDigest": "sha256:2444e22e51cd3e26ed86f05d502acc13e8ad413ffdbadeb5774f522df633b7a3"
     },
     "control-plane-core": {
       "inventoryFiles": 210,
       "inventoryMatchingLines": 700,
       "inventoryOccurrences": 707,
-      "inventoryDigest": "sha256:6e92fc08f8beac824904a5dfde28eb2b868a0e3a5fbac1d93e543c7a9a8e906b"
+      "inventoryDigest": "sha256:57a5ac29e7fd974fdfd3cb63a24c8a59ccf822a7183ae9fc246e2fb305fd4007"
     },
     "demo-portfolio": {
       "inventoryFiles": 359,
       "inventoryMatchingLines": 948,
       "inventoryOccurrences": 955,
-      "inventoryDigest": "sha256:1cbbf05343a88a738133a12bbd9da46783ffcc1b4aef7a21b85a0dde751609d0"
+      "inventoryDigest": "sha256:30d495ff9994dce2ffccefb6f8401566c972ceb725f0a18d7b76c93e6a78a821"
     }
   }
 }

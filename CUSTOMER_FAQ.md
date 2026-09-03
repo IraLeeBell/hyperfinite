@@ -8,7 +8,9 @@ sequence and the
 copy-ready customer requests.
 The supported customer artifact is reviewed source in a new customer-owned Git
 repository, not an npm package, SDK, packaged CLI, hosted service, or deployable
-service. See the [distribution boundary](docs/architecture/distribution-boundary.md).
+service. A customer-starter archive supports its documented profile commands; a
+complete sandbox evaluation requires a reviewed full file-only copy. See the
+[distribution boundary](docs/architecture/distribution-boundary.md).
 
 ## Executive and business questions
 

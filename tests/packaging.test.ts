@@ -56,6 +56,11 @@ import {
   type TrustedInstallationAdapter
 } from "../src/index.js";
 import {
+  assertProductBoundary,
+  assertRepositoryPackageBoundary,
+  PRODUCT_BOUNDARY
+} from "../src/product-boundary.js";
+import {
   assertSafeOutputRoot,
   canonicalDirectory,
   githubRepositoryFromRemote,
@@ -76,22 +81,6 @@ import {
 
 const ROOT = process.cwd();
 
-const EXPECTED_PRODUCT_BOUNDARY = {
-  decision: "repository-and-customer-starter-only",
-  maintainerEntryPoint: "authoritative-repository-clone",
-  localEvaluatorEntryPoint: "authoritative-repository-clone",
-  customerSandboxEntryPoint: "customer-starter-or-reviewed-file-copy",
-  repositoryScripts: "supported-in-repository-context",
-  typescriptApi: "unsupported-internal-only",
-  npmRegistryPackage: "unsupported-private-metadata-only",
-  packagedCli: "unsupported-absent",
-  hostedService: "unsupported-absent",
-  deployableService: "unsupported-absent",
-  liveAdministration: "external-human-prerequisite",
-  liveEffects: "external-trust-service-prerequisite",
-  futureDistribution: "separate-product-work-required"
-} as const;
-
 test("Hyperfinite distribution is repository and customer-starter source only", () => {
   const compatibility = agenticFramework.assertDocument(
     "PackagingDocument",
@@ -101,7 +90,10 @@ test("Hyperfinite distribution is repository and customer-starter source only", 
   if (compatibility.kind !== "CompatibilityMatrix") {
     assert.fail("expected CompatibilityMatrix");
   }
-  assert.deepEqual(compatibility.productBoundary, EXPECTED_PRODUCT_BOUNDARY);
+  assert.deepEqual(
+    assertProductBoundary(compatibility.productBoundary),
+    PRODUCT_BOUNDARY
+  );
   assert.equal(
     validateDocument("PackagingDocument", {
       ...compatibility,
@@ -124,37 +116,87 @@ test("Hyperfinite distribution is repository and customer-starter source only", 
   );
 
   const packageDocument = json<Record<string, unknown>>("package.json");
-  assert.equal(packageDocument["private"], true);
-  assert.deepEqual(packageDocument["exports"], {
-    "./package.json": "./package.json"
-  });
-  for (const unsupportedEntry of [
-    "bin",
-    "main",
-    "module",
-    "types",
-    "typings"
-  ]) {
-    assert.equal(
-      Object.hasOwn(packageDocument, unsupportedEntry),
-      false,
-      `package.json must not expose ${unsupportedEntry}`
-    );
-  }
-  const scripts = packageDocument["scripts"] as Record<string, unknown>;
-  for (const unsupportedScript of [
-    "publish",
-    "release",
-    "deploy",
-    "start",
-    "serve"
-  ]) {
-    assert.equal(
-      Object.hasOwn(scripts, unsupportedScript),
-      false,
-      `package.json must not advertise ${unsupportedScript}`
-    );
-  }
+  const rootEntries = readdirSync(ROOT);
+  assert.doesNotThrow(() =>
+    assertRepositoryPackageBoundary(packageDocument, rootEntries)
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        { ...packageDocument, directories: { bin: "cli" } },
+        rootEntries
+      ),
+    /directories\.bin/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        { ...packageDocument, bin: "dist/cli.js" },
+        rootEntries
+      ),
+    /must not expose bin/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        {
+          ...packageDocument,
+          exports: {
+            "./package.json": "./package.json",
+            ".": "./dist/src/index.js"
+          }
+        },
+        rootEntries
+      ),
+    /export package\.json metadata only/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(packageDocument, [
+        ...rootEntries,
+        "server.js"
+      ]),
+    /implicit server\.js start entry point/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        {
+          ...packageDocument,
+          scripts: {
+            ...(packageDocument["scripts"] as Record<string, unknown>),
+            prepare: "node build.js"
+          }
+        },
+        rootEntries
+      ),
+    /lifecycle script prepare/
+  );
+  assert.equal(
+    Object.hasOwn(agenticFramework, "assertRepositoryPackageBoundary"),
+    false
+  );
+
+  const durableStoreAdr = readFileSync(
+    path.join(
+      ROOT,
+      "docs/adr/0014-durable-local-trust-substrate-is-nonproduction.md"
+    ),
+    "utf8"
+  );
+  const distributionAdr = readFileSync(
+    path.join(
+      ROOT,
+      "docs/adr/0020-supported-distribution-is-repository-and-customer-starter-source-only.md"
+    ),
+    "utf8"
+  );
+  assert.match(durableStoreAdr, /contracts are supported public API/);
+  assert.match(
+    distributionAdr,
+    /supersedes ADR 0014's earlier description/
+  );
+  assert.match(distributionAdr, /no supported TypeScript package API/);
 });
 
 test("Hyperfinite retains one closed technical compatibility identity", () => {

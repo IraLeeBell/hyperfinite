@@ -14,7 +14,7 @@ package export, or compatibility promise.
 | Autonomous demos | `demo-portfolio.ts`, `demo-portfolio-validation.ts`, `demo-activation.ts`, `demo-runtime-state.ts`, `demo-dispatcher.ts`, `demo-scheduler.ts`, `demo-runtime.ts`, `demo-projection.ts`, `demo-review-evidence.ts`, `demo-observability.ts` |
 | Bounded engineering | `bounded-worktree.ts`, `engineering-slice.ts` |
 | Domain Packs | `domain-packs.ts`, `domain-artifact-schemas.ts`, `domain-git-packager.ts` |
-| Packaging, release, identity compatibility, and customer sharing | `packaging.ts`, `packaging-types.ts`, `technical-identity.ts`, `release.ts`, `release-support.ts`, `release-path.ts`, `customer-starter.ts`, `customer-starter-authoring.ts`, `customer-repository-config.ts`, `customer-readiness.ts` |
+| Packaging, release, product/identity compatibility, and customer sharing | `packaging.ts`, `packaging-types.ts`, `product-boundary.ts`, `technical-identity.ts`, `release.ts`, `release-support.ts`, `release-path.ts`, `customer-starter.ts`, `customer-starter-authoring.ts`, `customer-repository-config.ts`, `customer-readiness.ts` |
 | Pre-App deployment/App/administrator contracts | `deployment-topology.ts`, `app-registration-plan.ts`, `administrator-plan.ts`, `administrator-handoff.ts`, `freshness.ts` |
 | Observability | `events.ts`, `observability.ts` |
 | Internal repository barrel | `index.ts` |

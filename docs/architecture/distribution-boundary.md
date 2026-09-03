@@ -8,12 +8,16 @@ Hyperfinite is a reviewed source distribution with two supported forms:
 |---|---|---|
 | Maintainer | Authoritative `IraLeeBell/hyperfinite` repository at an exact reviewed head | Clone the repository, install the locked toolchain and dependencies, and invoke documented `npm` scripts |
 | Local evaluator | Authoritative repository clone at an exact reviewed head | Run deterministic validation, simulation, planning, and evidence commands without live effects |
-| Customer sandbox operator | Verified customer-starter archive or reviewed file-only copy of an exact head | Populate a new private customer-owned Git repository, configure ownership, create the initial commit, repin selection evidence, and follow the evaluation guide |
+| Customer-starter profile evaluator | Verified `control-plane-core` or `demo-portfolio` archive | Extract into a new private customer-owned Git repository, configure and repin it, and run only the documented commands for that profile |
+| Complete customer sandbox operator | Reviewed full file-only copy of an exact head | Populate a new private customer-owned Git repository and follow the complete evaluation guide |
 
 Repository scripts are supported only in those documented repository contexts.
 For a clean extracted customer-starter profile, the fixed profile catalog names
-the scripts independently validated as runnable. A full customer evaluation
-uses the new customer-owned Git history and the exact-head sequence in the
+the independently validated commands. Its supported scope ends with
+profile-level repository and hermetic evidence; neither profile supports the
+complete `npm run validate`, synthetic canary, or administrator-handoff matrix.
+A full customer evaluation instead uses a reviewed full source copy, new
+customer-owned Git history, and the exact-head sequence in the
 [customer evaluation guide](../../CUSTOMER_EVALUATION_GUIDE.md).
 
 ## Unsupported consumption models
@@ -39,7 +43,8 @@ target, local unsigned adapter, or success-shaped fallback.
    exact head. It does not prove a deployed service or live control.
 2. **Customer-owned sandbox evaluation** begins only after source is placed in a
    new customer repository and customer owners configure and approve the
-   documented prerequisites.
+   documented prerequisites. The complete evaluation requires the full reviewed
+   file set; a starter profile remains bounded to its documented profile scope.
 3. **Independent trust services** own credentials, protected time, conditional
    stores, signing, token brokerage, Single Writer effects, and authenticated
    readback. They are not shipped by this repository.
@@ -56,7 +61,9 @@ credential, capability, transition, administrative action, or effect authority.
 `schemas/v1alpha1/packaging.schema.json`, `src/packaging-types.ts`, and
 deterministic packaging validation reject omitted, widened, or contradictory
 values. Package validation also requires `private: true`, a metadata-only
-`exports` map, no SDK entry metadata, no `bin`, and no publish/deploy script.
+`exports` map, no SDK entry metadata, no direct or `directories.bin` binary
+entry, no implicit `server.js` start path, and no publish/deploy/install
+lifecycle script.
 
 See [ADR 0020](../adr/0020-supported-distribution-is-repository-and-customer-starter-source-only.md),
 the [compatibility guide](../compatibility.md), and the

@@ -9,6 +9,9 @@ false`, `selfApproved: false`, exactly like `release-candidate.json` in
 The resulting archive is supported only as source extracted into a new
 customer-owned Git repository. It is not an npm package, SDK, packaged CLI,
 hosted service, deployable service, or live-effect distribution.
+Run only the profile commands in the
+[customer-starter preflight](../../docs/release/customer-starter-preflight.md);
+the archive does not support the complete customer sandbox matrix.
 
 ```bash
 npm run starter:local -- build \

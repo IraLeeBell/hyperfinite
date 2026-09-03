@@ -282,7 +282,9 @@ export interface CompatibilityMatrix {
     readonly decision: "repository-and-customer-starter-only";
     readonly maintainerEntryPoint: "authoritative-repository-clone";
     readonly localEvaluatorEntryPoint: "authoritative-repository-clone";
-    readonly customerSandboxEntryPoint: "customer-starter-or-reviewed-file-copy";
+    readonly customerStarterEntryPoint: "verified-profile-source-extraction";
+    readonly customerStarterScope: "profile-documented-scripts-only";
+    readonly customerSandboxEntryPoint: "reviewed-full-source-file-copy";
     readonly repositoryScripts: "supported-in-repository-context";
     readonly typescriptApi: "unsupported-internal-only";
     readonly npmRegistryPackage: "unsupported-private-metadata-only";

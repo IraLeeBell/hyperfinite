@@ -50,10 +50,12 @@ customer owners and evidence listed in the
 
 Hyperfinite is distributed today as reviewed source, not as an installed
 product. Maintainers and local evaluators clone the authoritative repository and
-run its documented `npm` scripts. Customer sandbox operators populate a new
-private customer-owned repository from either a verified customer-starter
-archive or a reviewed file-only copy, then follow the
-[customer evaluation guide](CUSTOMER_EVALUATION_GUIDE.md).
+run its documented `npm` scripts. A verified customer-starter archive supports
+the bounded profile commands documented for that archive. A complete customer
+sandbox evaluation uses a reviewed full file-only copy in a new private
+customer-owned repository, then follows the
+[customer evaluation guide](CUSTOMER_EVALUATION_GUIDE.md). A starter profile
+does not imply support for the full sandbox matrix.
 
 The private `agentic-framework` package metadata preserves the technical
 compatibility identity used by repository tooling. It exposes only

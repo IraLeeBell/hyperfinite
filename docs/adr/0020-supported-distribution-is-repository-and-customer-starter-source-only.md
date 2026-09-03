@@ -18,14 +18,18 @@ releases, and interface implementations for deployed services.
 
 ## Decision
 
-The supported distribution is reviewed source in one of two forms:
+The supported distribution is reviewed source in two forms:
 
 1. maintainers and local evaluators clone the authoritative repository at an
    exact reviewed head and invoke documented repository `npm` scripts; or
-2. customer sandbox operators populate a new private customer-owned repository
-   from a verified customer-starter archive or reviewed file-only copy, then
-   configure ownership, commit, repin, validate, and obtain the documented human
-   and deployment prerequisites.
+2. customers populate a new private customer-owned repository from either a
+   verified customer-starter profile or a reviewed full file-only copy.
+
+A customer-starter profile supports only its documented profile commands and
+ends at repository/hermetic evidence. A complete sandbox evaluation uses the
+reviewed full file-only copy, then configures ownership, commits, repins,
+validates the full matrix, and obtains the documented human and deployment
+prerequisites.
 
 `CompatibilityMatrix.productBoundary` fixes those entry points. It also fixes
 the following as unsupported: npm registry package consumption, TypeScript SDK
@@ -36,9 +40,16 @@ live effects remain an independently deployed trust-service prerequisite.
 
 The private package keeps the `agentic-framework` name solely as the retained
 technical compatibility identity. Its export map exposes only `package.json`;
-SDK entry metadata and `bin` remain absent. Future SDK, CLI, hosted, deployable,
-release, or production-support distributions require separate product,
-compatibility, security, and operational work.
+SDK entry metadata, direct or `directories.bin` binary entry points, implicit
+`server.js` start behavior, and publication/deployment/install lifecycle scripts
+remain absent. Future SDK, CLI, hosted, deployable, release, or
+production-support distributions require separate product, compatibility,
+security, and operational work.
+
+This decision supersedes ADR 0014's earlier description of ADR 0013 TypeScript
+exports as a "supported public API" only where that phrase implies a package or
+SDK consumption model. Persisted JSON documents and schemas remain versioned
+repository contracts, but there is no supported TypeScript package API.
 
 ## Consequences
 
@@ -46,6 +57,8 @@ compatibility, security, and operational work.
   metadata.
 - Customer setup continues to start from a clean customer-owned Git repository
   and exact-head repin workflow.
+- Starter profiles and the full sandbox copy have separate documented command
+  scopes; the profile does not claim the full evaluation matrix.
 - Local release and starter evidence remains unsigned and non-authoritative.
 - Internal TypeScript exports remain available to repository tests and tools but
   carry no external API compatibility promise.

@@ -45,7 +45,8 @@ unsupported consumption models in `productBoundary`.
 |---|---|
 | Maintainer | Clone the authoritative repository and invoke documented repository scripts |
 | Local evaluator | Clone the authoritative repository and run deterministic validation, simulation, and evidence commands |
-| Customer sandbox operator | Use a verified customer-starter archive or reviewed file-only copy in a new customer-owned private repository |
+| Customer-starter profile evaluator | Extract a verified profile into a new customer-owned private repository and run only its documented profile commands |
+| Complete customer sandbox operator | Use a reviewed full file-only copy in a new customer-owned private repository and follow the complete evaluation matrix |
 | Repository `npm` scripts | Supported only in the documented repository or customer-copy context |
 | npm registry package | Unsupported; package metadata is private and exists for repository tooling and retained compatibility identity |
 | TypeScript API / deep import | Unsupported; `src/` and `src/index.ts` are internal repository implementation |
@@ -57,6 +58,10 @@ An SDK, CLI package, hosted service, deployable service, or production
 distribution is separate future product work. This boundary does not change the
 retained `agentic-framework/v1alpha1` technical identity and does not grant
 runtime or effect authority.
+
+Versioned JSON documents and schemas remain repository contracts. They do not
+create a supported TypeScript package API; ADR 0020 explicitly supersedes that
+interpretation of earlier API wording.
 
 The credentialless canary seed, synthetic topology OIDC audiences, and
 upstream taxonomy User-Agent previously used the product slug. They are
