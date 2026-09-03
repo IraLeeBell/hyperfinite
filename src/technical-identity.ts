@@ -474,10 +474,14 @@ export function assertIdentifierEpochBoundaries(
               typeof reference === "string" &&
               (/^[A-Za-z][A-Za-z0-9+.-]*:/u.test(reference) ||
                 reference.startsWith("//"));
+            const retainedReference =
+              typeof reference === "string" &&
+              (reference.startsWith("#") ||
+                (absoluteReference &&
+                  reference.startsWith(identity.schemaBaseUri)));
             if (
               typeof reference !== "string" ||
-              (absoluteReference &&
-                !reference.startsWith(identity.schemaBaseUri))
+              !retainedReference
             ) {
               throw new TypeError(
                 `${source.path} declares a schema reference outside the retained origin at ${displayJsonPath(referencePath)}`

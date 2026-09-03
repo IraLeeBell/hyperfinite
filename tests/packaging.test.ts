@@ -342,6 +342,19 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
     () =>
       assertIdentifierEpochBoundaries([
         {
+          path: "schemas/v1alpha1/example.schema.json",
+          content: JSON.stringify({
+            $id: RETAINED_TECHNICAL_IDENTITY.schemaBaseUri + "example.schema.json",
+            $ref: "../../../alternate-origin.schema.json"
+          })
+        }
+      ]),
+    /schema reference outside the retained origin/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
           path: "src/runtime-input.ts",
           content: 'interface RuntimeInput { ["identifier" + "Epoch"]: string }'
         }
