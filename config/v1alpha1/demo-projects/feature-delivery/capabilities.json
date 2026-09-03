@@ -6,7 +6,7 @@
     "demoProjectId": "feature-delivery",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
     "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
-    "projectProfileDigest": "sha256:69cd93cc47c615b2b2f6c495ff12b1e509ae2f7774a477bc64e4f7a69a3dfce1",
+    "projectProfileDigest": "sha256:df8e446236b00ef4a5af1078007ad7f19fd9ebdd85dea2f444ee9acb490c6219",
     "capabilities": [
       {
         "id": "demo.feature-delivery.requirements-clarification",
@@ -689,5 +689,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:ff59e5ac001413526eb1cffc4dbb428ebec97e4ede7fcd0d304f41bb29c79857"
+  "contentDigest": "sha256:fb6f43ffbbc321095ccc6ab456140834830c6923b1e1ccc4e0e574b37738eb89"
 }

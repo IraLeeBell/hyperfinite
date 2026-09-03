@@ -21,47 +21,69 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_1",
-          "name": "Captured"
+          "name": "Captured",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_2",
-          "name": "Activation pending"
+          "name": "Activation pending",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_3",
-          "name": "Framing"
+          "name": "Framing",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_4",
-          "name": "Planned"
+          "name": "Planned",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_5",
-          "name": "Executing"
+          "name": "Executing",
+          "color": "PINK",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_6",
-          "name": "Verifying"
+          "name": "Verifying",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_7",
-          "name": "Human review"
+          "name": "Human review",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_8",
-          "name": "Completed"
+          "name": "Completed",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_9",
-          "name": "Paused"
+          "name": "Paused",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_10",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_1_11",
-          "name": "Cancelled"
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -72,59 +94,87 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_1",
-          "name": "Intake"
+          "name": "Intake",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_2",
-          "name": "Repository discovery"
+          "name": "Repository discovery",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_3",
-          "name": "Current-state inventory"
+          "name": "Current-state inventory",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_4",
-          "name": "Modernization assessment"
+          "name": "Modernization assessment",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_5",
-          "name": "Target architecture"
+          "name": "Target architecture",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_6",
-          "name": "Migration plan"
+          "name": "Migration plan",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_7",
-          "name": "Implementation"
+          "name": "Implementation",
+          "color": "PINK",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_8",
-          "name": "Verification"
+          "name": "Verification",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_9",
-          "name": "Human review"
+          "name": "Human review",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_10",
-          "name": "Completed"
+          "name": "Completed",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_11",
-          "name": "Activation Pending"
+          "name": "Activation Pending",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_12",
-          "name": "Paused"
+          "name": "Paused",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_13",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_2_14",
-          "name": "Cancelled"
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -141,19 +191,27 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_4_1",
-          "name": "D0"
+          "name": "D0",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_4_2",
-          "name": "D1"
+          "name": "D1",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_4_3",
-          "name": "D2"
+          "name": "D2",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_4_4",
-          "name": "D3"
+          "name": "D3",
+          "color": "PINK",
+          "description": ""
         }
       ]
     },
@@ -164,15 +222,21 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_5_1",
-          "name": "Pending"
+          "name": "Pending",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_5_2",
-          "name": "Satisfied"
+          "name": "Satisfied",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_5_3",
-          "name": "Blocked"
+          "name": "Blocked",
+          "color": "RED",
+          "description": ""
         }
       ]
     },
@@ -195,15 +259,21 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_8_1",
-          "name": "None"
+          "name": "None",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_8_2",
-          "name": "Human action"
+          "name": "Human action",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_8_3",
-          "name": "Reconciliation"
+          "name": "Reconciliation",
+          "color": "ORANGE",
+          "description": ""
         }
       ]
     },
@@ -238,27 +308,39 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_13_1",
-          "name": "Backend autonomous"
+          "name": "Backend autonomous",
+          "color": "BLUE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_13_2",
-          "name": "User-selectable agent"
+          "name": "User-selectable agent",
+          "color": "PURPLE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_13_3",
-          "name": "Human gate"
+          "name": "Human gate",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_13_4",
-          "name": "Deterministic"
+          "name": "Deterministic",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_13_5",
-          "name": "Kernel control"
+          "name": "Kernel control",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_13_6",
-          "name": "Terminal"
+          "name": "Terminal",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -269,7 +351,9 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_14_1",
-          "name": "User selection unavailable - locked project"
+          "name": "User selection unavailable - locked project",
+          "color": "GRAY",
+          "description": ""
         }
       ]
     },
@@ -280,27 +364,39 @@
       "options": [
         {
           "nodeId": "PVTO_synthetic_app_modernization_15_1",
-          "name": "not-applicable"
+          "name": "not-applicable",
+          "color": "GRAY",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_15_2",
-          "name": "awaiting-selection"
+          "name": "awaiting-selection",
+          "color": "YELLOW",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_15_3",
-          "name": "accepted"
+          "name": "accepted",
+          "color": "GREEN",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_15_4",
-          "name": "invalid"
+          "name": "invalid",
+          "color": "RED",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_15_5",
-          "name": "stale"
+          "name": "stale",
+          "color": "ORANGE",
+          "description": ""
         },
         {
           "nodeId": "PVTO_synthetic_app_modernization_15_6",
-          "name": "reconciliation-required"
+          "name": "reconciliation-required",
+          "color": "PURPLE",
+          "description": ""
         }
       ]
     }

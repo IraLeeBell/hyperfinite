@@ -6,9 +6,9 @@
     "demoProjectId": "app-modernization",
     "catalogDigest": "sha256:3fa4580973bb80d0aed1c63ae96260c2877fab490832272a7538c710120343c2",
     "identityReservationsDigest": "sha256:df1ed09d1176a3652783e2d3a72207f3459994d3128be9b2435e426d12e858ac",
-    "projectProfileDigest": "sha256:0fa5790690aa483d2de2c5e9635120a737a7bb62ba6a529a877d6c9ab2748ccd",
-    "journeyDefinitionDigest": "sha256:493d045629647d698c9e5cdf6bdbf384f7acf2939139a42b747691b1896d30cd",
-    "capabilityShardDigest": "sha256:dbffa57045f77122d8e115b91f2696f398230137075013412aec74d5c0d8cfda",
+    "projectProfileDigest": "sha256:c282f48da8f22d74a39556705051f888efac4c3995ade23f8a3672c424127035",
+    "journeyDefinitionDigest": "sha256:fa168e774a508e6e58a2461ae6919c2df37c1b24167be36fd6d899cc18be71a4",
+    "capabilityShardDigest": "sha256:eb295bbbfae644d7d4301a35a56a0b44332a8b4602fec835e13bc085aa58d546",
     "participationPolicyDigest": "sha256:f7c8ef2282725040cc6586231005efc73f23cf3e7fe7faf233d7dae1aa8f4746",
     "stageBindings": [
       {
@@ -347,5 +347,5 @@
       }
     ]
   },
-  "contentDigest": "sha256:73bbd400a8743907836c2f38b9404f8ec1f2c5491a6f2d19131c5df88995b63e"
+  "contentDigest": "sha256:a4e8a5be7e36058affea21ce669e88933d94cd9bc0b6ac32284e96a42c56fae5"
 }

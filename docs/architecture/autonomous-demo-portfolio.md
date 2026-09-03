@@ -165,6 +165,15 @@ Trusted Binding. Stage derives from the Kernel snapshot. Journey Stage, Stage
 Interaction, Current Stage Agent, and Agent Selection Status derive from trusted
 state. Convergence writes the fourteen projection fields with Stage last.
 
+Every single-select option also carries one explicit supported GitHub color.
+Colors are presentation metadata only; option names and descriptions remain the
+accessible semantic source. Color is excluded from lifecycle, Work Accord,
+policy, capability, target, credential, transition, agent-selection, effect,
+approval, and merge decisions. The target manifest binds each Project schema
+digest, while setup bindings and bootstrap readback retain exact option names,
+colors, descriptions, and node IDs. Missing or drifted color data blocks binding
+or requires human-admin reconciliation rather than defaulting to gray.
+
 Each field write uses expected-state compare-and-swap plus read-after-write
 verification. A lost acknowledgement is reconciled only when two stable reads
 prove the exact intended state. A projection with a newer Kernel state version,

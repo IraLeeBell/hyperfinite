@@ -56,11 +56,13 @@
             "items": {
               "type": "object",
               "additionalProperties": false,
-              "required": ["key", "nodeId", "name"],
+              "required": ["key", "nodeId", "name", "color", "description"],
               "properties": {
                 "key": { "type": "string", "pattern": "^[a-z][a-z0-9-]{0,62}$" },
                 "nodeId": { "type": "string", "minLength": 1 },
-                "name": { "type": "string", "minLength": 1 }
+                "name": { "type": "string", "minLength": 1 },
+                "color": { "enum": ["GRAY", "BLUE", "GREEN", "YELLOW", "ORANGE", "RED", "PINK", "PURPLE"] },
+                "description": { "type": "string", "maxLength": 256 }
               }
             }
           }

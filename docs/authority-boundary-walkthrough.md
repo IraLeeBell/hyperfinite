@@ -78,7 +78,7 @@ Mode: SYNTHETIC / DETERMINISTIC / OFFLINE
    Synthetic-human continuation is not executed; only independent human authority may continue.
 
 Final counters: model=0, network=0, credential-reads=0, live-effects=0, fake-effects=1
-Scenario digest: sha256:6f5d9cf84404659cdcc0aa0a7e05fae2520ef6e0742ec09260347f87916a4e25
+Scenario digest: sha256:8ce2c2194f75b87ab47610238f57524f5f8bd246abb33a722f4168e7eb64b9a1
 
 This is hermetic repository evidence, not live deployment or readiness evidence.
 ```

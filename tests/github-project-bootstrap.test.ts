@@ -221,7 +221,7 @@ function postSnapshot(
         options: field.options.map((option, optionIndex) => ({
           nodeId: `OPTION_${projectNodeId}_${fieldIndex}_${optionIndex}`,
           name: option.name,
-          color: option.color ?? "GRAY",
+          color: option.color,
           description: option.description ?? ""
         }))
       }))
@@ -238,6 +238,10 @@ test("customer target manifest is derived from fresh empty Project snapshots", a
     maxSnapshotAgeMs: 5 * 60 * 1000
   });
   assert.deepEqual(generated, targetManifest);
+  assert.deepEqual(
+    generated.spec.projects.map((project) => project.projectSchemaDigest),
+    projectSchemas.entries.map((entry) => digest(entry.schema))
+  );
 });
 
 test("HYBRID-026 and HYBRID-027 produce one exact reviewed bootstrap plan", async () => {
@@ -267,6 +271,17 @@ test("HYBRID-026 and HYBRID-027 produce one exact reviewed bootstrap plan", asyn
     [14, 13, 13, 21]
   );
   assert.equal(first.manualViewSteps.length, 8);
+  assert.ok(first.operations.every((operation) => operation.requiresHumanAdmin));
+  assert.ok(
+    first.operations
+      .filter((operation) => operation.type === "create-field")
+      .flatMap((operation) => operation.options)
+      .every(
+        (option) =>
+          typeof option.color === "string" &&
+          typeof option.description === "string"
+      )
+  );
   assert.ok(
     first.operations.every(
       (operation) =>
@@ -275,6 +290,39 @@ test("HYBRID-026 and HYBRID-027 produce one exact reviewed bootstrap plan", asyn
           operation.type
         )
     )
+  );
+});
+
+test("bootstrap rejects a rehashed target manifest with a stale Project schema digest", async () => {
+  const projectSchemas = await schemas();
+  const projects = targetManifest.spec.projects.map((project, index) =>
+    index === 0
+      ? { ...project, projectSchemaDigest: digest("stale-project-schema") }
+      : project
+  );
+  const spec = { ...targetManifest.spec, projects };
+  const changedManifest = {
+    ...targetManifest,
+    spec,
+    contentDigest: digest({
+      apiVersion: targetManifest.apiVersion,
+      kind: targetManifest.kind,
+      schemaVersion: targetManifest.schemaVersion,
+      spec
+    })
+  };
+  assert.throws(
+    () =>
+      planVerifiedDemoProjectBootstrap({
+        targetManifest: changedManifest,
+        expectedTargetManifestDigest: changedManifest.contentDigest as Digest,
+        projectSchemas,
+        snapshots: initialSnapshots(),
+        issueBindings: issueBindings(),
+        evaluatedAt: EVALUATED_AT,
+        maxSnapshotAgeMs: 5 * 60 * 1000
+      }),
+    /live Project target drift blocks bootstrap/u
   );
 });
 
@@ -455,6 +503,38 @@ test("post-apply readback reconciles every API-supported field and synthetic ite
   });
   assert.equal(report.apiSupportedPostconditionsMet, true);
   assert.ok(report.projects.every((project) => project.problems.length === 0));
+  assert.ok(
+    report.projects.every((project) => project.fieldBindings.length === 15)
+  );
+  for (const [index, project] of report.projects.entries()) {
+    assert.deepEqual(
+      project.fieldBindings.map((field) => ({
+        fieldKey: field.fieldKey,
+        name: field.name,
+        options: field.options.map((option) => ({
+          key: option.key,
+          name: option.name,
+          color: option.color,
+          description: option.description
+        }))
+      })),
+      projectSchemas.entries[index]!.schema.fields.map((field) => ({
+        fieldKey: field.key,
+        name: field.name,
+        options: field.options.map((option) => ({
+          key: option.key,
+          name: option.name,
+          color: option.color,
+          description: option.description ?? ""
+        }))
+      }))
+    );
+    const nodeIds = project.fieldBindings.flatMap((field) => [
+      field.nodeId,
+      ...field.options.map((option) => option.nodeId)
+    ]);
+    assert.equal(new Set(nodeIds).size, nodeIds.length);
+  }
   assert.equal(report.confirmedPlanDigest, plan.planDigest);
   const { planDigest: _planDigest, ...planPayload } = plan;
   const tamperedPayload = {
@@ -480,6 +560,91 @@ test("post-apply readback reconciles every API-supported field and synthetic ite
         maxSnapshotAgeMs: 5 * 60 * 1000
       }),
     /confirmed plan/u
+  );
+});
+
+test("readback detects color, description, and option identity drift", async () => {
+  const projectSchemas = await schemas();
+  const initial = initialSnapshots();
+  const plan = planVerifiedDemoProjectBootstrap({
+    targetManifest,
+    expectedTargetManifestDigest: TARGET_MANIFEST_DIGEST,
+    projectSchemas,
+    snapshots: initial,
+    issueBindings: issueBindings(),
+    evaluatedAt: EVALUATED_AT,
+    maxSnapshotAgeMs: 5 * 60 * 1000
+  });
+  const snapshots = initial.map((entry, index) => ({
+    demoProjectId: entry.demoProjectId,
+    snapshot: postSnapshot(
+      plan,
+      projectSchemas.entries[index]!.schema,
+      entry
+    )
+  }));
+  const first = snapshots[0]!;
+  const second = snapshots[1]!;
+  const firstStage = first.snapshot.fields.find(
+    (field) => field.name === "Stage"
+  )!;
+  const secondStage = second.snapshot.fields.find(
+    (field) => field.name === "Stage"
+  )!;
+  const drifted = [
+    {
+      ...first,
+      snapshot: {
+        ...first.snapshot,
+        fields: first.snapshot.fields.map((field) =>
+          field.name === firstStage.name
+            ? {
+                ...field,
+                options: field.options.map((option, index) =>
+                  index === 0
+                    ? { ...option, color: "BLUE" as const }
+                    : index === 1
+                      ? { ...option, description: "drifted description" }
+                      : option
+                )
+              }
+            : field
+        )
+      }
+    },
+    {
+      ...second,
+      snapshot: {
+        ...second.snapshot,
+        fields: second.snapshot.fields.map((field) =>
+          field.name === secondStage.name
+            ? {
+                ...field,
+                options: field.options.map((option, index) =>
+                  index === 1
+                    ? { ...option, nodeId: field.options[0]!.nodeId }
+                    : option
+                )
+              }
+            : field
+        )
+      }
+    },
+    ...snapshots.slice(2)
+  ];
+  const report = reconcileVerifiedDemoProjectBootstrap({
+    targetManifest,
+    projectSchemas,
+    confirmedPlan: plan,
+    confirmedPlanDigest: plan.planDigest,
+    snapshots: drifted,
+    reconciledAt: RECONCILED_AT,
+    maxSnapshotAgeMs: 5 * 60 * 1000
+  });
+  assert.equal(report.apiSupportedPostconditionsMet, false);
+  assert.ok(report.projects[0]!.problems.includes("field:stage"));
+  assert.ok(
+    report.projects[1]!.problems.includes("field-option-identities")
   );
 });
 

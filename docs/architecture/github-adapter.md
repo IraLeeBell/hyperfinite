@@ -42,13 +42,18 @@ digests before returning a dry-run result.
 Foundation-bound demo schemas. Each declares fifteen Project fields, separates
 the human-editable Requested Stage Agent input from fourteen trusted
 projections, preserves the core Stage options, derives Journey Stage options
-from identity reservations, records projection sources, and writes Kernel Stage
-last.
+from identity reservations, requires an explicit supported display color on
+every single-select option, records projection sources, and writes Kernel Stage
+last. Live snapshots and bindings retain exact option names, colors,
+descriptions, and node IDs. Color is not consumed by projection or effect
+translation.
 `planProjectSetup()` compares one schema to a supplied fresh Project snapshot
 and either:
 
 1. emits a fully validated binding manifest; or
-2. emits human-admin actions for missing Projects, fields, or options and reconciliation actions for incompatible drift.
+2. emits human-admin actions for missing Projects, fields, or options and
+   reconciliation actions for incompatible name, order, color, description, or
+   type drift.
 
 `validateDemoProjectSchemaCatalog()` and `planDemoProjectCatalogSetup()` apply
 the same checks in canonical Foundation order. Catalog export/import binds the
@@ -62,14 +67,16 @@ enterprise policy remain outside the adapter.
 
 `createDemoProjectTargetManifest()` derives a target-manifest proposal from four
 fresh, empty, private customer Project snapshots in catalog order. An
-independent human confirms its digest. `planVerifiedDemoProjectBootstrap()`
+independent human confirms its digest. Each target entry binds its exact
+Project-schema digest. `planVerifiedDemoProjectBootstrap()`
 requires that exact digest plus the reviewed owner, repository, Project
 numbers/node IDs/titles/view IDs, repository link, zero-item precondition, fresh
 observations, and declarative schemas. It emits a content-digested plan only.
 `reconcileVerifiedDemoProjectBootstrap()` requires the confirmed plan digest and
-compares descriptions, READMEs, every field/option, synthetic issues, and
-visibly prefixed draft items after apply. Unknown fields or target drift block
-rather than delete or substitute.
+compares descriptions, READMEs, every field/option name, color, description, and
+node identity, synthetic issues, and visibly prefixed draft items after apply.
+Unknown fields, duplicate identities, or target drift block rather than delete
+or substitute.
 
 The four demonstration issue forms are static entry points into a deterministic intake
 preflight. The form-to-profile mapping is trusted configuration; issue text,

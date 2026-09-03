@@ -13,7 +13,7 @@
       "D3"
     ],
     "repositoryBindingDigest": "sha256:17cc2b4acc3b8063871e319db9d5c9e6e98e2d58c506e39768e88e70ec14ee6f",
-    "projectBindingDigest": "sha256:617e67953f08d1b0cc45f0afa2e1e87ca218b32a5fedcaf2ce9763013bad1944",
+    "projectBindingDigest": "sha256:ed2cbe0a139ca086efbbe65e97b1c4f3934c8eb38684a432c76bfda8efdee59c",
     "workAccordTemplateDigest": "sha256:8e13d2a697a8ef70784ee0d27c4adc294bcc408e22023ef36db1684f5794c551",
     "journeyDefinitionRef": "config/v1alpha1/demo-projects/security-dependency-remediation/journey.json",
     "stageAgentBindingsRef": "config/v1alpha1/demo-projects/security-dependency-remediation/runtime-bindings.json",
@@ -21,5 +21,5 @@
     "activationProfileRef": "config/v1alpha1/demo-projects/security-dependency-remediation/activation-profile.json",
     "projectionMappingRef": "config/v1alpha1/demo-projects/security-dependency-remediation/projection-mapping.json"
   },
-  "contentDigest": "sha256:aad5bf037fa831fa0c382c02dc546928aaec148b45786b8a3fcf0981c61f3952"
+  "contentDigest": "sha256:3bfd5991beec9a24546096d62b2ba11de85d3bb70119f683d56d822027f71a8f"
 }

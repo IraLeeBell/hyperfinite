@@ -2,7 +2,7 @@
   "synthetic": true,
   "demoProjectId": "feature-delivery",
   "trustedBindingDigest": "sha256:a796e6af915e46c3f55371d4c6fb9dbd2dc6b36d436d0a0ffe3bde44645834af",
-  "projectBindingDigest": "sha256:19e5c57fc25a780ad9774c6778b4a07c8290c63c23523db5180527fc35364b73",
+  "projectBindingDigest": "sha256:cbff649ede713daadea0ad1f2b4f8363499e0330cf7d4b01c18f75984679aa8f",
   "logicalTargetMapDigest": "sha256:37f067487df6d490506134b2fc44ce616fc94157a1d2133d65962a1845d24f4e",
   "verificationCommandCatalogDigest": "sha256:56fccbfef2d39ac3d71747baafc409b54a6973617a5fee5e0ceee27b36fca38c",
   "repositoryFullName": "example-organization/hyperfinite",
@@ -10,5 +10,5 @@
   "issueNumber": 27,
   "issueRepositoryHintIsAuthority": false,
   "observedPathsAreEvidenceOnly": true,
-  "projectSchemaDigest": "sha256:2ef81254b2e5369a4ca15340582e2db6e520400d6b21b2cd827e596aac553374"
+  "projectSchemaDigest": "sha256:1e97a7397e90e916ed170d91560687b455e1ee56caec2a22dc34dddce6a86843"
 }

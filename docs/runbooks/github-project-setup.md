@@ -12,6 +12,54 @@ reader in `github-http.ts`. An authorized human or separately reviewed trusted
 reader supplies the closed snapshot, keeping keyring/App credentials outside
 the planner and model-facing runtime.
 
+## Semantic single-select palette
+
+GitHub supports the exact option colors `GRAY`, `BLUE`, `GREEN`, `YELLOW`,
+`ORANGE`, `RED`, `PINK`, and `PURPLE`. Every single-select option must declare
+one of them. Omission is invalid; tooling never substitutes `GRAY`.
+
+| Core Stage | Color |
+|---|---|
+| Captured | `GRAY` |
+| Activation pending | `YELLOW` |
+| Framing | `BLUE` |
+| Planned | `PURPLE` |
+| Executing | `PINK` |
+| Verifying | `ORANGE` |
+| Human review | `YELLOW` |
+| Completed | `GREEN` |
+| Paused | `ORANGE` |
+| Blocked | `RED` |
+| Cancelled | `GRAY` |
+
+| Journey category | Exact Journey Stage options | Color |
+|---|---|---|
+| Intake/capture | Intake | `GRAY` |
+| Discovery, inventory, requirements | Repository discovery; Current-state inventory; Requirements clarification; Codebase discovery; Triage; Context inventory - autonomous; Discovery studio - choose agent | `BLUE` |
+| Assessment, synthesis, architecture, design, planning | Modernization assessment; Target architecture; Migration plan; Solution design; Implementation plan; Reproduction and impact analysis; Remediation design; Patch planning; Guided synthesis - autonomous; Implementation plan - deterministic gate | `PURPLE` |
+| Implementation/build | Implementation; Build; Patch implementation; Implementation studio - choose agent | `PINK` |
+| Test/verification | Verification; Test and verification; Security verification; Test and verification - autonomous | `ORANGE` |
+| Human review | Human review | `YELLOW` |
+| Completed | Completed | `GREEN` |
+| Activation pending | Activation Pending | `YELLOW` |
+| Paused | Paused | `ORANGE` |
+| Blocked | Blocked | `RED` |
+| Cancelled | Cancelled | `GRAY` |
+
+| Field | Option colors |
+|---|---|
+| Depth Profile | D0 `GRAY`; D1 `BLUE`; D2 `PURPLE`; D3 `PINK` |
+| Gate Status | Pending `YELLOW`; Satisfied `GREEN`; Blocked `RED` |
+| Attention | None `GRAY`; Human action `YELLOW`; Reconciliation `ORANGE` |
+| Stage Interaction | Backend autonomous `BLUE`; User-selectable agent `PURPLE`; Human gate `YELLOW`; Deterministic `GREEN`; Kernel control `ORANGE`; Terminal `GRAY` |
+| Requested Stage Agent | Locked/unavailable `GRAY`; discovery candidates `BLUE`; implementation candidates `PURPLE` |
+| Agent Selection Status | not-applicable `GRAY`; awaiting-selection `YELLOW`; accepted `GREEN`; invalid `RED`; stale `ORANGE`; reconciliation-required `PURPLE` |
+
+Names and descriptions are the accessible semantic source. Color is only a
+redundant visual cue and must never be interpreted as lifecycle, Work Accord,
+policy, capability, target, credential, transition, agent-selection, effect,
+approval, or merge authority.
+
 ## Validate declarative schemas
 
 ```bash
@@ -66,6 +114,46 @@ npm run github:setup -- plan \
 
 Synthetic, credential-free examples are in
 `tests/fixtures/project-ux/live/`. They are test evidence, not live bindings.
+
+## Reconcile colors on the four existing Projects
+
+After the palette change is merged, reconcile these exact Projects:
+`App Modernization - Hyperfinite`, `Feature Delivery - Hyperfinite`,
+`Security Dependency Remediation - Hyperfinite`, and
+`Adaptive Delivery - Hyperfinite`.
+
+1. **Plan:** obtain a fresh authenticated export for every Project, including
+   every field and each option's node ID, name, color, and description. Run the
+   four-demo `plan` command above. Stop on an unexpected owner, installation,
+   Project, field, option, order, or attribute. Every emitted action must say
+   `requiresHumanAdmin: true`; repository tooling performs no mutation.
+2. **Confirm:** a human Project administrator reviews all four target identities,
+   the merged per-Project schema digests, every proposed option attribute, and
+   the complete action set. Record the reviewed plan bytes or digest outside the
+   repository. Do not infer a target from issue or model text.
+3. **Apply:** the human administrator applies the confirmed color changes once
+   through an approved GitHub administration surface. Do not add an apply or
+   execute flag to this repository command, expose a Project-admin credential to
+   automation, delete unexpected state, or retry an ambiguous response.
+4. **Readback:** export all four Projects again from the exact targets and rerun
+   `plan`. Acceptance requires zero actions and four non-null bindings. Export
+   those reviewed bindings and confirm exact Project, field, and option node IDs;
+   field and option order; names; colors; descriptions; data types; and each
+   binding's current Project-schema digest. Any mismatch remains a blocked
+   human-admin reconciliation.
+
+For a new empty installation, generate and independently confirm a fresh target
+manifest before `bootstrap-plan`. Each manifest Project entry binds the exact
+Project-schema digest. The confirmed bootstrap plan carries explicit option
+colors and descriptions on every field operation, and every operation requires
+a human administrator. After the one reviewed external apply, run
+`bootstrap-readback`; success requires exact target identities, field and option
+node IDs, names, colors, descriptions, item bindings, and view state.
+
+Issue completion is a separate post-merge gate: keep the development issue open
+until a human administrator records zero-drift readback for all four existing
+Projects. A merged repository change alone does not complete live
+reconciliation.
 
 ## Generate and confirm the exact customer target manifest
 

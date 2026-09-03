@@ -206,6 +206,26 @@ test("Project setup is dry-run and produces a validated binding", async () => {
   assert.equal(binding.projectSchemaDigest, digest(schema));
   assert.equal(binding.project.nodeId, "PVT_synthetic_kwDOProject");
   assert.equal(binding.fields.length, schema.fields.length);
+  assert.deepEqual(
+    binding.fields.map((field) => ({
+      key: field.key,
+      options: field.options.map((option) => ({
+        key: option.key,
+        name: option.name,
+        color: option.color,
+        description: option.description
+      }))
+    })),
+    schema.fields.map((field) => ({
+      key: field.key,
+      options: field.options.map((option) => ({
+        key: option.key,
+        name: option.name,
+        color: option.color,
+        description: option.description ?? ""
+      }))
+    }))
+  );
 });
 
 test("OWNER schema placeholder accepts the authenticated customer organization", async () => {
@@ -251,10 +271,75 @@ test("Project schema drift requires explicit human-admin actions", async () => {
         fieldKey: "stage",
         optionKey: "blocked",
         name: "Blocked",
+        color: "RED",
+        description: "",
         requiresHumanAdmin: true
       }
     ]
   );
+});
+
+test("Project option color and description drift fail closed before binding", async () => {
+  const { schema, live } = await projectFixture();
+  for (const changed of [
+    { color: "BLUE" as const, description: "" },
+    { color: "GRAY" as const, description: "drifted description" }
+  ]) {
+    const drifted: LiveGitHubProject = {
+      ...live,
+      fields: live.fields.map((field) =>
+        field.name === "Stage"
+          ? {
+              ...field,
+              options: field.options.map((option) =>
+                option.name === "Captured"
+                  ? { ...option, ...changed }
+                  : option
+              )
+            }
+          : field
+      )
+    };
+    const plan = planProjectSetup({ schema, live: drifted, evaluatedAt: NOW });
+    assert.equal(plan.binding, null);
+    assert.deepEqual(
+      plan.actions.map((action) =>
+        action.type === "reconcile-drift" ? action.path : action.type
+      ),
+      ["/fields/stage/options/captured"]
+    );
+    assert.ok(plan.actions.every((action) => action.requiresHumanAdmin));
+  }
+});
+
+test("Project binding refuses duplicate field or option node identities", async () => {
+  const { schema, live } = await projectFixture();
+  const stage = live.fields.find((field) => field.name === "Stage")!;
+  const drifted: LiveGitHubProject = {
+    ...live,
+    fields: live.fields.map((field) =>
+      field.name === "Stage"
+        ? {
+            ...field,
+            options: field.options.map((option, index) =>
+              index === 1
+                ? { ...option, nodeId: stage.options[0]!.nodeId }
+                : option
+            )
+          }
+        : field
+    )
+  };
+  const plan = planProjectSetup({ schema, live: drifted, evaluatedAt: NOW });
+  assert.equal(plan.binding, null);
+  assert.ok(
+    plan.actions.some(
+      (action) =>
+        action.type === "reconcile-drift" &&
+        action.path === "/fields/nodeIds"
+    )
+  );
+  assert.ok(plan.actions.every((action) => action.requiresHumanAdmin));
 });
 
 test("Project export/import binds schema and live IDs", async () => {
@@ -270,6 +355,38 @@ test("Project export/import binds schema and live IDs", async () => {
   substitutedBinding.projectSchemaDigest = digest({ substituted: true });
   assert.throws(
     () => importProjectConfiguration(JSON.stringify(substituted)),
+    /does not match/
+  );
+  const colorTampered: GitHubProjectBinding = {
+    ...binding,
+    fields: binding.fields.map((field, fieldIndex) =>
+      fieldIndex !== 0
+        ? field
+        : {
+            ...field,
+            options: field.options.map((option, optionIndex) =>
+              optionIndex === 0
+                ? { ...option, color: "BLUE" as const }
+                : option
+            )
+          }
+    )
+  };
+  assert.throws(
+    () => exportProjectConfiguration(schema, colorTampered),
+    /does not match/
+  );
+  const duplicateIds = JSON.parse(serialized) as {
+    binding: {
+      fields: {
+        options: { nodeId: string }[];
+      }[];
+    };
+  };
+  duplicateIds.binding.fields[0]!.options[1]!.nodeId =
+    duplicateIds.binding.fields[0]!.options[0]!.nodeId;
+  assert.throws(
+    () => importProjectConfiguration(JSON.stringify(duplicateIds)),
     /does not match/
   );
 });

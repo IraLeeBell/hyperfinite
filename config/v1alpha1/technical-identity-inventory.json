@@ -4,21 +4,21 @@
   "scopes": {
     "authoritative-repository": {
       "inventoryFiles": 376,
-      "inventoryMatchingLines": 1014,
-      "inventoryOccurrences": 1023,
-      "inventoryDigest": "sha256:7b17981d1b0b27239fd646041b4f3f151cd5e5647489e4bf8a9a6e4f9f527598"
+      "inventoryMatchingLines": 1015,
+      "inventoryOccurrences": 1024,
+      "inventoryDigest": "sha256:005021c30c4f4b9959b556b263414ecc70e1cdafaa43d588924827efb55ae9d2"
     },
     "control-plane-core": {
       "inventoryFiles": 212,
-      "inventoryMatchingLines": 703,
-      "inventoryOccurrences": 710,
-      "inventoryDigest": "sha256:6871458e2da4012bd6e2eeddfbab8ee2f757a3e9fb8f080f31710eb178df9216"
+      "inventoryMatchingLines": 704,
+      "inventoryOccurrences": 711,
+      "inventoryDigest": "sha256:f3cc9cc466b87c95d6548d5a45291e447925153f50884405647a4c8ddc4edd27"
     },
     "demo-portfolio": {
       "inventoryFiles": 361,
-      "inventoryMatchingLines": 951,
-      "inventoryOccurrences": 958,
-      "inventoryDigest": "sha256:12e224e498953cf406ae4cf2818896018c0af8f2237f36c36e377feb2fa426b9"
+      "inventoryMatchingLines": 952,
+      "inventoryOccurrences": 959,
+      "inventoryDigest": "sha256:92c77959d3a24f519dc922811a754f1bc365e417a6943650379d060b20ccdde0"
     }
   }
 }

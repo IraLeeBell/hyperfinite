@@ -8,9 +8,9 @@
     "ownerNodeId": "O_synthetic_example_organization",
     "projectNodeId": "PVT_synthetic_adaptive_delivery",
     "itemNodeId": "PVTI_synthetic_adaptive_delivery_1",
-    "projectSchemaDigest": "sha256:e204a353b6863534cc56088120bfb9022615a405055646efbbad7a395c74ba58",
+    "projectSchemaDigest": "sha256:66ed8bde04937b5aa52e0526042f162d389a75e174eb01b56ff2c953d5d083a0",
     "projectionOnly": true,
     "administrativelyConfigured": false
   },
-  "contentDigest": "sha256:957f85da46cae787f38adf79378828f2f6a78230d9abab6b150573b9535d9187"
+  "contentDigest": "sha256:72d40a7b847bd7ae39bf3754ef8419e607c255247f1e4761ff5b23f80c086e4e"
 }

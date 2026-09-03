@@ -52,6 +52,7 @@
             "additionalProperties": false,
             "required": [
               "demoProjectId",
+              "projectSchemaDigest",
               "title",
               "number",
               "nodeId",
@@ -65,6 +66,9 @@
             "properties": {
               "demoProjectId": {
                 "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/demoProjectId"
+              },
+              "projectSchemaDigest": {
+                "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/demo-contract-common.schema.json#/$defs/digest"
               },
               "title": { "type": "string", "minLength": 1 },
               "number": {

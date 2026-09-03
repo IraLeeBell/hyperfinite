@@ -8,6 +8,16 @@ export type GitHubProjectFieldType =
   | "SINGLE_SELECT"
   | "TEXT";
 
+export type GitHubProjectOptionColor =
+  | "GRAY"
+  | "BLUE"
+  | "GREEN"
+  | "YELLOW"
+  | "ORANGE"
+  | "RED"
+  | "PINK"
+  | "PURPLE";
+
 export type GitHubProjectProjectionSlot =
   | "stage"
   | "journey-stage"
@@ -49,15 +59,7 @@ export interface GitHubProjectSchema {
       readonly key: string;
       readonly name: string;
       readonly description?: string;
-      readonly color?:
-        | "GRAY"
-        | "BLUE"
-        | "GREEN"
-        | "YELLOW"
-        | "ORANGE"
-        | "RED"
-        | "PINK"
-        | "PURPLE";
+      readonly color: GitHubProjectOptionColor;
     }[];
   }[];
   readonly projections: readonly {
@@ -196,6 +198,8 @@ export interface GitHubProjectBinding {
       readonly key: string;
       readonly nodeId: string;
       readonly name: string;
+      readonly color: GitHubProjectOptionColor;
+      readonly description: string;
     }[];
   }[];
   readonly validatedAt: string;
