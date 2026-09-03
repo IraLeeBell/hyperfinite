@@ -65,6 +65,7 @@ import {
 import {
   assertIdentifierEpochBoundaries,
   assertRetainedTechnicalIdentity,
+  assertReviewedTechnicalIdentityInventory,
   assertTechnicalIdentityInventoryEvidence,
   assertTechnicalIdentityPackageMetadata,
   assertTechnicalIdentityPublishers,
@@ -156,7 +157,7 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
 
   const retainedDomainLine =
     'const domain = "agentic-framework.runtime-signature.v1";';
-  const inventory = inventoryTechnicalIdentity([
+  const inventorySources = [
     {
       path: "docs/identity.md",
       content: "Hyperfinite retains `agentic-framework` for compatibility."
@@ -168,7 +169,7 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
     },
     {
       path: "config/v1alpha1/capability-registry.json",
-      content: '"publisher": "agentic-framework"'
+      content: '{"publisher":"agentic-framework"}'
     },
     {
       path: "src/release.ts",
@@ -180,9 +181,10 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
     },
     {
       path: "examples/example.json",
-      content: '"apiVersion": "agentic-framework.github.com/v1alpha1"'
+      content: '{"apiVersion":"agentic-framework.github.com/v1alpha1"}'
     }
-  ]);
+  ];
+  const inventory = inventoryTechnicalIdentity(inventorySources);
   assert.equal(inventory.occurrences, 6);
   for (const count of Object.values(inventory.categories)) {
     assert.equal(count.occurrences, 1);
@@ -257,6 +259,47 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
   assert.notEqual(
     firstSelectionInventory.inventoryDigest,
     widenedSelectionInventory.inventoryDigest
+  );
+  const reviewedInventoryEvidence = {
+    kind: "TechnicalIdentityInventoryEvidence" as const,
+    schemaVersion: "1.0.0" as const,
+    scopes: {
+      "authoritative-repository": {
+        inventoryFiles: inventory.filesWithOccurrences,
+        inventoryMatchingLines: inventory.matchingLines,
+        inventoryOccurrences: inventory.occurrences,
+        inventoryDigest: inventory.inventoryDigest
+      },
+      "control-plane-core": {
+        inventoryFiles: 1,
+        inventoryMatchingLines: 1,
+        inventoryOccurrences: 1,
+        inventoryDigest: `sha256:${"0".repeat(64)}` as const
+      },
+      "demo-portfolio": {
+        inventoryFiles: 1,
+        inventoryMatchingLines: 1,
+        inventoryOccurrences: 1,
+        inventoryDigest: `sha256:${"1".repeat(64)}` as const
+      }
+    }
+  };
+  assert.equal(
+    assertReviewedTechnicalIdentityInventory(
+      inventorySources,
+      reviewedInventoryEvidence,
+      "authoritative-repository"
+    ).scope,
+    "authoritative-repository"
+  );
+  assert.throws(
+    () =>
+      assertReviewedTechnicalIdentityInventory(
+        inventorySources,
+        reviewedInventoryEvidence,
+        "control-plane-core"
+      ),
+    /inventory drifted/
   );
   assert.doesNotThrow(() =>
     assertTechnicalIdentityInventoryEvidence(inventory, {

@@ -53,6 +53,7 @@
         "scripts/validate-packaging.ts",
         "scripts/validate-provenance.mjs",
         "scripts/validate-technical-identity.ts",
+        "scripts/validate-technical-identity-core.ts",
         "src",
         "tests/README.md",
         "tests/administrator-handoff.test.ts",

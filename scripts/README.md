@@ -28,6 +28,11 @@ and is not included in customer-starter profiles.
 | `npm run handoff:administrator` | Emit the canonical pre-App plan/readback and synthetic-unconfigured customer gap report |
 | `npm run validate:review-agent-runtime` | Run the separately controlled review-runtime probe |
 
+The authoritative technical-identity command and the
+`validate:technical-identity:core` / `validate:technical-identity:demo`
+customer-starter commands use separate fixed entrypoints. A caller cannot select
+a weaker inventory scope with an argument or mutable repository marker.
+
 ## Planning tools
 
 - `npm run customer:configure -- --codeowner @<owner>/<team>` rewrites every

@@ -67,9 +67,9 @@ other byte remains represented; changing selection semantics still changes the
 identity inventory.
 
 The compatibility contract binds distinct reviewed inventories for the
-authoritative repository, `control-plane-core`, and `demo-portfolio`. Validation
-accepts only an exact evidence match; deleting a marker file cannot select a
-weaker scope.
+authoritative repository, `control-plane-core`, and `demo-portfolio`. Three
+fixed executable entrypoints each require exactly one of those scopes; no
+argument, environment value, or mutable marker can select a weaker inventory.
 
 Only the exact protected compatibility field and its exact closed-schema
 property may declare the identifier epoch. Validation decodes JSON property

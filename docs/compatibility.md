@@ -16,7 +16,9 @@ occurrences, so changing enclosing semantics, removing an identifier, or
 replacing it cannot disappear silently from validation. Separate reviewed
 evidence covers the authoritative repository and the two mechanically closed
 customer-starter profiles. A source set must match exactly one of those scopes;
-file-presence heuristics cannot downgrade validation.
+the authoritative, core, and demo package scripts use separate fixed
+entrypoints, so file-presence heuristics or caller arguments cannot downgrade
+validation.
 
 | Surface | Fixed compatibility identity |
 |---|---|

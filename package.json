@@ -22,6 +22,8 @@
     "validate:customer-starter-extraction": "npm run build && node dist/scripts/validate-customer-starter-extraction.js",
     "validate:customer-readiness": "npm run build && node dist/scripts/validate-customer-readiness.js",
     "validate:technical-identity": "npm run build && node dist/scripts/validate-technical-identity.js",
+    "validate:technical-identity:core": "npm run build && node dist/scripts/validate-technical-identity-core.js",
+    "validate:technical-identity:demo": "npm run build && node dist/scripts/validate-technical-identity-demo.js",
     "validate:packaging": "npm run build && node dist/scripts/validate-packaging.js",
     "validate:provenance": "node scripts/validate-provenance.mjs",
     "validate:schemas": "npm run build && node dist/scripts/validate-schemas.js",

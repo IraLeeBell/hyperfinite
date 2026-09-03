@@ -131,7 +131,7 @@ const EXPECTED_EVIDENCE_INPUT_DIGESTS = {
   "dist/tests/observability.test.js":
     "sha256:a1a6a7d2f263e755298fe42ae6ad5cf4a663ca28b3afdc0c85c317cf8c3ac948",
   "dist/tests/packaging.test.js":
-    "sha256:f33a051534b310d0e20e67ddedd02865967d4620607b6d1c04a51b816f18e1d8",
+    "sha256:c2b3d7c1ef406e731256d7578176ae7dce07a9f209db76714a5c5406b5fe92c8",
   "dist/tests/portfolio-hardening.test.js":
     "sha256:5a21d2d27889ed337f2a38c62402a8b8266c765273d3954cde61c99eda50d668",
   "dist/tests/pre-app-api-surface.test.js":

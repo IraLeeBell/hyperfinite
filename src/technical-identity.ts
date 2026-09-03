@@ -787,6 +787,7 @@ export function inventoryTechnicalIdentity(
 export function assertReviewedTechnicalIdentityInventory(
   sources: readonly TechnicalIdentitySource[],
   evidence: TechnicalIdentityInventoryEvidenceDocument,
+  expectedScope: TechnicalIdentityInventoryScope,
   identity: TechnicalIdentity = RETAINED_TECHNICAL_IDENTITY
 ): {
   readonly scope: TechnicalIdentityInventoryScope;
@@ -794,23 +795,9 @@ export function assertReviewedTechnicalIdentityInventory(
 } {
   assertIdentifierEpochBoundaries(sources, identity);
   const inventory = inventoryTechnicalIdentity(sources, identity);
-  const scopes: readonly TechnicalIdentityInventoryScope[] = [
-    "authoritative-repository",
-    "control-plane-core",
-    "demo-portfolio"
-  ];
-  const matches = scopes.filter((scope) =>
-    technicalIdentityInventoryMatches(
-      inventory,
-      reviewedInventoryEvidence(evidence, scope)
-    )
+  assertTechnicalIdentityInventoryEvidence(
+    inventory,
+    reviewedInventoryEvidence(evidence, expectedScope)
   );
-  if (matches.length !== 1 || matches[0] === undefined) {
-    assertTechnicalIdentityInventoryEvidence(
-      inventory,
-      evidence.scopes["authoritative-repository"]
-    );
-    throw new TypeError("technical identity inventory matched multiple scopes");
-  }
-  return { scope: matches[0], inventory };
+  return { scope: expectedScope, inventory };
 }

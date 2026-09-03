@@ -28,6 +28,7 @@
         "scripts/validate-gh-aw.ts",
         "scripts/validate-runtime-config.ts",
         "scripts/validate-schemas.ts",
+        "scripts/validate-technical-identity-demo.ts",
         "scripts/validate-workflows.ts",
         "tests/adaptive-delivery-demo.test.ts",
         "tests/app-modernization-demo.test.ts",

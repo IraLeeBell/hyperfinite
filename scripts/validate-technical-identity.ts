@@ -25,6 +25,7 @@ import {
   assertTechnicalIdentityPublishers,
   technicalIdentityRegistryPublishers,
   type TechnicalIdentityInventoryEvidenceDocument,
+  type TechnicalIdentityInventoryScope,
   type TechnicalIdentitySource
 } from "../src/technical-identity.js";
 import { assertDocument } from "../src/validation.js";
@@ -168,6 +169,20 @@ function stringProperty(
     throw new TypeError(`${subject}.${key} must be a string`);
   }
   return property;
+}
+
+function expectedInventoryScope(): TechnicalIdentityInventoryScope {
+  const entrypoint = path.basename(process.argv[1] ?? "");
+  if (entrypoint === "validate-technical-identity.js") {
+    return "authoritative-repository";
+  }
+  if (entrypoint === "validate-technical-identity-core.js") {
+    return "control-plane-core";
+  }
+  if (entrypoint === "validate-technical-identity-demo.js") {
+    return "demo-portfolio";
+  }
+  throw new TypeError("technical identity validator requires a fixed entrypoint");
 }
 
 const root = realpathSync(process.cwd());
@@ -368,6 +383,7 @@ for (const source of sources) {
 const reviewedInventory = assertReviewedTechnicalIdentityInventory(
   sources,
   inventoryEvidence,
+  expectedInventoryScope(),
   identity
 );
 process.stdout.write(
