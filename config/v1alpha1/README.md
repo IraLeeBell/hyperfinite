@@ -3,8 +3,10 @@
 This directory contains the current reviewed configuration family. The
 top-level [configuration guide](../README.md) explains ownership and validation.
 
-- Core lifecycle, policy, registry, compatibility, Project, migration, and
-  readiness documents live at this level.
+- Core lifecycle, policy, registry, compatibility/technical-identity, Project,
+  migration, and readiness documents live at this level.
+- `technical-identity-inventory.json` binds reviewed full-file occurrence
+  evidence for the repository and both customer-starter scopes.
 - `phase-contracts/` contains the core active-phase contracts.
 - `demo-portfolio/` and `demo-projects/` contain the exact four-demo catalog and
   per-demo shards.

@@ -3,9 +3,52 @@
 `config/v1alpha1/compatibility.json` is the machine-readable source of truth.
 Unknown or omitted combinations are unsupported and must fail closed.
 
+## Product and technical identity
+
+Hyperfinite is the product name. `agentic-framework` is the retained technical
+compatibility identity for the current `v1alpha1` epoch; it is not a second
+product name. The compatibility document fixes this decision and the exact
+package, release archive, API/schema, logical Project schema, Capability
+Registry publisher, and domain stem values.
+`config/v1alpha1/technical-identity-inventory.json` separately binds the counts
+and digest of every complete identity-bearing file plus its classified
+occurrences, so changing enclosing semantics, removing an identifier, or
+replacing it cannot disappear silently from validation. Separate reviewed
+evidence covers the authoritative repository and the two mechanically closed
+customer-starter profiles. A source set must match exactly one of those scopes;
+the authoritative, core, and demo package scripts use separate fixed
+entrypoints, so file-presence heuristics or caller arguments cannot downgrade
+validation.
+
+| Surface | Fixed compatibility identity |
+|---|---|
+| npm/package and release manifest | `agentic-framework`; archive `agentic-framework.tar` |
+| API group and schema origin | `agentic-framework.github.com/v1alpha1`; `https://agentic-framework.github.com/schemas/` |
+| Reusable logical Project schema | `agentic-framework-control-plane`; display title `Hyperfinite Control Plane` |
+| Capability Registry publisher | `agentic-framework` |
+| Signature, digest, OIDC audience, evidence-marker, builder, User-Agent, and format domains | Values derived from the lower-case `agentic-framework` stem and closed by their existing schemas or validators |
+
+There is no alias, dual-read, dual-write, or automatic evidence rewrite.
+Existing exact-head release/customer-starter evidence remains evidence for its
+original head. New evidence is regenerated for the new head while retaining the
+same technical identifiers. Content digests therefore change only when their
+bound content or head changes; old digests are never re-signed or silently
+migrated.
+
+The credentialless canary seed, synthetic topology OIDC audiences, and
+upstream taxonomy User-Agent previously used the product slug. They are
+pre-release synthetic/tooling values, now normalized into the retained epoch;
+there is no deployed credential or live evidence migration.
+
+Only the exact protected compatibility field declares `identifierEpoch`, and
+its exact closed-schema property accepts one constant value. Validation decodes
+JSON keys, checks the exact schema location, and normalizes source Unicode
+escapes. Runtime jobs, model outputs, and migration manifests have no field that
+can choose or infer another epoch.
+
 | Surface | Tested/supported combination |
 |---|---|
-| Package | `agentic-framework 0.1.0` |
+| Package | Hyperfinite package `agentic-framework 0.1.0` |
 | Node.js | Major `24` in Agentic Workflows; major `26` for local deterministic validation |
 | npm | Major `11` |
 | GitHub CLI | `2.96.0` |

@@ -559,7 +559,7 @@ async function pullPlan(): Promise<{
     binding,
     plan: translateSafeOutput({
       output: safeOutput(),
-      intent: { type: "check-run", name: "Agentic Framework" },
+      intent: { type: "check-run", name: "Hyperfinite" },
       binding,
       eventId: "pull",
       contractRevision: 1,
@@ -2501,7 +2501,7 @@ test("stale contract, schema, receipt, and pull head are rejected before writes"
   };
   const pullPlan = translateSafeOutput({
     output: safeOutput(),
-    intent: { type: "check-run", name: "Agentic Framework" },
+    intent: { type: "check-run", name: "Hyperfinite" },
     binding: pullBinding,
     eventId: "pull",
     contractRevision: 1,

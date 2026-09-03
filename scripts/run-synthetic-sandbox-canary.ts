@@ -123,7 +123,7 @@ const EXPECTED_EVIDENCE_INPUT_DIGESTS = {
   "dist/tests/feature-delivery-demo.test.js":
     "sha256:efbdb4b781ac65453e7c913cb53ce3391b6880b4c262480c1da32783ff6711e9",
   "dist/tests/github-adapter.test.js":
-    "sha256:b1eada10cb1bd6782ac47db93ab9ce340a0143b0f552ecc98bee18aea0438522",
+    "sha256:3f547d9bed92aee84c2a83c6ccdbe5134155a1a8dea134f2860636a7c8ad096e",
   "dist/tests/github-project-bootstrap.test.js":
     "sha256:48a16ef62994c3d9a1d80d80119b9b3135e87773fbc8f4da15bdcc27952c118c",
   "dist/tests/hybrid-agent-selection.test.js":
@@ -131,7 +131,7 @@ const EXPECTED_EVIDENCE_INPUT_DIGESTS = {
   "dist/tests/observability.test.js":
     "sha256:a1a6a7d2f263e755298fe42ae6ad5cf4a663ca28b3afdc0c85c317cf8c3ac948",
   "dist/tests/packaging.test.js":
-    "sha256:beb6c5a646dfb872584e09f10161b735d278b4768b733b106f9957a8e1b1a831",
+    "sha256:c2b3d7c1ef406e731256d7578176ae7dce07a9f209db76714a5c5406b5fe92c8",
   "dist/tests/portfolio-hardening.test.js":
     "sha256:5a21d2d27889ed337f2a38c62402a8b8266c765273d3954cde61c99eda50d668",
   "dist/tests/pre-app-api-surface.test.js":
@@ -145,7 +145,7 @@ const EXPECTED_EVIDENCE_INPUT_DIGESTS = {
   "dist/tests/security-regression.test.js":
     "sha256:f4c725f65b7bea08b7d0bef628638c045672829dcb723a4b4ec03d735e80db37",
   "examples/pre-app/deployment-topology.json":
-    "sha256:ed2ad0b39c54ebbb69bcc96e2effd3484ac56c1122c323dbef380544977fb474"
+    "sha256:b4acaea0ce704045f35ffb4b031e180a48e3d90fd9e273f8db3e472680e5d0ea"
 } as const satisfies Readonly<Record<string, `sha256:${string}`>>;
 const RESTART_BOUNDARIES = [
   "activation-claim",
@@ -533,7 +533,7 @@ function createSyntheticEphemeralKeyPair(): {
   readonly publicKey: ReturnType<typeof createPublicKey>;
 } {
   const seed = createHash("sha256")
-    .update("hyperfinite credentialless synthetic sandbox canary v1", "utf8")
+    .update("agentic-framework credentialless synthetic sandbox canary v1", "utf8")
     .digest();
   const privateKey = createPrivateKey({
     key: Buffer.concat([

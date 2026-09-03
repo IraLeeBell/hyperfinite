@@ -263,6 +263,21 @@ export interface CompatibilityMatrix {
   readonly kind: "CompatibilityMatrix";
   readonly schemaVersion: "1.0.0";
   readonly packageVersion: string;
+  readonly technicalIdentity: {
+    readonly decision: "retain-compatibility-identity";
+    readonly productName: "Hyperfinite";
+    readonly identifierEpoch: "agentic-framework/v1alpha1";
+    readonly packageName: "agentic-framework";
+    readonly releaseArchiveName: "agentic-framework.tar";
+    readonly apiVersion: "agentic-framework.github.com/v1alpha1";
+    readonly schemaBaseUri: "https://agentic-framework.github.com/schemas/";
+    readonly projectSchemaName: "agentic-framework-control-plane";
+    readonly capabilityPublisher: "agentic-framework";
+    readonly domainStem: "agentic-framework";
+    readonly issueTaxonomyUserAgent: "agentic-framework-issue-taxonomy/1.0";
+    readonly syntheticCanarySeed: "agentic-framework credentialless synthetic sandbox canary v1";
+    readonly syntheticOidcAudiencePrefix: "synthetic://agentic-framework/";
+  };
   readonly nodeMajors: readonly number[];
   readonly npmMajors: readonly number[];
   readonly ghCliVersion: "2.96.0";

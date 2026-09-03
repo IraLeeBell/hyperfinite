@@ -27,7 +27,13 @@ The adapter adds closed JSON Schemas for:
 - App-attributed, cryptographically authenticated, append-only
   `GitHubEffectEvidence` envelopes.
 
-Every contract uses `agentic-framework.github.com/v1alpha1`, rejects unknown properties, and participates in the same strict AJV validation boundary as the kernel contracts. Project export/import binds a live manifest to the declarative schema digest. Project migration hooks double-run migrations and compare canonical digests before returning a dry-run result.
+Every contract uses the retained
+`agentic-framework.github.com/v1alpha1` technical compatibility identity,
+rejects unknown properties, and participates in the same strict AJV validation
+boundary as the kernel contracts. Hyperfinite does not introduce a second API
+epoch. Project export/import binds a live manifest to the declarative schema
+digest. Project migration hooks double-run migrations and compare canonical
+digests before returning a dry-run result.
 
 ## Project validation and setup
 

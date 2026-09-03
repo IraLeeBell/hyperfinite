@@ -20,6 +20,10 @@ import type {
   ReleaseManifest
 } from "../src/packaging-types.js";
 import { validateOpenSourceAssessment } from "../src/release.js";
+import {
+  assertRetainedTechnicalIdentity,
+  assertTechnicalIdentityPackageMetadata
+} from "../src/technical-identity.js";
 import { assertDocument } from "../src/validation.js";
 
 const EXPECTED_LICENSE_SHA256 =
@@ -160,14 +164,18 @@ async function main(): Promise<void> {
   ]);
 
   const packageDocument = JSON.parse(packageSource) as {
+    readonly name?: unknown;
+    readonly description?: unknown;
     readonly version?: unknown;
     readonly engines?: { readonly node?: unknown };
     readonly scripts?: Readonly<Record<string, string>>;
   };
   const lock = JSON.parse(lockSource) as {
+    readonly name?: unknown;
     readonly version?: unknown;
     readonly packages?: {
       readonly ""?: {
+        readonly name?: unknown;
         readonly version?: unknown;
         readonly engines?: { readonly node?: unknown };
       };
@@ -177,6 +185,10 @@ async function main(): Promise<void> {
     compatibilityValue,
     "CompatibilityMatrix"
   );
+  const technicalIdentity = assertRetainedTechnicalIdentity(
+    compatibility.technicalIdentity
+  );
+  assertTechnicalIdentityPackageMetadata(packageDocument, technicalIdentity);
   const migrations = validateMigrationManifest(migrationValue);
   const readiness = validateOpenSourceAssessment(readinessValue, "0.1.0");
   const config = packaging<InstallationConfig>(
@@ -194,6 +206,9 @@ async function main(): Promise<void> {
   );
 
   if (
+    packageDocument.name !== technicalIdentity.packageName ||
+    lock.name !== technicalIdentity.packageName ||
+    lock.packages?.[""]?.name !== technicalIdentity.packageName ||
     packageDocument.version !== compatibility.packageVersion ||
     lock.version !== compatibility.packageVersion ||
     lock.packages?.[""]?.version !== compatibility.packageVersion ||
@@ -315,7 +330,9 @@ async function main(): Promise<void> {
   assertContains(
     compatibilityDoc,
     [
-      "`agentic-framework 0.1.0`",
+      "Hyperfinite is the product name",
+      "`agentic-framework` is the retained technical",
+      "There is no alias, dual-read, dual-write, or automatic evidence rewrite.",
       "`github/gh-aw v0.86.2`",
       "`1.0.79`",
       "GitHub Enterprise Server | Unsupported and unverified"

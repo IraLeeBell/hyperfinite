@@ -62,8 +62,469 @@ import {
   listGitTree,
   safeOutputPath
 } from "../src/release-support.js";
+import {
+  assertIdentifierEpochBoundaries,
+  assertRetainedTechnicalIdentity,
+  assertReviewedTechnicalIdentityInventory,
+  assertTechnicalIdentityInventoryEvidence,
+  assertTechnicalIdentityPackageMetadata,
+  assertTechnicalIdentityPublishers,
+  inventoryTechnicalIdentity,
+  RETAINED_TECHNICAL_IDENTITY,
+  technicalIdentityRegistryPublishers
+} from "../src/technical-identity.js";
 
 const ROOT = process.cwd();
+
+test("Hyperfinite retains one closed technical compatibility identity", () => {
+  const compatibility = agenticFramework.assertDocument(
+    "PackagingDocument",
+    json("config/v1alpha1/compatibility.json")
+  );
+  assert.equal(compatibility.kind, "CompatibilityMatrix");
+  if (compatibility.kind !== "CompatibilityMatrix") {
+    assert.fail("expected CompatibilityMatrix");
+  }
+
+  assert.deepEqual(
+    assertRetainedTechnicalIdentity(compatibility.technicalIdentity),
+    RETAINED_TECHNICAL_IDENTITY
+  );
+  assertTechnicalIdentityPackageMetadata(
+    json("package.json"),
+    RETAINED_TECHNICAL_IDENTITY
+  );
+  assertTechnicalIdentityPublishers(
+    [RETAINED_TECHNICAL_IDENTITY.capabilityPublisher],
+    RETAINED_TECHNICAL_IDENTITY
+  );
+
+  const migratedStem = ["hyper", "finite"].join("");
+  const migrated = {
+    ...compatibility,
+    technicalIdentity: {
+      ...compatibility.technicalIdentity,
+      packageName: migratedStem
+    }
+  };
+  assert.equal(
+    validateDocument("PackagingDocument", migrated).valid,
+    false
+  );
+  assert.throws(
+    () => assertRetainedTechnicalIdentity(migrated.technicalIdentity),
+    /must remain/
+  );
+  assert.throws(
+    () =>
+      assertTechnicalIdentityPublishers(
+        [migratedStem],
+        RETAINED_TECHNICAL_IDENTITY
+      ),
+    /publisher identity drifted/
+  );
+
+  const epochField = ["identifier", "Epoch"].join("");
+  const migrations = agenticFramework.assertDocument(
+    "PackagingDocument",
+    json("config/v1alpha1/migrations.json")
+  );
+  assert.equal(migrations.kind, "MigrationManifest");
+  if (migrations.kind !== "MigrationManifest") {
+    assert.fail("expected MigrationManifest");
+  }
+  assert.equal(
+    validateDocument("PackagingDocument", {
+      ...migrations,
+      packageName: migratedStem,
+      [epochField]: RETAINED_TECHNICAL_IDENTITY.identifierEpoch
+    }).valid,
+    false
+  );
+
+  const runtimePolicy = agenticFramework.assertDocument(
+    "CopilotRuntimePolicy",
+    json("config/v1alpha1/copilot-runtime-policy.json")
+  );
+  assert.equal(
+    validateDocument("CopilotRuntimePolicy", {
+      ...runtimePolicy,
+      apiVersion: `${migratedStem}.github.com/v1alpha1`,
+      [epochField]: RETAINED_TECHNICAL_IDENTITY.identifierEpoch
+    }).valid,
+    false
+  );
+
+  const retainedDomainLine =
+    'const domain = "agentic-framework.runtime-signature.v1";';
+  const inventorySources = [
+    {
+      path: "docs/identity.md",
+      content: "Hyperfinite retains `agentic-framework` for compatibility."
+    },
+    {
+      path: "src/api.ts",
+      content:
+        'const apiVersion = "agentic-framework.github.com/v1alpha1";'
+    },
+    {
+      path: "config/v1alpha1/capability-registry.json",
+      content: '{"publisher":"agentic-framework"}'
+    },
+    {
+      path: "src/release.ts",
+      content: 'const packageName = "agentic-framework";'
+    },
+    {
+      path: "src/runtime.ts",
+      content: retainedDomainLine
+    },
+    {
+      path: "examples/example.json",
+      content: '{"apiVersion":"agentic-framework.github.com/v1alpha1"}'
+    }
+  ];
+  const inventory = inventoryTechnicalIdentity(inventorySources);
+  assert.equal(inventory.occurrences, 6);
+  for (const count of Object.values(inventory.categories)) {
+    assert.equal(count.occurrences, 1);
+  }
+  const enabledDomain = inventoryTechnicalIdentity([
+    {
+      path: "src/runtime.ts",
+      content: ["if (true) {", "  authorize();", retainedDomainLine, "}"].join(
+        "\n"
+      )
+    }
+  ]);
+  const disabledDomain = inventoryTechnicalIdentity([
+    {
+      path: "src/runtime.ts",
+      content: ["if (false) {", "  authorize();", retainedDomainLine, "}"].join(
+        "\n"
+      )
+    }
+  ]);
+  assert.equal(enabledDomain.occurrences, disabledDomain.occurrences);
+  assert.notEqual(enabledDomain.inventoryDigest, disabledDomain.inventoryDigest);
+  const selectionEvidence = {
+    apiVersion: RETAINED_TECHNICAL_IDENTITY.apiVersion,
+    kind: "CustomerStarterSelection",
+    schemaVersion: "1.0.0",
+    profileId: "control-plane-core",
+    extendsProfileId: null,
+    baseSelectionDigest: null,
+    sourceHeadSha: "1".repeat(40),
+    includedPaths: ["src"],
+    excludedPaths: [],
+    resolvedClosureDigest: `sha256:${"2".repeat(64)}`
+  };
+  const firstSelectionInventory = inventoryTechnicalIdentity([
+    {
+      path: "config/v1alpha1/customer-starter-selection.json",
+      content: JSON.stringify(selectionEvidence, null, 2)
+    }
+  ]);
+  const repinnedSelectionInventory = inventoryTechnicalIdentity([
+    {
+      path: "config/v1alpha1/customer-starter-selection.json",
+      content: JSON.stringify(
+        {
+          ...selectionEvidence,
+          sourceHeadSha: "3".repeat(40),
+          resolvedClosureDigest: `sha256:${"4".repeat(64)}`
+        },
+        null,
+        2
+      )
+    }
+  ]);
+  assert.equal(
+    firstSelectionInventory.inventoryDigest,
+    repinnedSelectionInventory.inventoryDigest
+  );
+  const widenedSelectionInventory = inventoryTechnicalIdentity([
+    {
+      path: "config/v1alpha1/customer-starter-selection.json",
+      content: JSON.stringify(
+        {
+          ...selectionEvidence,
+          includedPaths: ["src", "scripts"]
+        },
+        null,
+        2
+      )
+    }
+  ]);
+  assert.notEqual(
+    firstSelectionInventory.inventoryDigest,
+    widenedSelectionInventory.inventoryDigest
+  );
+  const reviewedInventoryEvidence = {
+    kind: "TechnicalIdentityInventoryEvidence" as const,
+    schemaVersion: "1.0.0" as const,
+    scopes: {
+      "authoritative-repository": {
+        inventoryFiles: inventory.filesWithOccurrences,
+        inventoryMatchingLines: inventory.matchingLines,
+        inventoryOccurrences: inventory.occurrences,
+        inventoryDigest: inventory.inventoryDigest
+      },
+      "control-plane-core": {
+        inventoryFiles: 1,
+        inventoryMatchingLines: 1,
+        inventoryOccurrences: 1,
+        inventoryDigest: `sha256:${"0".repeat(64)}` as const
+      },
+      "demo-portfolio": {
+        inventoryFiles: 1,
+        inventoryMatchingLines: 1,
+        inventoryOccurrences: 1,
+        inventoryDigest: `sha256:${"1".repeat(64)}` as const
+      }
+    }
+  };
+  assert.equal(
+    assertReviewedTechnicalIdentityInventory(
+      inventorySources,
+      reviewedInventoryEvidence,
+      "authoritative-repository"
+    ).scope,
+    "authoritative-repository"
+  );
+  assert.throws(
+    () =>
+      assertReviewedTechnicalIdentityInventory(
+        inventorySources,
+        reviewedInventoryEvidence,
+        "control-plane-core"
+      ),
+    /inventory drifted/
+  );
+  assert.doesNotThrow(() =>
+    assertTechnicalIdentityInventoryEvidence(inventory, {
+      inventoryFiles: inventory.filesWithOccurrences,
+      inventoryMatchingLines: inventory.matchingLines,
+      inventoryOccurrences: inventory.occurrences,
+      inventoryDigest: inventory.inventoryDigest
+    })
+  );
+  assert.throws(
+    () =>
+      assertTechnicalIdentityInventoryEvidence(inventory, {
+        inventoryFiles: inventory.filesWithOccurrences,
+        inventoryMatchingLines: inventory.matchingLines,
+        inventoryOccurrences: inventory.occurrences - 1,
+        inventoryDigest: inventory.inventoryDigest
+      }),
+    /inventory drifted/
+  );
+
+  const staleDisplayName = ["Agentic", "Framework"].join(" ");
+  assert.throws(
+    () =>
+      inventoryTechnicalIdentity([
+        { path: "docs/stale.md", content: staleDisplayName }
+      ]),
+    /stale product spelling/
+  );
+  assert.throws(
+    () =>
+      inventoryTechnicalIdentity([
+        {
+          path: "src/migrated.ts",
+          content: `const apiVersion = "${migratedStem}.github.com/v1alpha1";`
+        }
+      ]),
+    /unsupported Hyperfinite technical identifier/
+  );
+  for (const forbiddenTechnicalIdentity of [
+    `synthetic://${migratedStem}/authorization-redeemer`,
+    `${migratedStem}-issue-taxonomy/1.0`,
+    `${migratedStem} credentialless synthetic sandbox canary v1`
+  ]) {
+    assert.throws(
+      () =>
+        inventoryTechnicalIdentity([
+          {
+            path: "src/migrated-domain.ts",
+            content: forbiddenTechnicalIdentity
+          }
+        ]),
+      /unsupported Hyperfinite technical identifier/
+    );
+  }
+
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "config/v1alpha1/migrations.json",
+          content: `{"identifier\\u0045poch":"agentic-framework/v1alpha1"}`
+        }
+      ]),
+    /outside the exact compatibility declaration/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "schemas/v1alpha1/packaging.schema.json",
+          content: JSON.stringify({
+            $defs: {
+              "compatibilityMatrix/allOf/1/properties/technicalIdentity": {
+                properties: {
+                  [epochField]: {
+                    const: RETAINED_TECHNICAL_IDENTITY.identifierEpoch
+                  }
+                }
+              }
+            }
+          })
+        }
+      ]),
+    /outside the exact compatibility declaration/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "schemas/v1alpha1/packaging.schema.json",
+          content: JSON.stringify({
+            $defs: {
+              migrationManifest: {
+                properties: {
+                  [epochField]: {
+                    enum: ["agentic-framework/v1alpha1"]
+                  }
+                }
+              }
+            }
+          })
+        }
+      ]),
+    /outside the exact compatibility declaration/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "src/runtime-input.ts",
+          content: `interface RuntimeInput { ${epochField}: string }`
+        }
+      ]),
+    /outside the exact compatibility type/
+  );
+  assert.throws(
+    () =>
+      technicalIdentityRegistryPublishers(
+        JSON.parse(
+          `{"kind":"CapabilityRegistry","capabilities":[{"publ\\u0069sher":"${migratedStem}"}]}`
+        ),
+        RETAINED_TECHNICAL_IDENTITY
+      ),
+    /publisher identity drifted/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "schemas/v1alpha1/example.schema.json",
+          content: JSON.stringify({
+            type: "object",
+            patternProperties: {
+              [`^${epochField}$`]: { type: "string" }
+            }
+          })
+        }
+      ]),
+    /patternProperties admits/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "schemas/v1alpha1/example.schema.json",
+          content: JSON.stringify({
+            $id: `https://${migratedStem}.github.com/schemas/example.schema.json`,
+            type: "object",
+            additionalProperties: false
+          })
+        }
+      ]),
+    /schema ID outside the retained origin/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "schemas/v1alpha1/example.schema.json",
+          content: JSON.stringify({
+            $id: RETAINED_TECHNICAL_IDENTITY.schemaBaseUri + "example.schema.json",
+            $ref: "../../../alternate-origin.schema.json"
+          })
+        }
+      ]),
+    /schema reference outside the retained origin/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "schemas/v1alpha1/example.schema.json",
+          content: JSON.stringify({
+            $id:
+              RETAINED_TECHNICAL_IDENTITY.schemaBaseUri +
+              "../outside.schema.json",
+            type: "object",
+            additionalProperties: false
+          })
+        }
+      ]),
+    /schema ID outside the retained origin/
+  );
+  const nestedCompatibilityType = [
+    "export interface CompatibilityMatrix {",
+    "  readonly runtimeInput: {",
+    "    readonly technicalIdentity: {",
+    `      readonly ${epochField}: "${RETAINED_TECHNICAL_IDENTITY.identifierEpoch}";`,
+    "    };",
+    "  };",
+    "}"
+  ].join("\n");
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "src/packaging-types.ts",
+          content: nestedCompatibilityType
+        }
+      ]),
+    /CompatibilityMatrix must own/
+  );
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "src/runtime-input.ts",
+          content: 'interface RuntimeInput { ["identifier" + "Epoch"]: string }'
+        }
+      ]),
+    /outside the exact compatibility type/
+  );
+  const continuedEpochProperty =
+    '"identifierEpo' + "\\" + "\n" + 'ch": string';
+  assert.throws(
+    () =>
+      assertIdentifierEpochBoundaries([
+        {
+          path: "src/runtime-input.ts",
+          content: `interface RuntimeInput { ${continuedEpochProperty} }`
+        }
+      ]),
+    /outside the exact compatibility type/
+  );
+});
 
 test("source repository identity includes the canonical GitHub host", () => {
   assert.deepEqual(

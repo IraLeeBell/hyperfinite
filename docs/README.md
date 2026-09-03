@@ -37,8 +37,9 @@ prerequisites; it does not grant authority or substitute for live evidence.
 - [Provenance](provenance/README.md): source inventory and reuse policy.
 - [Release](release/README.md): deterministic local evidence and the no-go
   release checklist.
-- [Compatibility](compatibility.md): tested Node, npm, Git, GitHub CLI, gh-aw,
-  Copilot CLI, and platform versions.
+- [Compatibility](compatibility.md): Hyperfinite product/technical identity
+  boundary plus tested Node, npm, Git, GitHub CLI, gh-aw, Copilot CLI, and
+  platform versions.
 
 ## Status language
 

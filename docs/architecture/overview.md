@@ -1,4 +1,4 @@
-# agentic-framework architecture
+# Hyperfinite architecture
 
 ## Status
 
@@ -28,7 +28,17 @@ and production mutation remain unavailable.
 
 ## Purpose
 
-`agentic-framework` is a GitHub-native, domain-neutral framework under the tagline **“Unbounded capability. Finite control.”** GitHub is the authoritative system of record. Models may judge and generate; only conventional deterministic code may authorize, target, transition, or mutate.
+Hyperfinite is a GitHub-native, domain-neutral control plane under the tagline
+**“Unbounded capability. Finite control.”** GitHub is the authoritative system
+of record. Models may judge and generate; only conventional deterministic code
+may authorize, target, transition, or mutate.
+
+The lower-case `agentic-framework` identifiers are the retained technical
+compatibility identity, not the product name. Package, API/schema, Capability
+Registry publisher, release artifact, evidence marker, and cryptographic domain
+values remain in that one fixed epoch. See
+[ADR 0019](../adr/0019-hyperfinite-retains-agentic-framework-technical-identity.md)
+and the [compatibility matrix](../compatibility.md).
 
 The repository implementation is GitHub Actions and CLI based. It introduces no
 deployed daemon, database, queue, webhook service, or cloud broker. Live use

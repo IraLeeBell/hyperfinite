@@ -3,8 +3,8 @@
 Hyperfinite separates deterministic authority from untrusted advisory
 computation. Read the pages in this order for a complete system view:
 
-1. [Overview](overview.md) — trust zones, two-plane model, durable evidence,
-   replay, and current implementation boundary.
+1. [Overview](overview.md) — product/technical identity, trust zones, two-plane
+   model, durable evidence, replay, and current implementation boundary.
 2. [Lifecycle](lifecycle.md) — domain-neutral states, routes, gates, and failure
    behavior.
 3. [Work Accord and Phase Contract](work-contract.md) — versioned work scope,

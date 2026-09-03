@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://agentic-framework.github.com/schemas/v1alpha1/packaging.schema.json",
-  "title": "Agentic framework packaging contracts",
+  "title": "Hyperfinite packaging contracts",
   "oneOf": [
     { "$ref": "#/$defs/installationConfig" },
     { "$ref": "#/$defs/installationBackupEvidence" },
@@ -425,12 +425,46 @@
         {
           "type": "object",
           "additionalProperties": false,
-          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "nodeMajors", "npmMajors", "ghCliVersion", "gitMinimumVersion", "ghAwVersion", "copilotCliVersion", "actions", "platforms", "contractVersions"],
+          "required": ["apiVersion", "kind", "schemaVersion", "packageVersion", "technicalIdentity", "nodeMajors", "npmMajors", "ghCliVersion", "gitMinimumVersion", "ghAwVersion", "copilotCliVersion", "actions", "platforms", "contractVersions"],
           "properties": {
             "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
             "kind": { "const": "CompatibilityMatrix" },
             "schemaVersion": { "const": "1.0.0" },
             "packageVersion": { "$ref": "#/$defs/version" },
+            "technicalIdentity": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "decision",
+                "productName",
+                "identifierEpoch",
+                "packageName",
+                "releaseArchiveName",
+                "apiVersion",
+                "schemaBaseUri",
+                "projectSchemaName",
+                "capabilityPublisher",
+                "domainStem",
+                "issueTaxonomyUserAgent",
+                "syntheticCanarySeed",
+                "syntheticOidcAudiencePrefix"
+              ],
+              "properties": {
+                "decision": { "const": "retain-compatibility-identity" },
+                "productName": { "const": "Hyperfinite" },
+                "identifierEpoch": { "const": "agentic-framework/v1alpha1" },
+                "packageName": { "const": "agentic-framework" },
+                "releaseArchiveName": { "const": "agentic-framework.tar" },
+                "apiVersion": { "const": "agentic-framework.github.com/v1alpha1" },
+                "schemaBaseUri": { "const": "https://agentic-framework.github.com/schemas/" },
+                "projectSchemaName": { "const": "agentic-framework-control-plane" },
+                "capabilityPublisher": { "const": "agentic-framework" },
+                "domainStem": { "const": "agentic-framework" },
+                "issueTaxonomyUserAgent": { "const": "agentic-framework-issue-taxonomy/1.0" },
+                "syntheticCanarySeed": { "const": "agentic-framework credentialless synthetic sandbox canary v1" },
+                "syntheticOidcAudiencePrefix": { "const": "synthetic://agentic-framework/" }
+              }
+            },
             "nodeMajors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [24, 26] } },
             "npmMajors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [11] } },
             "ghCliVersion": { "const": "2.96.0" },
