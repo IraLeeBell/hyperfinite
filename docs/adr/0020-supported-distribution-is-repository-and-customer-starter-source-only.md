@@ -41,10 +41,12 @@ live effects remain an independently deployed trust-service prerequisite.
 The private package keeps the `agentic-framework` name solely as the retained
 technical compatibility identity. Its export map exposes only `package.json`;
 SDK entry metadata, direct or `directories.bin` binary entry points, implicit
-`server.js` start behavior, and publication/deployment/install lifecycle scripts
-remain absent. Future SDK, CLI, hosted, deployable, release, or
-production-support distributions require separate product, compatibility,
-security, and operational work.
+`server.js` start behavior, implicit `binding.gyp` native builds, and
+install/prepare/dependencies/package/publication/deployment/service lifecycle
+scripts remain absent. Dependency installation always disables lifecycle
+scripts. Future SDK, CLI, hosted, deployable, release, or production-support
+distributions require separate product, compatibility, security, and operational
+work.
 
 This decision supersedes ADR 0014's earlier description of ADR 0013 TypeScript
 exports as a "supported public API" only where that phrase implies a package or

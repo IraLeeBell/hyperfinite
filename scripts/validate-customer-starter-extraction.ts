@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 // Repeatable clean-extraction validation for every customer-starter
 // profile: build the real archive from the exact reviewed repository head,
-// extract it into a fresh directory with no Git history, `npm ci` inside
-// that extraction, and run every script the profile's selection advertises
-// as standalone-runnable. This is the only mechanical check that a
-// profile's package/script/import/schema/workflow closure checks (all
-// static, all hermetic) cannot substitute for: it proves the archive is
-// actually installable and runnable on its own, not merely closed on paper.
+// extract it into a fresh directory with no Git history, run
+// `npm ci --ignore-scripts --no-audit --no-fund` inside that extraction, and
+// run every script the profile's selection advertises as standalone-runnable.
+// This is the only mechanical check that a profile's
+// package/script/import/schema/workflow closure checks (all static, all
+// hermetic) cannot substitute for: it proves the archive is actually
+// dependency-installable and runnable on its own, not merely closed on paper.
 //
-// `npm ci` reaches the network, so this script is intentionally NOT part
-// of `npm test`/`validate:packaging` (which must stay hermetic); it is its
-// own checked, explicitly-run validation step, and it writes a retained
-// JSON evidence record (source commit, archive digest, and the exact
+// Dependency installation reaches the network, so this script is intentionally
+// NOT part of `npm test`/`validate:packaging` (which must stay hermetic); it is
+// its own checked, explicitly-run validation step, and it writes a retained JSON
+// evidence record (source commit, archive digest, and the exact
 // command/exit-status/duration of every step) rather than only printing a
 // pass/fail line.
 
@@ -105,7 +106,7 @@ function validateProfile(
     // Every archived entry is namespaced under a "payload/" prefix (the
     // same convention src/release.ts uses); strip it on extraction so
     // package.json/package-lock.json land at the extraction root, where
-    // npm ci and every advertised script expect them.
+    // dependency installation and every advertised script expect them.
     steps.push(
       runStep(scratch, "tar", [
         "-xf",
@@ -115,11 +116,18 @@ function validateProfile(
         "--strip-components=1"
       ])
     );
-    steps.push(runStep(extractRoot, "npm", ["ci"]));
+    steps.push(
+      runStep(extractRoot, "npm", [
+        "ci",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund"
+      ])
+    );
     // Defense-in-depth for the same authority boundary
     // src/customer-starter.ts's shipped-export surface enforces: prove
-    // that once this extracted, npm-ci'd bundle's own package.json
-    // "exports" restriction is in effect, a deep import of an internal
+    // that once dependencies are installed in this extracted bundle, its own
+    // package.json "exports" restriction is in effect, a deep import of an internal
     // module by the package's own name (the same self-reference
     // resolution Node supports for a package that declares "exports" and
     // has a "name" field) fails outright, rather than merely relying on
@@ -127,7 +135,7 @@ function validateProfile(
     // This does not exercise a real external consumer installing this
     // package as a dependency (this package is private and unpublished);
     // it proves the "exports" restriction this profile ships is itself
-    // load-bearing inside a real, extracted, npm-ci'd bundle -- not just
+    // load-bearing inside a real, extracted, dependency-installed bundle -- not just
     // present in source and untested.
     const deepImportProbe = spawnSync(
       process.execPath,

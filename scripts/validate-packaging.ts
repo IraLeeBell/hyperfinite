@@ -389,7 +389,9 @@ async function main(): Promise<void> {
       "Independent trust services",
       "requires separate future product work",
       "neither profile supports the",
-      "complete `npm run validate`"
+      "complete `npm run validate`",
+      "`binding.gyp` install path",
+      "npm ci --ignore-scripts --no-audit --no-fund"
     ],
     "product boundary documentation"
   );
@@ -442,7 +444,8 @@ async function main(): Promise<void> {
       "does not decide license, publication, visibility, or release",
       "npm run validate:technical-identity:core",
       "npm run validate:technical-identity:demo",
-      "are not supported customer-starter commands"
+      "are not supported customer-starter commands",
+      "npm ci --ignore-scripts --no-audit --no-fund"
     ],
     "customer-starter documentation"
   );
@@ -452,7 +455,9 @@ async function main(): Promise<void> {
       "supersedes ADR 0014's earlier description",
       "Persisted JSON documents and schemas remain versioned",
       "repository contracts, but there is no supported TypeScript package API",
-      "no supported TypeScript package API"
+      "no supported TypeScript package API",
+      "`binding.gyp` native builds",
+      "Dependency installation always disables lifecycle"
     ],
     "distribution ADR"
   );

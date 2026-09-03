@@ -248,7 +248,8 @@ customer-starter command surface; it cannot apply, publish, install, or reach
 the network and is not a packaged CLI.
 `npm run validate:customer-starter-extraction` is a separate, network-
 reaching, checked (not hermetic-unit-test) validation that builds each
-profile, extracts it with no Git history, runs `npm ci`, and runs every
-advertised script, retaining a JSON evidence record. See
+profile, extracts it with no Git history, runs
+`npm ci --ignore-scripts --no-audit --no-fund`, and runs every advertised
+script, retaining a JSON evidence record. See
 [ADR 0015](../adr/0015-customer-starter-and-open-source-preflight-tooling.md)
 and the [customer-starter example](../../examples/customer-starter/README.md).

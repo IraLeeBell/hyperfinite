@@ -135,7 +135,8 @@ publication; open-source readiness remains `not-ready`.
 ## Clean-extraction validation
 
 `npm run validate:customer-starter-extraction` builds each profile,
-extracts it with no Git history, runs `npm ci`, and runs every advertised
+extracts it with no Git history, runs
+`npm ci --ignore-scripts --no-audit --no-fund`, and runs every advertised
 script inside the extraction, writing a retained JSON evidence record. It
 reaches the network, so it is kept outside `npm test`/`validate:packaging`;
 the hermetic unit tests in `tests/customer-starter.test.ts` still prove

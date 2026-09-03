@@ -62,8 +62,9 @@ credential, capability, transition, administrative action, or effect authority.
 deterministic packaging validation reject omitted, widened, or contradictory
 values. Package validation also requires `private: true`, a metadata-only
 `exports` map, no SDK entry metadata, no direct or `directories.bin` binary
-entry, no implicit `server.js` start path, and no publish/deploy/install
-lifecycle script.
+entry, no implicit `server.js` start or `binding.gyp` install path, and no
+install/prepare/dependencies/package/publish/deploy/service lifecycle script.
+Dependency installation uses `npm ci --ignore-scripts --no-audit --no-fund`.
 
 See [ADR 0020](../adr/0020-supported-distribution-is-repository-and-customer-starter-source-only.md),
 the [compatibility guide](../compatibility.md), and the

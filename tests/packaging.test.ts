@@ -172,9 +172,55 @@ test("Hyperfinite distribution is repository and customer-starter source only", 
       ),
     /lifecycle script prepare/
   );
+  for (const installHook of [
+    "preprepare",
+    "postprepare",
+    "predependencies",
+    "dependencies",
+    "postdependencies"
+  ]) {
+    assert.throws(
+      () =>
+        assertRepositoryPackageBoundary(
+          {
+            ...packageDocument,
+            scripts: {
+              ...(packageDocument["scripts"] as Record<string, unknown>),
+              [installHook]: "node hook.js"
+            }
+          },
+          rootEntries
+        ),
+      new RegExp(`lifecycle script ${installHook}`)
+    );
+  }
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(packageDocument, [
+        ...rootEntries,
+        "binding.gyp"
+      ]),
+    /implicit binding\.gyp install entry point/
+  );
+  assert.throws(
+    () =>
+      assertRepositoryPackageBoundary(
+        { ...packageDocument, gypfile: true },
+        rootEntries
+      ),
+    /must not enable gypfile/
+  );
   assert.equal(
     Object.hasOwn(agenticFramework, "assertRepositoryPackageBoundary"),
     false
+  );
+  const extractionValidator = readFileSync(
+    path.join(ROOT, "scripts/validate-customer-starter-extraction.ts"),
+    "utf8"
+  );
+  assert.match(
+    extractionValidator,
+    /"ci",\s*"--ignore-scripts",\s*"--no-audit",\s*"--no-fund"/u
   );
 
   const durableStoreAdr = readFileSync(

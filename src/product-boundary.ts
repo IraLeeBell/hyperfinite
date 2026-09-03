@@ -26,21 +26,8 @@ const UNSUPPORTED_ENTRY_FIELDS = [
   "typings"
 ] as const;
 
-const UNSUPPORTED_LIFECYCLE_SCRIPTS = [
-  "deploy",
-  "install",
-  "postinstall",
-  "postpack",
-  "preinstall",
-  "prepack",
-  "prepare",
-  "prepublish",
-  "prepublishOnly",
-  "publish",
-  "release",
-  "serve",
-  "start"
-] as const;
+const UNSUPPORTED_LIFECYCLE_SCRIPT =
+  /^(?:pre|post)?(?:dependencies|deploy|install|pack|prepare|publish|release|restart|serve|start|stop|uninstall|version)$/u;
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -96,13 +83,27 @@ export function assertRepositoryPackageBoundary(
     throw new TypeError("repository package scripts must be an object");
   }
   if (isRecord(scripts)) {
-    for (const script of UNSUPPORTED_LIFECYCLE_SCRIPTS) {
-      if (Object.hasOwn(scripts, script)) {
+    for (const script of Object.keys(scripts)) {
+      if (
+        script === "prepublishOnly" ||
+        UNSUPPORTED_LIFECYCLE_SCRIPT.test(script)
+      ) {
         throw new TypeError(
           `repository package must not advertise lifecycle script ${script}`
         );
       }
     }
+  }
+  if (
+    Object.hasOwn(value, "gypfile") &&
+    value["gypfile"] !== false
+  ) {
+    throw new TypeError("repository package must not enable gypfile");
+  }
+  if (rootEntries.includes("binding.gyp")) {
+    throw new TypeError(
+      "repository package must not expose npm's implicit binding.gyp install entry point"
+    );
   }
   if (rootEntries.includes("server.js")) {
     throw new TypeError(
