@@ -3,6 +3,9 @@
 The customer-starter tool builds a configurable, mechanically-closed subset
 of the exact reviewed Git tree ("profile") plus deterministic evidence. It
 does not decide license, publication, visibility, or release.
+The archive is a source distribution for extraction into a new customer-owned
+Git repository. It is not an npm package, TypeScript SDK, packaged CLI, hosted
+service, deployable service, or bundle of live trust services.
 
 ## Build and verify
 

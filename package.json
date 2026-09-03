@@ -2,7 +2,7 @@
   "name": "agentic-framework",
   "version": "0.1.0",
   "private": true,
-  "description": "Hyperfinite deterministic control kernel and validation tooling; technical artifacts retain the agentic-framework compatibility identity.",
+  "description": "Private Hyperfinite repository and customer-starter tooling under the agentic-framework compatibility identity; not a published SDK or packaged CLI.",
   "type": "module",
   "exports": {
     "./package.json": "./package.json"

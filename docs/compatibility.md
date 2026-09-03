@@ -35,6 +35,29 @@ same technical identifiers. Content digests therefore change only when their
 bound content or head changes; old digests are never re-signed or silently
 migrated.
 
+## Product and distribution boundary
+
+Repository and customer-starter source are the only supported distribution
+today. `config/v1alpha1/compatibility.json` closes the entry points and
+unsupported consumption models in `productBoundary`.
+
+| Consumer or surface | Supported status |
+|---|---|
+| Maintainer | Clone the authoritative repository and invoke documented repository scripts |
+| Local evaluator | Clone the authoritative repository and run deterministic validation, simulation, and evidence commands |
+| Customer sandbox operator | Use a verified customer-starter archive or reviewed file-only copy in a new customer-owned private repository |
+| Repository `npm` scripts | Supported only in the documented repository or customer-copy context |
+| npm registry package | Unsupported; package metadata is private and exists for repository tooling and retained compatibility identity |
+| TypeScript API / deep import | Unsupported; `src/` and `src/index.ts` are internal repository implementation |
+| Packaged or general-purpose CLI | Unsupported; there is no `bin` entry |
+| Hosted or deployable service | Unsupported; no service distribution is provided |
+| Live administration and effects | External human and independently deployed trust-service prerequisites |
+
+An SDK, CLI package, hosted service, deployable service, or production
+distribution is separate future product work. This boundary does not change the
+retained `agentic-framework/v1alpha1` technical identity and does not grant
+runtime or effect authority.
+
 The credentialless canary seed, synthetic topology OIDC audiences, and
 upstream taxonomy User-Agent previously used the product slug. They are
 pre-release synthetic/tooling values, now normalized into the retained epoch;
@@ -48,7 +71,7 @@ can choose or infer another epoch.
 
 | Surface | Tested/supported combination |
 |---|---|
-| Package | Hyperfinite package `agentic-framework 0.1.0` |
+| Private repository package metadata | Hyperfinite technical package identity `agentic-framework 0.1.0`; not a registry distribution |
 | Node.js | Major `24` in Agentic Workflows; major `26` for local deterministic validation |
 | npm | Major `11` |
 | GitHub CLI | `2.96.0` |

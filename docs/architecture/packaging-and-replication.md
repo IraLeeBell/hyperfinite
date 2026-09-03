@@ -46,16 +46,17 @@ flowchart LR
 
 ## Installer state machine
 
-The default surface is `plan`; `offline-validate` repeats the same checks over
-caller-supplied files and emits only digests. The ambiguous legacy `validate`
-name is rejected. Authenticated live validation is instead the typed
+The repository command defaults to `plan`; `offline-validate` repeats the same
+checks over caller-supplied files and emits only digests. The ambiguous legacy
+`validate` name is rejected. Authenticated live validation is instead the typed
 `validateLiveInstallationPlan` boundary: an injected read-only trusted adapter
 fresh-observes the exact target, verifies current human authorization twice, and
 returns signature-verified evidence bound to the plan, authorization, target,
 state, head, adapter, and protected adapter time without applying an effect.
-The CLI rejects `apply` and has no command, template, network, token, or
-credential input. Inputs and outputs must be bounded regular files beneath the
-repository with canonical non-traversing paths.
+The repository command rejects `apply` and has no command, template, network,
+token, or credential input. It is not a packaged CLI. Inputs and outputs must be
+bounded regular files beneath the repository with canonical non-traversing
+paths.
 
 After raw aggregate container bounds are enforced, every untrusted plan,
 authorization, receipt, configuration, state, manifest, and backup input is
@@ -242,8 +243,9 @@ throws on the first violation rather than shipping a "flagged" bundle. The
 resulting `CustomerStarterPreflightReport` is always `decision: "no-go"`,
 `authoritative: false`, `selfApproved: false`, and binds the live
 `OpenSourceReadinessAssessment` by exact digest.
-`npm run starter:local -- build|verify --profile <id>` is the only CLI
-surface; it cannot apply, publish, install, or reach the network.
+`npm run starter:local -- build|verify --profile <id>` is the only
+customer-starter command surface; it cannot apply, publish, install, or reach
+the network and is not a packaged CLI.
 `npm run validate:customer-starter-extraction` is a separate, network-
 reaching, checked (not hermetic-unit-test) validation that builds each
 profile, extracts it with no Git history, runs `npm ci`, and runs every

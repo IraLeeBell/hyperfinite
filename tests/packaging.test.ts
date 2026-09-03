@@ -76,6 +76,87 @@ import {
 
 const ROOT = process.cwd();
 
+const EXPECTED_PRODUCT_BOUNDARY = {
+  decision: "repository-and-customer-starter-only",
+  maintainerEntryPoint: "authoritative-repository-clone",
+  localEvaluatorEntryPoint: "authoritative-repository-clone",
+  customerSandboxEntryPoint: "customer-starter-or-reviewed-file-copy",
+  repositoryScripts: "supported-in-repository-context",
+  typescriptApi: "unsupported-internal-only",
+  npmRegistryPackage: "unsupported-private-metadata-only",
+  packagedCli: "unsupported-absent",
+  hostedService: "unsupported-absent",
+  deployableService: "unsupported-absent",
+  liveAdministration: "external-human-prerequisite",
+  liveEffects: "external-trust-service-prerequisite",
+  futureDistribution: "separate-product-work-required"
+} as const;
+
+test("Hyperfinite distribution is repository and customer-starter source only", () => {
+  const compatibility = agenticFramework.assertDocument(
+    "PackagingDocument",
+    json("config/v1alpha1/compatibility.json")
+  );
+  assert.equal(compatibility.kind, "CompatibilityMatrix");
+  if (compatibility.kind !== "CompatibilityMatrix") {
+    assert.fail("expected CompatibilityMatrix");
+  }
+  assert.deepEqual(compatibility.productBoundary, EXPECTED_PRODUCT_BOUNDARY);
+  assert.equal(
+    validateDocument("PackagingDocument", {
+      ...compatibility,
+      productBoundary: {
+        ...compatibility.productBoundary,
+        typescriptApi: "supported"
+      }
+    }).valid,
+    false
+  );
+  assert.equal(
+    validateDocument("PackagingDocument", {
+      ...compatibility,
+      productBoundary: {
+        ...compatibility.productBoundary,
+        registryFallback: "supported"
+      }
+    }).valid,
+    false
+  );
+
+  const packageDocument = json<Record<string, unknown>>("package.json");
+  assert.equal(packageDocument["private"], true);
+  assert.deepEqual(packageDocument["exports"], {
+    "./package.json": "./package.json"
+  });
+  for (const unsupportedEntry of [
+    "bin",
+    "main",
+    "module",
+    "types",
+    "typings"
+  ]) {
+    assert.equal(
+      Object.hasOwn(packageDocument, unsupportedEntry),
+      false,
+      `package.json must not expose ${unsupportedEntry}`
+    );
+  }
+  const scripts = packageDocument["scripts"] as Record<string, unknown>;
+  for (const unsupportedScript of [
+    "publish",
+    "release",
+    "deploy",
+    "start",
+    "serve"
+  ]) {
+    assert.equal(
+      Object.hasOwn(scripts, unsupportedScript),
+      false,
+      `package.json must not advertise ${unsupportedScript}`
+    );
+  }
+});
+
 test("Hyperfinite retains one closed technical compatibility identity", () => {
   const compatibility = agenticFramework.assertDocument(
     "PackagingDocument",

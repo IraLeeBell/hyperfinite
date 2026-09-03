@@ -29,9 +29,9 @@ non-authoritative after provisioning: the Kernel and durable receipts lead,
 and projection fields converge afterward with Stage written last.
 
 Use `npm run github:setup -- validate`, `plan`, `bootstrap-plan`, and
-`bootstrap-readback` for offline evidence. Never use an apply flag; the setup
-CLI rejects it. A human-authorized administrator applies only an explicitly
-confirmed external plan and retains complete readback.
+`bootstrap-readback` for offline evidence. Never use an apply flag; the
+repository setup command rejects it. A human-authorized administrator applies
+only an explicitly confirmed external plan and retains complete readback.
 
 The exact required-value inventory, kill switch, recovery drill, and canary
 criteria are in [activation and readiness](activation-and-readiness.md).

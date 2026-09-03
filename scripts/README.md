@@ -1,6 +1,9 @@
 # Tooling
 
-Scripts are deterministic repository tools. None of them grants live authority.
+Scripts are deterministic repository tools invoked through `npm run` from a
+reviewed repository checkout or customer-owned copy. They are not an installed
+or general-purpose CLI, and the private package has no `bin` entry. None of
+them grants live authority.
 
 `reconcile-issue-taxonomy.ts` is the narrow exception that performs
 repository-local display metadata writes. It is optionless, receives only the
@@ -45,7 +48,7 @@ a weaker inventory scope with an argument or mutable repository marker.
   validates declarative Project schemas, derives a customer target-manifest
   proposal from fresh snapshots, and emits human-admin dry-run actions. A
   bootstrap plan requires the separately confirmed target-manifest digest. The
-  CLI cannot apply changes.
+  repository command cannot apply changes.
 - `npm run installer -- plan|offline-validate` validates target-bound customer
   installation plans. It cannot perform a live apply.
 - `npm run release:local -- build <required flags>` and

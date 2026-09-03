@@ -1,6 +1,9 @@
 # Source map
 
 The TypeScript source is organized by trust boundary rather than by product UI.
+These modules are repository implementation. `src/index.ts` is an internal
+barrel for repository tests and tools; it is not a supported TypeScript SDK,
+package export, or compatibility promise.
 
 | Area | Key modules |
 |---|---|
@@ -14,7 +17,7 @@ The TypeScript source is organized by trust boundary rather than by product UI.
 | Packaging, release, identity compatibility, and customer sharing | `packaging.ts`, `packaging-types.ts`, `technical-identity.ts`, `release.ts`, `release-support.ts`, `release-path.ts`, `customer-starter.ts`, `customer-starter-authoring.ts`, `customer-repository-config.ts`, `customer-readiness.ts` |
 | Pre-App deployment/App/administrator contracts | `deployment-topology.ts`, `app-registration-plan.ts`, `administrator-plan.ts`, `administrator-handoff.ts`, `freshness.ts` |
 | Observability | `events.ts`, `observability.ts` |
-| Public exports | `index.ts` |
+| Internal repository barrel | `index.ts` |
 
 ## Design constraints
 
@@ -26,6 +29,8 @@ The TypeScript source is organized by trust boundary rather than by product UI.
 - Ambiguous outcomes reconcile from stable exact readback or remain blocked.
 - No PAT, model-job credential, approval, merge, deployment, or publication
   fallback exists.
+- Supported consumers invoke reviewed repository scripts; deep imports and
+  direct TypeScript API consumption are unsupported.
 
 Before changing authority-bearing code, read the matching architecture page,
 schema, security control, and deterministic tests.

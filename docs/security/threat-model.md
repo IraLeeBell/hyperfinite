@@ -1069,3 +1069,24 @@ Residual: a future intentional identifier migration still requires a new
 reviewed contract epoch, migration/evidence design, exact-head regeneration,
 and human approval. A compromised protected branch or release tool can still
 mislabel artifacts.
+
+### T37 Distribution and deployment boundary confusion
+
+Private package metadata, internal TypeScript exports, repository scripts,
+unsigned archives, and implemented service interfaces can be mistaken for a
+published SDK, installed CLI, hosted control plane, deployable service, or live
+effect path. A consumer could then bypass exact-head repository assumptions,
+customer-owned setup, independent trust services, or human administration while
+treating unsupported behavior as product-supported.
+
+Control C38 closes one product boundary in protected compatibility
+configuration: only authoritative repository clones and customer-starter or
+reviewed file-only customer copies are supported. Package metadata remains
+private and metadata-only, SDK/bin entry points remain absent, repository
+commands are context-bound, and service administration/effects remain external
+prerequisites. Deterministic packaging tests and customer-starter extraction
+validation detect contradictory distribution claims.
+
+Residual: source is inspectable and can be used outside the supported model.
+A future SDK, CLI, hosted, deployable, or production distribution requires a
+separate reviewed compatibility, security, release, and support design.

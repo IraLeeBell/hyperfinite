@@ -10,7 +10,7 @@ prerequisites; it does not grant authority or substitute for live evidence.
 |---|---|
 | Executive sponsor | [Executive summary](../README.md#executive-summary) → [Customer FAQ](../CUSTOMER_FAQ.md) → [Evaluation guide](../CUSTOMER_EVALUATION_GUIDE.md) |
 | Evaluation lead | [Evaluation guide](../CUSTOMER_EVALUATION_GUIDE.md) → [Approval tickets](runbooks/customer-approval-tickets.md) → [Customer administrator](runbooks/customer-administrator.md) |
-| Architecture reviewer | [Architecture overview](architecture/overview.md) → [Lifecycle](architecture/lifecycle.md) → [Control Kernel](architecture/control-kernel.md) |
+| Architecture reviewer | [Architecture overview](architecture/overview.md) → [Distribution boundary](architecture/distribution-boundary.md) → [Lifecycle](architecture/lifecycle.md) → [Control Kernel](architecture/control-kernel.md) |
 | Demo operator | [Demo portfolio](demos/README.md) → [Operator runbook](demos/portfolio/operator-runbook.md) → [Simulation](demos/portfolio/simulation.md) |
 | Customer administrator | [Customer administrator](runbooks/customer-administrator.md) → [Project setup](runbooks/github-project-setup.md) → [Deployment prerequisites](runbooks/deployment-prerequisites.md) → [Administrator handoff](runbooks/administrator-handoff.md) |
 | Security reviewer | [Threat model](security/threat-model.md) → [Control matrix](security/control-matrix.md) → [Secrets and identity](security/secrets-and-identity.md) |
@@ -22,6 +22,9 @@ prerequisites; it does not grant authority or substitute for live evidence.
 
 - [Architecture](architecture/README.md): authority, lifecycle, contracts,
   adapters, Domain Packs, packaging, and demo integration.
+- [Distribution boundary](architecture/distribution-boundary.md): supported
+  repository/customer-starter entry points and unsupported SDK, CLI, service,
+  deployment, and live-effect consumption models.
 - [Architecture decisions](adr/README.md): accepted and proposed design
   decisions, with their current status.
 - [Demos](demos/README.md): the four demo journeys and portfolio-level

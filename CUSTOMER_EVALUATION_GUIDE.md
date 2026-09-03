@@ -3,6 +3,10 @@
 This guide is the shortest supported path from a clean copy of Hyperfinite to a
 customer-owned GitHub Enterprise Cloud evaluation. It stops at every point where
 an authorized human must approve or perform an administrative action.
+The supported artifact is reviewed repository source in a customer-owned Git
+repository, obtained as a verified customer-starter archive or a reviewed
+file-only copy. It is not an npm package, SDK, packaged CLI, hosted service, or
+deployable service.
 
 Use these companion documents:
 
@@ -60,8 +64,11 @@ review.
 1. Create a new private repository in the customer organization with `main` as
    the default branch. Current release, handoff, Work Accord, and ruleset
    contracts bind `refs/heads/main`.
-2. Copy the repository contents without source pull-request, issue, or commit
-   history.
+2. Populate it from either a verified
+   [customer-starter archive](docs/release/customer-starter-preflight.md) or a
+   reviewed file-only copy of one exact Hyperfinite head. Do not carry source
+   pull-request, issue, or commit history, and do not use an npm registry
+   install or a source-history fork as the customer distribution.
 3. Leave `example-organization` fixtures synthetic. Put live customer identities
    only in protected customer configuration and generated target manifests
    outside the repository.

@@ -2,9 +2,9 @@
 
 ## Safety boundary
 
-The setup CLI is offline and dry-run only. It never authenticates to GitHub,
-mints a token, creates a Project, or performs a mutation. `--apply` and
-`--execute` are rejected before any input is loaded. Every emitted setup or
+The repository setup command is offline and dry-run only. It never authenticates
+to GitHub, mints a token, creates a Project, or performs a mutation. `--apply`
+and `--execute` are rejected before any input is loaded. Every emitted setup or
 drift action has `requiresHumanAdmin: true`.
 
 The repository intentionally does not embed a credentialed full-administration

@@ -6,6 +6,9 @@ and evaluation questions. Start with the
 sequence and the
 [approval ticket templates](docs/runbooks/customer-approval-tickets.md) for
 copy-ready customer requests.
+The supported customer artifact is reviewed source in a new customer-owned Git
+repository, not an npm package, SDK, packaged CLI, hosted service, or deployable
+service. See the [distribution boundary](docs/architecture/distribution-boundary.md).
 
 ## Executive and business questions
 
@@ -133,7 +136,8 @@ current GitHub facts. Moving a card cannot authorize a transition.
 
 The repository validates the complete four-demo portfolio because cross-demo
 isolation is part of the evidence. A customer may choose to activate only one
-canary after validating the whole package and documenting that narrower scope.
+canary after validating the whole source artifact and documenting that narrower
+scope.
 
 ### 17. Can Hyperfinite target multiple repositories?
 
@@ -150,8 +154,8 @@ rather than a fork that inherits source-network assumptions.
 
 ### 19. Why copy the repository without history?
 
-The customer package is intended to stand on its own without source issue, pull
-request, or commit history. This limits the transfer to reviewed files and
+The customer source copy is intended to stand on its own without source issue,
+pull request, or commit history. This limits the transfer to reviewed files and
 avoids carrying coordination comments, source-tenant identifiers, and obsolete
 delivery records.
 

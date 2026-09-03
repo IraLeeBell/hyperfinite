@@ -6,6 +6,9 @@ does not decide license, publication, visibility, or release; the produced
 `starter-preflight.json` is always `decision: "no-go"`, `authoritative:
 false`, `selfApproved: false`, exactly like `release-candidate.json` in
 [`examples/customer-installation/`](../customer-installation/README.md).
+The resulting archive is supported only as source extracted into a new
+customer-owned Git repository. It is not an npm package, SDK, packaged CLI,
+hosted service, deployable service, or live-effect distribution.
 
 ```bash
 npm run starter:local -- build \

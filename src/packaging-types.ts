@@ -278,6 +278,21 @@ export interface CompatibilityMatrix {
     readonly syntheticCanarySeed: "agentic-framework credentialless synthetic sandbox canary v1";
     readonly syntheticOidcAudiencePrefix: "synthetic://agentic-framework/";
   };
+  readonly productBoundary: {
+    readonly decision: "repository-and-customer-starter-only";
+    readonly maintainerEntryPoint: "authoritative-repository-clone";
+    readonly localEvaluatorEntryPoint: "authoritative-repository-clone";
+    readonly customerSandboxEntryPoint: "customer-starter-or-reviewed-file-copy";
+    readonly repositoryScripts: "supported-in-repository-context";
+    readonly typescriptApi: "unsupported-internal-only";
+    readonly npmRegistryPackage: "unsupported-private-metadata-only";
+    readonly packagedCli: "unsupported-absent";
+    readonly hostedService: "unsupported-absent";
+    readonly deployableService: "unsupported-absent";
+    readonly liveAdministration: "external-human-prerequisite";
+    readonly liveEffects: "external-trust-service-prerequisite";
+    readonly futureDistribution: "separate-product-work-required";
+  };
   readonly nodeMajors: readonly number[];
   readonly npmMajors: readonly number[];
   readonly ghCliVersion: "2.96.0";
