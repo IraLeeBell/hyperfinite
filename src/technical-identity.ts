@@ -15,22 +15,7 @@ export const RETAINED_TECHNICAL_IDENTITY = Object.freeze({
   issueTaxonomyUserAgent: "agentic-framework-issue-taxonomy/1.0",
   syntheticCanarySeed:
     "agentic-framework credentialless synthetic sandbox canary v1",
-  syntheticOidcAudiencePrefix: "synthetic://agentic-framework/",
-  inventoryFiles: 367,
-  inventoryMatchingLines: 1000,
-  inventoryOccurrences: 1009,
-  inventoryDigest:
-    "sha256:20b169d7612d3077ce40f576e6badf7a74b2526313d1bf3572f973651a1938c3",
-  coreInventoryFiles: 206,
-  coreInventoryMatchingLines: 694,
-  coreInventoryOccurrences: 701,
-  coreInventoryDigest:
-    "sha256:9446f2f550aba51ca633e5f9bfee348488d124782cea7dde3c7e4c6fa89dca15",
-  demoInventoryFiles: 355,
-  demoInventoryMatchingLines: 942,
-  demoInventoryOccurrences: 949,
-  demoInventoryDigest:
-    "sha256:ca9893dda7819e04c4c44fd449b7226fa82caade9790139fc0587dfe91b1d57c"
+  syntheticOidcAudiencePrefix: "synthetic://agentic-framework/"
 } as const);
 
 export const HYPERFINITE_PACKAGE_DESCRIPTION =
@@ -87,6 +72,14 @@ export type TechnicalIdentityInventoryScope =
   | "authoritative-repository"
   | "control-plane-core"
   | "demo-portfolio";
+
+export interface TechnicalIdentityInventoryEvidenceDocument {
+  readonly kind: "TechnicalIdentityInventoryEvidence";
+  readonly schemaVersion: "1.0.0";
+  readonly scopes: Readonly<
+    Record<TechnicalIdentityInventoryScope, ReviewedTechnicalIdentityInventory>
+  >;
+}
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -197,31 +190,10 @@ function technicalIdentityInventoryMatches(
 }
 
 function reviewedInventoryEvidence(
-  identity: TechnicalIdentity,
+  evidence: TechnicalIdentityInventoryEvidenceDocument,
   scope: TechnicalIdentityInventoryScope
 ): ReviewedTechnicalIdentityInventory {
-  if (scope === "authoritative-repository") {
-    return {
-      inventoryFiles: identity.inventoryFiles,
-      inventoryMatchingLines: identity.inventoryMatchingLines,
-      inventoryOccurrences: identity.inventoryOccurrences,
-      inventoryDigest: identity.inventoryDigest
-    };
-  }
-  if (scope === "control-plane-core") {
-    return {
-      inventoryFiles: identity.coreInventoryFiles,
-      inventoryMatchingLines: identity.coreInventoryMatchingLines,
-      inventoryOccurrences: identity.coreInventoryOccurrences,
-      inventoryDigest: identity.coreInventoryDigest
-    };
-  }
-  return {
-    inventoryFiles: identity.demoInventoryFiles,
-    inventoryMatchingLines: identity.demoInventoryMatchingLines,
-    inventoryOccurrences: identity.demoInventoryOccurrences,
-    inventoryDigest: identity.demoInventoryDigest
-  };
+  return evidence.scopes[scope];
 }
 
 type JsonPath = readonly string[];
@@ -697,14 +669,15 @@ export function inventoryTechnicalIdentity(
       "iu"
     )
   ];
-  const reviewedLines: {
+  const reviewedFiles: {
     readonly path: string;
-    readonly ordinal: number;
-    readonly content: string;
-    readonly previousContent: string | null;
-    readonly nextContent: string | null;
-    readonly category: TechnicalIdentityOccurrenceCategory;
-    readonly occurrences: number;
+    readonly contentDigest: `sha256:${string}`;
+    readonly lines: readonly {
+      readonly ordinal: number;
+      readonly content: string;
+      readonly category: TechnicalIdentityOccurrenceCategory;
+      readonly occurrences: number;
+    }[];
   }[] = [];
 
   const orderedSources = [...sources].sort((left, right) =>
@@ -720,6 +693,12 @@ export function inventoryTechnicalIdentity(
     }
 
     const lines = source.content.split(/\r?\n/u);
+    const reviewedLines: {
+      readonly ordinal: number;
+      readonly content: string;
+      readonly category: TechnicalIdentityOccurrenceCategory;
+      readonly occurrences: number;
+    }[] = [];
     let identityLineOrdinal = 0;
     for (let index = 0; index < lines.length; index += 1) {
       const line = lines[index] ?? "";
@@ -747,13 +726,17 @@ export function inventoryTechnicalIdentity(
       categories[category].occurrences += matches.length;
       identityLineOrdinal += 1;
       reviewedLines.push({
-        path: source.path,
         ordinal: identityLineOrdinal,
         content: line,
-        previousContent: lines[index - 1] ?? null,
-        nextContent: lines[index + 1] ?? null,
         category,
         occurrences: matches.length
+      });
+    }
+    if (reviewedLines.length > 0) {
+      reviewedFiles.push({
+        path: source.path,
+        contentDigest: digest(source.content),
+        lines: reviewedLines
       });
     }
   }
@@ -762,13 +745,14 @@ export function inventoryTechnicalIdentity(
     filesWithOccurrences: matchedFiles.size,
     matchingLines,
     occurrences,
-    inventoryDigest: digest(reviewedLines),
+    inventoryDigest: digest(reviewedFiles),
     categories
   };
 }
 
 export function assertReviewedTechnicalIdentityInventory(
   sources: readonly TechnicalIdentitySource[],
+  evidence: TechnicalIdentityInventoryEvidenceDocument,
   identity: TechnicalIdentity = RETAINED_TECHNICAL_IDENTITY
 ): {
   readonly scope: TechnicalIdentityInventoryScope;
@@ -784,11 +768,14 @@ export function assertReviewedTechnicalIdentityInventory(
   const matches = scopes.filter((scope) =>
     technicalIdentityInventoryMatches(
       inventory,
-      reviewedInventoryEvidence(identity, scope)
+      reviewedInventoryEvidence(evidence, scope)
     )
   );
   if (matches.length !== 1 || matches[0] === undefined) {
-    assertTechnicalIdentityInventoryEvidence(inventory, identity);
+    assertTechnicalIdentityInventoryEvidence(
+      inventory,
+      evidence.scopes["authoritative-repository"]
+    );
     throw new TypeError("technical identity inventory matched multiple scopes");
   }
   return { scope: matches[0], inventory };

@@ -11,6 +11,10 @@ import { execFileSync } from "node:child_process";
 import path from "node:path";
 import process from "node:process";
 
+import { Ajv2020 } from "ajv/dist/2020.js";
+import type { AnySchema } from "ajv";
+
+import technicalIdentityInventorySchema from "../schemas/v1alpha1/technical-identity-inventory.schema.json" with { type: "json" };
 import { canonicalJson } from "../src/canonical.js";
 import type { CompatibilityMatrix } from "../src/packaging-types.js";
 import { parseStrictJson } from "../src/strict-json.js";
@@ -20,6 +24,7 @@ import {
   assertTechnicalIdentityPackageMetadata,
   assertTechnicalIdentityPublishers,
   technicalIdentityRegistryPublishers,
+  type TechnicalIdentityInventoryEvidenceDocument,
   type TechnicalIdentitySource
 } from "../src/technical-identity.js";
 import { assertDocument } from "../src/validation.js";
@@ -180,6 +185,22 @@ const compatibility = compatibilityMatrix(
 const identity = assertRetainedTechnicalIdentity(
   compatibility.technicalIdentity
 );
+const inventoryEvidenceValue = parseStrictJson(
+  requiredSource(sources, "config/v1alpha1/technical-identity-inventory.json")
+);
+const inventoryAjv = new Ajv2020({ allErrors: true, strict: true });
+const validateInventoryEvidence = inventoryAjv.compile(
+  technicalIdentityInventorySchema as AnySchema
+);
+if (!validateInventoryEvidence(inventoryEvidenceValue)) {
+  throw new TypeError(
+    `technical identity inventory evidence is invalid: ${inventoryAjv.errorsText(
+      validateInventoryEvidence.errors
+    )}`
+  );
+}
+const inventoryEvidence =
+  inventoryEvidenceValue as TechnicalIdentityInventoryEvidenceDocument;
 
 const packageDocument = parseStrictJson(requiredSource(sources, "package.json"));
 assertTechnicalIdentityPackageMetadata(packageDocument, identity);
@@ -346,6 +367,7 @@ for (const source of sources) {
 
 const reviewedInventory = assertReviewedTechnicalIdentityInventory(
   sources,
+  inventoryEvidence,
   identity
 );
 process.stdout.write(

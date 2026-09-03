@@ -15,6 +15,7 @@ authority; it does not activate a service or authorize a mutation by itself.
 | `domain-packs/` | Marketing and Business Operations definitions, policies, contracts, and templates |
 | `github-project.json` | Reusable logical Project schema |
 | `compatibility.json` | Tested toolchain/platform versions and the fixed Hyperfinite product versus retained technical identity boundary |
+| `technical-identity-inventory.json` | Reviewed full-file identity occurrence evidence for the authoritative repository and both customer-starter profiles |
 | `migrations.json` | Supported deterministic migration graph |
 | `open-source-readiness.json` | Current gated release-readiness decision |
 | `issue-taxonomy.json` | Upstream-only repository identity, display labels, historical issue mappings, title prefixes, and reconciliation limits |

@@ -447,19 +447,7 @@
                 "domainStem",
                 "issueTaxonomyUserAgent",
                 "syntheticCanarySeed",
-                "syntheticOidcAudiencePrefix",
-                "inventoryFiles",
-                "inventoryMatchingLines",
-                "inventoryOccurrences",
-                "inventoryDigest",
-                "coreInventoryFiles",
-                "coreInventoryMatchingLines",
-                "coreInventoryOccurrences",
-                "coreInventoryDigest",
-                "demoInventoryFiles",
-                "demoInventoryMatchingLines",
-                "demoInventoryOccurrences",
-                "demoInventoryDigest"
+                "syntheticOidcAudiencePrefix"
               ],
               "properties": {
                 "decision": { "const": "retain-compatibility-identity" },
@@ -474,19 +462,7 @@
                 "domainStem": { "const": "agentic-framework" },
                 "issueTaxonomyUserAgent": { "const": "agentic-framework-issue-taxonomy/1.0" },
                 "syntheticCanarySeed": { "const": "agentic-framework credentialless synthetic sandbox canary v1" },
-                "syntheticOidcAudiencePrefix": { "const": "synthetic://agentic-framework/" },
-                "inventoryFiles": { "const": 367 },
-                "inventoryMatchingLines": { "const": 1000 },
-                "inventoryOccurrences": { "const": 1009 },
-                "inventoryDigest": { "const": "sha256:20b169d7612d3077ce40f576e6badf7a74b2526313d1bf3572f973651a1938c3" },
-                "coreInventoryFiles": { "const": 206 },
-                "coreInventoryMatchingLines": { "const": 694 },
-                "coreInventoryOccurrences": { "const": 701 },
-                "coreInventoryDigest": { "const": "sha256:9446f2f550aba51ca633e5f9bfee348488d124782cea7dde3c7e4c6fa89dca15" },
-                "demoInventoryFiles": { "const": 355 },
-                "demoInventoryMatchingLines": { "const": 942 },
-                "demoInventoryOccurrences": { "const": 949 },
-                "demoInventoryDigest": { "const": "sha256:ca9893dda7819e04c4c44fd449b7226fa82caade9790139fc0587dfe91b1d57c" }
+                "syntheticOidcAudiencePrefix": { "const": "synthetic://agentic-framework/" }
               }
             },
             "nodeMajors": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": [24, 26] } },

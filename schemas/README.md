@@ -18,6 +18,8 @@ Major groups include:
 - packaging, installation, migration, release, audit, metrics, budgets,
   administrator handoff/apply/readback, and durable grant-store contracts.
 - the upstream-only, repository-bound issue-taxonomy reconciliation contract.
+- reviewed full-file technical-identity inventory evidence for the repository
+  and customer-starter scopes.
 
 Hyperfinite retains `agentic-framework.github.com/v1alpha1` and the
 `https://agentic-framework.github.com/schemas/` origin as its technical

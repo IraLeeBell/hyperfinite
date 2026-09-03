@@ -9,13 +9,14 @@ Hyperfinite is the product name. `agentic-framework` is the retained technical
 compatibility identity for the current `v1alpha1` epoch; it is not a second
 product name. The compatibility document fixes this decision and the exact
 package, release archive, API/schema, logical Project schema, Capability
-Registry publisher, and domain stem values. It also binds the counts and digest
-of the ordered per-path, per-line technical-identity inventory, so removing or
-replacing an identifier cannot disappear silently from validation.
-Separate reviewed inventory evidence covers the authoritative repository and
-the two mechanically closed customer-starter profiles. A source set must match
-exactly one of those scopes; file-presence heuristics cannot downgrade
-validation.
+Registry publisher, and domain stem values.
+`config/v1alpha1/technical-identity-inventory.json` separately binds the counts
+and digest of every complete identity-bearing file plus its classified
+occurrences, so changing enclosing semantics, removing an identifier, or
+replacing it cannot disappear silently from validation. Separate reviewed
+evidence covers the authoritative repository and the two mechanically closed
+customer-starter profiles. A source set must match exactly one of those scopes;
+file-presence heuristics cannot downgrade validation.
 
 | Surface | Fixed compatibility identity |
 |---|---|

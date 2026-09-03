@@ -9,6 +9,7 @@ import { parse } from "yaml";
 
 import demoPortfolioHardeningPlanSchema from "../schemas/v1alpha1/demo-portfolio-hardening-plan.schema.json" with { type: "json" };
 import demoExternalCallAssertionsSchema from "../schemas/v1alpha1/demo-external-call-assertions.schema.json" with { type: "json" };
+import technicalIdentityInventorySchema from "../schemas/v1alpha1/technical-identity-inventory.schema.json" with { type: "json" };
 import { workAccordBindingDigest } from "../src/binding.js";
 import { digest } from "../src/canonical.js";
 import { chainHead as durableStoreChainHead } from "../src/durable-substrate.js";
@@ -94,6 +95,12 @@ const validateHardeningPlan = hardeningAjv.compile(
 );
 const validateExternalCallAssertions = hardeningAjv.compile(
   demoExternalCallAssertionsSchema as AnySchema
+);
+const validateTechnicalIdentityInventory = hardeningAjv.compile(
+  technicalIdentityInventorySchema as AnySchema
+);
+const technicalIdentityInventory = await readJson(
+  "config/v1alpha1/technical-identity-inventory.json"
 );
 const externalCallAssertionDocuments = await Promise.all(
   demoMetadata.catalog.spec.entries.map(async (entry) => ({
@@ -526,6 +533,13 @@ const snapshotValidation = validateDocument("KernelSnapshot", initialSnapshot);
 const errors: string[] = [
   ...externalCallAssertionErrors,
   ...preAppErrors,
+  ...(validateTechnicalIdentityInventory(technicalIdentityInventory)
+    ? []
+    : [
+        `Technical identity inventory: ${hardeningAjv.errorsText(
+          validateTechnicalIdentityInventory.errors
+        )}`
+      ]),
   ...(validateHardeningPlan(hardeningPlan)
     ? []
     : [

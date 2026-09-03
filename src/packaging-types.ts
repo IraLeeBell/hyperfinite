@@ -277,18 +277,6 @@ export interface CompatibilityMatrix {
     readonly issueTaxonomyUserAgent: "agentic-framework-issue-taxonomy/1.0";
     readonly syntheticCanarySeed: "agentic-framework credentialless synthetic sandbox canary v1";
     readonly syntheticOidcAudiencePrefix: "synthetic://agentic-framework/";
-    readonly inventoryFiles: 367;
-    readonly inventoryMatchingLines: 1000;
-    readonly inventoryOccurrences: 1009;
-    readonly inventoryDigest: "sha256:20b169d7612d3077ce40f576e6badf7a74b2526313d1bf3572f973651a1938c3";
-    readonly coreInventoryFiles: 206;
-    readonly coreInventoryMatchingLines: 694;
-    readonly coreInventoryOccurrences: 701;
-    readonly coreInventoryDigest: "sha256:9446f2f550aba51ca633e5f9bfee348488d124782cea7dde3c7e4c6fa89dca15";
-    readonly demoInventoryFiles: 355;
-    readonly demoInventoryMatchingLines: 942;
-    readonly demoInventoryOccurrences: 949;
-    readonly demoInventoryDigest: "sha256:ca9893dda7819e04c4c44fd449b7226fa82caade9790139fc0587dfe91b1d57c";
   };
   readonly nodeMajors: readonly number[];
   readonly npmMajors: readonly number[];

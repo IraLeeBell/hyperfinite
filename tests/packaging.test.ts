@@ -154,6 +154,8 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
     false
   );
 
+  const retainedDomainLine =
+    'const domain = "agentic-framework.runtime-signature.v1";';
   const inventory = inventoryTechnicalIdentity([
     {
       path: "docs/identity.md",
@@ -174,7 +176,7 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
     },
     {
       path: "src/runtime.ts",
-      content: 'const domain = "agentic-framework.runtime-signature.v1";'
+      content: retainedDomainLine
     },
     {
       path: "examples/example.json",
@@ -185,6 +187,24 @@ test("Hyperfinite retains one closed technical compatibility identity", () => {
   for (const count of Object.values(inventory.categories)) {
     assert.equal(count.occurrences, 1);
   }
+  const enabledDomain = inventoryTechnicalIdentity([
+    {
+      path: "src/runtime.ts",
+      content: ["if (true) {", "  authorize();", retainedDomainLine, "}"].join(
+        "\n"
+      )
+    }
+  ]);
+  const disabledDomain = inventoryTechnicalIdentity([
+    {
+      path: "src/runtime.ts",
+      content: ["if (false) {", "  authorize();", retainedDomainLine, "}"].join(
+        "\n"
+      )
+    }
+  ]);
+  assert.equal(enabledDomain.occurrences, disabledDomain.occurrences);
+  assert.notEqual(enabledDomain.inventoryDigest, disabledDomain.inventoryDigest);
   assert.doesNotThrow(() =>
     assertTechnicalIdentityInventoryEvidence(inventory, {
       inventoryFiles: inventory.filesWithOccurrences,

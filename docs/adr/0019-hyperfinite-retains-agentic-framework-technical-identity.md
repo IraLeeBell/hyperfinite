@@ -48,14 +48,15 @@ use their lower-case stem. The reusable logical Project schema name remains
 `Hyperfinite Control Plane`.
 
 `validate:technical-identity` scans the repository or extracted customer
-starter, classifies every retained occurrence, and verifies the reviewed digest
-of the ordered per-path, per-line inventory. Removing or replacing a domain,
-marker, format, or release identifier therefore fails even when the replacement
-no longer contains the retained stem. The validator also rejects stale
-spaced/capitalized product spelling and unclassified uses, verifies package/lock
-metadata, schema/API identity, registry publishers, and the Project display
-boundary, and rejects Hyperfinite-shaped package, API, publisher, or domain
-identifiers.
+starter, classifies every retained occurrence, and verifies reviewed evidence
+that digests the complete content of every identity-bearing file together with
+its ordered occurrence inventory. Changing enclosing semantics, removing or
+replacing a domain, marker, format, or release identifier therefore fails even
+when the changed line no longer contains the retained stem. The validator also
+rejects stale spaced/capitalized product spelling and unclassified uses,
+verifies package/lock metadata, schema/API identity, registry publishers, and
+the Project display boundary, and rejects Hyperfinite-shaped package, API,
+publisher, or domain identifiers.
 
 The compatibility contract binds distinct reviewed inventories for the
 authoritative repository, `control-plane-core`, and `demo-portfolio`. Validation
@@ -64,11 +65,12 @@ weaker scope.
 
 Only the exact protected compatibility field and its exact closed-schema
 property may declare the identifier epoch. Validation decodes JSON property
-names, walks the schema structure, normalizes ASCII Unicode escapes in source,
+names, walks the schema structure, canonicalizes schema URLs, verifies the
+compatibility type's brace ancestry, normalizes ASCII Unicode escapes in source,
 and rejects every other declaration, including one elsewhere in the shared
-packaging schema. Runtime jobs, model outputs, and migration documents expose no
-identifier-epoch selector, so untrusted input cannot choose between identities
-or request a migration.
+packaging schema. Runtime jobs, model outputs, and migration documents expose
+no identifier-epoch selector, so untrusted input cannot choose between
+identities or request a migration.
 
 ## Compatibility and evidence consequences
 

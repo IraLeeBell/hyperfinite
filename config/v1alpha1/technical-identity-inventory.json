@@ -1,0 +1,24 @@
+{
+  "kind": "TechnicalIdentityInventoryEvidence",
+  "schemaVersion": "1.0.0",
+  "scopes": {
+    "authoritative-repository": {
+      "inventoryFiles": 368,
+      "inventoryMatchingLines": 1001,
+      "inventoryOccurrences": 1010,
+      "inventoryDigest": "sha256:584e4b322967e34bc9af9c76e0a3f5e2cdfa64f3d0d8d2400f1efad08aa94cd8"
+    },
+    "control-plane-core": {
+      "inventoryFiles": 207,
+      "inventoryMatchingLines": 695,
+      "inventoryOccurrences": 702,
+      "inventoryDigest": "sha256:4cc2228430eb6052185cda30fced2356d48eef4313519f8a897ff0a99aaf891d"
+    },
+    "demo-portfolio": {
+      "inventoryFiles": 356,
+      "inventoryMatchingLines": 943,
+      "inventoryOccurrences": 950,
+      "inventoryDigest": "sha256:b2ccd7b0aaa65c4f735ee59bd4324bea944f9d69e3b3760843b9ee0bf61e27f2"
+    }
+  }
+}
