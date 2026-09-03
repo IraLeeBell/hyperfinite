@@ -31,6 +31,8 @@
         "docs/README.md",
         "docs/adr",
         "docs/architecture",
+        "docs/authority-boundary-walkthrough.gif",
+        "docs/authority-boundary-walkthrough.md",
         "docs/compatibility.md",
         "docs/demos",
         "docs/governance",
