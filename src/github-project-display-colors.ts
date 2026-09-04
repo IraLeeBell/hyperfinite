@@ -430,6 +430,67 @@ function targetFromSnapshot(
   };
 }
 
+function reconstructedSnapshot(input: {
+  readonly target: ManifestTarget;
+  readonly observedAt: string;
+  readonly view: {
+    readonly nodeId: string;
+    readonly name: string;
+    readonly observedLayout: string;
+    readonly observedVisibleFields: readonly GitHubProjectDisplayVisibleField[];
+  };
+  readonly optionColors: readonly {
+    readonly fieldNodeId: string;
+    readonly optionNodeId: string;
+    readonly color: GitHubProjectOptionColor;
+  }[];
+}): GitHubProjectDisplaySnapshot {
+  let observationIndex = 0;
+  const customFields = input.target.customFields.map((field) => ({
+    nodeId: field.nodeId,
+    name: field.name,
+    dataType: field.dataType,
+    options: field.options.map((option) => {
+      const observation = input.optionColors[observationIndex];
+      observationIndex += 1;
+      if (
+        observation === undefined ||
+        observation.fieldNodeId !== field.nodeId ||
+        observation.optionNodeId !== option.nodeId
+      ) {
+        fail(`${input.target.demoProjectId} snapshot digest mapping changed`);
+      }
+      return {
+        nodeId: option.nodeId,
+        name: option.name,
+        color: observation.color,
+        description: option.description
+      };
+    })
+  }));
+  if (observationIndex !== input.optionColors.length) {
+    fail(`${input.target.demoProjectId} snapshot digest mapping changed`);
+  }
+  return {
+    apiVersion: API_VERSION,
+    kind: "GitHubProjectDisplaySnapshot",
+    schemaVersion: DISPLAY_SCHEMA_VERSION,
+    ...DISPLAY_MARKERS,
+    observedAt: input.observedAt,
+    owner: input.target.owner,
+    repository: input.target.repository,
+    linkedRepositories: [input.target.repository],
+    project: input.target.project,
+    view: {
+      nodeId: input.view.nodeId,
+      name: input.view.name,
+      layout: input.view.observedLayout,
+      visibleFields: input.view.observedVisibleFields
+    },
+    customFields
+  };
+}
+
 function manifestPayload(
   spec: GitHubProjectDisplayTargetManifest["spec"]
 ): Omit<GitHubProjectDisplayTargetManifest, "contentDigest"> {
@@ -552,6 +613,21 @@ function validateManifest(
       schemaEntry.schema,
       schemaEntry.demoProjectId
     );
+    const proposalSnapshot = reconstructedSnapshot({
+      target,
+      observedAt: target.proposal.observedAt,
+      view: target.view,
+      optionColors: target.customFields.flatMap((field) =>
+        field.options.map((option) => ({
+          fieldNodeId: field.nodeId,
+          optionNodeId: option.nodeId,
+          color: option.observedColor
+        }))
+      )
+    });
+    if (target.proposal.snapshotDigest !== digest(proposalSnapshot)) {
+      fail(`${target.demoProjectId} proposal snapshot digest is invalid`);
+    }
     const observedAt = Date.parse(target.proposal.observedAt);
     if (
       !Number.isFinite(generatedAt) ||
@@ -776,6 +852,12 @@ function validatePlan(input: {
   ) {
     fail("display color plan differs from the confirmed manifest or plan digest");
   }
+  assertFreshObservation({
+    observedAt: input.manifest.spec.generatedAt,
+    evaluatedAt: plan.evaluatedAt,
+    maxSnapshotAgeMs: plan.maxSnapshotAgeMs,
+    subject: "display target manifest"
+  });
   const expectedActions: GitHubProjectDisplayColorAction[] = [];
   for (let index = 0; index < input.schemas.entries.length; index += 1) {
     const schemaEntry = input.schemas.entries[index];
@@ -801,6 +883,19 @@ function validatePlan(input: {
     expectedActions.push(
       ...actionsForObservation(project, target, schemaEntry.schema)
     );
+    if (
+      project.snapshotDigest !==
+      digest(
+        reconstructedSnapshot({
+          target,
+          observedAt: project.observedAt,
+          view: project.view,
+          optionColors: project.optionColors
+        })
+      )
+    ) {
+      fail(`${project.demoProjectId} plan snapshot digest is invalid`);
+    }
   }
   if (canonicalJson(plan.actions) !== canonicalJson(expectedActions)) {
     fail("display color plan action set is not the exact observed color drift");

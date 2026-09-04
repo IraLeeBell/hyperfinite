@@ -167,7 +167,8 @@ function rehashDisplayManifest(
 
 function rehashDisplayPlan(
   plan: GitHubProjectDisplayColorPlan,
-  actions: readonly unknown[]
+  actions: readonly unknown[],
+  overrides: Readonly<Record<string, unknown>> = {}
 ): unknown {
   const payload = {
     apiVersion: plan.apiVersion,
@@ -180,7 +181,8 @@ function rehashDisplayPlan(
     maxSnapshotAgeMs: plan.maxSnapshotAgeMs,
     targetManifestDigest: plan.targetManifestDigest,
     projects: plan.projects,
-    actions
+    actions,
+    ...overrides
   };
   return {
     ...payload,
@@ -1031,17 +1033,24 @@ test("display target confirmation, identity, schema, and freshness fail closed",
     /independently confirmed digest/u
   );
 
-  const substitutedTargets = manifest.spec.targets.map((target, index) =>
-    index === 0
-      ? {
-          ...target,
-          project: {
-            ...target.project,
-            nodeId: "PVT_synthetic_substituted_target"
-          }
-        }
-      : target
-  );
+  const substitutedTargets = manifest.spec.targets.map((target, index) => {
+    if (index !== 0) return target;
+    const project = {
+      ...target.project,
+      nodeId: "PVT_synthetic_substituted_target"
+    };
+    return {
+      ...target,
+      proposal: {
+        ...target.proposal,
+        snapshotDigest: digest({
+          ...snapshots[0]!.snapshot,
+          project
+        })
+      },
+      project
+    };
+  });
   const substitutedManifest = rehashDisplayManifest(
     manifest,
     substitutedTargets
@@ -1092,6 +1101,33 @@ test("display target confirmation, identity, schema, and freshness fail closed",
         confirmedTargetManifestDigest: wrongSchemaManifest.contentDigest
       }),
     /differs from the merged schema/u
+  );
+
+  const wrongSnapshotDigestTargets = manifest.spec.targets.map(
+    (target, index) =>
+      index === 0
+        ? {
+            ...target,
+            proposal: {
+              ...target.proposal,
+              snapshotDigest: digest("wrong-proposal-snapshot")
+            }
+          }
+        : target
+  );
+  const wrongSnapshotDigestManifest = rehashDisplayManifest(
+    manifest,
+    wrongSnapshotDigestTargets
+  );
+  assert.throws(
+    () =>
+      planDisplayOnlyProjectColorReconciliation({
+        ...planInput,
+        targetManifest: wrongSnapshotDigestManifest,
+        confirmedTargetManifestDigest:
+          wrongSnapshotDigestManifest.contentDigest
+      }),
+    /proposal snapshot digest is invalid/u
   );
 
   const titleOnlySubstitution = snapshots.map((entry, index) =>
@@ -1236,6 +1272,47 @@ test("display target confirmation, identity, schema, and freshness fail closed",
       planDisplayOnlyProjectColorReconciliation({
         ...planInput,
         evaluatedAt: "2026-09-04T00:10:00.000Z"
+      }),
+    /display target manifest is stale/u
+  );
+
+  const oldSnapshots = snapshots.map((entry) => ({
+    ...entry,
+    snapshot: {
+      ...entry.snapshot,
+      observedAt: "2026-09-03T23:39:00.000Z"
+    }
+  }));
+  const oldManifest = createDisplayOnlyProjectTargetManifest({
+    projectSchemas,
+    snapshots: oldSnapshots,
+    generatedAt: "2026-09-03T23:40:00.000Z",
+    maxSnapshotAgeMs: DISPLAY_MAX_AGE_MS
+  });
+  const ordinaryPlan = displayPlan(projectSchemas, manifest, snapshots);
+  const staleManifestPlan = rehashDisplayPlan(
+    ordinaryPlan,
+    ordinaryPlan.actions,
+    { targetManifestDigest: oldManifest.contentDigest }
+  );
+  const staleManifestPlanDigest = (
+    staleManifestPlan as { planDigest: Digest }
+  ).planDigest;
+  assert.throws(
+    () =>
+      readbackDisplayOnlyProjectColorReconciliation({
+        targetManifest: oldManifest,
+        confirmedTargetManifestDigest: oldManifest.contentDigest,
+        projectSchemas,
+        confirmedPlan: staleManifestPlan,
+        confirmedPlanDigest: staleManifestPlanDigest,
+        snapshots: withExpectedDisplayColors(
+          projectSchemas,
+          snapshots,
+          DISPLAY_READBACK_OBSERVED_AT
+        ),
+        reconciledAt: DISPLAY_READBACK_AT,
+        maxSnapshotAgeMs: DISPLAY_MAX_AGE_MS
       }),
     /display target manifest is stale/u
   );
@@ -1470,6 +1547,32 @@ test("display-only plan validation rejects altered colors and unexpected action 
         maxSnapshotAgeMs: DISPLAY_MAX_AGE_MS
       }),
     /GitHubProjectDisplayColorPlan validation failed/u
+  );
+
+  const wrongSnapshotProjects = plan.projects.map((project, index) =>
+    index === 0
+      ? { ...project, snapshotDigest: digest("wrong-plan-snapshot") }
+      : project
+  );
+  const wrongSnapshotPlan = rehashDisplayPlan(plan, plan.actions, {
+    projects: wrongSnapshotProjects
+  });
+  const wrongSnapshotPlanDigest = (
+    wrongSnapshotPlan as { planDigest: Digest }
+  ).planDigest;
+  assert.throws(
+    () =>
+      readbackDisplayOnlyProjectColorReconciliation({
+        targetManifest: manifest,
+        confirmedTargetManifestDigest: manifest.contentDigest,
+        projectSchemas,
+        confirmedPlan: wrongSnapshotPlan,
+        confirmedPlanDigest: wrongSnapshotPlanDigest,
+        snapshots: postApply,
+        reconciledAt: DISPLAY_READBACK_AT,
+        maxSnapshotAgeMs: DISPLAY_MAX_AGE_MS
+      }),
+    /plan snapshot digest is invalid/u
   );
 });
 
