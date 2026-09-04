@@ -151,7 +151,7 @@
       ],
       "properties": {
         "apiVersion": {
-          "$ref": "#/$defs/apiVersion"
+          "const": "agentic-framework.github.com/v1alpha1"
         },
         "kind": {
           "const": "GitHubProjectDisplaySnapshot"
@@ -429,7 +429,7 @@
       ],
       "properties": {
         "apiVersion": {
-          "$ref": "#/$defs/apiVersion"
+          "const": "agentic-framework.github.com/v1alpha1"
         },
         "kind": {
           "const": "GitHubProjectDisplayTargetManifest"
@@ -674,7 +674,7 @@
       ],
       "properties": {
         "apiVersion": {
-          "$ref": "#/$defs/apiVersion"
+          "const": "agentic-framework.github.com/v1alpha1"
         },
         "kind": {
           "const": "GitHubProjectDisplayColorPlan"
@@ -846,7 +846,7 @@
       ],
       "properties": {
         "apiVersion": {
-          "$ref": "#/$defs/apiVersion"
+          "const": "agentic-framework.github.com/v1alpha1"
         },
         "kind": {
           "const": "GitHubProjectDisplayColorReadback"

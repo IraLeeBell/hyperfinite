@@ -3,10 +3,10 @@
   "schemaVersion": "1.0.0",
   "scopes": {
     "authoritative-repository": {
-      "inventoryFiles": 376,
-      "inventoryMatchingLines": 1015,
-      "inventoryOccurrences": 1024,
-      "inventoryDigest": "sha256:005021c30c4f4b9959b556b263414ecc70e1cdafaa43d588924827efb55ae9d2"
+      "inventoryFiles": 386,
+      "inventoryMatchingLines": 1034,
+      "inventoryOccurrences": 1043,
+      "inventoryDigest": "sha256:181ca6155d722e48f1ef60aba5d5d13ce7374acdf40f44dcf71cf9bb0dc068c2"
     },
     "control-plane-core": {
       "inventoryFiles": 212,
