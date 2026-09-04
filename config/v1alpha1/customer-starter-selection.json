@@ -5,7 +5,7 @@
     "profileId": "control-plane-core",
     "extendsProfileId": null,
     "baseSelectionDigest": null,
-    "sourceHeadSha": "8dd70a09b603139ff725925dc4f4fafb65dd3831",
+    "sourceHeadSha": "0537b8c4292773885d0f0d9ce7b53a5c36d9b00a",
     "includedPaths": [
         ".github/AUTOMATION.md",
         ".github/CODEOWNERS",
@@ -49,6 +49,7 @@
         "scripts/configure-customer-repository.ts",
         "scripts/customer-starter-local.ts",
         "scripts/generate-authority-walkthrough-recording.ts",
+        "scripts/github-project-display-colors.ts",
         "scripts/github-setup.ts",
         "scripts/release-local.ts",
         "scripts/repin-customer-starter.ts",
@@ -82,5 +83,5 @@
         "schemas/v1alpha1/repository-metadata.schema.json",
         "tests/fixtures/project-ux/live"
     ],
-    "resolvedClosureDigest": "sha256:ce94f23647ffd07de93aee799fb60591b9b8e76ab306234a2e301a6943890dd8"
+    "resolvedClosureDigest": "sha256:9991d1db84ef85449d6f6a0e944293117cd78f0658814f47f7582b7f53f8ff84"
 }

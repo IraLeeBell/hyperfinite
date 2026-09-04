@@ -1122,3 +1122,37 @@ still alter display metadata after acceptance. Readback is point-in-time,
 drift-prone evidence. About fields remain display/discovery only and grant no
 lifecycle, repository, target, Project, capability, credential, transition,
 release, or effect authority.
+
+### T39 Display-only Project reconciliation confused with runtime binding
+
+A color-only repair can be incorrectly routed through generic setup, tempting an
+operator to fabricate a GitHub App installation or weaken organization,
+visibility, empty-Project, view, activation, or binding requirements so a
+user-owned populated display Project passes. Conversely, a permissive display
+tool could accept a title as identity, let issue/model text select a Project,
+hide an unexpected field or option, emit a rename/reorder/delete/effect, or claim
+runtime readiness after colors happen to match. Reusing an unconfirmed or stale
+manifest/plan across Projects creates a target-substitution path.
+
+Control C40 uses separate closed snapshot, target-manifest, plan, and readback
+contracts. Snapshot data may describe a user or organization owner but cannot
+contain installation, credential, binding, or effect data. Target identities
+come only from fresh read-only snapshots, current merged schema digests are
+bound, and a separate human confirms the canonical manifest digest before
+planning. The only plan action changes one exact option color and always carries
+Project/field/option node IDs plus human-admin, display-only, and
+non-authoritative markers. Description or structural drift blocks. Readback
+requires both confirmed digests, a strictly later fresh snapshot, exact
+identity/schema/field/option state, and zero color drift; it explicitly produces
+no runtime binding.
+
+View layout and API-visible field order are retained as observational evidence
+but cannot authorize or block this attribute-only repair. The generic runtime
+and customer-bootstrap contracts remain unchanged and continue to require their
+installation, owner, visibility, emptiness, view, activation, and binding
+preconditions.
+
+Residual: a human administrator or compromised GitHub account/platform can
+apply a different mutation or drift colors after readback. Repository tooling
+cannot authenticate the external human apply; issue completion therefore
+remains open until independent zero-drift evidence is recorded.

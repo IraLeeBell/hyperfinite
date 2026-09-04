@@ -16,6 +16,7 @@
     "test": "npm run build && node --test tests/*.test.mjs dist/tests/*.test.js",
     "validate": "npm run validate:customer-readiness && npm run validate:technical-identity && npm run typecheck && npm test && npm run validate:schemas && npm run validate:runtime && npm run validate:eval-fixtures && npm run validate:provenance && npm run validate:workflows && npm run validate:gh-aw && npm run validate:packaging && npm run validate:demos && npm run simulate:demos && npm run validate:hardening",
     "github:setup": "npm run build && node dist/scripts/github-setup.js",
+    "github:display-colors": "npm run build && node dist/scripts/github-project-display-colors.js",
     "installer": "npm run build && node dist/scripts/installer.js",
     "release:local": "npm run build && node dist/scripts/release-local.js",
     "starter:local": "npm run build && node dist/scripts/customer-starter-local.js",

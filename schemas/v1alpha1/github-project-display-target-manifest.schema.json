@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-project-display-target-manifest.schema.json",
+  "title": "Non-authoritative display Project target manifest",
+  "$ref": "https://agentic-framework.github.com/schemas/v1alpha1/github-project-display-common.schema.json#/$defs/manifest"
+}

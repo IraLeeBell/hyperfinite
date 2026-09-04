@@ -1,0 +1,901 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentic-framework.github.com/schemas/v1alpha1/github-project-display-common.schema.json",
+  "title": "Shared closed contracts for display-only GitHub Project color reconciliation",
+  "$defs": {
+    "apiVersion": {
+      "const": "agentic-framework.github.com/v1alpha1"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "nodeId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "demoProjectId": {
+      "enum": [
+        "app-modernization",
+        "feature-delivery",
+        "security-dependency-remediation",
+        "adaptive-delivery"
+      ]
+    },
+    "color": {
+      "enum": [
+        "GRAY",
+        "BLUE",
+        "GREEN",
+        "YELLOW",
+        "ORANGE",
+        "RED",
+        "PINK",
+        "PURPLE"
+      ]
+    },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "login", "nodeId"],
+      "properties": {
+        "type": {
+          "enum": ["organization", "user"]
+        },
+        "login": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9](?:[A-Za-z0-9-]{0,38})$"
+        },
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fullName", "nodeId"],
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+        },
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        }
+      }
+    },
+    "visibleField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "name", "dataType"],
+      "properties": {
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "dataType": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z_]{0,63}$"
+        }
+      }
+    },
+    "snapshotOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "name", "color", "description"],
+      "properties": {
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "snapshotField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodeId", "name", "dataType", "options"],
+      "properties": {
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "dataType": {
+          "enum": ["DATE", "ITERATION", "NUMBER", "SINGLE_SELECT", "TEXT"]
+        },
+        "options": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/snapshotOption"
+          }
+        }
+      }
+    },
+    "snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "authoritative",
+        "displayOnly",
+        "observedAt",
+        "owner",
+        "repository",
+        "linkedRepositories",
+        "project",
+        "view",
+        "customFields"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "const": "GitHubProjectDisplaySnapshot"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "authoritative": {
+          "const": false
+        },
+        "displayOnly": {
+          "const": true
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "repository": {
+          "$ref": "#/$defs/repository"
+        },
+        "linkedRepositories": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "$ref": "#/$defs/repository"
+          }
+        },
+        "project": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["number", "nodeId", "title", "visibility", "closed"],
+          "properties": {
+            "number": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "nodeId": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "visibility": {
+              "enum": ["private", "public"]
+            },
+            "closed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "view": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["nodeId", "name", "layout", "visibleFields"],
+          "properties": {
+            "nodeId": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "layout": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "visibleFields": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "$ref": "#/$defs/visibleField"
+              }
+            }
+          }
+        },
+        "customFields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/snapshotField"
+          }
+        }
+      }
+    },
+    "manifestOption": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "nodeId",
+        "name",
+        "observedColor",
+        "description"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,62}$"
+        },
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "observedColor": {
+          "$ref": "#/$defs/color"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 256
+        }
+      }
+    },
+    "manifestField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "nodeId", "name", "dataType", "options"],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,62}$"
+        },
+        "nodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "dataType": {
+          "enum": ["DATE", "ITERATION", "NUMBER", "SINGLE_SELECT", "TEXT"]
+        },
+        "options": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/manifestOption"
+          }
+        }
+      }
+    },
+    "manifestTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "projectSchemaDigest",
+        "proposal",
+        "owner",
+        "repository",
+        "project",
+        "view",
+        "customFields"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "#/$defs/demoProjectId"
+        },
+        "projectSchemaDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "proposal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["observedAt", "snapshotDigest"],
+          "properties": {
+            "observedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "snapshotDigest": {
+              "$ref": "#/$defs/digest"
+            }
+          }
+        },
+        "owner": {
+          "$ref": "#/$defs/owner"
+        },
+        "repository": {
+          "$ref": "#/$defs/repository"
+        },
+        "project": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["number", "nodeId", "title", "visibility", "closed"],
+          "properties": {
+            "number": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "nodeId": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024
+            },
+            "visibility": {
+              "enum": ["private", "public"]
+            },
+            "closed": {
+              "type": "boolean"
+            }
+          }
+        },
+        "view": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nodeId",
+            "name",
+            "observedLayout",
+            "observedVisibleFields"
+          ],
+          "properties": {
+            "nodeId": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "observedLayout": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "observedVisibleFields": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "$ref": "#/$defs/visibleField"
+              }
+            }
+          }
+        },
+        "customFields": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/$defs/manifestField"
+          }
+        }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "authoritative",
+        "displayOnly",
+        "contentDigest",
+        "spec"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "const": "GitHubProjectDisplayTargetManifest"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "authoritative": {
+          "const": false
+        },
+        "displayOnly": {
+          "const": true
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "spec": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["generatedAt", "maxSnapshotAgeMs", "targets"],
+          "properties": {
+            "generatedAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "maxSnapshotAgeMs": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "targets": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 4,
+              "items": {
+                "$ref": "#/$defs/manifestTarget"
+              }
+            }
+          }
+        }
+      }
+    },
+    "optionColorObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldNodeId", "optionNodeId", "color"],
+      "properties": {
+        "fieldNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "optionNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "color": {
+          "$ref": "#/$defs/color"
+        }
+      }
+    },
+    "planProject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "projectSchemaDigest",
+        "projectNodeId",
+        "snapshotDigest",
+        "observedAt",
+        "view",
+        "optionColors"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "#/$defs/demoProjectId"
+        },
+        "projectSchemaDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "projectNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "snapshotDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "view": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nodeId",
+            "name",
+            "observedLayout",
+            "observedVisibleFields"
+          ],
+          "properties": {
+            "nodeId": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "observedLayout": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "observedVisibleFields": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "$ref": "#/$defs/visibleField"
+              }
+            }
+          }
+        },
+        "optionColors": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "$ref": "#/$defs/optionColorObservation"
+          }
+        }
+      }
+    },
+    "colorAction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "authoritative",
+        "displayOnly",
+        "requiresHumanAdmin",
+        "demoProjectId",
+        "projectSchemaDigest",
+        "ownerNodeId",
+        "projectNodeId",
+        "fieldKey",
+        "fieldNodeId",
+        "fieldName",
+        "optionKey",
+        "optionNodeId",
+        "optionName",
+        "optionDescription",
+        "before",
+        "after"
+      ],
+      "properties": {
+        "type": {
+          "const": "set-single-select-option-color"
+        },
+        "authoritative": {
+          "const": false
+        },
+        "displayOnly": {
+          "const": true
+        },
+        "requiresHumanAdmin": {
+          "const": true
+        },
+        "demoProjectId": {
+          "$ref": "#/$defs/demoProjectId"
+        },
+        "projectSchemaDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "ownerNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "projectNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "fieldKey": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,62}$"
+        },
+        "fieldNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "fieldName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "optionKey": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{0,62}$"
+        },
+        "optionNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "optionName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "optionDescription": {
+          "type": "string",
+          "maxLength": 256
+        },
+        "before": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["color"],
+          "properties": {
+            "color": {
+              "$ref": "#/$defs/color"
+            }
+          }
+        },
+        "after": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["color"],
+          "properties": {
+            "color": {
+              "$ref": "#/$defs/color"
+            }
+          }
+        }
+      }
+    },
+    "plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "authoritative",
+        "displayOnly",
+        "mode",
+        "evaluatedAt",
+        "maxSnapshotAgeMs",
+        "targetManifestDigest",
+        "projects",
+        "actions",
+        "planDigest"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "const": "GitHubProjectDisplayColorPlan"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "authoritative": {
+          "const": false
+        },
+        "displayOnly": {
+          "const": true
+        },
+        "mode": {
+          "const": "display-only-dry-run"
+        },
+        "evaluatedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxSnapshotAgeMs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "targetManifestDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "projects": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/planProject"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "$ref": "#/$defs/colorAction"
+          }
+        },
+        "planDigest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    },
+    "remainingColorDrift": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fieldNodeId",
+        "optionNodeId",
+        "actualColor",
+        "expectedColor"
+      ],
+      "properties": {
+        "fieldNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "optionNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "actualColor": {
+          "$ref": "#/$defs/color"
+        },
+        "expectedColor": {
+          "$ref": "#/$defs/color"
+        }
+      }
+    },
+    "readbackProject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "demoProjectId",
+        "projectSchemaDigest",
+        "projectNodeId",
+        "snapshotDigest",
+        "observedAt",
+        "exactIdentityVerified",
+        "schemaVerified",
+        "viewObservation",
+        "remainingColorDrift"
+      ],
+      "properties": {
+        "demoProjectId": {
+          "$ref": "#/$defs/demoProjectId"
+        },
+        "projectSchemaDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "projectNodeId": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "snapshotDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "observedAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "exactIdentityVerified": {
+          "const": true
+        },
+        "schemaVerified": {
+          "const": true
+        },
+        "viewObservation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "nodeId",
+            "name",
+            "observedLayout",
+            "observedVisibleFields"
+          ],
+          "properties": {
+            "nodeId": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            "observedLayout": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 128
+            },
+            "observedVisibleFields": {
+              "type": "array",
+              "maxItems": 200,
+              "items": {
+                "$ref": "#/$defs/visibleField"
+              }
+            }
+          }
+        },
+        "remainingColorDrift": {
+          "type": "array",
+          "maxItems": 512,
+          "items": {
+            "$ref": "#/$defs/remainingColorDrift"
+          }
+        }
+      }
+    },
+    "readback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "apiVersion",
+        "kind",
+        "schemaVersion",
+        "authoritative",
+        "displayOnly",
+        "mode",
+        "reconciledAt",
+        "maxSnapshotAgeMs",
+        "targetManifestDigest",
+        "confirmedPlanDigest",
+        "success",
+        "runtimeBindingProduced",
+        "projects",
+        "reportDigest"
+      ],
+      "properties": {
+        "apiVersion": {
+          "const": "agentic-framework.github.com/v1alpha1"
+        },
+        "kind": {
+          "const": "GitHubProjectDisplayColorReadback"
+        },
+        "schemaVersion": {
+          "const": "1.0.0"
+        },
+        "authoritative": {
+          "const": false
+        },
+        "displayOnly": {
+          "const": true
+        },
+        "mode": {
+          "const": "display-only-readback"
+        },
+        "reconciledAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "maxSnapshotAgeMs": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        },
+        "targetManifestDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "confirmedPlanDigest": {
+          "$ref": "#/$defs/digest"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "runtimeBindingProduced": {
+          "const": false
+        },
+        "projects": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "$ref": "#/$defs/readbackProject"
+          }
+        },
+        "reportDigest": {
+          "$ref": "#/$defs/digest"
+        }
+      }
+    }
+  }
+}

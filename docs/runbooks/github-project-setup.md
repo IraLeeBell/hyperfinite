@@ -2,10 +2,10 @@
 
 ## Safety boundary
 
-The repository setup command is offline and dry-run only. It never authenticates
-to GitHub, mints a token, creates a Project, or performs a mutation. `--apply`
-and `--execute` are rejected before any input is loaded. Every emitted setup or
-drift action has `requiresHumanAdmin: true`.
+The repository setup and display-color commands are offline and dry-run only.
+They never authenticate to GitHub, mint a token, create a Project, or perform a
+mutation. `--apply` and `--execute` are rejected before any input is loaded.
+Every emitted setup or color action has `requiresHumanAdmin: true`.
 
 The repository intentionally does not embed a credentialed full-administration
 reader in `github-http.ts`. An authorized human or separately reviewed trusted
@@ -117,38 +117,92 @@ Synthetic, credential-free examples are in
 
 ## Reconcile colors on the four existing Projects
 
-After the palette change is merged, reconcile these exact Projects:
-`App Modernization - Hyperfinite`, `Feature Delivery - Hyperfinite`,
-`Security Dependency Remediation - Hyperfinite`, and
-`Adaptive Delivery - Hyperfinite`.
+Existing display Projects use the dedicated `github:display-colors` boundary.
+They are not bootstrap targets and do not become runtime bindings. This path
+accepts an exact user- or organization-owned Project that is public or private,
+open or closed, and populated, because none of those attributes is changed. It
+records and then requires their exact current values.
 
-1. **Plan:** obtain a fresh authenticated export for every Project, including
-   every field and each option's node ID, name, color, and description. Run the
-   four-demo `plan` command above. Stop on an unexpected owner, installation,
-   Project, field, option, order, or attribute. Every emitted action must say
-   `requiresHumanAdmin: true`; repository tooling performs no mutation.
-2. **Confirm:** a human Project administrator reviews all four target identities,
-   the merged per-Project schema digests, every proposed option attribute, and
-   the complete action set. Record the reviewed plan bytes or digest outside the
-   repository. Do not infer a target from issue or model text.
-3. **Apply:** the human administrator applies the confirmed color changes once
-   through an approved GitHub administration surface. Do not add an apply or
-   execute flag to this repository command, expose a Project-admin credential to
-   automation, delete unexpected state, or retry an ambiguous response.
-4. **Readback:** export all four Projects again from the exact targets and rerun
-   `plan`. Acceptance requires zero actions and four non-null bindings. Export
-   those reviewed bindings and confirm exact Project, field, and option node IDs;
-   field and option order; names; colors; descriptions; data types; and each
-   binding's current Project-schema digest. Any mismatch remains a blocked
-   human-admin reconciliation.
+The separately supplied files
+`<demo-project-id>.display.json` must match
+`github-project-display-snapshot.schema.json`. Each file contains one fresh
+read-only observation: exact owner, linked repository, Project, selected view,
+all custom fields in API order, and all single-select options in API order with
+node ID, name, color, and description. Installation, credential, item, binding,
+and effect data are unknown properties and are rejected. Every time must use
+canonical UTC with a `Z` suffix and at most millisecond precision, for example
+`2026-09-03T23:54:00.000Z`.
+
+1. **Propose exact targets:** obtain all four fresh snapshots and derive a
+   non-authoritative manifest:
+
+   ```bash
+   npm run github:display-colors -- target-manifest \
+     --snapshots path/to/fresh-display-snapshots \
+     --evaluated-at <current-canonical-UTC-time> \
+     --output path/to/display-target-manifest.json
+   ```
+
+   The proposal copies target identities only from the snapshots, binds the
+   current merged schema digest for each demo, and records the view layout and
+   API-visible field order as observation. It does not select or authorize a
+   target.
+2. **Independently confirm the manifest:** a human other than the snapshot
+   preparer reviews every owner, repository, Project, view, field, and option
+   identity plus visibility, closed state, names, types, order, descriptions,
+   and schema digests. Record the manifest `contentDigest` outside repository
+   configuration. Title matching alone is never identity.
+3. **Plan exact color changes:** obtain fresh snapshots again, then run:
+
+   ```bash
+   npm run github:display-colors -- plan \
+     --snapshots path/to/fresh-display-snapshots \
+     --target-manifest path/to/display-target-manifest.json \
+     --confirmed-target-manifest-digest sha256:<confirmed-manifest-digest> \
+     --evaluated-at <current-canonical-UTC-time> \
+     --output path/to/display-color-plan.json
+   ```
+
+   Exit code `2` means exact color actions were emitted. Every action is
+   `set-single-select-option-color`, carries exact Project/field/option node IDs,
+   before/after colors, `displayOnly: true`, `authoritative: false`, and
+   `requiresHumanAdmin: true`. Description drift blocks planning; this contract
+   never edits accessible semantics. Any unexpected field, option, ID, order,
+   attribute, timestamp, digest, or target substitution fails closed.
+4. **Confirm and apply once:** an independent human reviews and records the
+   `planDigest`, then one human Project administrator applies exactly that action
+   set through an approved GitHub administration surface. Repository tooling has
+   no apply/execute verb, credential reader, network client, binding output, or
+   effect adapter. Do not retry an ambiguous response.
+5. **Fresh readback:** export the same four targets again after the confirmed
+   plan time and run:
+
+   ```bash
+   npm run github:display-colors -- readback \
+     --snapshots path/to/post-apply-display-snapshots \
+     --target-manifest path/to/display-target-manifest.json \
+     --confirmed-target-manifest-digest sha256:<confirmed-manifest-digest> \
+     --input path/to/display-color-plan.json \
+     --confirmed-plan-digest sha256:<confirmed-plan-digest> \
+     --evaluated-at <current-canonical-UTC-time> \
+     --output path/to/display-color-readback.json
+   ```
+
+   Success requires `success: true`, zero remaining color drift, and exact
+   owner/repository/Project/view, visibility/closed state, custom-field,
+   option, description, order, and current schema-digest verification. The
+   report explicitly says `runtimeBindingProduced: false`. View layout and
+   visible-field order are preserved in manifest, plan, and readback evidence,
+   but changes to those observations neither authorize nor block this
+   color-only flow.
 
 For a new empty installation, generate and independently confirm a fresh target
-manifest before `bootstrap-plan`. Each manifest Project entry binds the exact
-Project-schema digest. The confirmed bootstrap plan carries explicit option
-colors and descriptions on every field operation, and every operation requires
-a human administrator. After the one reviewed external apply, run
-`bootstrap-readback`; success requires exact target identities, field and option
-node IDs, names, colors, descriptions, item bindings, and view state.
+manifest before `bootstrap-plan` through the existing `github:setup` path. That
+runtime/customer bootstrap path remains stricter: it still requires an
+organization owner, private empty Projects, `View 1`, an authenticated
+installation wherever a runtime binding may be emitted, and complete activation
+and binding checks. The display-only path is a smaller contract for one mutable
+attribute, not a downgrade or alternate route around those requirements.
 
 Issue completion is a separate post-merge gate: keep the development issue open
 until a human administrator records zero-drift readback for all four existing
@@ -338,19 +392,16 @@ group the Journey view by Status and do not treat Status as lifecycle authority.
 ## Operator walkthrough
 
 1. Validate the catalog and forms with `npm run validate:schemas`.
-2. Obtain four fresh read-only Project snapshots through an authorized human or
-   separately reviewed reader.
-3. Generate and independently confirm the target-manifest digest.
-4. Run catalog `plan` and inspect every action. If any action exists, stop and
-   have a human administrator reconcile it.
-5. After manual reconciliation, obtain new snapshots and rerun `plan`. Retain
-   the old plan and snapshots as evidence.
-6. Export reviewed bindings only when every plan has no action and contains a
-   binding.
-7. Submit a synthetic form and run deterministic intake validation. A ready
+2. For existing display-only color reconciliation, use the exact
+   manifest-confirmation-plan-confirmation-human-apply-readback sequence above.
+3. For a new customer bootstrap, use only the stricter `github:setup` target
+   manifest, bootstrap plan, and bootstrap readback sequence.
+4. Export a runtime binding only when the generic plan has no action and contains
+   a binding backed by the required installation identity.
+5. Submit a synthetic form and run deterministic intake validation. A ready
    result still waits for Kernel activation and separate runtime contracts.
-8. Seed only the synthetic examples under `examples/demo-projects/`; never copy
-   customer data, credentials, or live IDs.
+6. Seed only synthetic examples; never copy customer data, credentials, or live
+   IDs into the repository.
 
 ## Reset and recovery
 

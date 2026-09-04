@@ -1,0 +1,434 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubProjectDisplaySnapshot",
+  "schemaVersion": "1.0.0",
+  "authoritative": false,
+  "displayOnly": true,
+  "observedAt": "2026-09-03T23:53:44.000Z",
+  "owner": {
+    "type": "user",
+    "login": "example-user",
+    "nodeId": "U_synthetic_example_user"
+  },
+  "repository": {
+    "fullName": "example-user/hyperfinite",
+    "nodeId": "R_synthetic_display_repository"
+  },
+  "linkedRepositories": [
+    {
+      "fullName": "example-user/hyperfinite",
+      "nodeId": "R_synthetic_display_repository"
+    }
+  ],
+  "project": {
+    "number": 103,
+    "nodeId": "PVT_synthetic_security_dependency_remediation",
+    "title": "Security Dependency Remediation - Hyperfinite",
+    "visibility": "public",
+    "closed": false
+  },
+  "view": {
+    "nodeId": "PVTV_synthetic_display_security_dependency_remediation",
+    "name": "Journey",
+    "layout": "BOARD_LAYOUT",
+    "visibleFields": [
+      {
+        "nodeId": "PVTFV_synthetic_title_security_dependency_remediation",
+        "name": "Title",
+        "dataType": "TITLE"
+      },
+      {
+        "nodeId": "PVTFV_synthetic_status_security_dependency_remediation",
+        "name": "Status",
+        "dataType": "SINGLE_SELECT"
+      },
+      {
+        "nodeId": "PVTFV_synthetic_attention_security_dependency_remediation",
+        "name": "Attention",
+        "dataType": "SINGLE_SELECT"
+      }
+    ]
+  },
+  "customFields": [
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_1",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_1",
+          "name": "Captured",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_2",
+          "name": "Activation pending",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_3",
+          "name": "Framing",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_4",
+          "name": "Planned",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_5",
+          "name": "Executing",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_6",
+          "name": "Verifying",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_7",
+          "name": "Human review",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_8",
+          "name": "Completed",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_9",
+          "name": "Paused",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_10",
+          "name": "Blocked",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_1_11",
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_2",
+      "name": "Journey Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_1",
+          "name": "Intake",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_2",
+          "name": "Triage",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_3",
+          "name": "Reproduction and impact analysis",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_4",
+          "name": "Remediation design",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_5",
+          "name": "Patch planning",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_6",
+          "name": "Patch implementation",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_7",
+          "name": "Security verification",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_8",
+          "name": "Human review",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_9",
+          "name": "Completed",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_10",
+          "name": "Activation Pending",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_11",
+          "name": "Paused",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_12",
+          "name": "Blocked",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_2_13",
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_3",
+      "name": "Demo Project Profile",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_4",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_4_1",
+          "name": "D0",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_4_2",
+          "name": "D1",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_4_3",
+          "name": "D2",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_4_4",
+          "name": "D3",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_5",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_5_1",
+          "name": "Pending",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_5_2",
+          "name": "Satisfied",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_5_3",
+          "name": "Blocked",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_6",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_7",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_8",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_8_1",
+          "name": "None",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_8_2",
+          "name": "Human action",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_8_3",
+          "name": "Reconciliation",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_9",
+      "name": "Target Repository",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_10",
+      "name": "Run / Attempt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_11",
+      "name": "Current Draft PR",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_12",
+      "name": "Current Stage Agent",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_13",
+      "name": "Stage Interaction",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_13_1",
+          "name": "Backend autonomous",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_13_2",
+          "name": "User-selectable agent",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_13_3",
+          "name": "Human gate",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_13_4",
+          "name": "Deterministic",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_13_5",
+          "name": "Kernel control",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_13_6",
+          "name": "Terminal",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_14",
+      "name": "Requested Stage Agent",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_14_1",
+          "name": "User selection unavailable - locked project",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_security_dependency_remediation_15",
+      "name": "Agent Selection Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_15_1",
+          "name": "not-applicable",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_15_2",
+          "name": "awaiting-selection",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_15_3",
+          "name": "accepted",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_15_4",
+          "name": "invalid",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_15_5",
+          "name": "stale",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_security_dependency_remediation_15_6",
+          "name": "reconciliation-required",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}
