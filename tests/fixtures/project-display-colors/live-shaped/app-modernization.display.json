@@ -1,0 +1,440 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "kind": "GitHubProjectDisplaySnapshot",
+  "schemaVersion": "1.0.0",
+  "authoritative": false,
+  "displayOnly": true,
+  "observedAt": "2026-09-03T23:53:44.000Z",
+  "owner": {
+    "type": "user",
+    "login": "example-user",
+    "nodeId": "U_synthetic_example_user"
+  },
+  "repository": {
+    "fullName": "example-user/hyperfinite",
+    "nodeId": "R_synthetic_display_repository"
+  },
+  "linkedRepositories": [
+    {
+      "fullName": "example-user/hyperfinite",
+      "nodeId": "R_synthetic_display_repository"
+    }
+  ],
+  "project": {
+    "number": 101,
+    "nodeId": "PVT_synthetic_app_modernization",
+    "title": "App Modernization - Hyperfinite",
+    "visibility": "public",
+    "closed": false
+  },
+  "view": {
+    "nodeId": "PVTV_synthetic_display_app_modernization",
+    "name": "Journey",
+    "layout": "BOARD_LAYOUT",
+    "visibleFields": [
+      {
+        "nodeId": "PVTFV_synthetic_title_app_modernization",
+        "name": "Title",
+        "dataType": "TITLE"
+      },
+      {
+        "nodeId": "PVTFV_synthetic_status_app_modernization",
+        "name": "Status",
+        "dataType": "SINGLE_SELECT"
+      },
+      {
+        "nodeId": "PVTFV_synthetic_attention_app_modernization",
+        "name": "Attention",
+        "dataType": "SINGLE_SELECT"
+      }
+    ]
+  },
+  "customFields": [
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_1",
+      "name": "Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_1",
+          "name": "Captured",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_2",
+          "name": "Activation pending",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_3",
+          "name": "Framing",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_4",
+          "name": "Planned",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_5",
+          "name": "Executing",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_6",
+          "name": "Verifying",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_7",
+          "name": "Human review",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_8",
+          "name": "Completed",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_9",
+          "name": "Paused",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_10",
+          "name": "Blocked",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_1_11",
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_2",
+      "name": "Journey Stage",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_1",
+          "name": "Intake",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_2",
+          "name": "Repository discovery",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_3",
+          "name": "Current-state inventory",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_4",
+          "name": "Modernization assessment",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_5",
+          "name": "Target architecture",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_6",
+          "name": "Migration plan",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_7",
+          "name": "Implementation",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_8",
+          "name": "Verification",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_9",
+          "name": "Human review",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_10",
+          "name": "Completed",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_11",
+          "name": "Activation Pending",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_12",
+          "name": "Paused",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_13",
+          "name": "Blocked",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_2_14",
+          "name": "Cancelled",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_3",
+      "name": "Demo Project Profile",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_4",
+      "name": "Depth Profile",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_4_1",
+          "name": "D0",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_4_2",
+          "name": "D1",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_4_3",
+          "name": "D2",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_4_4",
+          "name": "D3",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_5",
+      "name": "Gate Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_5_1",
+          "name": "Pending",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_5_2",
+          "name": "Satisfied",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_5_3",
+          "name": "Blocked",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_6",
+      "name": "Contract Revision",
+      "dataType": "NUMBER",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_7",
+      "name": "Last Receipt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_8",
+      "name": "Attention",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_8_1",
+          "name": "None",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_8_2",
+          "name": "Human action",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_8_3",
+          "name": "Reconciliation",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_9",
+      "name": "Target Repository",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_10",
+      "name": "Run / Attempt",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_11",
+      "name": "Current Draft PR",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_12",
+      "name": "Current Stage Agent",
+      "dataType": "TEXT",
+      "options": []
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_13",
+      "name": "Stage Interaction",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_13_1",
+          "name": "Backend autonomous",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_13_2",
+          "name": "User-selectable agent",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_13_3",
+          "name": "Human gate",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_13_4",
+          "name": "Deterministic",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_13_5",
+          "name": "Kernel control",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_13_6",
+          "name": "Terminal",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_14",
+      "name": "Requested Stage Agent",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_14_1",
+          "name": "User selection unavailable - locked project",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    },
+    {
+      "nodeId": "PVTF_synthetic_app_modernization_15",
+      "name": "Agent Selection Status",
+      "dataType": "SINGLE_SELECT",
+      "options": [
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_15_1",
+          "name": "not-applicable",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_15_2",
+          "name": "awaiting-selection",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_15_3",
+          "name": "accepted",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_15_4",
+          "name": "invalid",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_15_5",
+          "name": "stale",
+          "color": "GRAY",
+          "description": ""
+        },
+        {
+          "nodeId": "PVTO_synthetic_app_modernization_15_6",
+          "name": "reconciliation-required",
+          "color": "GRAY",
+          "description": ""
+        }
+      ]
+    }
+  ]
+}

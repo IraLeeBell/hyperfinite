@@ -174,6 +174,15 @@ digest, while setup bindings and bootstrap readback retain exact option names,
 colors, descriptions, and node IDs. Missing or drifted color data blocks binding
 or requires human-admin reconciliation rather than defaulting to gray.
 
+Existing populated display Projects use a separate display-only reconciliation
+contract. It binds exact snapshot-derived owner/repository/Project/view and
+field/option identities plus current schema digests, requires independent
+manifest and plan confirmation, and can emit only human-admin option-color
+changes. It records view layout/order without treating either as color authority
+and explicitly cannot produce installation, credential, effect, activation, or
+runtime-binding data. The stricter customer bootstrap and runtime binding
+requirements are unchanged.
+
 Each field write uses expected-state compare-and-swap plus read-after-write
 verification. A lost acknowledgement is reconciled only when two stable reads
 prove the exact intended state. A projection with a newer Kernel state version,

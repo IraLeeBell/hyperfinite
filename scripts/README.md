@@ -51,6 +51,11 @@ a weaker inventory scope with an argument or mutable repository marker.
   proposal from fresh snapshots, and emits human-admin dry-run actions. A
   bootstrap plan requires the separately confirmed target-manifest digest. The
   repository command cannot apply changes.
+- `npm run github:display-colors -- target-manifest|plan|readback` is the
+  separate display-only path for existing populated Projects. It accepts no
+  installation or credential data, requires independent manifest and plan
+  digest confirmation, emits only exact human-admin option-color actions, and
+  never produces a runtime binding or effect.
 - `npm run installer -- plan|offline-validate` validates target-bound customer
   installation plans. It cannot perform a live apply.
 - After `npm run build`, `gh repo view IraLeeBell/hyperfinite` can pipe the

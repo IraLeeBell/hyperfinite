@@ -48,6 +48,11 @@ import githubEffectPlanSchema from "../schemas/v1alpha1/github-effect-plan.schem
 import githubEffectEvidenceSchema from "../schemas/v1alpha1/github-effect-evidence.schema.json" with { type: "json" };
 import githubProjectBindingSchema from "../schemas/v1alpha1/github-project-binding.schema.json" with { type: "json" };
 import githubProjectAdminSnapshotSchema from "../schemas/v1alpha1/github-project-admin-snapshot.schema.json" with { type: "json" };
+import githubProjectDisplayColorPlanSchema from "../schemas/v1alpha1/github-project-display-color-plan.schema.json" with { type: "json" };
+import githubProjectDisplayColorReadbackSchema from "../schemas/v1alpha1/github-project-display-color-readback.schema.json" with { type: "json" };
+import githubProjectDisplayCommonSchema from "../schemas/v1alpha1/github-project-display-common.schema.json" with { type: "json" };
+import githubProjectDisplaySnapshotSchema from "../schemas/v1alpha1/github-project-display-snapshot.schema.json" with { type: "json" };
+import githubProjectDisplayTargetManifestSchema from "../schemas/v1alpha1/github-project-display-target-manifest.schema.json" with { type: "json" };
 import githubProjectLiveSchema from "../schemas/v1alpha1/github-project-live.schema.json" with { type: "json" };
 import githubProjectSchema from "../schemas/v1alpha1/github-project-schema.schema.json" with { type: "json" };
 import githubSafeOutputSchema from "../schemas/v1alpha1/github-safe-output.schema.json" with { type: "json" };
@@ -116,6 +121,12 @@ import type {
   LiveDemoProjectAdminSnapshot,
   LiveGitHubProject
 } from "./github-projects.js";
+import type {
+  GitHubProjectDisplayColorPlan,
+  GitHubProjectDisplayColorReadback,
+  GitHubProjectDisplaySnapshot,
+  GitHubProjectDisplayTargetManifest
+} from "./github-project-display-colors.js";
 import type { GitHubEvidenceRecord } from "./github-adapter.js";
 import type { TargetFreePatch } from "./bounded-worktree.js";
 import type { TrustedValidatedPatchArtifact } from "./execution-bridge.js";
@@ -216,6 +227,10 @@ export type DocumentKind =
   | "GitHubProjectSchema"
   | "GitHubProjectBinding"
   | "GitHubProjectAdminSnapshot"
+  | "GitHubProjectDisplaySnapshot"
+  | "GitHubProjectDisplayTargetManifest"
+  | "GitHubProjectDisplayColorPlan"
+  | "GitHubProjectDisplayColorReadback"
   | "GitHubProjectLive"
   | "GitHubSafeOutput"
   | "TargetFreePatch"
@@ -263,6 +278,9 @@ const immutableDocumentKinds = new Set<DocumentKind>([
   "DemoScheduleDecision",
   "DemoRuntimeRefusal",
   "DemoReviewEvidenceBundle",
+  "GitHubProjectDisplayTargetManifest",
+  "GitHubProjectDisplayColorPlan",
+  "GitHubProjectDisplayColorReadback",
   "AdministratorHandoffDocument"
 ]);
 
@@ -326,6 +344,7 @@ ajv.addFormat("release-path", {
 });
 ajv.addSchema(capabilityRegistrySchema);
 ajv.addSchema(demoContractCommonSchema);
+ajv.addSchema(githubProjectDisplayCommonSchema);
 
 function registeredValidator(id: string): ValidateFunction {
   const validator = ajv.getSchema(id);
@@ -393,6 +412,16 @@ const validators: Record<DocumentKind, ValidateFunction> = {
   GitHubProjectSchema: ajv.compile(githubProjectSchema),
   GitHubProjectBinding: ajv.compile(githubProjectBindingSchema),
   GitHubProjectAdminSnapshot: ajv.compile(githubProjectAdminSnapshotSchema),
+  GitHubProjectDisplaySnapshot: ajv.compile(githubProjectDisplaySnapshotSchema),
+  GitHubProjectDisplayTargetManifest: ajv.compile(
+    githubProjectDisplayTargetManifestSchema
+  ),
+  GitHubProjectDisplayColorPlan: ajv.compile(
+    githubProjectDisplayColorPlanSchema
+  ),
+  GitHubProjectDisplayColorReadback: ajv.compile(
+    githubProjectDisplayColorReadbackSchema
+  ),
   GitHubProjectLive: ajv.compile(githubProjectLiveSchema),
   GitHubSafeOutput: ajv.compile(githubSafeOutputSchema),
   TargetFreePatch: ajv.compile(targetFreePatchSchema),
@@ -459,6 +488,10 @@ type KindValue = {
   readonly GitHubProjectSchema: GitHubProjectSchema;
   readonly GitHubProjectBinding: GitHubProjectBinding;
   readonly GitHubProjectAdminSnapshot: LiveDemoProjectAdminSnapshot;
+  readonly GitHubProjectDisplaySnapshot: GitHubProjectDisplaySnapshot;
+  readonly GitHubProjectDisplayTargetManifest: GitHubProjectDisplayTargetManifest;
+  readonly GitHubProjectDisplayColorPlan: GitHubProjectDisplayColorPlan;
+  readonly GitHubProjectDisplayColorReadback: GitHubProjectDisplayColorReadback;
   readonly GitHubProjectLive: LiveGitHubProject;
   readonly GitHubSafeOutput: GitHubSafeOutput;
   readonly TargetFreePatch: TargetFreePatch;

@@ -10,7 +10,7 @@ deterministic boundaries.
 | Runtime authorization and bridge | `copilot-runtime.test.ts` |
 | Demo contracts and runtime | `demo-portfolio.test.ts`, `demo-runtime.test.ts`, `demo-integration.test.ts` |
 | Demo packs | `app-modernization-demo.test.ts`, `feature-delivery-demo.test.ts`, `security-dependency-remediation-demo.test.ts`, `adaptive-delivery-demo.test.ts` |
-| Hybrid selection and exact Project bootstrap | `hybrid-agent-selection.test.ts`, `github-project-bootstrap.test.ts` |
+| Hybrid selection, exact Project bootstrap, and display-only color reconciliation | `hybrid-agent-selection.test.ts`, `github-project-bootstrap.test.ts` |
 | Bounded execution and end-to-end engineering | `bounded-worktree.test.ts`, `engineering-slice.test.ts` |
 | Domain Packs | `domain-packs.test.ts` |
 | Packaging, release, and technical identity compatibility | `packaging.test.ts` |

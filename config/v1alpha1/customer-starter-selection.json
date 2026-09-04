@@ -49,6 +49,7 @@
         "scripts/configure-customer-repository.ts",
         "scripts/customer-starter-local.ts",
         "scripts/generate-authority-walkthrough-recording.ts",
+        "scripts/github-project-display-colors.ts",
         "scripts/github-setup.ts",
         "scripts/release-local.ts",
         "scripts/repin-customer-starter.ts",

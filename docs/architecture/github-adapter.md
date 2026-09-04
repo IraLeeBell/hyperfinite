@@ -22,6 +22,10 @@ The adapter adds closed JSON Schemas for:
 
 - declarative `GitHubProjectSchema` documents containing logical owner, Project, field, option, and projection names but no live IDs;
 - fresh Project API snapshots and validated `GitHubProjectBinding` manifests containing the resolved installation, owner, Project, field, and option IDs;
+- separate fresh display snapshots plus content-addressed target-manifest,
+  option-color plan, and post-apply readback documents that are explicitly
+  non-authoritative and cannot contain installations, bindings, credentials, or
+  effects;
 - target-free `GitHubSafeOutput`; and
 - deterministic `GitHubEffectPlan` documents; and
 - App-attributed, cryptographically authenticated, append-only
@@ -64,6 +68,31 @@ reflection as target authority.
 The planner never executes an action. Project creation, schema changes,
 migration, App installation, rulesets, visibility, teams, billing, and
 enterprise policy remain outside the adapter.
+
+Existing populated display Projects use a structurally separate
+`github:display-colors` path. A closed `GitHubProjectDisplaySnapshot` accepts an
+exact user or organization owner and records repository linkage, Project/view
+identity, visibility and closed state, custom field/option IDs and order, names,
+types, colors, descriptions, and API-visible view-field order. It cannot accept
+an installation or credential. `createDisplayOnlyProjectTargetManifest()` copies
+target identities only from those observations and binds every current
+per-Project schema digest; an independent human must confirm its content digest
+before `planDisplayOnlyProjectColorReconciliation()` can emit anything.
+
+The display plan's only action variant is one exact single-select option color
+change with Project/field/option node IDs and mandatory human-admin,
+display-only, and non-authoritative markers. Description or structural drift
+blocks instead of becoming an action. The post-apply readback binds both
+confirmed digests and succeeds only with zero color drift plus exact current
+identity, state, schema, field, option, description, and order checks. It
+explicitly reports that no runtime binding was produced. View layout and visible
+field order are retained as observation but are not color authority and do not
+import the generic bootstrap layout requirements.
+
+This is bounded separation, not weakened setup. `GitHubProjectLive`, the admin
+snapshot, organization/private/empty/bootstrap constraints, installation
+identity, activation, target manifest, and runtime binding requirements remain
+unchanged for any path that can emit or consume a runtime binding.
 
 `createDemoProjectTargetManifest()` derives a target-manifest proposal from four
 fresh, empty, private customer Project snapshots in catalog order. An

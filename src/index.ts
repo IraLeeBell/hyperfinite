@@ -29,6 +29,7 @@ export * from "./execution-delivery.js";
 export * from "./events.js";
 export * from "./freshness.js";
 export * from "./github-types.js";
+export * from "./github-project-display-colors.js";
 export * from "./github-projects.js";
 export * from "./github-events.js";
 export * from "./github-auth.js";

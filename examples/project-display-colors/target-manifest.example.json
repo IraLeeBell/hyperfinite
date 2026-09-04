@@ -1,0 +1,2009 @@
+{
+  "apiVersion": "agentic-framework.github.com/v1alpha1",
+  "authoritative": false,
+  "contentDigest": "sha256:39acfb755a213aa35c6a6cb5a7d44ee9532a568dc15ea28de782e3fe9df7fd46",
+  "displayOnly": true,
+  "kind": "GitHubProjectDisplayTargetManifest",
+  "schemaVersion": "1.0.0",
+  "spec": {
+    "generatedAt": "2026-09-03T23:54:00.000Z",
+    "maxSnapshotAgeMs": 300000,
+    "targets": [
+      {
+        "customFields": [
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage",
+            "name": "Stage",
+            "nodeId": "PVTF_synthetic_app_modernization_1",
+            "options": [
+              {
+                "description": "",
+                "key": "captured",
+                "name": "Captured",
+                "nodeId": "PVTO_synthetic_app_modernization_1_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation pending",
+                "nodeId": "PVTO_synthetic_app_modernization_1_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "framing",
+                "name": "Framing",
+                "nodeId": "PVTO_synthetic_app_modernization_1_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "planned",
+                "name": "Planned",
+                "nodeId": "PVTO_synthetic_app_modernization_1_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "executing",
+                "name": "Executing",
+                "nodeId": "PVTO_synthetic_app_modernization_1_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "verifying",
+                "name": "Verifying",
+                "nodeId": "PVTO_synthetic_app_modernization_1_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_app_modernization_1_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_app_modernization_1_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_app_modernization_1_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_app_modernization_1_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_app_modernization_1_11",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "journey-stage",
+            "name": "Journey Stage",
+            "nodeId": "PVTF_synthetic_app_modernization_2",
+            "options": [
+              {
+                "description": "",
+                "key": "intake",
+                "name": "Intake",
+                "nodeId": "PVTO_synthetic_app_modernization_2_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "repository-discovery",
+                "name": "Repository discovery",
+                "nodeId": "PVTO_synthetic_app_modernization_2_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "current-state-inventory",
+                "name": "Current-state inventory",
+                "nodeId": "PVTO_synthetic_app_modernization_2_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "modernization-assessment",
+                "name": "Modernization assessment",
+                "nodeId": "PVTO_synthetic_app_modernization_2_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "target-architecture",
+                "name": "Target architecture",
+                "nodeId": "PVTO_synthetic_app_modernization_2_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "migration-plan",
+                "name": "Migration plan",
+                "nodeId": "PVTO_synthetic_app_modernization_2_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "implementation",
+                "name": "Implementation",
+                "nodeId": "PVTO_synthetic_app_modernization_2_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "verification",
+                "name": "Verification",
+                "nodeId": "PVTO_synthetic_app_modernization_2_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_app_modernization_2_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_app_modernization_2_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation Pending",
+                "nodeId": "PVTO_synthetic_app_modernization_2_11",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_app_modernization_2_12",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_app_modernization_2_13",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_app_modernization_2_14",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "demo-project-profile",
+            "name": "Demo Project Profile",
+            "nodeId": "PVTF_synthetic_app_modernization_3",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "depth-profile",
+            "name": "Depth Profile",
+            "nodeId": "PVTF_synthetic_app_modernization_4",
+            "options": [
+              {
+                "description": "",
+                "key": "d0",
+                "name": "D0",
+                "nodeId": "PVTO_synthetic_app_modernization_4_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d1",
+                "name": "D1",
+                "nodeId": "PVTO_synthetic_app_modernization_4_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d2",
+                "name": "D2",
+                "nodeId": "PVTO_synthetic_app_modernization_4_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d3",
+                "name": "D3",
+                "nodeId": "PVTO_synthetic_app_modernization_4_4",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "gate-status",
+            "name": "Gate Status",
+            "nodeId": "PVTF_synthetic_app_modernization_5",
+            "options": [
+              {
+                "description": "",
+                "key": "pending",
+                "name": "Pending",
+                "nodeId": "PVTO_synthetic_app_modernization_5_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "satisfied",
+                "name": "Satisfied",
+                "nodeId": "PVTO_synthetic_app_modernization_5_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_app_modernization_5_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "NUMBER",
+            "key": "contract-revision",
+            "name": "Contract Revision",
+            "nodeId": "PVTF_synthetic_app_modernization_6",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "last-receipt",
+            "name": "Last Receipt",
+            "nodeId": "PVTF_synthetic_app_modernization_7",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "attention",
+            "name": "Attention",
+            "nodeId": "PVTF_synthetic_app_modernization_8",
+            "options": [
+              {
+                "description": "",
+                "key": "none",
+                "name": "None",
+                "nodeId": "PVTO_synthetic_app_modernization_8_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-action",
+                "name": "Human action",
+                "nodeId": "PVTO_synthetic_app_modernization_8_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation",
+                "name": "Reconciliation",
+                "nodeId": "PVTO_synthetic_app_modernization_8_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "target-repository",
+            "name": "Target Repository",
+            "nodeId": "PVTF_synthetic_app_modernization_9",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "run-attempt",
+            "name": "Run / Attempt",
+            "nodeId": "PVTF_synthetic_app_modernization_10",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-draft-pr",
+            "name": "Current Draft PR",
+            "nodeId": "PVTF_synthetic_app_modernization_11",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-stage-agent",
+            "name": "Current Stage Agent",
+            "nodeId": "PVTF_synthetic_app_modernization_12",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage-interaction",
+            "name": "Stage Interaction",
+            "nodeId": "PVTF_synthetic_app_modernization_13",
+            "options": [
+              {
+                "description": "",
+                "key": "backend-autonomous",
+                "name": "Backend autonomous",
+                "nodeId": "PVTO_synthetic_app_modernization_13_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "user-selectable",
+                "name": "User-selectable agent",
+                "nodeId": "PVTO_synthetic_app_modernization_13_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-gate",
+                "name": "Human gate",
+                "nodeId": "PVTO_synthetic_app_modernization_13_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "deterministic",
+                "name": "Deterministic",
+                "nodeId": "PVTO_synthetic_app_modernization_13_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "kernel-control",
+                "name": "Kernel control",
+                "nodeId": "PVTO_synthetic_app_modernization_13_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "terminal",
+                "name": "Terminal",
+                "nodeId": "PVTO_synthetic_app_modernization_13_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "requested-stage-agent",
+            "name": "Requested Stage Agent",
+            "nodeId": "PVTF_synthetic_app_modernization_14",
+            "options": [
+              {
+                "description": "",
+                "key": "selection-unavailable-locked",
+                "name": "User selection unavailable - locked project",
+                "nodeId": "PVTO_synthetic_app_modernization_14_1",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "agent-selection-status",
+            "name": "Agent Selection Status",
+            "nodeId": "PVTF_synthetic_app_modernization_15",
+            "options": [
+              {
+                "description": "",
+                "key": "not-applicable",
+                "name": "not-applicable",
+                "nodeId": "PVTO_synthetic_app_modernization_15_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "awaiting-selection",
+                "name": "awaiting-selection",
+                "nodeId": "PVTO_synthetic_app_modernization_15_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "accepted",
+                "name": "accepted",
+                "nodeId": "PVTO_synthetic_app_modernization_15_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "invalid",
+                "name": "invalid",
+                "nodeId": "PVTO_synthetic_app_modernization_15_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "stale",
+                "name": "stale",
+                "nodeId": "PVTO_synthetic_app_modernization_15_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation-required",
+                "name": "reconciliation-required",
+                "nodeId": "PVTO_synthetic_app_modernization_15_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          }
+        ],
+        "demoProjectId": "app-modernization",
+        "owner": {
+          "login": "example-user",
+          "nodeId": "U_synthetic_example_user",
+          "type": "user"
+        },
+        "project": {
+          "closed": false,
+          "nodeId": "PVT_synthetic_app_modernization",
+          "number": 101,
+          "title": "App Modernization - Hyperfinite",
+          "visibility": "public"
+        },
+        "projectSchemaDigest": "sha256:3f15f9c9a3060e3fe049cf227c588e3d0fe985cb90fa27f6d617ae4b00310a6a",
+        "proposal": {
+          "observedAt": "2026-09-03T23:53:44.000Z",
+          "snapshotDigest": "sha256:303ced5d9e4ab52ea5301b1b9ea2884612e93370eb3aeff5b9d17bae05e21c05"
+        },
+        "repository": {
+          "fullName": "example-user/hyperfinite",
+          "nodeId": "R_synthetic_display_repository"
+        },
+        "view": {
+          "name": "Journey",
+          "nodeId": "PVTV_synthetic_display_app_modernization",
+          "observedLayout": "BOARD_LAYOUT",
+          "observedVisibleFields": [
+            {
+              "dataType": "TITLE",
+              "name": "Title",
+              "nodeId": "PVTFV_synthetic_title_app_modernization"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Status",
+              "nodeId": "PVTFV_synthetic_status_app_modernization"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Attention",
+              "nodeId": "PVTFV_synthetic_attention_app_modernization"
+            }
+          ]
+        }
+      },
+      {
+        "customFields": [
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage",
+            "name": "Stage",
+            "nodeId": "PVTF_synthetic_feature_delivery_1",
+            "options": [
+              {
+                "description": "",
+                "key": "captured",
+                "name": "Captured",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation pending",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "framing",
+                "name": "Framing",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "planned",
+                "name": "Planned",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "executing",
+                "name": "Executing",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "verifying",
+                "name": "Verifying",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_feature_delivery_1_11",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "journey-stage",
+            "name": "Journey Stage",
+            "nodeId": "PVTF_synthetic_feature_delivery_2",
+            "options": [
+              {
+                "description": "",
+                "key": "intake",
+                "name": "Intake",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "requirements-clarification",
+                "name": "Requirements clarification",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "codebase-discovery",
+                "name": "Codebase discovery",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "solution-design",
+                "name": "Solution design",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "implementation-plan",
+                "name": "Implementation plan",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "build",
+                "name": "Build",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "test-and-verification",
+                "name": "Test and verification",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation Pending",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_11",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_12",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_feature_delivery_2_13",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "demo-project-profile",
+            "name": "Demo Project Profile",
+            "nodeId": "PVTF_synthetic_feature_delivery_3",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "depth-profile",
+            "name": "Depth Profile",
+            "nodeId": "PVTF_synthetic_feature_delivery_4",
+            "options": [
+              {
+                "description": "",
+                "key": "d0",
+                "name": "D0",
+                "nodeId": "PVTO_synthetic_feature_delivery_4_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d1",
+                "name": "D1",
+                "nodeId": "PVTO_synthetic_feature_delivery_4_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d2",
+                "name": "D2",
+                "nodeId": "PVTO_synthetic_feature_delivery_4_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d3",
+                "name": "D3",
+                "nodeId": "PVTO_synthetic_feature_delivery_4_4",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "gate-status",
+            "name": "Gate Status",
+            "nodeId": "PVTF_synthetic_feature_delivery_5",
+            "options": [
+              {
+                "description": "",
+                "key": "pending",
+                "name": "Pending",
+                "nodeId": "PVTO_synthetic_feature_delivery_5_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "satisfied",
+                "name": "Satisfied",
+                "nodeId": "PVTO_synthetic_feature_delivery_5_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_feature_delivery_5_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "NUMBER",
+            "key": "contract-revision",
+            "name": "Contract Revision",
+            "nodeId": "PVTF_synthetic_feature_delivery_6",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "last-receipt",
+            "name": "Last Receipt",
+            "nodeId": "PVTF_synthetic_feature_delivery_7",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "attention",
+            "name": "Attention",
+            "nodeId": "PVTF_synthetic_feature_delivery_8",
+            "options": [
+              {
+                "description": "",
+                "key": "none",
+                "name": "None",
+                "nodeId": "PVTO_synthetic_feature_delivery_8_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-action",
+                "name": "Human action",
+                "nodeId": "PVTO_synthetic_feature_delivery_8_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation",
+                "name": "Reconciliation",
+                "nodeId": "PVTO_synthetic_feature_delivery_8_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "target-repository",
+            "name": "Target Repository",
+            "nodeId": "PVTF_synthetic_feature_delivery_9",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "run-attempt",
+            "name": "Run / Attempt",
+            "nodeId": "PVTF_synthetic_feature_delivery_10",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-draft-pr",
+            "name": "Current Draft PR",
+            "nodeId": "PVTF_synthetic_feature_delivery_11",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-stage-agent",
+            "name": "Current Stage Agent",
+            "nodeId": "PVTF_synthetic_feature_delivery_12",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage-interaction",
+            "name": "Stage Interaction",
+            "nodeId": "PVTF_synthetic_feature_delivery_13",
+            "options": [
+              {
+                "description": "",
+                "key": "backend-autonomous",
+                "name": "Backend autonomous",
+                "nodeId": "PVTO_synthetic_feature_delivery_13_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "user-selectable",
+                "name": "User-selectable agent",
+                "nodeId": "PVTO_synthetic_feature_delivery_13_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-gate",
+                "name": "Human gate",
+                "nodeId": "PVTO_synthetic_feature_delivery_13_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "deterministic",
+                "name": "Deterministic",
+                "nodeId": "PVTO_synthetic_feature_delivery_13_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "kernel-control",
+                "name": "Kernel control",
+                "nodeId": "PVTO_synthetic_feature_delivery_13_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "terminal",
+                "name": "Terminal",
+                "nodeId": "PVTO_synthetic_feature_delivery_13_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "requested-stage-agent",
+            "name": "Requested Stage Agent",
+            "nodeId": "PVTF_synthetic_feature_delivery_14",
+            "options": [
+              {
+                "description": "",
+                "key": "selection-unavailable-locked",
+                "name": "User selection unavailable - locked project",
+                "nodeId": "PVTO_synthetic_feature_delivery_14_1",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "agent-selection-status",
+            "name": "Agent Selection Status",
+            "nodeId": "PVTF_synthetic_feature_delivery_15",
+            "options": [
+              {
+                "description": "",
+                "key": "not-applicable",
+                "name": "not-applicable",
+                "nodeId": "PVTO_synthetic_feature_delivery_15_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "awaiting-selection",
+                "name": "awaiting-selection",
+                "nodeId": "PVTO_synthetic_feature_delivery_15_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "accepted",
+                "name": "accepted",
+                "nodeId": "PVTO_synthetic_feature_delivery_15_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "invalid",
+                "name": "invalid",
+                "nodeId": "PVTO_synthetic_feature_delivery_15_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "stale",
+                "name": "stale",
+                "nodeId": "PVTO_synthetic_feature_delivery_15_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation-required",
+                "name": "reconciliation-required",
+                "nodeId": "PVTO_synthetic_feature_delivery_15_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          }
+        ],
+        "demoProjectId": "feature-delivery",
+        "owner": {
+          "login": "example-user",
+          "nodeId": "U_synthetic_example_user",
+          "type": "user"
+        },
+        "project": {
+          "closed": false,
+          "nodeId": "PVT_synthetic_feature_delivery",
+          "number": 102,
+          "title": "Feature Delivery - Hyperfinite",
+          "visibility": "public"
+        },
+        "projectSchemaDigest": "sha256:1e97a7397e90e916ed170d91560687b455e1ee56caec2a22dc34dddce6a86843",
+        "proposal": {
+          "observedAt": "2026-09-03T23:53:44.000Z",
+          "snapshotDigest": "sha256:740d8771199c649c71a08e3c0c2816a0fcefa10fe18f3912da76ff51ded541da"
+        },
+        "repository": {
+          "fullName": "example-user/hyperfinite",
+          "nodeId": "R_synthetic_display_repository"
+        },
+        "view": {
+          "name": "Journey",
+          "nodeId": "PVTV_synthetic_display_feature_delivery",
+          "observedLayout": "BOARD_LAYOUT",
+          "observedVisibleFields": [
+            {
+              "dataType": "TITLE",
+              "name": "Title",
+              "nodeId": "PVTFV_synthetic_title_feature_delivery"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Status",
+              "nodeId": "PVTFV_synthetic_status_feature_delivery"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Attention",
+              "nodeId": "PVTFV_synthetic_attention_feature_delivery"
+            }
+          ]
+        }
+      },
+      {
+        "customFields": [
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage",
+            "name": "Stage",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_1",
+            "options": [
+              {
+                "description": "",
+                "key": "captured",
+                "name": "Captured",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation pending",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "framing",
+                "name": "Framing",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "planned",
+                "name": "Planned",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "executing",
+                "name": "Executing",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "verifying",
+                "name": "Verifying",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_1_11",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "journey-stage",
+            "name": "Journey Stage",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_2",
+            "options": [
+              {
+                "description": "",
+                "key": "intake",
+                "name": "Intake",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "triage",
+                "name": "Triage",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reproduction-and-impact-analysis",
+                "name": "Reproduction and impact analysis",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "remediation-design",
+                "name": "Remediation design",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "patch-planning",
+                "name": "Patch planning",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "patch-implementation",
+                "name": "Patch implementation",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "security-verification",
+                "name": "Security verification",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation Pending",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_11",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_12",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_2_13",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "demo-project-profile",
+            "name": "Demo Project Profile",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_3",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "depth-profile",
+            "name": "Depth Profile",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_4",
+            "options": [
+              {
+                "description": "",
+                "key": "d0",
+                "name": "D0",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_4_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d1",
+                "name": "D1",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_4_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d2",
+                "name": "D2",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_4_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d3",
+                "name": "D3",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_4_4",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "gate-status",
+            "name": "Gate Status",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_5",
+            "options": [
+              {
+                "description": "",
+                "key": "pending",
+                "name": "Pending",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_5_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "satisfied",
+                "name": "Satisfied",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_5_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_5_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "NUMBER",
+            "key": "contract-revision",
+            "name": "Contract Revision",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_6",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "last-receipt",
+            "name": "Last Receipt",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_7",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "attention",
+            "name": "Attention",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_8",
+            "options": [
+              {
+                "description": "",
+                "key": "none",
+                "name": "None",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_8_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-action",
+                "name": "Human action",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_8_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation",
+                "name": "Reconciliation",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_8_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "target-repository",
+            "name": "Target Repository",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_9",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "run-attempt",
+            "name": "Run / Attempt",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_10",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-draft-pr",
+            "name": "Current Draft PR",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_11",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-stage-agent",
+            "name": "Current Stage Agent",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_12",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage-interaction",
+            "name": "Stage Interaction",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_13",
+            "options": [
+              {
+                "description": "",
+                "key": "backend-autonomous",
+                "name": "Backend autonomous",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_13_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "user-selectable",
+                "name": "User-selectable agent",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_13_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-gate",
+                "name": "Human gate",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_13_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "deterministic",
+                "name": "Deterministic",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_13_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "kernel-control",
+                "name": "Kernel control",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_13_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "terminal",
+                "name": "Terminal",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_13_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "requested-stage-agent",
+            "name": "Requested Stage Agent",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_14",
+            "options": [
+              {
+                "description": "",
+                "key": "selection-unavailable-locked",
+                "name": "User selection unavailable - locked project",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_14_1",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "agent-selection-status",
+            "name": "Agent Selection Status",
+            "nodeId": "PVTF_synthetic_security_dependency_remediation_15",
+            "options": [
+              {
+                "description": "",
+                "key": "not-applicable",
+                "name": "not-applicable",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_15_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "awaiting-selection",
+                "name": "awaiting-selection",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_15_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "accepted",
+                "name": "accepted",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_15_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "invalid",
+                "name": "invalid",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_15_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "stale",
+                "name": "stale",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_15_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation-required",
+                "name": "reconciliation-required",
+                "nodeId": "PVTO_synthetic_security_dependency_remediation_15_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          }
+        ],
+        "demoProjectId": "security-dependency-remediation",
+        "owner": {
+          "login": "example-user",
+          "nodeId": "U_synthetic_example_user",
+          "type": "user"
+        },
+        "project": {
+          "closed": false,
+          "nodeId": "PVT_synthetic_security_dependency_remediation",
+          "number": 103,
+          "title": "Security Dependency Remediation - Hyperfinite",
+          "visibility": "public"
+        },
+        "projectSchemaDigest": "sha256:ed2cbe0a139ca086efbbe65e97b1c4f3934c8eb38684a432c76bfda8efdee59c",
+        "proposal": {
+          "observedAt": "2026-09-03T23:53:44.000Z",
+          "snapshotDigest": "sha256:4d898e805422242753c72f79a906723077233a41f5aa22979c3ad89c9f37bb93"
+        },
+        "repository": {
+          "fullName": "example-user/hyperfinite",
+          "nodeId": "R_synthetic_display_repository"
+        },
+        "view": {
+          "name": "Journey",
+          "nodeId": "PVTV_synthetic_display_security_dependency_remediation",
+          "observedLayout": "BOARD_LAYOUT",
+          "observedVisibleFields": [
+            {
+              "dataType": "TITLE",
+              "name": "Title",
+              "nodeId": "PVTFV_synthetic_title_security_dependency_remediation"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Status",
+              "nodeId": "PVTFV_synthetic_status_security_dependency_remediation"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Attention",
+              "nodeId": "PVTFV_synthetic_attention_security_dependency_remediation"
+            }
+          ]
+        }
+      },
+      {
+        "customFields": [
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage",
+            "name": "Stage",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_1",
+            "options": [
+              {
+                "description": "",
+                "key": "captured",
+                "name": "Captured",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation pending",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "framing",
+                "name": "Framing",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "planned",
+                "name": "Planned",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "executing",
+                "name": "Executing",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "verifying",
+                "name": "Verifying",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_1_11",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "journey-stage",
+            "name": "Journey Stage",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_2",
+            "options": [
+              {
+                "description": "",
+                "key": "intake",
+                "name": "Intake",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "context-inventory",
+                "name": "Context inventory - autonomous",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "discovery-studio",
+                "name": "Discovery studio - choose agent",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "guided-synthesis",
+                "name": "Guided synthesis - autonomous",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "implementation-plan",
+                "name": "Implementation plan - deterministic gate",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "implementation-studio",
+                "name": "Implementation studio - choose agent",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_6",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "test-and-verification",
+                "name": "Test and verification - autonomous",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_7",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-review",
+                "name": "Human review",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_8",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "completed",
+                "name": "Completed",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_9",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "activation-pending",
+                "name": "Activation Pending",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_10",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "paused",
+                "name": "Paused",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_11",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_12",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "cancelled",
+                "name": "Cancelled",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_2_13",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "demo-project-profile",
+            "name": "Demo Project Profile",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_3",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "depth-profile",
+            "name": "Depth Profile",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_4",
+            "options": [
+              {
+                "description": "",
+                "key": "d0",
+                "name": "D0",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_4_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d1",
+                "name": "D1",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_4_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d2",
+                "name": "D2",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_4_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "d3",
+                "name": "D3",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_4_4",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "gate-status",
+            "name": "Gate Status",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_5",
+            "options": [
+              {
+                "description": "",
+                "key": "pending",
+                "name": "Pending",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_5_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "satisfied",
+                "name": "Satisfied",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_5_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "blocked",
+                "name": "Blocked",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_5_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "NUMBER",
+            "key": "contract-revision",
+            "name": "Contract Revision",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_6",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "last-receipt",
+            "name": "Last Receipt",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_7",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "attention",
+            "name": "Attention",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_8",
+            "options": [
+              {
+                "description": "",
+                "key": "none",
+                "name": "None",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_8_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-action",
+                "name": "Human action",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_8_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation",
+                "name": "Reconciliation",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_8_3",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "TEXT",
+            "key": "target-repository",
+            "name": "Target Repository",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_9",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "run-attempt",
+            "name": "Run / Attempt",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_10",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-draft-pr",
+            "name": "Current Draft PR",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_11",
+            "options": []
+          },
+          {
+            "dataType": "TEXT",
+            "key": "current-stage-agent",
+            "name": "Current Stage Agent",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_12",
+            "options": []
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "stage-interaction",
+            "name": "Stage Interaction",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_13",
+            "options": [
+              {
+                "description": "",
+                "key": "backend-autonomous",
+                "name": "Backend autonomous",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_13_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "user-selectable",
+                "name": "User-selectable agent",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_13_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "human-gate",
+                "name": "Human gate",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_13_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "deterministic",
+                "name": "Deterministic",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_13_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "kernel-control",
+                "name": "Kernel control",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_13_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "terminal",
+                "name": "Terminal",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_13_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "requested-stage-agent",
+            "name": "Requested Stage Agent",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_14",
+            "options": [
+              {
+                "description": "",
+                "key": "discovery-customer-value-explorer",
+                "name": "Discovery - Customer Value Explorer",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_14_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "discovery-technical-options-explorer",
+                "name": "Discovery - Technical Options Explorer",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_14_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "discovery-delivery-risk-challenger",
+                "name": "Discovery - Delivery Risk Challenger",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_14_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "implementation-minimal-slice-builder",
+                "name": "Implementation - Minimal Slice Builder",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_14_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "implementation-resilience-first-builder",
+                "name": "Implementation - Resilience-First Builder",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_14_5",
+                "observedColor": "GRAY"
+              }
+            ]
+          },
+          {
+            "dataType": "SINGLE_SELECT",
+            "key": "agent-selection-status",
+            "name": "Agent Selection Status",
+            "nodeId": "PVTF_synthetic_adaptive_delivery_15",
+            "options": [
+              {
+                "description": "",
+                "key": "not-applicable",
+                "name": "not-applicable",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_15_1",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "awaiting-selection",
+                "name": "awaiting-selection",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_15_2",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "accepted",
+                "name": "accepted",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_15_3",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "invalid",
+                "name": "invalid",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_15_4",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "stale",
+                "name": "stale",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_15_5",
+                "observedColor": "GRAY"
+              },
+              {
+                "description": "",
+                "key": "reconciliation-required",
+                "name": "reconciliation-required",
+                "nodeId": "PVTO_synthetic_adaptive_delivery_15_6",
+                "observedColor": "GRAY"
+              }
+            ]
+          }
+        ],
+        "demoProjectId": "adaptive-delivery",
+        "owner": {
+          "login": "example-user",
+          "nodeId": "U_synthetic_example_user",
+          "type": "user"
+        },
+        "project": {
+          "closed": false,
+          "nodeId": "PVT_synthetic_adaptive_delivery",
+          "number": 104,
+          "title": "Adaptive Delivery - Hyperfinite",
+          "visibility": "public"
+        },
+        "projectSchemaDigest": "sha256:66ed8bde04937b5aa52e0526042f162d389a75e174eb01b56ff2c953d5d083a0",
+        "proposal": {
+          "observedAt": "2026-09-03T23:53:44.000Z",
+          "snapshotDigest": "sha256:fd82ed5e87691895174630dd64ef53fde57f732831245eb3c80459dd8a2f662f"
+        },
+        "repository": {
+          "fullName": "example-user/hyperfinite",
+          "nodeId": "R_synthetic_display_repository"
+        },
+        "view": {
+          "name": "Journey",
+          "nodeId": "PVTV_synthetic_display_adaptive_delivery",
+          "observedLayout": "BOARD_LAYOUT",
+          "observedVisibleFields": [
+            {
+              "dataType": "TITLE",
+              "name": "Title",
+              "nodeId": "PVTFV_synthetic_title_adaptive_delivery"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Status",
+              "nodeId": "PVTFV_synthetic_status_adaptive_delivery"
+            },
+            {
+              "dataType": "SINGLE_SELECT",
+              "name": "Attention",
+              "nodeId": "PVTFV_synthetic_attention_adaptive_delivery"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

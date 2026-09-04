@@ -13,6 +13,13 @@ as gray and made independently configured Projects visually inconsistent.
 Color is mutable Project metadata. It cannot become a semantic shortcut or enter
 the authority chain.
 
+Post-merge readback showed that the generic setup planner correctly refused the
+four selected existing Projects before action generation: that contract may
+emit runtime bindings and therefore requires a GitHub App installation identity.
+The selected display Projects are user-owned, public, and populated, so the
+organization/private/empty bootstrap contract also correctly rejects them.
+OAuth read access cannot supply or justify a fabricated App installation.
+
 ## Decision
 
 Every declarative single-select option must specify one GitHub-supported color:
@@ -39,10 +46,28 @@ verb. A human administrator separately reviews the exact plan, confirms its
 targets and digest, applies one change set, and obtains fresh exact readback for
 all four Projects.
 
+Existing-Project color repair therefore uses a separate closed display-only
+contract and CLI. Its snapshot accepts an exact user or organization owner but
+cannot contain installation, credential, binding, item, or effect data. A target
+manifest proposal derives IDs only from fresh snapshots, binds current
+per-Project schema digests, and requires an independently confirmed digest.
+Planning can emit only exact option-color actions; description, identity, type,
+name, order, state, freshness, or digest drift fails closed. Post-apply readback
+binds both confirmed digests and cannot claim runtime readiness or emit a
+Project binding.
+
+View layout and API-visible field order remain recorded observational evidence.
+They are not coupled to the color-only decision because generic
+bootstrap/runtime view configuration is outside this repair. This is a bounded
+attribute-specific contract, not a relaxation of the runtime/customer setup
+contract.
+
 ## Consequences
 
 - Existing Projects require one reviewed human-admin color reconciliation after
   merge.
+- Generic setup continues to reject missing installation identity and
+  nonconforming bootstrap targets exactly as before.
 - Schema, target-manifest, binding, plan, export, and readback digests change
   when an option color changes.
 - Color drift blocks a fresh binding but cannot change a projection source,
