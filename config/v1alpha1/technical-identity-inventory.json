@@ -15,10 +15,10 @@
       "inventoryDigest": "sha256:ec576eafc76636bcf79b4e66eeb3be7afefe818327ee8d8df33cae94d6d3c655"
     },
     "demo-portfolio": {
-      "inventoryFiles": 361,
-      "inventoryMatchingLines": 952,
-      "inventoryOccurrences": 959,
-      "inventoryDigest": "sha256:92c77959d3a24f519dc922811a754f1bc365e417a6943650379d060b20ccdde0"
+      "inventoryFiles": 371,
+      "inventoryMatchingLines": 971,
+      "inventoryOccurrences": 978,
+      "inventoryDigest": "sha256:c3b95524997a08cd2e5e14284c284cd911a7e96428d8ab2b68e1e2c960f4b8db"
     }
   }
 }
