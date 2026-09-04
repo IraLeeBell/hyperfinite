@@ -9,10 +9,10 @@
       "inventoryDigest": "sha256:181ca6155d722e48f1ef60aba5d5d13ce7374acdf40f44dcf71cf9bb0dc068c2"
     },
     "control-plane-core": {
-      "inventoryFiles": 212,
-      "inventoryMatchingLines": 704,
-      "inventoryOccurrences": 711,
-      "inventoryDigest": "sha256:f3cc9cc466b87c95d6548d5a45291e447925153f50884405647a4c8ddc4edd27"
+      "inventoryFiles": 222,
+      "inventoryMatchingLines": 723,
+      "inventoryOccurrences": 730,
+      "inventoryDigest": "sha256:ec576eafc76636bcf79b4e66eeb3be7afefe818327ee8d8df33cae94d6d3c655"
     },
     "demo-portfolio": {
       "inventoryFiles": 361,
